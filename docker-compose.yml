@@ -1,0 +1,17 @@
+services:
+  regula:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pillion-regula
+    ports:
+      - "8085:8085"
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/regula", "healthcheck"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+

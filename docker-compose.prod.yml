@@ -1,0 +1,48 @@
+# Regula — Production
+#
+# Regula is the compliance-records service for legal documents, consent history,
+# and acceptance evidence.
+#
+# Prerequisites on the VPS:
+#   - traefik network exists (external — handles TLS + public routing)
+#   - REGULA_DATABASE_URL points to Neon or another managed PostgreSQL instance
+#
+# First deploy:
+#   cp .env.prod.example .env
+#   # fill in secrets in .env
+#   docker compose -f docker-compose.prod.yml up -d --build
+#
+# Redeploy after code change:
+#   docker compose -f docker-compose.prod.yml build regula
+#   docker compose -f docker-compose.prod.yml up -d --no-deps regula
+
+services:
+
+  regula:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pillion/regula:latest
+    container_name: pillion-regula
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
+      - "traefik.http.routers.regula.rule=Host(`regula.ms.thepillion.com`)"
+      - "traefik.http.routers.regula.entrypoints=websecure"
+      - "traefik.http.routers.regula.tls.certresolver=letsencrypt"
+      - "traefik.http.services.regula.loadbalancer.server.port=8085"
+    healthcheck:
+      test: ["CMD", "/regula", "healthcheck"]
+      interval: 20s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+networks:
+  traefik:
+    external: true

@@ -1,0 +1,177 @@
+{
+  "documents": [
+    {
+      "key": "privacy-policy",
+      "display_name": "Privacy Policy",
+      "category": "legal",
+      "version": "2026-03-29-public-site",
+      "locale": "en",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/privacy-policy.en.html",
+      "is_published": true,
+      "effective_from": "2026-03-29T00:00:00Z",
+      "created_by": "seed:public-site"
+    },
+    {
+      "key": "privacy-policy",
+      "display_name": "Privacy Policy",
+      "category": "legal",
+      "version": "2026-03-29-public-site",
+      "locale": "it",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/privacy-policy.it.html",
+      "is_published": true,
+      "effective_from": "2026-03-29T00:00:00Z",
+      "created_by": "seed:public-site"
+    },
+    {
+      "key": "privacy-policy",
+      "display_name": "Privacy Policy",
+      "category": "legal",
+      "version": "2026-03-29-public-site",
+      "locale": "de",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/privacy-policy.de.html",
+      "is_published": true,
+      "effective_from": "2026-03-29T00:00:00Z",
+      "created_by": "seed:public-site"
+    },
+    {
+      "key": "terms-of-service",
+      "display_name": "Terms of Service",
+      "category": "legal",
+      "version": "2026-03-29-public-site",
+      "locale": "en",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/terms-of-service.en.html",
+      "is_published": true,
+      "effective_from": "2026-03-29T00:00:00Z",
+      "created_by": "seed:public-site"
+    },
+    {
+      "key": "terms-of-service",
+      "display_name": "Terms of Service",
+      "category": "legal",
+      "version": "2026-03-29-public-site",
+      "locale": "it",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/terms-of-service.it.html",
+      "is_published": true,
+      "effective_from": "2026-03-29T00:00:00Z",
+      "created_by": "seed:public-site"
+    },
+    {
+      "key": "terms-of-service",
+      "display_name": "Terms of Service",
+      "category": "legal",
+      "version": "2026-03-29-public-site",
+      "locale": "de",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/terms-of-service.de.html",
+      "is_published": true,
+      "effective_from": "2026-03-29T00:00:00Z",
+      "created_by": "seed:public-site"
+    },
+    {
+      "key": "cookie-policy",
+      "display_name": "Cookie Policy",
+      "category": "legal",
+      "version": "2026-03-29-public-site",
+      "locale": "en",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/cookie-policy.en.html",
+      "is_published": true,
+      "effective_from": "2026-03-29T00:00:00Z",
+      "created_by": "seed:public-site"
+    },
+    {
+      "key": "cookie-policy",
+      "display_name": "Cookie Policy",
+      "category": "legal",
+      "version": "2026-03-29-public-site",
+      "locale": "it",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/cookie-policy.it.html",
+      "is_published": true,
+      "effective_from": "2026-03-29T00:00:00Z",
+      "created_by": "seed:public-site"
+    },
+    {
+      "key": "cookie-policy",
+      "display_name": "Cookie Policy",
+      "category": "legal",
+      "version": "2026-03-29-public-site",
+      "locale": "de",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/cookie-policy.de.html",
+      "is_published": true,
+      "effective_from": "2026-03-29T00:00:00Z",
+      "created_by": "seed:public-site"
+    },
+    {
+      "key": "impressum",
+      "display_name": "Impressum / Colofono",
+      "category": "legal",
+      "version": "2026-03-29-public-site",
+      "locale": "en",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/impressum.en.html",
+      "is_published": true,
+      "effective_from": "2026-03-29T00:00:00Z",
+      "created_by": "seed:public-site"
+    },
+    {
+      "key": "impressum",
+      "display_name": "Impressum / Colofono",
+      "category": "legal",
+      "version": "2026-03-29-public-site",
+      "locale": "it",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/impressum.it.html",
+      "is_published": true,
+      "effective_from": "2026-03-29T00:00:00Z",
+      "created_by": "seed:public-site"
+    },
+    {
+      "key": "impressum",
+      "display_name": "Impressum / Colofono",
+      "category": "legal",
+      "version": "2026-03-29-public-site",
+      "locale": "de",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/impressum.de.html",
+      "is_published": true,
+      "effective_from": "2026-03-29T00:00:00Z",
+      "created_by": "seed:public-site"
+    }
+  ],
+  "consent_purposes": [
+    {
+      "key": "newsletter-email",
+      "display_name": "Newsletter Email",
+      "description": "Explicit consent for newsletter emails."
+    },
+    {
+      "key": "marketing-email",
+      "display_name": "Marketing Email",
+      "description": "Explicit consent for promotional or marketing email communication."
+    },
+    {
+      "key": "marketing-sms",
+      "display_name": "Marketing SMS",
+      "description": "Explicit consent for promotional or marketing SMS communication."
+    }
+  ]
+}

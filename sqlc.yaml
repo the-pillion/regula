@@ -1,0 +1,16 @@
+version: "2"
+sql:
+  - engine: "postgresql"
+    queries:
+      - "db/query/documents.sql"
+      - "db/query/acceptances.sql"
+      - "db/query/consents.sql"
+    schema:
+      - "db/migrations/000001_init.up.sql"
+    gen:
+      go:
+        package: "store"
+        out: "internal/store"
+        sql_package: "pgx/v5"
+        emit_interface: false
+        emit_json_tags: true
