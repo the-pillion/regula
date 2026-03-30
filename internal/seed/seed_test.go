@@ -17,6 +17,18 @@ func TestLoadManifest(t *testing.T) {
 	if len(manifest.ConsentPurposes) < 3 {
 		t.Fatalf("expected consent purposes to load")
 	}
+	if len(manifest.Processors) < 3 {
+		t.Fatalf("expected processor registry seeds to load")
+	}
+	if len(manifest.RetentionPolicies) < 3 {
+		t.Fatalf("expected retention policy seeds to load")
+	}
+	if len(manifest.ProcessingActivities) < 3 {
+		t.Fatalf("expected processing activity seeds to load")
+	}
+	if len(manifest.DPIARecords) < 1 {
+		t.Fatalf("expected dpia record seeds to load")
+	}
 	if baseDir == "" {
 		t.Fatal("expected non-empty base dir")
 	}

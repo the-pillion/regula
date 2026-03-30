@@ -38,3 +38,39 @@ func TestBuildLatestVersionCacheKey(t *testing.T) {
 		t.Fatalf("unexpected cache key: %s", got)
 	}
 }
+
+func TestNormalizeRelationshipType(t *testing.T) {
+	if got := normalizeRelationshipType("subprocessor"); got != "subprocessor" {
+		t.Fatalf("expected subprocessor, got %s", got)
+	}
+	if got := normalizeRelationshipType("anything-else"); got != "processor" {
+		t.Fatalf("expected processor fallback, got %s", got)
+	}
+}
+
+func TestNormalizeDPAStatus(t *testing.T) {
+	if got := normalizeDPAStatus("signed"); got != "signed" {
+		t.Fatalf("expected signed, got %s", got)
+	}
+	if got := normalizeDPAStatus("weird"); got != "unknown" {
+		t.Fatalf("expected unknown fallback, got %s", got)
+	}
+}
+
+func TestNormalizeDPIAStatus(t *testing.T) {
+	if got := normalizeDPIAStatus("approved"); got != "approved" {
+		t.Fatalf("expected approved, got %s", got)
+	}
+	if got := normalizeDPIAStatus("odd"); got != "draft" {
+		t.Fatalf("expected draft fallback, got %s", got)
+	}
+}
+
+func TestNormalizeRiskLevel(t *testing.T) {
+	if got := normalizeRiskLevel("very_high"); got != "very_high" {
+		t.Fatalf("expected very_high, got %s", got)
+	}
+	if got := normalizeRiskLevel("odd"); got != "medium" {
+		t.Fatalf("expected medium fallback, got %s", got)
+	}
+}

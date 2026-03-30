@@ -58,15 +58,25 @@ func NewRouter(cfg *config.Config, log *slog.Logger, queries *store.Queries) (ht
 	r.Get("/readyz", api.ready)
 
 	r.Group(func(r chi.Router) {
-		r.Use(auth.Middleware(validator))
+		r.Use(auth.Middleware(validator, auth.LogFailureWith(log)))
+		r.Use(api.auditAccess)
 
 		r.Post("/v1/documents", api.createDocument)
 		r.Post("/v1/documents/{key}/versions", api.createDocumentVersion)
+		r.Get("/v1/documents/{key}/versions", api.listDocumentVersions)
 		r.Get("/v1/documents/{key}/versions/latest", api.getLatestDocumentVersion)
 
 		r.Post("/v1/consent-purposes", api.upsertConsentPurpose)
 		r.Post("/v1/acceptances", api.createAcceptance)
 		r.Post("/v1/consents", api.createConsent)
+		r.Get("/v1/processors", api.listProcessors)
+		r.Post("/v1/processors", api.upsertProcessor)
+		r.Get("/v1/retention-policies", api.listRetentionPolicies)
+		r.Post("/v1/retention-policies", api.upsertRetentionPolicy)
+		r.Get("/v1/processing-activities", api.listProcessingActivities)
+		r.Post("/v1/processing-activities", api.upsertProcessingActivity)
+		r.Get("/v1/dpia-records", api.listDPIARecords)
+		r.Post("/v1/dpia-records", api.upsertDPIARecord)
 
 		r.Get("/v1/subjects/{subjectRef}/acceptances", api.listAcceptances)
 		r.Get("/v1/subjects/{subjectRef}/consents/history", api.listConsentHistory)
@@ -75,6 +85,57 @@ func NewRouter(cfg *config.Config, log *slog.Logger, queries *store.Queries) (ht
 	})
 
 	return r, nil
+}
+
+func (api *API) auditAccess(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		ww := middleware.NewWrapResponseWriter(w, r.ProtoMajor)
+		start := time.Now()
+
+		next.ServeHTTP(ww, r)
+
+		identity, _ := auth.IdentityFromContext(r.Context())
+		subjectRef := chi.URLParam(r, "subjectRef")
+		documentKey := normalizeKey(chi.URLParam(r, "key"))
+
+		fields := []any{
+			"event", "internal_api_access",
+			"method", r.Method,
+			"path", r.URL.Path,
+			"route_pattern", safeRoutePattern(r),
+			"status", ww.Status(),
+			"bytes", ww.BytesWritten(),
+			"duration_ms", time.Since(start).Milliseconds(),
+			"request_id", middleware.GetReqID(r.Context()),
+			"remote_ip", r.RemoteAddr,
+			"user_agent", r.UserAgent(),
+		}
+
+		if identity != nil {
+			fields = append(fields,
+				"principal", identity.Principal,
+				"client_id", identity.ClientID,
+				"subject", identity.Subject,
+				"authorized_party", identity.AuthorizedParty,
+			)
+		}
+		if subjectRef != "" {
+			fields = append(fields, "subject_ref", subjectRef)
+		}
+		if documentKey != "" {
+			fields = append(fields, "document_key", documentKey)
+		}
+
+		api.log.Info("regula internal api access", fields...)
+	})
+}
+
+func safeRoutePattern(r *http.Request) string {
+	if routeContext := chi.RouteContext(r.Context()); routeContext != nil {
+		return routeContext.RoutePattern()
+	}
+
+	return ""
 }
 
 type createDocumentRequest struct {
@@ -127,6 +188,62 @@ type createConsentRequest struct {
 	SourceService   string          `json:"source_service"`
 	SourceApp       string          `json:"source_app"`
 	Metadata        json.RawMessage `json:"metadata"`
+}
+
+type upsertProcessorRequest struct {
+	Key               string `json:"key"`
+	DisplayName       string `json:"display_name"`
+	RelationshipType  string `json:"relationship_type"`
+	ServiceArea       string `json:"service_area"`
+	WebsiteURL        string `json:"website_url"`
+	PrimaryCountry    string `json:"primary_country"`
+	DataLocation      string `json:"data_location"`
+	TransferMechanism string `json:"transfer_mechanism"`
+	DPAStatus         string `json:"dpa_status"`
+	Notes             string `json:"notes"`
+	IsActive          *bool  `json:"is_active"`
+}
+
+type upsertRetentionPolicyRequest struct {
+	Key            string `json:"key"`
+	DisplayName    string `json:"display_name"`
+	DataCategory   string `json:"data_category"`
+	Description    string `json:"description"`
+	RetentionDays  *int32 `json:"retention_days"`
+	TriggerEvent   string `json:"trigger_event"`
+	StorageScope   string `json:"storage_scope"`
+	DeletionMethod string `json:"deletion_method"`
+	LegalBasis     string `json:"legal_basis"`
+	Notes          string `json:"notes"`
+	IsActive       *bool  `json:"is_active"`
+}
+
+type upsertProcessingActivityRequest struct {
+	Key                    string `json:"key"`
+	DisplayName            string `json:"display_name"`
+	Purpose                string `json:"purpose"`
+	LegalBasis             string `json:"legal_basis"`
+	DataSubjectCategories  string `json:"data_subject_categories"`
+	PersonalDataCategories string `json:"personal_data_categories"`
+	RecipientCategories    string `json:"recipient_categories"`
+	TransferNotes          string `json:"transfer_notes"`
+	RetentionSummary       string `json:"retention_summary"`
+	SecurityMeasures       string `json:"security_measures"`
+	Owner                  string `json:"owner"`
+	IsActive               *bool  `json:"is_active"`
+}
+
+type upsertDPIARecordRequest struct {
+	Key                string     `json:"key"`
+	DisplayName        string     `json:"display_name"`
+	Status             string     `json:"status"`
+	Summary            string     `json:"summary"`
+	Scope              string     `json:"scope"`
+	RiskLevel          string     `json:"risk_level"`
+	MitigatingMeasures string     `json:"mitigating_measures"`
+	Owner              string     `json:"owner"`
+	ReviewDueAt        *time.Time `json:"review_due_at"`
+	IsActive           *bool      `json:"is_active"`
 }
 
 func (api *API) health(w http.ResponseWriter, _ *http.Request) {
@@ -225,6 +342,26 @@ func (api *API) createDocumentVersion(w http.ResponseWriter, r *http.Request) {
 
 	api.invalidateDocumentCache(key)
 	writeJSON(w, http.StatusCreated, version)
+}
+
+func (api *API) listDocumentVersions(w http.ResponseWriter, r *http.Request) {
+	key := normalizeKey(chi.URLParam(r, "key"))
+	if key == "" {
+		writeError(w, http.StatusBadRequest, errors.New("document key is required"))
+		return
+	}
+
+	rows, err := api.queries.ListDocumentVersionsByKey(r.Context(), key)
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	if rows == nil {
+		rows = []store.ListDocumentVersionsByKeyRow{}
+	}
+
+	writeJSON(w, http.StatusOK, map[string]any{"items": rows})
 }
 
 func (api *API) getLatestDocumentVersion(w http.ResponseWriter, r *http.Request) {
@@ -432,6 +569,197 @@ func (api *API) getSubjectBundle(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+func (api *API) listProcessors(w http.ResponseWriter, r *http.Request) {
+	rows, err := api.queries.ListProcessors(r.Context())
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	writeJSON(w, http.StatusOK, map[string]any{"items": rows})
+}
+
+func (api *API) upsertProcessor(w http.ResponseWriter, r *http.Request) {
+	var req upsertProcessorRequest
+	if err := decodeJSON(r, &req); err != nil {
+		writeError(w, http.StatusBadRequest, err)
+		return
+	}
+
+	req.Key = normalizeKey(req.Key)
+	if req.Key == "" || strings.TrimSpace(req.DisplayName) == "" {
+		writeError(w, http.StatusBadRequest, errors.New("key and display_name are required"))
+		return
+	}
+
+	row, err := api.queries.UpsertProcessor(r.Context(), store.UpsertProcessorParams{
+		Key:               req.Key,
+		DisplayName:       strings.TrimSpace(req.DisplayName),
+		RelationshipType:  normalizeRelationshipType(req.RelationshipType),
+		ServiceArea:       strings.TrimSpace(req.ServiceArea),
+		WebsiteUrl:        strings.TrimSpace(req.WebsiteURL),
+		PrimaryCountry:    strings.TrimSpace(req.PrimaryCountry),
+		DataLocation:      strings.TrimSpace(req.DataLocation),
+		TransferMechanism: strings.TrimSpace(req.TransferMechanism),
+		DpaStatus:         normalizeDPAStatus(req.DPAStatus),
+		Notes:             strings.TrimSpace(req.Notes),
+		IsActive:          defaultBool(req.IsActive, true),
+	})
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	writeJSON(w, http.StatusOK, row)
+}
+
+func (api *API) listRetentionPolicies(w http.ResponseWriter, r *http.Request) {
+	rows, err := api.queries.ListRetentionPolicies(r.Context())
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	writeJSON(w, http.StatusOK, map[string]any{"items": rows})
+}
+
+func (api *API) upsertRetentionPolicy(w http.ResponseWriter, r *http.Request) {
+	var req upsertRetentionPolicyRequest
+	if err := decodeJSON(r, &req); err != nil {
+		writeError(w, http.StatusBadRequest, err)
+		return
+	}
+
+	req.Key = normalizeKey(req.Key)
+	if req.Key == "" || strings.TrimSpace(req.DisplayName) == "" {
+		writeError(w, http.StatusBadRequest, errors.New("key and display_name are required"))
+		return
+	}
+
+	retentionDays := pgtype.Int4{}
+	if req.RetentionDays != nil {
+		if *req.RetentionDays < 0 {
+			writeError(w, http.StatusBadRequest, errors.New("retention_days must be greater than or equal to 0"))
+			return
+		}
+
+		retentionDays = pgtype.Int4{Int32: *req.RetentionDays, Valid: true}
+	}
+
+	row, err := api.queries.UpsertRetentionPolicy(r.Context(), store.UpsertRetentionPolicyParams{
+		Key:            req.Key,
+		DisplayName:    strings.TrimSpace(req.DisplayName),
+		DataCategory:   strings.TrimSpace(defaultString(req.DataCategory, "general")),
+		Description:    strings.TrimSpace(req.Description),
+		RetentionDays:  retentionDays,
+		TriggerEvent:   strings.TrimSpace(req.TriggerEvent),
+		StorageScope:   strings.TrimSpace(req.StorageScope),
+		DeletionMethod: strings.TrimSpace(req.DeletionMethod),
+		LegalBasis:     strings.TrimSpace(req.LegalBasis),
+		Notes:          strings.TrimSpace(req.Notes),
+		IsActive:       defaultBool(req.IsActive, true),
+	})
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	writeJSON(w, http.StatusOK, row)
+}
+
+func (api *API) listProcessingActivities(w http.ResponseWriter, r *http.Request) {
+	rows, err := api.queries.ListProcessingActivities(r.Context())
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	writeJSON(w, http.StatusOK, map[string]any{"items": rows})
+}
+
+func (api *API) upsertProcessingActivity(w http.ResponseWriter, r *http.Request) {
+	var req upsertProcessingActivityRequest
+	if err := decodeJSON(r, &req); err != nil {
+		writeError(w, http.StatusBadRequest, err)
+		return
+	}
+
+	req.Key = normalizeKey(req.Key)
+	if req.Key == "" || strings.TrimSpace(req.DisplayName) == "" {
+		writeError(w, http.StatusBadRequest, errors.New("key and display_name are required"))
+		return
+	}
+
+	row, err := api.queries.UpsertProcessingActivity(r.Context(), store.UpsertProcessingActivityParams{
+		Key:                    req.Key,
+		DisplayName:            strings.TrimSpace(req.DisplayName),
+		Purpose:                strings.TrimSpace(req.Purpose),
+		LegalBasis:             strings.TrimSpace(req.LegalBasis),
+		DataSubjectCategories:  strings.TrimSpace(req.DataSubjectCategories),
+		PersonalDataCategories: strings.TrimSpace(req.PersonalDataCategories),
+		RecipientCategories:    strings.TrimSpace(req.RecipientCategories),
+		TransferNotes:          strings.TrimSpace(req.TransferNotes),
+		RetentionSummary:       strings.TrimSpace(req.RetentionSummary),
+		SecurityMeasures:       strings.TrimSpace(req.SecurityMeasures),
+		Owner:                  strings.TrimSpace(req.Owner),
+		IsActive:               defaultBool(req.IsActive, true),
+	})
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	writeJSON(w, http.StatusOK, row)
+}
+
+func (api *API) listDPIARecords(w http.ResponseWriter, r *http.Request) {
+	rows, err := api.queries.ListDPIARecords(r.Context())
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	writeJSON(w, http.StatusOK, map[string]any{"items": rows})
+}
+
+func (api *API) upsertDPIARecord(w http.ResponseWriter, r *http.Request) {
+	var req upsertDPIARecordRequest
+	if err := decodeJSON(r, &req); err != nil {
+		writeError(w, http.StatusBadRequest, err)
+		return
+	}
+
+	req.Key = normalizeKey(req.Key)
+	if req.Key == "" || strings.TrimSpace(req.DisplayName) == "" {
+		writeError(w, http.StatusBadRequest, errors.New("key and display_name are required"))
+		return
+	}
+
+	reviewDueAt := pgtype.Timestamptz{}
+	if req.ReviewDueAt != nil {
+		reviewDueAt = pgtype.Timestamptz{Time: req.ReviewDueAt.UTC(), Valid: true}
+	}
+
+	row, err := api.queries.UpsertDPIARecord(r.Context(), store.UpsertDPIARecordParams{
+		Key:                req.Key,
+		DisplayName:        strings.TrimSpace(req.DisplayName),
+		Status:             normalizeDPIAStatus(req.Status),
+		Summary:            strings.TrimSpace(req.Summary),
+		Scope:              strings.TrimSpace(req.Scope),
+		RiskLevel:          normalizeRiskLevel(req.RiskLevel),
+		MitigatingMeasures: strings.TrimSpace(req.MitigatingMeasures),
+		Owner:              strings.TrimSpace(req.Owner),
+		ReviewDueAt:        reviewDueAt,
+		IsActive:           defaultBool(req.IsActive, true),
+	})
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	writeJSON(w, http.StatusOK, row)
+}
+
 func (api *API) lookupDocumentVersion(r *http.Request, documentKey, documentVersion, locale, audience string) (store.DocumentVersion, error) {
 	if normalizeKey(documentKey) == "" || strings.TrimSpace(documentVersion) == "" || strings.TrimSpace(locale) == "" {
 		return store.DocumentVersion{}, errors.New("document_key, document_version, and locale are required")
@@ -494,6 +822,49 @@ func defaultString(value, fallback string) string {
 		return fallback
 	}
 	return value
+}
+
+func defaultBool(value *bool, fallback bool) bool {
+	if value == nil {
+		return fallback
+	}
+	return *value
+}
+
+func normalizeRelationshipType(value string) string {
+	switch normalizeKey(value) {
+	case "subprocessor":
+		return "subprocessor"
+	default:
+		return "processor"
+	}
+}
+
+func normalizeDPAStatus(value string) string {
+	switch normalizeKey(value) {
+	case "pending", "signed", "not_required":
+		return normalizeKey(value)
+	default:
+		return "unknown"
+	}
+}
+
+func normalizeDPIAStatus(value string) string {
+	switch normalizeKey(value) {
+	case "in_review", "approved", "retired":
+		return normalizeKey(value)
+	default:
+		return "draft"
+	}
+}
+
+func normalizeRiskLevel(value string) string {
+	switch normalizeKey(value) {
+	case "low", "high", "very_high":
+		return normalizeKey(value)
+	default:
+		return "medium"
+	}
 }
 
 func normalizeContentType(value string) (string, error) {

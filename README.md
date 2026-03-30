@@ -9,6 +9,10 @@ It exists to keep legal and compliance evidence out of the main business service
 - consent history
 - subject-facing evidence exports
 - multilingual legal content
+- processor and subprocessor registry records
+- retention policy records
+- Article 30 processing activity records
+- DPIA records and mitigation tracking
 
 This service is intended to be small, explicit, and operationally boring. It does not try to interpret the law. It stores the records and evidence your platform needs in order to prove what text was active, what a user accepted, and when a consent state changed.
 
@@ -20,15 +24,26 @@ Current implementation status:
 - multilingual legal document seeding is working for `en`, `it`, and `de`
 - core legal documents are seeded into the live database
 - document retrieval is working through the API
+- public legal documents are served into the monolith from Regula
+- signup and profile flows write legal acceptance and consent evidence into Regula
+- GDPR export can read the Regula subject evidence bundle
+- processor and subprocessor registry records are stored in Regula
+- retention policy records are stored in Regula
+- Article 30 processing activities are stored in Regula
+- DPIA records are stored in Regula
 - document content is stored as document-body HTML, not full website pages
 - hardcoded public-site hostnames were removed from the stored legal content
 - small in-memory TTL cache is enabled for latest published document reads
+- structured internal API access logging is enabled
+- auth failures are logged with request context
+- production ingress rate limiting is configured at Traefik
+- monolith admin can publish legal document versions into Regula
+- monolith admin can manage processor and retention registry records
+- monolith admin can manage processing activities and DPIA records
 
 Still planned:
-- Laravel monolith integration for public legal page reads
-- consent and acceptance writes from monolith flows
-- admin tooling for document publishing and evidence inspection
 - future locale expansion beyond `en`, `it`, and `de`
+- deeper audit/reporting views if needed later
 
 ## Why This Service Exists
 The monolith should not be the long-term source of truth for compliance evidence. Legal content and consent history need different guarantees than ride lifecycle, pricing, or notifications.
@@ -50,6 +65,10 @@ Regula owns:
 - consent purpose registry
 - acceptance events
 - consent events
+- processor and subprocessor registry entries
+- retention policy registry entries
+- Article 30 processing activity entries
+- DPIA entries
 - subject evidence bundle reads
 
 Regula does not own:
@@ -130,7 +149,71 @@ Examples of consent purposes:
 - `marketing-email`
 - `marketing-sms`
 
-### 4. Subject Evidence Bundle
+### 4. Processor and Subprocessor Registry
+Regula stores a structured vendor registry so Pillion can track who processes platform data, for what operational area, and under which DPA / transfer assumptions.
+
+Each processor record can capture:
+- stable key
+- display name
+- relationship type `processor` or `subprocessor`
+- service area
+- website URL
+- primary country
+- data location
+- transfer mechanism notes
+- DPA status
+- operational notes
+- active / inactive state
+
+### 5. Retention Policy Registry
+Regula stores the working retention matrix in structured form instead of leaving it scattered across notes, backlog cards, or ad-hoc code comments.
+
+Each retention policy can capture:
+- stable key
+- display name
+- data category
+- description
+- retention days when fixed
+- trigger event
+- storage scope
+- deletion method
+- legal basis
+- notes
+- active / inactive state
+
+### 6. Article 30 Processing Register
+Regula stores structured processing activities so the platform can build and maintain a real record of processing instead of keeping that work only in external spreadsheets.
+
+Each activity can capture:
+- stable key
+- display name
+- purpose
+- legal basis
+- data subject categories
+- personal data categories
+- recipient categories
+- transfer notes
+- retention summary
+- security measures
+- owner
+- active / inactive state
+
+### 7. DPIA Records
+Regula stores DPIA records for high-risk processing domains such as geolocation, driver screening, and monitoring-heavy operations.
+
+Each DPIA record can capture:
+- stable key
+- display name
+- status
+- summary
+- scope
+- risk level
+- mitigating measures
+- owner
+- review due date
+- active / inactive state
+
+### 8. Subject Evidence Bundle
 The service can return a combined view per subject with:
 - acceptance history
 - consent history
@@ -138,7 +221,7 @@ The service can return a combined view per subject with:
 
 This is intended as a foundation for later export and audit workflows.
 
-### 5. Multilingual Support
+### 9. Multilingual Support
 Regula already supports multilingual legal content at the data model level and in the current seed set.
 
 Current seeded locales:
@@ -199,6 +282,10 @@ Main tables:
 - `consent_purposes`
 - `acceptance_events`
 - `consent_events`
+- `processors`
+- `retention_policies`
+- `processing_activities`
+- `dpia_records`
 - `schema_migrations`
 
 High-level model:
@@ -207,6 +294,10 @@ High-level model:
 - `acceptance_events` records acceptance of a specific document version
 - `consent_events` records changes to consent state linked to a specific legal version
 - `consent_purposes` stores the defined consent namespaces used by the platform
+- `processors` stores processor and subprocessor registry records
+- `retention_policies` stores the platform retention matrix in structured form
+- `processing_activities` stores the structured Article 30 record of processing
+- `dpia_records` stores high-risk assessment records and mitigation status
 
 ## API
 All routes except `/healthz` and `/readyz` require bearer authentication.
@@ -222,6 +313,16 @@ All routes except `/healthz` and `/readyz` require bearer authentication.
 
 ### Consent Purposes
 - `POST /v1/consent-purposes`
+
+### Governance Registry
+- `GET /v1/processors`
+- `POST /v1/processors`
+- `GET /v1/retention-policies`
+- `POST /v1/retention-policies`
+- `GET /v1/processing-activities`
+- `POST /v1/processing-activities`
+- `GET /v1/dpia-records`
+- `POST /v1/dpia-records`
 
 ### Evidence Writes
 - `POST /v1/acceptances`
@@ -272,6 +373,91 @@ What Regula does not need:
 - user sessions
 - public client auth
 - direct end-user access
+
+## Monolith Integration
+The monolith now uses Regula in three concrete ways:
+
+### Public legal pages
+The website legal pages are read from Regula instead of static local content:
+- `/privacy-policy`
+- `/terms-of-service`
+- `/cookie-policy`
+- `/impressum`
+- localized `en`, `it`, and `de` variants
+
+### Consent and acceptance writes
+The monolith writes:
+- privacy and terms acceptance from registration flows
+- newsletter and marketing consent decisions
+- later consent changes from authenticated profile and API flows
+
+### Admin workflows
+The monolith admin panel exposes:
+- `Legal Documents`
+  - inspect current published document versions by locale
+  - publish new legal text versions
+- `Compliance Registry`
+  - manage processor and subprocessor records
+  - manage retention policies
+  - manage Article 30 processing activities
+  - manage DPIA records
+
+This keeps Regula standalone while avoiding a separate backoffice application.
+
+## Audit Logging
+Regula writes structured logs for both successful internal API access and rejected auth attempts.
+
+Successful authenticated access logs include:
+- calling principal
+- client ID
+- subject and authorized party when available
+- method
+- path
+- route pattern
+- response status
+- bytes written
+- request duration
+- request ID
+- remote IP
+- user agent
+- `subject_ref` when the route contains it
+- `document_key` when the route contains it
+
+Auth failure logs include:
+- failure reason
+- validation error
+- method
+- path
+- request ID
+- remote IP
+- user agent
+
+This is intentionally lightweight:
+- no extra database tables
+- no tracing stack
+- no Redis
+- easy to consume from Docker logs or your future log pipeline
+
+## Rate Limiting
+Ingress rate limiting is configured at Traefik, not inside the Go service.
+
+Why:
+- cheaper under load
+- no in-process shared state
+- no added dependency like Redis
+- keeps Regula focused on evidence storage and retrieval
+
+`docker-compose.prod.yml` now defines a Traefik middleware for Regula with:
+- `REGULA_TRAEFIK_RATELIMIT_AVERAGE`
+- `REGULA_TRAEFIK_RATELIMIT_BURST`
+- `REGULA_TRAEFIK_RATELIMIT_PERIOD`
+
+Default example values:
+- average `60`
+- burst `120`
+- period `1s`
+
+Tune them only after observing real monolith traffic.
 
 ## Caching
 Regula uses a very small in-memory TTL cache for latest published document reads only.
@@ -354,6 +540,9 @@ Common:
 - `REGULA_LOG_LEVEL`
 - `REGULA_DOCUMENT_CACHE_TTL_SECONDS`
 - `REGULA_DOCUMENT_CACHE_MAX_ITEMS`
+- `REGULA_TRAEFIK_RATELIMIT_AVERAGE`
+- `REGULA_TRAEFIK_RATELIMIT_BURST`
+- `REGULA_TRAEFIK_RATELIMIT_PERIOD`
 
 Current production-style database target is Neon.
 
@@ -377,6 +566,9 @@ REGULA_AUTO_MIGRATE=false
 REGULA_LOG_LEVEL=warning
 REGULA_DOCUMENT_CACHE_TTL_SECONDS=120
 REGULA_DOCUMENT_CACHE_MAX_ITEMS=64
+REGULA_TRAEFIK_RATELIMIT_AVERAGE=60
+REGULA_TRAEFIK_RATELIMIT_BURST=120
+REGULA_TRAEFIK_RATELIMIT_PERIOD=1s
 ```
 
 ## Neon Database
@@ -471,7 +663,7 @@ If you later want public legal pages served through this domain, the recommended
 5. Run `docker compose -f docker-compose.prod.yml exec regula /regula seed foundation` if initial legal texts should be loaded
 6. Verify reads for `en`, `it`, and `de`
 7. Enable the monolith integration
-8. Replace static bearer tokens with Zitadel M2M JWT auth
+8. Confirm Regula receives authenticated traffic and access logs after rollout
 
 ### Do Not Use `reset-db` in Production
 `reset-db` and `reset-and-seed` are destructive commands intended for development, staging, or controlled reinitialization only.
@@ -483,9 +675,8 @@ Short-term:
 - Regula remains internal-only behind authenticated calls
 
 Later:
-- service-to-service JWT auth via Zitadel
 - admin publishing tools
-- subject export workflow
+- deeper audit/reporting views
 - retention-policy and processor-registry modules if you decide to extend Regula further
 
 ## What Is Done
@@ -496,14 +687,17 @@ Done now:
 - hardcoded public host removal from stored content
 - seed/reset CLI support
 - live service verification
+- Zitadel M2M auth via opaque-token introspection
+- monolith legal-page reads from Regula
+- monolith acceptance and consent writes into Regula
+- structured access audit logging
+- Traefik ingress rate limiting config
 
 ## What Is Next
 Best next engineering steps:
-1. integrate the Laravel legal pages so they read from Regula
-2. send consent and acceptance writes from signup and profile flows
-3. replace static bearer tokens with Zitadel service JWTs
-4. add admin publishing workflow for new legal versions
-5. add structured evidence export and audit endpoints
+1. add admin publishing workflow for new legal versions
+2. add deeper audit/reporting views if operationally needed
+3. formalize retention-policy and processor-registry modules if you want Regula to own more legal governance data
 
 ## File Guide
 Key files in this service:

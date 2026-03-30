@@ -159,6 +159,69 @@ func (q *Queries) GetDocumentVersionByNaturalKey(ctx context.Context, arg GetDoc
 	return i, err
 }
 
+const listDocumentVersionsByKey = `-- name: ListDocumentVersionsByKey :many
+SELECT
+  d.key AS document_key,
+  d.display_name,
+  dv.id,
+  dv.version,
+  dv.locale,
+  dv.audience,
+  dv.content_type,
+  dv.is_published,
+  dv.effective_from,
+  dv.created_by,
+  dv.created_at
+FROM document_versions dv
+JOIN documents d ON d.id = dv.document_id
+WHERE d.key = $1
+ORDER BY dv.effective_from DESC, dv.created_at DESC
+`
+
+type ListDocumentVersionsByKeyRow struct {
+	DocumentKey  string             `json:"document_key"`
+	DisplayName  string             `json:"display_name"`
+	ID           int64              `json:"id"`
+	Version      string             `json:"version"`
+	Locale       string             `json:"locale"`
+	Audience     string             `json:"audience"`
+	ContentType  string             `json:"content_type"`
+	IsPublished  bool               `json:"is_published"`
+	EffectiveFrom pgtype.Timestamptz `json:"effective_from"`
+	CreatedBy    string             `json:"created_by"`
+	CreatedAt    pgtype.Timestamptz `json:"created_at"`
+}
+
+func (q *Queries) ListDocumentVersionsByKey(ctx context.Context, key string) ([]ListDocumentVersionsByKeyRow, error) {
+	rows, err := q.db.Query(ctx, listDocumentVersionsByKey, key)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var items []ListDocumentVersionsByKeyRow
+	for rows.Next() {
+		var i ListDocumentVersionsByKeyRow
+		if err := rows.Scan(
+			&i.DocumentKey,
+			&i.DisplayName,
+			&i.ID,
+			&i.Version,
+			&i.Locale,
+			&i.Audience,
+			&i.ContentType,
+			&i.IsPublished,
+			&i.EffectiveFrom,
+			&i.CreatedBy,
+			&i.CreatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	return items, rows.Err()
+}
+
 const getLatestPublishedDocumentVersion = `-- name: GetLatestPublishedDocumentVersion :one
 SELECT
   d.key AS document_key,

@@ -67,3 +67,71 @@ type DocumentVersion struct {
 	CreatedBy     string             `json:"created_by"`
 	CreatedAt     pgtype.Timestamptz `json:"created_at"`
 }
+
+type DpiaRecord struct {
+	ID                 string             `json:"id"`
+	Key                string             `json:"key"`
+	DisplayName        string             `json:"display_name"`
+	Status             string             `json:"status"`
+	Summary            string             `json:"summary"`
+	Scope              string             `json:"scope"`
+	RiskLevel          string             `json:"risk_level"`
+	MitigatingMeasures string             `json:"mitigating_measures"`
+	Owner              string             `json:"owner"`
+	ReviewDueAt        pgtype.Timestamptz `json:"review_due_at"`
+	IsActive           bool               `json:"is_active"`
+	CreatedAt          pgtype.Timestamptz `json:"created_at"`
+	UpdatedAt          pgtype.Timestamptz `json:"updated_at"`
+}
+
+type ProcessingActivity struct {
+	ID                     string             `json:"id"`
+	Key                    string             `json:"key"`
+	DisplayName            string             `json:"display_name"`
+	Purpose                string             `json:"purpose"`
+	LegalBasis             string             `json:"legal_basis"`
+	DataSubjectCategories  string             `json:"data_subject_categories"`
+	PersonalDataCategories string             `json:"personal_data_categories"`
+	RecipientCategories    string             `json:"recipient_categories"`
+	TransferNotes          string             `json:"transfer_notes"`
+	RetentionSummary       string             `json:"retention_summary"`
+	SecurityMeasures       string             `json:"security_measures"`
+	Owner                  string             `json:"owner"`
+	IsActive               bool               `json:"is_active"`
+	CreatedAt              pgtype.Timestamptz `json:"created_at"`
+	UpdatedAt              pgtype.Timestamptz `json:"updated_at"`
+}
+
+type Processor struct {
+	ID                string             `json:"id"`
+	Key               string             `json:"key"`
+	DisplayName       string             `json:"display_name"`
+	RelationshipType  string             `json:"relationship_type"`
+	ServiceArea       string             `json:"service_area"`
+	WebsiteUrl        string             `json:"website_url"`
+	PrimaryCountry    string             `json:"primary_country"`
+	DataLocation      string             `json:"data_location"`
+	TransferMechanism string             `json:"transfer_mechanism"`
+	DpaStatus         string             `json:"dpa_status"`
+	Notes             string             `json:"notes"`
+	IsActive          bool               `json:"is_active"`
+	CreatedAt         pgtype.Timestamptz `json:"created_at"`
+	UpdatedAt         pgtype.Timestamptz `json:"updated_at"`
+}
+
+type RetentionPolicy struct {
+	ID             string             `json:"id"`
+	Key            string             `json:"key"`
+	DisplayName    string             `json:"display_name"`
+	DataCategory   string             `json:"data_category"`
+	Description    string             `json:"description"`
+	RetentionDays  pgtype.Int4        `json:"retention_days"`
+	TriggerEvent   string             `json:"trigger_event"`
+	StorageScope   string             `json:"storage_scope"`
+	DeletionMethod string             `json:"deletion_method"`
+	LegalBasis     string             `json:"legal_basis"`
+	Notes          string             `json:"notes"`
+	IsActive       bool               `json:"is_active"`
+	CreatedAt      pgtype.Timestamptz `json:"created_at"`
+	UpdatedAt      pgtype.Timestamptz `json:"updated_at"`
+}

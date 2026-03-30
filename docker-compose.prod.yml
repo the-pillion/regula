@@ -35,7 +35,11 @@ services:
       - "traefik.http.routers.regula.rule=Host(`regula.ms.thepillion.com`)"
       - "traefik.http.routers.regula.entrypoints=websecure"
       - "traefik.http.routers.regula.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.regula.middlewares=regula-ratelimit"
       - "traefik.http.services.regula.loadbalancer.server.port=8085"
+      - "traefik.http.middlewares.regula-ratelimit.ratelimit.average=${REGULA_TRAEFIK_RATELIMIT_AVERAGE:-60}"
+      - "traefik.http.middlewares.regula-ratelimit.ratelimit.burst=${REGULA_TRAEFIK_RATELIMIT_BURST:-120}"
+      - "traefik.http.middlewares.regula-ratelimit.ratelimit.period=${REGULA_TRAEFIK_RATELIMIT_PERIOD:-1s}"
     healthcheck:
       test: ["CMD", "/regula", "healthcheck"]
       interval: 20s

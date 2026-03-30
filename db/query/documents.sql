@@ -64,6 +64,24 @@ WHERE d.key = $1
   AND dv.audience = $4
 LIMIT 1;
 
+-- name: ListDocumentVersionsByKey :many
+SELECT
+  d.key AS document_key,
+  d.display_name,
+  dv.id,
+  dv.version,
+  dv.locale,
+  dv.audience,
+  dv.content_type,
+  dv.is_published,
+  dv.effective_from,
+  dv.created_by,
+  dv.created_at
+FROM document_versions dv
+JOIN documents d ON d.id = dv.document_id
+WHERE d.key = $1
+ORDER BY dv.effective_from DESC, dv.created_at DESC;
+
 -- name: GetLatestPublishedDocumentVersion :one
 SELECT
   d.key AS document_key,

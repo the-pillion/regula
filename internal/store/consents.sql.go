@@ -11,25 +11,6 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
-const getConsentPurposeByKey = `-- name: GetConsentPurposeByKey :one
-SELECT id, key, display_name, description, created_at
-FROM consent_purposes
-WHERE key = $1
-`
-
-func (q *Queries) GetConsentPurposeByKey(ctx context.Context, key string) (ConsentPurpose, error) {
-	row := q.db.QueryRow(ctx, getConsentPurposeByKey, key)
-	var i ConsentPurpose
-	err := row.Scan(
-		&i.ID,
-		&i.Key,
-		&i.DisplayName,
-		&i.Description,
-		&i.CreatedAt,
-	)
-	return i, err
-}
-
 const createConsentEvent = `-- name: CreateConsentEvent :one
 INSERT INTO consent_events (
   subject_ref,
@@ -85,6 +66,25 @@ func (q *Queries) CreateConsentEvent(ctx context.Context, arg CreateConsentEvent
 		&i.SourceApp,
 		&i.EvidenceSha256,
 		&i.Metadata,
+		&i.CreatedAt,
+	)
+	return i, err
+}
+
+const getConsentPurposeByKey = `-- name: GetConsentPurposeByKey :one
+SELECT id, key, display_name, description, created_at
+FROM consent_purposes
+WHERE key = $1
+`
+
+func (q *Queries) GetConsentPurposeByKey(ctx context.Context, key string) (ConsentPurpose, error) {
+	row := q.db.QueryRow(ctx, getConsentPurposeByKey, key)
+	var i ConsentPurpose
+	err := row.Scan(
+		&i.ID,
+		&i.Key,
+		&i.DisplayName,
+		&i.Description,
 		&i.CreatedAt,
 	)
 	return i, err
