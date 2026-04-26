@@ -225,6 +225,66 @@ Public surface gets only what GDPR transparency norms expect: legal documents + 
 - Generators give a defensible starting point in multiple languages.
 - Lawyer review is high-value once there are real driver contracts and real money.
 
+### Decision 8 — Regula owns its admin dashboard (reverses the "admin lives in core" stance)
+
+**Choice:** build an admin dashboard **inside Regula**, not as a section in `pillion-core`.
+
+**Why:**
+- Audience is lawyers + compliance team, not platform operators. Different mental model from core's admin (rides, drivers, payments).
+- Compliance work has its own cadence (legal text revisions, processor onboarding, DPIA reviews) decoupled from product releases.
+- Keeping the admin colocated with the data avoids cross-service round-trips for every edit.
+- Lawyers should be able to publish a new privacy policy version, flip `is_publicly_visible`, add a subprocessor, or update a DPIA record without engineering touching anything.
+- Core's existing admin controllers (`Admin/LegalDocumentController`, `Admin/ComplianceRegistryController`) become **migration debt** — they should shrink to passthroughs and eventually be removed.
+
+**Constraints on the dashboard (must hold):**
+- Lives in the same Regula repo. Not a separate service.
+- Stack stays boring — Go-rendered HTML templates, htmx, or similar. **No SPA framework.** No React/Vue/etc.
+- Authenticated only — Zitadel browser-session OAuth flow (this is the *one* exception to "M2M-only" — restricted to a `legal` / `compliance` role).
+- Audit-logged at the same level as `/v1/*` writes.
+- Read-only mirrors of acceptance/consent ledgers (never editable — append-only invariant stays).
+
+**Tradeoff acknowledged:** this expands Regula's surface beyond pure "store + retrieve evidence." The dashboard is the only acceptable expansion. Public APIs, business logic, ride-related concerns — still refused.
+
+### Decision 9 — Public visibility is a DB property, not an env-config
+
+**Choice:** drop `REGULA_PUBLIC_LEGAL_KEYS`. Add `is_publicly_visible BOOLEAN` on `documents`. Public surface joins on it.
+
+**Why:**
+- Env-based whitelist requires a redeploy every time legal adds a new public document type (community guidelines variant, accessibility statement, supplier code of conduct, etc.).
+- Lawyers should not need engineering to publish.
+- DB-driven visibility is auditable (column changes show up in admin audit log; env changes don't unless we instrument them).
+- Aligns with Decision 8 — dashboard provides the toggle; lawyers self-serve.
+
+**Implementation note:** for safety, default `is_publicly_visible = FALSE` on document creation. Public exposure is opt-in, never accidental.
+
+### Decision 10 — "Gig layer" — adaptive legal-content layer for lawyers
+
+**Choice:** plan for a layer where lawyers (gig-engaged or in-house) can plug content into Regula and the system adapts automatically — no engineering for routine legal updates.
+
+**What "adapts automatically" means concretely:**
+- Lawyer creates new document key + locale + audience + version through the dashboard → it appears under `/public/legal/{key}.html?lang=...` immediately if `is_publicly_visible=TRUE`.
+- Lawyer updates a subprocessor → it appears in the `/public/subprocessors.html` table on the next cache refresh.
+- Lawyer marks a DPIA as reviewed → audit trail records the change; no public surface impact.
+- Lawyer adds a new consent purpose → new key registers; whichever caller writes against it just works.
+
+**What this rules out:**
+- Hardcoded document key whitelists (already addressed by Decision 9).
+- Hardcoded audience values (`passenger`, `driver`, `all` should stay free strings, not a Go-side enum that needs releasing).
+- Hardcoded locale lists.
+- Engineering-gated publishing flows.
+
+**What this still requires:**
+- Admin dashboard (Decision 8) — the lawyer's UI.
+- Schema flexibility — keep all type-like columns (audience, locale, content_type, relationship_type, dpa_status, dpia status, risk_level) as text/varchar with normalization in the handler, not as `ENUM` types in the DB. Already mostly done.
+- Sane defaults so misconfiguration fails closed (private), not open (leak).
+
+**Open questions for later:**
+- Does the dashboard get a markdown/HTML editor for legal text, or do lawyers paste content from their own authoring tool?
+- Do we support side-by-side translation (English original + Italian translation in one screen) or one-locale-at-a-time?
+- Should the lawyer dashboard expose an "approval workflow" (draft → reviewed → published)? Probably yes — single-person publishing of legal text is a risk.
+
+**Decisions deferred until dashboard work begins.** Recorded here so the gig-layer intent is preserved across sessions.
+
 ---
 
 ## 6. Multi-country, multi-language strategy
@@ -339,7 +399,7 @@ CSS for the embedded subprocessors table can be styled via a `.regula-subprocess
 
 ### Public surface env (added 2026-04-26)
 
-- `REGULA_PUBLIC_LEGAL_KEYS` (CSV, default `privacy-policy,terms-of-service,cookie-policy,impressum`)
+- ~~`REGULA_PUBLIC_LEGAL_KEYS`~~ — **deprecated same day.** Replaced by `documents.is_publicly_visible` DB column (Decision 9). Code currently still reads it; remove after the column + migration land.
 - `REGULA_PUBLIC_CACHE_MAX_AGE_SECONDS` (default `300`)
 - `REGULA_PUBLIC_CACHE_SHARED_MAX_AGE_SECONDS` (default `3600`)
 - `REGULA_PUBLIC_CACHE_STALE_REVALIDATE_SECONDS` (default `86400`)
@@ -395,7 +455,7 @@ If a future task or agent suggests any of the following, push back hard:
 - Adding browser-session auth, OAuth login flows, or end-user direct access to Regula.
 - Storing full website pages instead of document body content.
 - Adding Redis, distributed tracing, or a heavy framework.
-- Building a second admin UI inside Regula (admin lives in `pillion-core`).
+- ~~Building a second admin UI inside Regula~~ → **reversed 2026-04-26.** Regula now owns its admin dashboard (Decision 8). Lawyer/compliance audience only. Boring stack (Go templates + htmx, no SPA). Read-only mirrors of acceptance/consent ledgers — never editable.
 - Letting acceptance or consent rows become mutable. Always append-only.
 - Overwriting old document versions instead of publishing a new version.
 - Pre-translating documents to languages for markets that are not actually launching.
@@ -421,18 +481,36 @@ Regula stays narrow. That narrowness is why it can run reliably on a small VPS.
 
 ## 12. Outstanding follow-ups (not yet done)
 
-1. Add separate Traefik rate-limit middleware in `docker-compose.prod.yml` for `/public/*` (lower limits, IP-based) distinct from `/v1/*`.
-2. Once `/public/*` is wired into `thepillion.com`, remove the public legal-page rendering path from `pillion-core/LegalDocumentController.php`.
-3. Seed Italian (`it-IT` + `it`) versions of the launch document set when legal text is ready.
-4. Consider a `/public/legal/{key}` (no extension) route that 302-redirects to `.html` with `lang` derived from `Accept-Language` — friendlier embed URL.
-5. When second country launches, decide: per-country addenda doc or fully separate per-country terms doc. Either works; pick before seeding multi-country.
+**Schema + visibility model (Decision 9):**
+1. Migration: add `is_publicly_visible BOOLEAN NOT NULL DEFAULT FALSE` to `documents`.
+2. Update `getLatestPublishedDocumentVersion`-style queries used by `/public/*` to join `documents` and filter `documents.is_publicly_visible = TRUE`.
+3. Update `internal/api/public.go` handlers — drop the `isPublicLegalKey()` whitelist check; rely on the join filter.
+4. Backfill existing seed docs (`privacy-policy`, `terms-of-service`, `cookie-policy`, `impressum`) with `is_publicly_visible = TRUE`. Everything else stays `FALSE` by default.
+5. Remove `REGULA_PUBLIC_LEGAL_KEYS` from `internal/config/config.go`, `.env.example`, `docker-compose*.yml`, and from `service-regula.md` in `pillion/raw/`.
+
+**Admin dashboard (Decision 8):**
+6. Spike: Go templates + htmx vs alpine.js — pick one, document why.
+7. Browser-session auth: Zitadel OAuth code flow. Restrict to `legal` / `compliance` / `admin` role. Session storage: cookies + server-side state (not JWTs).
+8. Dashboard scope (v1): list/edit/publish documents + versions, manage processors/retention/Article 30/DPIA, **read-only** view of acceptance + consent ledgers, audit log viewer.
+9. Approval workflow design — draft → reviewed → published. Two-person publish for legal text recommended (not engineering-gated, but second-lawyer-gated).
+10. Migrate core's admin controllers (`Admin/LegalDocumentController`, `Admin/ComplianceRegistryController`) → mark deprecated → remove once dashboard is in production.
+
+**Public surface (existing follow-ups):**
+11. Add separate Traefik rate-limit middleware in `docker-compose.prod.yml` for `/public/*` (lower limits, IP-based) distinct from `/v1/*`.
+12. Once `/public/*` is wired into `thepillion.com` and the upcoming mobile app, remove the public legal-page rendering path from `pillion-core/LegalDocumentController.php`.
+13. Consider a `/public/legal/{key}` (no extension) route that 302-redirects to `.html` with `lang` derived from `Accept-Language` — friendlier embed URL.
+14. Future: dedicated public-edge caching/protection service (mentioned in section 4 #5) — only if real traffic justifies; default no.
+
+**Content seeding (existing):**
+15. Seed Italian (`it-IT` + `it`) versions of the launch document set when legal text is ready (iubenda or lawyer output).
+16. When second country launches, decide: per-country addenda doc or fully separate per-country terms doc. Either works; pick before seeding multi-country.
 
 ---
 
 ## 13. Quick mental model (for a new agent reading cold)
 
-> Regula is a write-once ledger. Any service holding a Zitadel M2M token can append acceptance or consent events, publish new legal versions, or update governance registries via `/v1/*`. Anyone on the internet can read published legal documents and the active subprocessor list via `/public/*`. Nothing else is exposed publicly.
+> Regula is a write-once ledger plus a thin lawyer-facing CMS layer. Any service holding a Zitadel M2M token can append acceptance or consent events, publish new legal versions, or update governance registries via `/v1/*`. Lawyers + compliance team manage content directly through the in-Regula admin dashboard (Zitadel OAuth, restricted role). Anyone on the internet can read documents flagged `is_publicly_visible = TRUE` and the active subprocessor list via `/public/*`. Nothing else is exposed publicly.
 >
 > The service that owns the user-facing moment (signup, profile change, admin action) is responsible for telling Regula what happened. Regula has no event subscriptions, no user awareness, no opinions about who someone is — only opaque `subject_ref` strings and structured records.
 >
-> Schema, auth boundary, and public surface are the three things to keep stable. Everything else can iterate.
+> Schema, auth boundary, public surface, and the lawyer dashboard are the four things to keep stable. Everything else can iterate. The "gig layer" intent (Decision 10) means: lawyers self-serve via the dashboard; engineering involvement should approach zero for routine legal updates.
