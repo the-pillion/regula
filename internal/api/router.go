@@ -18,6 +18,7 @@ import (
 	"github.com/pillion/regula/internal/auth"
 	"github.com/pillion/regula/internal/cache"
 	"github.com/pillion/regula/internal/config"
+	"github.com/pillion/regula/internal/dashboard"
 	"github.com/pillion/regula/internal/store"
 )
 
@@ -95,6 +96,17 @@ func NewRouter(cfg *config.Config, log *slog.Logger, queries *store.Queries) (ht
 		r.Get("/v1/subjects/{subjectRef}/consents/current", api.listCurrentConsents)
 		r.Get("/v1/subjects/{subjectRef}/bundle", api.getSubjectBundle)
 	})
+
+	if cfg.Dashboard.Enabled {
+		dash, err := dashboard.NewServer(cfg.Dashboard, log, queries, r)
+		if err != nil {
+			return nil, fmt.Errorf("dashboard init: %w", err)
+		}
+		r.Route("/admin", func(r chi.Router) {
+			r.Use(dashboard.BasicAuth(cfg.Dashboard))
+			dash.Mount(r)
+		})
+	}
 
 	return r, nil
 }

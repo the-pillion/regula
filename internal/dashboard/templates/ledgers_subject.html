@@ -1,0 +1,59 @@
+{{define "page"}}
+<h1>Subject — <code>{{.Subject}}</code></h1>
+<p><a href="/admin/ledgers">← back</a></p>
+
+<h2>Current consents</h2>
+<table>
+  <thead><tr><th>Purpose</th><th>Status</th><th>Changed at</th><th>Source</th></tr></thead>
+  <tbody>
+  {{range .Current}}
+    <tr>
+      <td><code>{{.PurposeKey}}</code></td>
+      <td>{{if eq .Status "granted"}}<span class="pill pill-on">{{.Status}}</span>{{else}}<span class="pill pill-off">{{.Status}}</span>{{end}}</td>
+      <td>{{.ChangedAt.Time}}</td>
+      <td>{{.SourceService}}</td>
+    </tr>
+  {{else}}
+    <tr><td colspan="4"><em>No consent records.</em></td></tr>
+  {{end}}
+  </tbody>
+</table>
+
+<h2>Acceptance history</h2>
+<table>
+  <thead><tr><th>Accepted at</th><th>Document</th><th>Version</th><th>Locale</th><th>Source</th><th>IP</th></tr></thead>
+  <tbody>
+  {{range .Acceptances}}
+    <tr>
+      <td>{{.AcceptedAt.Time}}</td>
+      <td><code>{{.DocumentKey}}</code></td>
+      <td>{{.DocumentVersion}}</td>
+      <td>{{.Locale}}</td>
+      <td>{{.SourceService}}</td>
+      <td>{{.IpAddress}}</td>
+    </tr>
+  {{else}}
+    <tr><td colspan="6"><em>No acceptances recorded.</em></td></tr>
+  {{end}}
+  </tbody>
+</table>
+
+<h2>Consent history</h2>
+<table>
+  <thead><tr><th>Changed at</th><th>Purpose</th><th>Status</th><th>Document</th><th>Legal basis</th><th>Source</th></tr></thead>
+  <tbody>
+  {{range .Consents}}
+    <tr>
+      <td>{{.ChangedAt.Time}}</td>
+      <td><code>{{.PurposeKey}}</code></td>
+      <td>{{if eq .Status "granted"}}<span class="pill pill-on">{{.Status}}</span>{{else}}<span class="pill pill-off">{{.Status}}</span>{{end}}</td>
+      <td><code>{{.DocumentKey}}</code> / {{.DocumentVersion}}</td>
+      <td>{{.LegalBasis}}</td>
+      <td>{{.SourceService}}</td>
+    </tr>
+  {{else}}
+    <tr><td colspan="6"><em>No consent events recorded.</em></td></tr>
+  {{end}}
+  </tbody>
+</table>
+{{end}}

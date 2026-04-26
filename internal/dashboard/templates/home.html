@@ -1,0 +1,17 @@
+{{define "page"}}
+<h1>Regula admin dashboard</h1>
+<p>Lawyer / compliance team console. Read + publish legal documents, manage processor registry, audit consent + acceptance ledgers (read-only), inspect public route surface.</p>
+<h2>Quick links</h2>
+<ul>
+  <li><a href="/admin/documents">Documents</a> — versions, public visibility flag</li>
+  <li><a href="/admin/processors">Processors &amp; subprocessors</a></li>
+  <li><a href="/admin/ledgers">Acceptance + consent ledgers</a> (read-only)</li>
+  <li><a href="/admin/routes">All HTTP routes</a> — what is public vs internal</li>
+</ul>
+<h2>Invariants</h2>
+<ul>
+  <li>Acceptance + consent rows are <strong>append-only</strong>. Never edit.</li>
+  <li>Document versions are <strong>versioned</strong>; publish a new row, never overwrite.</li>
+  <li>Public visibility = DB column <code>documents.is_publicly_visible</code>.</li>
+</ul>
+{{end}}

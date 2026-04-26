@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"html"
@@ -14,18 +15,21 @@ import (
 
 // Public read-only surface.
 //
-// Anonymous, GET-only, published-only, whitelisted-keys-only.
+// Anonymous, GET-only, published-only. Visibility gated by
+// documents.is_publicly_visible (DB column, not env).
 // Never exposes acceptance/consent ledgers, processor internal notes,
 // DPA status, retention policy details, Article 30 records, or DPIA records.
 
-func (api *API) isPublicLegalKey(key string) bool {
+func (api *API) isPublicLegalKey(ctx context.Context, key string) bool {
 	key = normalizeKey(key)
-	for _, allowed := range api.cfg.PublicLegalKeys {
-		if key == allowed {
-			return true
-		}
+	if key == "" {
+		return false
 	}
-	return false
+	visible, err := api.queries.IsDocumentPubliclyVisible(ctx, key)
+	if err != nil {
+		return false
+	}
+	return visible
 }
 
 func (api *API) publicCacheHeaders(next http.Handler) http.Handler {
@@ -78,7 +82,7 @@ func (api *API) getPublicLegalDocument(w http.ResponseWriter, r *http.Request) {
 	key, ext := splitExt(rawKey)
 	key = normalizeKey(key)
 
-	if !api.isPublicLegalKey(key) {
+	if !api.isPublicLegalKey(r.Context(), key) {
 		writeError(w, http.StatusNotFound, errors.New("document not found"))
 		return
 	}
@@ -110,7 +114,7 @@ func (api *API) getPublicLegalDocumentPinned(w http.ResponseWriter, r *http.Requ
 	rawVersion := chi.URLParam(r, "versionExt")
 	versionStr, ext := splitExt(rawVersion)
 
-	if !api.isPublicLegalKey(key) {
+	if !api.isPublicLegalKey(r.Context(), key) {
 		writeError(w, http.StatusNotFound, errors.New("document not found"))
 		return
 	}
@@ -161,7 +165,7 @@ func (api *API) getPublicLegalDocumentPinned(w http.ResponseWriter, r *http.Requ
 
 func (api *API) listPublicLegalVersions(w http.ResponseWriter, r *http.Request) {
 	key := normalizeKey(chi.URLParam(r, "key"))
-	if !api.isPublicLegalKey(key) {
+	if !api.isPublicLegalKey(r.Context(), key) {
 		writeError(w, http.StatusNotFound, errors.New("document not found"))
 		return
 	}

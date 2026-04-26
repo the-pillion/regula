@@ -1,0 +1,8 @@
+{{define "page"}}
+<h1>Ledgers (read-only)</h1>
+<p>Acceptance + consent events are append-only. This view is for inspection — never editing. Look up by <code>subject_ref</code> (typically the Zitadel <code>sub</code>).</p>
+<form method="get" action="/admin/ledgers/subject">
+  <input type="text" name="subject_ref" placeholder="subject_ref (e.g. zitadel sub)" required>
+  <button type="submit">Look up</button>
+</form>
+{{end}}

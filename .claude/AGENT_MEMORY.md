@@ -239,7 +239,7 @@ Public surface gets only what GDPR transparency norms expect: legal documents + 
 **Constraints on the dashboard (must hold):**
 - Lives in the same Regula repo. Not a separate service.
 - Stack stays boring — Go-rendered HTML templates, htmx, or similar. **No SPA framework.** No React/Vue/etc.
-- Authenticated only — Zitadel browser-session OAuth flow (this is the *one* exception to "M2M-only" — restricted to a `legal` / `compliance` role).
+- Authenticated only — **HTTP basic auth, single shared user from env** (`REGULA_DASHBOARD_USER` + `REGULA_DASHBOARD_PASSWORD`). Standalone admin app — no Zitadel coupling. Zitadel stays scoped to `/v1/*` M2M between `pillion-core` and Regula. **(Updated 2026-04-26 evening — supersedes the earlier "Zitadel OAuth code flow" plan recorded in this decision.)**
 - Audit-logged at the same level as `/v1/*` writes.
 - Read-only mirrors of acceptance/consent ledgers (never editable — append-only invariant stays).
 
@@ -371,6 +371,17 @@ JS fetch only when live filtering or sorting is needed. Otherwise stay server-re
 
 CSS for the embedded subprocessors table can be styled via a `.regula-subprocessors` class (already on the table). Style on the embedding side.
 
+### Cookie consent banner — use Klaro (don't build one)
+
+For the *frontend* consent UI on `thepillion.com`, the dashboard worker, and any mobile webview, use **[Klaro!](https://github.com/klaro-org/klaro)** (Apache 2.0). It is the polished, themable, OSS cookie/consent manager — pairs cleanly with Regula:
+
+- **Klaro = the UI** (banner, preferences modal, accept/reject toggles).
+- **Regula = the server-side ledger** (append-only consent + acceptance events).
+
+Wire Klaro's `onAccept` / `onDecline` callbacks → frontend → `pillion-core` → `POST /v1/consents` on Regula. One row per change, never overwrite. Klaro can also link to `/public/legal/{key}.html` from inside its preferences modal so the policy text always reflects the latest published version.
+
+Regula does **not** serve a banner. Banner UX is a frontend concern, not a compliance-ledger concern.
+
 ---
 
 ## 9. Operational and configuration cheat sheet
@@ -489,10 +500,10 @@ Regula stays narrow. That narrowness is why it can run reliably on a small VPS.
 5. Remove `REGULA_PUBLIC_LEGAL_KEYS` from `internal/config/config.go`, `.env.example`, `docker-compose*.yml`, and from `service-regula.md` in `pillion/raw/`.
 
 **Admin dashboard (Decision 8):**
-6. Spike: Go templates + htmx vs alpine.js — pick one, document why.
-7. Browser-session auth: Zitadel OAuth code flow. Restrict to `legal` / `compliance` / `admin` role. Session storage: cookies + server-side state (not JWTs).
-8. Dashboard scope (v1): list/edit/publish documents + versions, manage processors/retention/Article 30/DPIA, **read-only** view of acceptance + consent ledgers, audit log viewer.
-9. Approval workflow design — draft → reviewed → published. Two-person publish for legal text recommended (not engineering-gated, but second-lawyer-gated).
+6. Spike: Go templates + htmx vs alpine.js — pick one, document why. *(Initial v0 shipped with plain Go html/template + zero JS — htmx upgrade only if interaction needs grow.)*
+7. ~~Browser-session auth: Zitadel OAuth code flow~~ → **superseded.** Dashboard is a standalone admin app with HTTP basic auth (env user/pass). Zitadel stays scoped to `/v1/*` M2M only. Don't propose OAuth for the dashboard.
+8. Dashboard scope (v1): list/edit/publish documents + versions, manage processors/retention/Article 30/DPIA, **read-only** view of acceptance + consent ledgers, audit log viewer. *(v0 ships: documents list + visibility toggle, processors list, ledger lookup-by-subject, routes overview. Edit/publish for docs + registry-management UIs still TODO.)*
+9. Approval workflow design — draft → reviewed → published. Two-person publish for legal text recommended (not engineering-gated, but second-lawyer-gated). Basic-auth single-user means this gate is procedural for now; revisit when team > 1.
 10. Migrate core's admin controllers (`Admin/LegalDocumentController`, `Admin/ComplianceRegistryController`) → mark deprecated → remove once dashboard is in production.
 
 **Public surface (existing follow-ups):**

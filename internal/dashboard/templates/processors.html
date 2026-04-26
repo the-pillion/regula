@@ -1,0 +1,36 @@
+{{define "page"}}
+<h1>Processors &amp; subprocessors</h1>
+<p>Registry of (sub)processors. Internal notes + DPA status are visible here only — never on <code>/public/subprocessors</code>.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Service area</th>
+      <th>Country</th>
+      <th>Data location</th>
+      <th>Transfer mech.</th>
+      <th>DPA</th>
+      <th>Active</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{range .Processors}}
+    <tr>
+      <td><code>{{.Key}}</code></td>
+      <td>{{.DisplayName}}</td>
+      <td>{{.RelationshipType}}</td>
+      <td>{{.ServiceArea}}</td>
+      <td>{{.PrimaryCountry}}</td>
+      <td>{{.DataLocation}}</td>
+      <td>{{.TransferMechanism}}</td>
+      <td>{{.DpaStatus}}</td>
+      <td>{{if .IsActive}}<span class="pill pill-on">yes</span>{{else}}<span class="pill pill-off">no</span>{{end}}</td>
+    </tr>
+  {{else}}
+    <tr><td colspan="9"><em>No processors registered.</em></td></tr>
+  {{end}}
+  </tbody>
+</table>
+{{end}}

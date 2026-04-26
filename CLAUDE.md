@@ -16,7 +16,7 @@ You or this session is mainly responsible for the **Regula** microservice. You a
 - **Append-only ledgers** — `acceptance_events` and `consent_events` are history. Never edited, never overwritten. New row per change.
 - **Versioned, never overwritten** — new legal text = new `document_versions` row. Old versions stay queryable forever.
 - **M2M auth on `/v1/*`** — Zitadel opaque-token introspection. No browser sessions on `/v1/*`.
-- **Browser auth allowed only on the lawyer dashboard** (when built) — Zitadel OAuth code flow, restricted role.
+- **Dashboard `/admin/*` uses HTTP basic auth** — single shared user from `REGULA_DASHBOARD_USER` / `REGULA_DASHBOARD_PASSWORD`. Standalone admin app. Do **not** wire Zitadel into the dashboard. Zitadel stays scoped to `/v1/*` M2M only.
 - **`/public/*` is hardened** — anonymous, GET-only, only documents flagged `is_publicly_visible=TRUE` (DB column, not env), filtered subprocessor projection. Never expose DPIA, Article 30 register, retention specifics, or any ledgers.
 - **Boring stack** — Go + Chi + sqlc + Postgres + distroless. No Redis, no tracing, no SPA framework, no heavy dependencies.
 - **Body-only document storage** — never store full website pages.
@@ -55,6 +55,7 @@ If a task mentions "regulatory" or "regulation," confirm which one before acting
 Two shifts in flight:
 
 1. **Public visibility moves to a DB column** (`documents.is_publicly_visible`), replacing `REGULA_PUBLIC_LEGAL_KEYS` env. Lawyers self-serve, no redeploy per new public document.
-2. **Regula gains its own admin dashboard** for the legal/compliance team. Reverses the prior "admin lives in core" stance. Goal: lawyers manage content + visibility + governance registry without engineering involvement ("gig layer" — Decision 10).
+2. **Regula gains its own admin dashboard** for the legal/compliance team. Reverses the prior "admin lives in core" stance. Standalone Go-rendered HTML app at `/admin/*`, basic auth (env user/pass), zero JS framework. Goal: lawyers manage content + visibility + governance registry without engineering involvement ("gig layer" — Decision 10).
+3. **Cookie banner UX = Klaro** ([github.com/klaro-org/klaro](https://github.com/klaro-org/klaro), Apache 2.0). Use it on the frontend; Regula stays server-side ledger only. See AGENT_MEMORY §8.
 
 See `.claude/AGENT_MEMORY.md` Decisions 8, 9, 10 for full reasoning. Open design questions (markdown editor vs paste, side-by-side translation, approval workflow) deferred until dashboard work begins.

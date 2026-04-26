@@ -1,0 +1,37 @@
+{{define "page"}}
+<h1>Routes</h1>
+<p>All HTTP routes registered on this Regula instance, with their visibility class. Public routes are anonymous + GET-only and gated by <code>documents.is_publicly_visible</code> for legal docs.</p>
+
+<table>
+  <thead>
+    <tr><th>Method</th><th>Pattern</th><th>Visibility</th></tr>
+  </thead>
+  <tbody>
+  {{range .Routes}}
+    <tr>
+      <td><code>{{.Method}}</code></td>
+      <td><code>{{.Pattern}}</code></td>
+      <td><span class="pill pill-{{.Visibility}}">{{.Visibility}}</span></td>
+    </tr>
+  {{end}}
+  </tbody>
+</table>
+
+<h2>Currently public legal documents</h2>
+<p>These document keys are publicly readable via <code>/public/legal/{key}.{html|md|json}</code> right now (DB-flagged):</p>
+{{if .PublicDocumentKeys}}
+<ul>
+  {{range .PublicDocumentKeys}}<li><code>{{.}}</code> — <a href="/public/legal/{{.}}.json">json</a> · <a href="/public/legal/{{.}}.html">html</a> · <a href="/public/legal/{{.}}.md">md</a></li>{{end}}
+</ul>
+{{else}}
+<p><em>None — no documents flagged public.</em> Toggle from <a href="/admin/documents">Documents</a>.</p>
+{{end}}
+
+<h2>Visibility classes</h2>
+<ul>
+  <li><span class="pill pill-public">public</span> — anonymous, GET-only, hardened. Cache-Control + ETag.</li>
+  <li><span class="pill pill-internal">internal</span> — Zitadel M2M token (<code>/v1/*</code>). Audited.</li>
+  <li><span class="pill pill-admin">admin</span> — basic-auth dashboard. Single shared user from env.</li>
+  <li><span class="pill pill-infra">infra</span> — health / readiness probes.</li>
+</ul>
+{{end}}

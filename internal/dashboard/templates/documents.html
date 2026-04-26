@@ -1,0 +1,45 @@
+{{define "page"}}
+<h1>Documents</h1>
+{{if .Flash}}<div class="flash">{{.Flash}}</div>{{end}}
+<p>Toggle <code>is_publicly_visible</code> to control whether <code>/public/legal/{key}.{html|md|json}</code> serves the document. Default is OFF.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Display name</th>
+      <th>Category</th>
+      <th>Versions</th>
+      <th>Published</th>
+      <th>Public</th>
+      <th>Toggle</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{range .Documents}}
+    <tr>
+      <td><code>{{.Key}}</code></td>
+      <td>{{.DisplayName}}</td>
+      <td>{{.Category}}</td>
+      <td>{{.VersionCount}}</td>
+      <td>{{.PublishedCount}}</td>
+      <td>
+        {{if .IsPubliclyVisible}}<span class="pill pill-on">public</span>{{else}}<span class="pill pill-off">private</span>{{end}}
+      </td>
+      <td>
+        <form class="inline" method="post" action="/admin/documents/{{.Key}}/visibility">
+          {{if .IsPubliclyVisible}}
+            <input type="hidden" name="visible" value="false">
+            <button type="submit" class="danger">Make private</button>
+          {{else}}
+            <input type="hidden" name="visible" value="true">
+            <button type="submit">Make public</button>
+          {{end}}
+        </form>
+      </td>
+    </tr>
+  {{else}}
+    <tr><td colspan="7"><em>No documents yet. Seed via <code>/regula seed foundation</code>.</em></td></tr>
+  {{end}}
+  </tbody>
+</table>
+{{end}}

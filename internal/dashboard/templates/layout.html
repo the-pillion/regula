@@ -1,0 +1,50 @@
+{{define "layout.html"}}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{.Title}} — Regula</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root { --fg:#1a1a1a; --bg:#fafafa; --muted:#666; --border:#ddd; --accent:#0b6; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--fg); background: var(--bg); }
+    header { background: #111; color: #fff; padding: 12px 24px; display: flex; gap: 24px; align-items: center; }
+    header a { color: #fff; text-decoration: none; opacity: .85; }
+    header a:hover { opacity: 1; }
+    header strong { font-size: 16px; }
+    main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    h1 { margin: 0 0 16px; font-size: 22px; }
+    h2 { margin: 24px 0 8px; font-size: 16px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border); }
+    th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: #f3f3f3; font-weight: 600; font-size: 12px; text-transform: uppercase; color: var(--muted); }
+    tr:last-child td { border-bottom: none; }
+    code { background: #f0f0f0; padding: 1px 4px; border-radius: 3px; font: 12px/1.4 ui-monospace, SFMono-Regular, monospace; }
+    .pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+    .pill-public { background: #e0f5ea; color: #066; }
+    .pill-internal { background: #fff3cd; color: #855; }
+    .pill-admin { background: #e6e6ff; color: #339; }
+    .pill-infra { background: #eee; color: #555; }
+    .pill-on { background: #d6f5d6; color: #161; }
+    .pill-off { background: #f5d6d6; color: #611; }
+    form.inline { display: inline; }
+    button, .btn { background: var(--accent); color: #fff; border: 0; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; }
+    button.danger { background: #c33; }
+    .flash { background: #e0f5ea; border: 1px solid #066; padding: 8px 12px; border-radius: 4px; margin-bottom: 16px; }
+    input[type=text] { padding: 6px 10px; border: 1px solid var(--border); border-radius: 4px; font-size: 14px; min-width: 320px; }
+  </style>
+</head>
+<body>
+<header>
+  <strong><a href="/admin/">Regula</a></strong>
+  <a href="/admin/documents">Documents</a>
+  <a href="/admin/processors">Processors</a>
+  <a href="/admin/ledgers">Ledgers</a>
+  <a href="/admin/routes">Routes</a>
+</header>
+<main>
+{{template "page" .}}
+</main>
+</body>
+</html>
+{{end}}

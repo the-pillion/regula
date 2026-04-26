@@ -25,11 +25,22 @@ type Config struct {
 	ZitadelAPIClientID       string
 	ZitadelAPIClientSecret   string
 
-	PublicLegalKeys           []string
-	PublicCacheMaxAge         time.Duration
-	PublicCacheSharedMaxAge   time.Duration
+	PublicCacheMaxAge          time.Duration
+	PublicCacheSharedMaxAge    time.Duration
 	PublicCacheStaleRevalidate time.Duration
-	PublicCORSAllowedOrigins  []string
+	PublicCORSAllowedOrigins   []string
+
+	Dashboard DashboardConfig
+}
+
+// DashboardConfig is the basic-auth-protected admin dashboard config.
+// Zitadel OAuth integration is deferred; for now the dashboard uses
+// a single shared username + password from env. Keep a single user only.
+type DashboardConfig struct {
+	Enabled  bool
+	Username string
+	Password string
+	Realm    string
 }
 
 func Load() (*Config, error) {
@@ -56,11 +67,11 @@ func Load() (*Config, error) {
 		ZitadelAPIClientID:       strings.TrimSpace(os.Getenv("REGULA_ZITADEL_API_CLIENT_ID")),
 		ZitadelAPIClientSecret:   strings.TrimSpace(os.Getenv("REGULA_ZITADEL_API_CLIENT_SECRET")),
 
-		PublicLegalKeys:            publicLegalKeysConfig(),
 		PublicCacheMaxAge:          time.Duration(getInt("REGULA_PUBLIC_CACHE_MAX_AGE_SECONDS", 300)) * time.Second,
 		PublicCacheSharedMaxAge:    time.Duration(getInt("REGULA_PUBLIC_CACHE_SHARED_MAX_AGE_SECONDS", 3600)) * time.Second,
 		PublicCacheStaleRevalidate: time.Duration(getInt("REGULA_PUBLIC_CACHE_STALE_REVALIDATE_SECONDS", 86400)) * time.Second,
 		PublicCORSAllowedOrigins:   splitCSV(os.Getenv("REGULA_PUBLIC_CORS_ALLOWED_ORIGINS")),
+		Dashboard:                  loadDashboardConfig(),
 	}
 
 	if cfg.DatabaseURL == "" {
@@ -90,21 +101,35 @@ func Load() (*Config, error) {
 	if len(cfg.ZitadelAllowedServiceIDs) == 0 {
 		return nil, fmt.Errorf("REGULA_ALLOWED_SERVICE_IDS must contain at least one value")
 	}
+	if err := cfg.Dashboard.Validate(); err != nil {
+		return nil, err
+	}
 
 	return cfg, nil
 }
 
-func publicLegalKeysConfig() []string {
-	raw := strings.TrimSpace(os.Getenv("REGULA_PUBLIC_LEGAL_KEYS"))
-	if raw == "" {
-		return []string{"privacy-policy", "terms-of-service", "cookie-policy", "impressum"}
+func loadDashboardConfig() DashboardConfig {
+	enabled := getBool("REGULA_DASHBOARD_ENABLED", false)
+	return DashboardConfig{
+		Enabled:  enabled,
+		Username: strings.TrimSpace(os.Getenv("REGULA_DASHBOARD_USER")),
+		Password: os.Getenv("REGULA_DASHBOARD_PASSWORD"),
+		Realm:    getEnv("REGULA_DASHBOARD_REALM", "Regula Admin"),
 	}
-	keys := splitCSV(raw)
-	out := make([]string, 0, len(keys))
-	for _, k := range keys {
-		out = append(out, strings.ToLower(k))
+}
+
+// Validate returns nil if dashboard is disabled or properly configured.
+func (d DashboardConfig) Validate() error {
+	if !d.Enabled {
+		return nil
 	}
-	return out
+	if d.Username == "" {
+		return fmt.Errorf("REGULA_DASHBOARD_USER is required when REGULA_DASHBOARD_ENABLED=true")
+	}
+	if d.Password == "" {
+		return fmt.Errorf("REGULA_DASHBOARD_PASSWORD is required when REGULA_DASHBOARD_ENABLED=true")
+	}
+	return nil
 }
 
 func audienceConfig() []string {
