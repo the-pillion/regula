@@ -24,6 +24,12 @@ type Config struct {
 	ZitadelAllowedServiceIDs []string
 	ZitadelAPIClientID       string
 	ZitadelAPIClientSecret   string
+
+	PublicLegalKeys           []string
+	PublicCacheMaxAge         time.Duration
+	PublicCacheSharedMaxAge   time.Duration
+	PublicCacheStaleRevalidate time.Duration
+	PublicCORSAllowedOrigins  []string
 }
 
 func Load() (*Config, error) {
@@ -49,6 +55,12 @@ func Load() (*Config, error) {
 		ZitadelAllowedServiceIDs: splitCSV(os.Getenv("REGULA_ALLOWED_SERVICE_IDS")),
 		ZitadelAPIClientID:       strings.TrimSpace(os.Getenv("REGULA_ZITADEL_API_CLIENT_ID")),
 		ZitadelAPIClientSecret:   strings.TrimSpace(os.Getenv("REGULA_ZITADEL_API_CLIENT_SECRET")),
+
+		PublicLegalKeys:            publicLegalKeysConfig(),
+		PublicCacheMaxAge:          time.Duration(getInt("REGULA_PUBLIC_CACHE_MAX_AGE_SECONDS", 300)) * time.Second,
+		PublicCacheSharedMaxAge:    time.Duration(getInt("REGULA_PUBLIC_CACHE_SHARED_MAX_AGE_SECONDS", 3600)) * time.Second,
+		PublicCacheStaleRevalidate: time.Duration(getInt("REGULA_PUBLIC_CACHE_STALE_REVALIDATE_SECONDS", 86400)) * time.Second,
+		PublicCORSAllowedOrigins:   splitCSV(os.Getenv("REGULA_PUBLIC_CORS_ALLOWED_ORIGINS")),
 	}
 
 	if cfg.DatabaseURL == "" {
@@ -80,6 +92,19 @@ func Load() (*Config, error) {
 	}
 
 	return cfg, nil
+}
+
+func publicLegalKeysConfig() []string {
+	raw := strings.TrimSpace(os.Getenv("REGULA_PUBLIC_LEGAL_KEYS"))
+	if raw == "" {
+		return []string{"privacy-policy", "terms-of-service", "cookie-policy", "impressum"}
+	}
+	keys := splitCSV(raw)
+	out := make([]string, 0, len(keys))
+	for _, k := range keys {
+		out = append(out, strings.ToLower(k))
+	}
+	return out
 }
 
 func audienceConfig() []string {

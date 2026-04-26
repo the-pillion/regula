@@ -58,6 +58,18 @@ func NewRouter(cfg *config.Config, log *slog.Logger, queries *store.Queries) (ht
 	r.Get("/readyz", api.ready)
 
 	r.Group(func(r chi.Router) {
+		r.Use(api.publicCacheHeaders)
+		r.Use(api.publicCORS)
+
+		r.Get("/public/legal/{keyExt}", api.getPublicLegalDocument)
+		r.Get("/public/legal/{key}/versions.json", api.listPublicLegalVersions)
+		r.Get("/public/legal/{key}/versions/{versionExt}", api.getPublicLegalDocumentPinned)
+		r.Get("/public/subprocessors", api.getPublicSubprocessors)
+		r.Get("/public/subprocessors.json", api.getPublicSubprocessors)
+		r.Get("/public/subprocessors.html", api.getPublicSubprocessors)
+	})
+
+	r.Group(func(r chi.Router) {
 		r.Use(auth.Middleware(validator, auth.LogFailureWith(log)))
 		r.Use(api.auditAccess)
 

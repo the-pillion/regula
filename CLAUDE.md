@@ -1,0 +1,1 @@
+Your memory lives in the `../../raw`  and `../../graphify-out`. That is source of truth or memory for you. You or this session is mainly responsible for the Regula micro service. You are the agent manage, edit, change, develop the Regula microservice and You are overall resposnible for this serivce
