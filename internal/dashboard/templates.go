@@ -7,22 +7,44 @@ import (
 	"io"
 	"io/fs"
 	"strings"
+	"time"
+
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 //go:embed templates/*.html
 var templateFS embed.FS
 
-// templates wraps parsed html/template sets keyed by page name.
-// Each page is parsed together with layout.html so the page can
-// override the {{define "page"}} block. Templates are loaded once
-// at startup; they live in embed.FS so the binary is fully self-contained.
+//go:embed assets/quill/*
+var assetFS embed.FS
+
 type templates struct {
-	pages map[string]*template.Template
+	pages    map[string]*template.Template
+	partials map[string]*template.Template
 }
 
 func loadTemplates() (*templates, error) {
 	funcs := template.FuncMap{
 		"upper": strings.ToUpper,
+		"lower": strings.ToLower,
+		"fmtTime": func(t pgtype.Timestamptz) string {
+			if !t.Valid {
+				return ""
+			}
+			return t.Time.UTC().Format(time.RFC3339)
+		},
+		"fmtDate": func(t pgtype.Timestamptz) string {
+			if !t.Valid {
+				return ""
+			}
+			return t.Time.UTC().Format("2006-01-02")
+		},
+		"truncate": func(n int, s string) string {
+			if len(s) <= n {
+				return s
+			}
+			return s[:n] + "…"
+		},
 	}
 
 	entries, err := fs.ReadDir(templateFS, "templates")
@@ -31,22 +53,35 @@ func loadTemplates() (*templates, error) {
 	}
 
 	pages := map[string]*template.Template{}
+	partials := map[string]*template.Template{}
 	for _, e := range entries {
-		if e.IsDir() || e.Name() == "layout.html" || !strings.HasSuffix(e.Name(), ".html") {
+		if e.IsDir() || !strings.HasSuffix(e.Name(), ".html") {
+			continue
+		}
+		name := e.Name()
+		if name == "layout.html" {
+			continue
+		}
+		if strings.HasSuffix(name, "_partial.html") {
+			t, err := template.New(name).Funcs(funcs).ParseFS(templateFS, "templates/"+name)
+			if err != nil {
+				return nil, fmt.Errorf("parse partial %s: %w", name, err)
+			}
+			partials[name] = t
 			continue
 		}
 		t, err := template.New("layout.html").Funcs(funcs).ParseFS(
 			templateFS,
 			"templates/layout.html",
-			"templates/"+e.Name(),
+			"templates/"+name,
 		)
 		if err != nil {
-			return nil, fmt.Errorf("parse template %s: %w", e.Name(), err)
+			return nil, fmt.Errorf("parse template %s: %w", name, err)
 		}
-		pages[e.Name()] = t
+		pages[name] = t
 	}
 
-	return &templates{pages: pages}, nil
+	return &templates{pages: pages, partials: partials}, nil
 }
 
 func (t *templates) render(w io.Writer, name string, data any) error {
@@ -55,4 +90,12 @@ func (t *templates) render(w io.Writer, name string, data any) error {
 		return fmt.Errorf("template %q not found", name)
 	}
 	return tpl.ExecuteTemplate(w, "layout.html", data)
+}
+
+func (t *templates) renderPartial(w io.Writer, name string, data any) error {
+	tpl, ok := t.partials[name]
+	if !ok {
+		return fmt.Errorf("partial %q not found", name)
+	}
+	return tpl.Execute(w, data)
 }

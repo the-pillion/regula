@@ -1,0 +1,41 @@
+{{define "page"}}
+<nav class="crumbs"><a href="/admin/documents">Documents</a> / {{.Document.Key}}</nav>
+<div class="toolbar">
+  <h1>{{.Document.DisplayName}} <code>{{.Document.Key}}</code></h1>
+  <a href="/admin/documents/{{.Document.Key}}/versions/new" class="btn">+ New version</a>
+</div>
+{{if .Flash}}<div class="flash">{{.Flash}}</div>{{end}}
+<p class="muted">Each row is one (locale, audience, version). Drafts and published rows remain editable until finalised; finalisation locks content and snapshots active subprocessors.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Locale</th>
+      <th>Audience</th>
+      <th>Version</th>
+      <th>Status</th>
+      <th>Type</th>
+      <th>Subprocessors</th>
+      <th>Effective</th>
+      <th>By</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {{range .Versions}}
+    <tr>
+      <td><code>{{.Locale}}</code></td>
+      <td>{{.Audience}}</td>
+      <td>{{.Version}}</td>
+      <td>{{if .IsFinalized}}<span class="pill pill-off">finalised</span>{{else if .IsPublished}}<span class="pill pill-published">published</span>{{else}}<span class="pill pill-draft">draft</span>{{end}}</td>
+      <td>{{.ContentType}}</td>
+      <td>{{.ProcessorN}}</td>
+      <td>{{fmtDate .EffectiveFrom}}</td>
+      <td>{{.CreatedBy}}</td>
+      <td><a href="/admin/documents/{{.DocumentKey}}/versions/{{.ID}}">Open</a></td>
+    </tr>
+  {{else}}
+    <tr><td colspan="9"><em>No versions yet. Create the first one.</em></td></tr>
+  {{end}}
+  </tbody>
+</table>
+{{end}}

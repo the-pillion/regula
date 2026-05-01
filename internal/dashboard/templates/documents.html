@@ -1,7 +1,10 @@
 {{define "page"}}
-<h1>Documents</h1>
+<div class="toolbar">
+  <h1>Documents</h1>
+  <a href="/admin/documents/new" class="btn">+ New document</a>
+</div>
 {{if .Flash}}<div class="flash">{{.Flash}}</div>{{end}}
-<p>Toggle <code>is_publicly_visible</code> to control whether <code>/public/legal/{key}.{html|md|json}</code> serves the document. Default is OFF.</p>
+<p class="muted">Click a key to manage versions and translations. Toggle <code>is_publicly_visible</code> to control whether <code>/public/legal/{key}.{html|md|json}</code> serves the document.</p>
 <table>
   <thead>
     <tr>
@@ -17,14 +20,12 @@
   <tbody>
   {{range .Documents}}
     <tr>
-      <td><code>{{.Key}}</code></td>
+      <td><a href="/admin/documents/{{.Key}}"><code>{{.Key}}</code></a></td>
       <td>{{.DisplayName}}</td>
       <td>{{.Category}}</td>
       <td>{{.VersionCount}}</td>
       <td>{{.PublishedCount}}</td>
-      <td>
-        {{if .IsPubliclyVisible}}<span class="pill pill-on">public</span>{{else}}<span class="pill pill-off">private</span>{{end}}
-      </td>
+      <td>{{if .IsPubliclyVisible}}<span class="pill pill-on">public</span>{{else}}<span class="pill pill-off">private</span>{{end}}</td>
       <td>
         <form class="inline" method="post" action="/admin/documents/{{.Key}}/visibility">
           {{if .IsPubliclyVisible}}
@@ -38,7 +39,7 @@
       </td>
     </tr>
   {{else}}
-    <tr><td colspan="7"><em>No documents yet. Seed via <code>/regula seed foundation</code>.</em></td></tr>
+    <tr><td colspan="7"><em>No documents yet.</em></td></tr>
   {{end}}
   </tbody>
 </table>

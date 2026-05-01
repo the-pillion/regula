@@ -52,7 +52,7 @@ func main() {
 
 func serve() {
 	withRuntime(true, func(ctx context.Context, cfg *config.Config, logger *slog.Logger, pool *pgxpool.Pool, queries *store.Queries) error {
-		handler, err := api.NewRouter(cfg, logger, queries)
+		handler, err := api.NewRouter(cfg, logger, queries, pool)
 		if err != nil {
 			return err
 		}

@@ -4,6 +4,8 @@ import (
 	"crypto/sha256"
 	"crypto/subtle"
 	"net/http"
+	"net/url"
+	"strings"
 
 	"github.com/pillion/regula/internal/config"
 )
@@ -45,4 +47,44 @@ func BasicAuth(cfg config.DashboardConfig) func(http.Handler) http.Handler {
 func challenge(w http.ResponseWriter, realm string) {
 	w.Header().Set("WWW-Authenticate", `Basic realm="`+realm+`", charset="UTF-8"`)
 	http.Error(w, "unauthorized", http.StatusUnauthorized)
+}
+
+// SameOriginUnsafeMethods rejects browser-originated cross-site POSTs to
+// the basic-auth dashboard. It is intentionally small: Regula has no browser
+// session state, but browsers will resend Basic Auth credentials across
+// sites, so unsafe methods must stay same-origin.
+func SameOriginUnsafeMethods(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodGet || r.Method == http.MethodHead || r.Method == http.MethodOptions {
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		if sameOrigin(r, r.Header.Get("Origin")) {
+			next.ServeHTTP(w, r)
+			return
+		}
+		if origin := strings.TrimSpace(r.Header.Get("Origin")); origin != "" {
+			http.Error(w, "cross-origin dashboard write rejected", http.StatusForbidden)
+			return
+		}
+		if ref := strings.TrimSpace(r.Header.Get("Referer")); ref != "" && !sameOrigin(r, ref) {
+			http.Error(w, "cross-origin dashboard write rejected", http.StatusForbidden)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
+func sameOrigin(r *http.Request, raw string) bool {
+	raw = strings.TrimSpace(raw)
+	if raw == "" {
+		return false
+	}
+	u, err := url.Parse(raw)
+	if err != nil {
+		return false
+	}
+	return strings.EqualFold(u.Host, r.Host)
 }

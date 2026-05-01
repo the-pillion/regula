@@ -1,0 +1,27 @@
+{{define "page"}}
+<nav class="crumbs"><a href="/admin/processors">Processors</a> / <a href="/admin/processors/{{.Processor.ID}}">{{.Processor.Key}}</a> / history</nav>
+<h1>{{.Processor.DisplayName}} — revision history</h1>
+<p class="muted">Append-only audit trail. Each row is a snapshot of the processor at a point in time. Document versions reference these rows, so old policies always show accurate point-in-time data.</p>
+<table>
+  <thead>
+    <tr><th>When</th><th>By</th><th>Reason</th><th>Type</th><th>DPA</th><th>Country</th><th>Data loc.</th><th>Transfer</th><th>Active</th></tr>
+  </thead>
+  <tbody>
+  {{range .Revisions}}
+    <tr>
+      <td>{{fmtTime .CreatedAt}}</td>
+      <td>{{.ChangedBy}}</td>
+      <td>{{truncate 60 .ChangeReason}}</td>
+      <td>{{.RelationshipType}}</td>
+      <td>{{.DPAStatus}}</td>
+      <td>{{.PrimaryCountry}}</td>
+      <td>{{.DataLocation}}</td>
+      <td>{{.TransferMechanism}}</td>
+      <td>{{if .IsActive}}yes{{else}}no{{end}}</td>
+    </tr>
+  {{else}}
+    <tr><td colspan="9"><em>No revisions.</em></td></tr>
+  {{end}}
+  </tbody>
+</table>
+{{end}}

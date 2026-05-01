@@ -224,18 +224,6 @@
       "notes": "Used for transactional and safety SMS messaging."
     },
     {
-      "key": "checkr",
-      "display_name": "Checkr",
-      "relationship_type": "processor",
-      "service_area": "Driver screening and background checks",
-      "website_url": "https://checkr.com",
-      "primary_country": "United States",
-      "data_location": "Provider-managed regions",
-      "transfer_mechanism": "High-risk transfer and screening-data review required",
-      "dpa_status": "pending",
-      "notes": "Sensitive driver screening processor requiring DPIA attention."
-    },
-    {
       "key": "neon",
       "display_name": "Neon",
       "relationship_type": "subprocessor",

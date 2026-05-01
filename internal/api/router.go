@@ -15,6 +15,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/jackc/pgx/v5/pgtype"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/pillion/regula/internal/auth"
 	"github.com/pillion/regula/internal/cache"
 	"github.com/pillion/regula/internal/config"
@@ -26,14 +27,16 @@ type API struct {
 	cfg      *config.Config
 	log      *slog.Logger
 	queries  *store.Queries
+	pool     *pgxpool.Pool
 	docCache *cache.LatestDocumentCache
 }
 
-func NewRouter(cfg *config.Config, log *slog.Logger, queries *store.Queries) (http.Handler, error) {
+func NewRouter(cfg *config.Config, log *slog.Logger, queries *store.Queries, pool *pgxpool.Pool) (http.Handler, error) {
 	api := &API{
 		cfg:      cfg,
 		log:      log,
 		queries:  queries,
+		pool:     pool,
 		docCache: cache.NewLatestDocumentCache(cfg.DocumentCacheTTL, cfg.DocumentCacheMaxItems),
 	}
 
@@ -98,12 +101,13 @@ func NewRouter(cfg *config.Config, log *slog.Logger, queries *store.Queries) (ht
 	})
 
 	if cfg.Dashboard.Enabled {
-		dash, err := dashboard.NewServer(cfg.Dashboard, log, queries, r)
+		dash, err := dashboard.NewServer(cfg.Dashboard, log, queries, pool, r)
 		if err != nil {
 			return nil, fmt.Errorf("dashboard init: %w", err)
 		}
 		r.Route("/admin", func(r chi.Router) {
 			r.Use(dashboard.BasicAuth(cfg.Dashboard))
+			r.Use(dashboard.SameOriginUnsafeMethods)
 			dash.Mount(r)
 		})
 	}

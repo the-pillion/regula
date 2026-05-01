@@ -1,0 +1,34 @@
+{{define "page"}}
+<div class="toolbar">
+  <h1>Audit trail</h1>
+</div>
+<p class="muted">Recent dashboard mutations. This is a durable database trail for document, version, and processor changes.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Actor</th>
+      <th>Event</th>
+      <th>Entity</th>
+      <th>Document</th>
+      <th>Path</th>
+      <th>Metadata</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{range .Events}}
+    <tr>
+      <td>{{fmtTime .CreatedAt}}</td>
+      <td>{{.Actor}}</td>
+      <td><code>{{.EventType}}</code></td>
+      <td>{{.EntityType}}<br><code>{{.EntityID}}</code></td>
+      <td>{{if .DocumentKey}}<code>{{.DocumentKey}}</code>{{end}}</td>
+      <td><code>{{.Method}}</code> {{.Path}}</td>
+      <td><code>{{printf "%s" .Metadata}}</code></td>
+    </tr>
+  {{else}}
+    <tr><td colspan="7"><em>No dashboard audit events yet.</em></td></tr>
+  {{end}}
+  </tbody>
+</table>
+{{end}}

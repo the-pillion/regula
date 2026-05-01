@@ -1,24 +1,20 @@
 {{define "page"}}
-<h1>Processors &amp; subprocessors</h1>
-<p>Registry of (sub)processors. Internal notes + DPA status are visible here only — never on <code>/public/subprocessors</code>.</p>
+<div class="toolbar">
+  <h1>Processors &amp; subprocessors</h1>
+  <a href="/admin/processors/new" class="btn">+ New</a>
+</div>
+{{if .Flash}}<div class="flash">{{.Flash}}</div>{{end}}
+<p class="muted">Internal notes and DPA status are visible here only — never on <code>/public/subprocessors</code>. Each save creates a new revision; finalised document versions stay pinned to the revision active at finalisation.</p>
 <table>
   <thead>
     <tr>
-      <th>Key</th>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Service area</th>
-      <th>Country</th>
-      <th>Data location</th>
-      <th>Transfer mech.</th>
-      <th>DPA</th>
-      <th>Active</th>
+      <th>Key</th><th>Name</th><th>Type</th><th>Service area</th><th>Country</th><th>Data location</th><th>Transfer</th><th>DPA</th><th>Active</th><th></th>
     </tr>
   </thead>
   <tbody>
   {{range .Processors}}
     <tr>
-      <td><code>{{.Key}}</code></td>
+      <td><a href="/admin/processors/{{.ID}}"><code>{{.Key}}</code></a></td>
       <td>{{.DisplayName}}</td>
       <td>{{.RelationshipType}}</td>
       <td>{{.ServiceArea}}</td>
@@ -27,9 +23,14 @@
       <td>{{.TransferMechanism}}</td>
       <td>{{.DpaStatus}}</td>
       <td>{{if .IsActive}}<span class="pill pill-on">yes</span>{{else}}<span class="pill pill-off">no</span>{{end}}</td>
+      <td class="row-actions">
+        <a href="/admin/processors/{{.ID}}">edit</a> ·
+        <a href="/admin/processors/{{.ID}}/history">history</a> ·
+        <a href="/admin/processors/{{.ID}}/usage">used in</a>
+      </td>
     </tr>
   {{else}}
-    <tr><td colspan="9"><em>No processors registered.</em></td></tr>
+    <tr><td colspan="10"><em>No processors registered.</em></td></tr>
   {{end}}
   </tbody>
 </table>

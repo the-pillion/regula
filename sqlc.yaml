@@ -10,6 +10,9 @@ sql:
       - "db/migrations/000001_init.up.sql"
       - "db/migrations/000002_governance_registries.up.sql"
       - "db/migrations/000003_accountability_records.up.sql"
+      - "db/migrations/000004_documents_visibility.up.sql"
+      - "db/migrations/000005_processor_revisions.up.sql"
+      - "db/migrations/000006_document_versions_finalized.up.sql"
     gen:
       go:
         package: "store"

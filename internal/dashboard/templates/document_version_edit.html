@@ -1,0 +1,89 @@
+{{define "page"}}
+{{$locked := .Version.IsFinalized}}
+{{$published := .Version.IsPublished}}
+<nav class="crumbs">
+  <a href="/admin/documents">Documents</a> /
+  <a href="/admin/documents/{{.Version.DocumentKey}}">{{.Version.DocumentKey}}</a> /
+  {{.Version.Locale}}/{{.Version.Audience}}/{{.Version.Version}}
+</nav>
+<div class="toolbar">
+  <h1>
+    {{.Version.DocumentName}}
+    <span class="title-meta"> — <code>{{.Version.Locale}}</code> / {{.Version.Audience}} / {{.Version.Version}}</span>
+    {{if $locked}}<span class="pill pill-off">finalised</span>{{else if $published}}<span class="pill pill-published">published</span>{{else}}<span class="pill pill-draft">draft</span>{{end}}
+  </h1>
+  <div class="toolbar-actions">
+    {{if not $locked}}
+      {{if $published}}
+        <form method="post" action="/admin/documents/{{.Version.DocumentKey}}/versions/{{.Version.ID}}/unpublish" class="inline">
+          <button type="submit" class="secondary">Unpublish</button>
+        </form>
+      {{else}}
+        <form method="post" action="/admin/documents/{{.Version.DocumentKey}}/versions/{{.Version.ID}}/publish" class="inline">
+          <button type="submit">Publish</button>
+        </form>
+      {{end}}
+      <form method="post" action="/admin/documents/{{.Version.DocumentKey}}/versions/{{.Version.ID}}/finalize" class="inline" onsubmit="return confirm('Finalise this version? It becomes immutable forever and the active subprocessors will be locked against it. Use this once the lawyer signs off.')">
+        <button type="submit" class="danger">Finalise &amp; lock</button>
+      </form>
+      <form method="post" action="/admin/documents/{{.Version.DocumentKey}}/versions/{{.Version.ID}}/delete" class="inline" onsubmit="return confirm('Delete this version permanently? This is only allowed before finalisation.')">
+        <button type="submit" class="danger">Delete</button>
+      </form>
+    {{end}}
+  </div>
+</div>
+{{if .Flash}}<div class="flash">{{.Flash}}</div>{{end}}
+
+{{if $locked}}
+  <div class="flash danger">
+    Finalised. Content + subprocessor snapshot are locked. To change anything, create a new version.
+  </div>
+{{else if $published}}
+  <div class="flash warn">
+    Live on <code>/public/legal/{{.Version.DocumentKey}}.html?lang={{.Version.Locale}}</code>. Edits update the public copy immediately. Finalise once the text is signed off.
+  </div>
+{{end}}
+
+<form method="post" action="/admin/documents/{{.Version.DocumentKey}}/versions/{{.Version.ID}}">
+  <label>Body</label>
+  <textarea id="editor" class="editor-source" name="content_text" {{if $locked}}readonly{{end}}>{{.EditorContent}}</textarea>
+  <div class="wysiwyg-shell js-wysiwyg-shell" data-source="editor" data-readonly="{{if $locked}}true{{else}}false{{end}}">
+    <div class="js-rich-editor"></div>
+  </div>
+
+  {{if not $locked}}
+  <div class="actions">
+    <button type="submit">Save</button>
+    <a href="/admin/documents/{{.Version.DocumentKey}}" class="btn secondary">Back</a>
+  </div>
+  {{end}}
+</form>
+
+<h2>Subprocessors snapshot</h2>
+{{if not $locked}}
+<p class="muted">Snapshot is taken at finalisation. Currently active subprocessors will be locked to this version when you finalise.</p>
+{{else}}
+<p class="muted">Subprocessors active at finalisation. Pinned forever.</p>
+{{end}}
+<table>
+  <thead>
+    <tr><th>Key</th><th>Name</th><th>Type</th><th>Country</th><th>Data location</th><th>Transfer</th><th>Snapshot at</th></tr>
+  </thead>
+  <tbody>
+  {{range .Processors}}
+    <tr>
+      <td><code>{{.ProcessorKey}}</code></td>
+      <td>{{.DisplayName}}</td>
+      <td>{{.RelationshipType}}</td>
+      <td>{{.PrimaryCountry}}</td>
+      <td>{{.DataLocation}}</td>
+      <td>{{.TransferMechanism}}</td>
+      <td>{{fmtDate .CreatedAt}}</td>
+    </tr>
+  {{else}}
+    <tr><td colspan="7"><em>{{if $locked}}No subprocessors were active at finalisation.{{else}}Will be populated on finalise.{{end}}</em></td></tr>
+  {{end}}
+  </tbody>
+</table>
+
+{{end}}

@@ -1,0 +1,25 @@
+{{define "page"}}
+<nav class="crumbs"><a href="/admin/processors">Processors</a> / <a href="/admin/processors/{{.Processor.ID}}">{{.Processor.Key}}</a> / used in</nav>
+<h1>{{.Processor.DisplayName}} — used in document versions</h1>
+<p class="muted">Document versions that snapshotted a revision of this processor at publish time.</p>
+<table>
+  <thead>
+    <tr><th>Document</th><th>Locale</th><th>Audience</th><th>Version</th><th>Status</th><th>Attached at</th><th>Revision date</th></tr>
+  </thead>
+  <tbody>
+  {{range .Usage}}
+    <tr>
+      <td><a href="/admin/documents/{{.DocumentKey}}/versions/{{.DocumentVersionID}}"><code>{{.DocumentKey}}</code></a> — {{.DocumentName}}</td>
+      <td>{{.Locale}}</td>
+      <td>{{.Audience}}</td>
+      <td>{{.Version}}</td>
+      <td>{{if .IsPublished}}<span class="pill pill-published">published</span>{{else}}<span class="pill pill-draft">draft</span>{{end}}</td>
+      <td>{{fmtTime .AttachedAt}}</td>
+      <td>{{fmtDate .RevisionAt}}</td>
+    </tr>
+  {{else}}
+    <tr><td colspan="7"><em>Not yet referenced by any published document version.</em></td></tr>
+  {{end}}
+  </tbody>
+</table>
+{{end}}

@@ -1,15 +1,38 @@
 {{define "page"}}
-<h1>Regula admin dashboard</h1>
-<p>Lawyer / compliance team console. Read + publish legal documents, manage processor registry, audit consent + acceptance ledgers (read-only), inspect public route surface.</p>
+<div class="hero-panel">
+  <h1>Regula admin dashboard</h1>
+  <p class="muted">Lawyer / compliance team console for legal documents, processor records, consent evidence, and public route review.</p>
+</div>
 <h2>Quick links</h2>
-<ul>
-  <li><a href="/admin/documents">Documents</a> — versions, public visibility flag</li>
-  <li><a href="/admin/processors">Processors &amp; subprocessors</a></li>
-  <li><a href="/admin/ledgers">Acceptance + consent ledgers</a> (read-only)</li>
-  <li><a href="/admin/routes">All HTTP routes</a> — what is public vs internal</li>
-</ul>
+<div class="quick-grid">
+  <a class="quick-card" href="/admin/documents">
+    <span class="card-icon">D</span>
+    <strong>Documents</strong>
+    <span>Versions, languages, public visibility.</span>
+  </a>
+  <a class="quick-card" href="/admin/processors">
+    <span class="card-icon processors">P</span>
+    <strong>Processors</strong>
+    <span>Registry, DPA status, revision history.</span>
+  </a>
+  <a class="quick-card" href="/admin/ledgers">
+    <span class="card-icon ledgers">L</span>
+    <strong>Ledgers</strong>
+    <span>Read-only acceptance and consent evidence.</span>
+  </a>
+  <a class="quick-card" href="/admin/routes">
+    <span class="card-icon routes">R</span>
+    <strong>Routes</strong>
+    <span>Public, internal, admin, and infra surfaces.</span>
+  </a>
+  <a class="quick-card" href="/admin/audit">
+    <span class="card-icon">A</span>
+    <strong>Audit</strong>
+    <span>Durable dashboard change history.</span>
+  </a>
+</div>
 <h2>Invariants</h2>
-<ul>
+<ul class="invariant-list">
   <li>Acceptance + consent rows are <strong>append-only</strong>. Never edit.</li>
   <li>Document versions are <strong>versioned</strong>; publish a new row, never overwrite.</li>
   <li>Public visibility = DB column <code>documents.is_publicly_visible</code>.</li>

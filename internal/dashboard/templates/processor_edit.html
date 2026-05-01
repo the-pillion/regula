@@ -1,0 +1,83 @@
+{{define "page"}}
+<nav class="crumbs">
+  <a href="/admin/processors">Processors</a> / {{if .New}}new{{else}}{{.Processor.Key}}{{end}}
+</nav>
+<h1>{{if .New}}New processor{{else}}{{.Processor.DisplayName}}{{end}}</h1>
+{{if .Flash}}<div class="flash">{{.Flash}}</div>{{end}}
+{{if not .New}}
+<p class="muted">Saving creates a new revision row. Document versions previously published stay pinned to their revision.
+  <a href="/admin/processors/{{.Processor.ID}}/history">History</a> ·
+  <a href="/admin/processors/{{.Processor.ID}}/usage">Used in</a>
+</p>
+{{end}}
+<form method="post" action="{{if .New}}/admin/processors{{else}}/admin/processors/{{.Processor.ID}}{{end}}">
+  <div class="grid-2">
+    <div>
+      <label>Key (slug)</label>
+      <input type="text" name="key" required pattern="[a-z0-9\-]+" value="{{if not .New}}{{.Processor.Key}}{{end}}" {{if not .New}}readonly{{end}}>
+    </div>
+    <div>
+      <label>Display name</label>
+      <input type="text" name="display_name" required value="{{if not .New}}{{.Processor.DisplayName}}{{end}}">
+    </div>
+  </div>
+  <div class="grid-3">
+    <div>
+      <label>Relationship type</label>
+      <select name="relationship_type">
+        <option value="processor" {{if not .New}}{{if eq .Processor.RelationshipType "processor"}}selected{{end}}{{end}}>processor</option>
+        <option value="subprocessor" {{if not .New}}{{if eq .Processor.RelationshipType "subprocessor"}}selected{{end}}{{end}}>subprocessor</option>
+      </select>
+    </div>
+    <div>
+      <label>DPA status</label>
+      <select name="dpa_status">
+        {{$cur := ""}}{{if not .New}}{{$cur = .Processor.DpaStatus}}{{end}}
+        <option value="unknown" {{if eq $cur "unknown"}}selected{{end}}>unknown</option>
+        <option value="pending" {{if eq $cur "pending"}}selected{{end}}>pending</option>
+        <option value="signed" {{if eq $cur "signed"}}selected{{end}}>signed</option>
+        <option value="not_required" {{if eq $cur "not_required"}}selected{{end}}>not_required</option>
+      </select>
+    </div>
+    <div>
+      <label>Active</label>
+      <select name="is_active">
+        <option value="true" {{if .New}}selected{{else}}{{if .Processor.IsActive}}selected{{end}}{{end}}>yes</option>
+        <option value="false" {{if not .New}}{{if not .Processor.IsActive}}selected{{end}}{{end}}>no</option>
+      </select>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <label>Service area</label>
+      <input type="text" name="service_area" value="{{if not .New}}{{.Processor.ServiceArea}}{{end}}" placeholder="payments, email, sms…">
+    </div>
+    <div>
+      <label>Website</label>
+      <input type="url" name="website_url" value="{{if not .New}}{{.Processor.WebsiteUrl}}{{end}}">
+    </div>
+  </div>
+  <div class="grid-3">
+    <div>
+      <label>Primary country</label>
+      <input type="text" name="primary_country" value="{{if not .New}}{{.Processor.PrimaryCountry}}{{end}}" placeholder="IE, US…">
+    </div>
+    <div>
+      <label>Data location</label>
+      <input type="text" name="data_location" value="{{if not .New}}{{.Processor.DataLocation}}{{end}}" placeholder="EU, US, global">
+    </div>
+    <div>
+      <label>Transfer mechanism</label>
+      <input type="text" name="transfer_mechanism" value="{{if not .New}}{{.Processor.TransferMechanism}}{{end}}" placeholder="SCC, adequacy, none">
+    </div>
+  </div>
+  <label>Notes (internal)</label>
+  <textarea name="notes" rows="4">{{if not .New}}{{.Processor.Notes}}{{end}}</textarea>
+  <label>Change reason (recorded on the revision)</label>
+  <input type="text" name="change_reason" placeholder="e.g. updated transfer mechanism after SCC review">
+  <div class="actions">
+    <button type="submit">{{if .New}}Create{{else}}Save revision{{end}}</button>
+    <a href="/admin/processors" class="btn secondary">Cancel</a>
+  </div>
+</form>
+{{end}}

@@ -1,0 +1,30 @@
+{{define "page"}}
+<nav class="crumbs"><a href="/admin/documents">Documents</a> / <a href="/admin/documents/{{.Document.Key}}">{{.Document.Key}}</a> / new version</nav>
+<h1>New version — {{.Document.DisplayName}}</h1>
+<p class="muted">A new version is always a draft. Write or paste the legal text below, then publish when ready.</p>
+<form method="post" action="/admin/documents/{{.Document.Key}}/versions">
+  <div class="grid-3">
+    <div>
+      <label>Version</label>
+      <input type="text" name="version" required placeholder="2026-04-26 or 1.4.0">
+    </div>
+    <div>
+      <label>Locale (BCP-47)</label>
+      <input type="text" name="locale" required value="{{.Locale}}" placeholder="it-IT, de, en">
+    </div>
+    <div>
+      <label>Audience</label>
+      <input type="text" name="audience" value="{{if .Audience}}{{.Audience}}{{else}}all{{end}}" placeholder="all, passenger, driver">
+    </div>
+  </div>
+  <label>Body</label>
+  <textarea id="editor" class="editor-source" name="content_text"></textarea>
+  <div class="wysiwyg-shell js-wysiwyg-shell" data-source="editor" data-readonly="false">
+    <div class="js-rich-editor"></div>
+  </div>
+  <div class="actions">
+    <button type="submit">Create draft</button>
+    <a href="/admin/documents/{{.Document.Key}}" class="btn secondary">Cancel</a>
+  </div>
+</form>
+{{end}}

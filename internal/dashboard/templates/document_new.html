@@ -1,0 +1,25 @@
+{{define "page"}}
+<nav class="crumbs"><a href="/admin/documents">Documents</a> / new</nav>
+<h1>New document</h1>
+<p class="muted">Creates a key. Add versions (locales/audiences) on the next screen.</p>
+<form method="post" action="/admin/documents">
+  <div class="grid-3">
+    <div>
+      <label>Key (slug)</label>
+      <input type="text" name="key" required pattern="[a-z0-9\-]+" placeholder="privacy-policy">
+    </div>
+    <div>
+      <label>Display name</label>
+      <input type="text" name="display_name" required placeholder="Privacy Policy">
+    </div>
+    <div>
+      <label>Category</label>
+      <input type="text" name="category" value="legal">
+    </div>
+  </div>
+  <div class="actions">
+    <button type="submit">Create</button>
+    <a href="/admin/documents" class="btn secondary">Cancel</a>
+  </div>
+</form>
+{{end}}
