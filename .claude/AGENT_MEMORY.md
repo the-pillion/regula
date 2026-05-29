@@ -392,7 +392,6 @@ Regula does **not** serve a banner. Banner UX is a frontend concern, not a compl
 - `ZITADEL_ISSUER`
 - `ZITADEL_PROJECT_ID`
 - `REGULA_ALLOWED_SERVICE_IDS`
-- `REGULA_ZITADEL_API_CLIENT_ID`
 - `REGULA_ZITADEL_API_CLIENT_SECRET`
 
 ### Common env

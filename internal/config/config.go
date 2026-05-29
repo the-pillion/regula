@@ -18,12 +18,10 @@ type Config struct {
 	DocumentCacheMaxItems    int
 	ZitadelIssuer            string
 	ZitadelProjectID         string
-	ZitadelIntrospectionURI  string
-	ZitadelIntrospectionTTL  time.Duration
+	ZitadelJWKSURI           string
+	ZitadelJWKSCacheTTL      time.Duration
 	ZitadelAllowedAudiences  []string
 	ZitadelAllowedServiceIDs []string
-	ZitadelAPIClientID       string
-	ZitadelAPIClientSecret   string
 
 	PublicCacheMaxAge          time.Duration
 	PublicCacheSharedMaxAge    time.Duration
@@ -45,9 +43,9 @@ type DashboardConfig struct {
 
 func Load() (*Config, error) {
 	issuer := strings.TrimRight(strings.TrimSpace(os.Getenv("ZITADEL_ISSUER")), "/")
-	introspectionURI := strings.TrimSpace(os.Getenv("ZITADEL_INTROSPECTION_URI"))
-	if introspectionURI == "" && issuer != "" {
-		introspectionURI = issuer + "/oauth/v2/introspect"
+	jwksURI := strings.TrimSpace(os.Getenv("ZITADEL_JWKS_URI"))
+	if jwksURI == "" && issuer != "" {
+		jwksURI = issuer + "/oauth/v2/keys"
 	}
 
 	cfg := &Config{
@@ -60,12 +58,10 @@ func Load() (*Config, error) {
 		DocumentCacheMaxItems:    getInt("REGULA_DOCUMENT_CACHE_MAX_ITEMS", 64),
 		ZitadelIssuer:            issuer,
 		ZitadelProjectID:         strings.TrimSpace(os.Getenv("ZITADEL_PROJECT_ID")),
-		ZitadelIntrospectionURI:  introspectionURI,
-		ZitadelIntrospectionTTL:  time.Duration(getInt("ZITADEL_INTROSPECTION_CACHE_TTL_SECONDS", 15)) * time.Second,
+		ZitadelJWKSURI:           jwksURI,
+		ZitadelJWKSCacheTTL:      time.Duration(getInt("ZITADEL_JWKS_CACHE_TTL_SECONDS", 3600)) * time.Second,
 		ZitadelAllowedAudiences:  audienceConfig(),
 		ZitadelAllowedServiceIDs: splitCSV(os.Getenv("REGULA_ALLOWED_SERVICE_IDS")),
-		ZitadelAPIClientID:       strings.TrimSpace(os.Getenv("REGULA_ZITADEL_API_CLIENT_ID")),
-		ZitadelAPIClientSecret:   strings.TrimSpace(os.Getenv("REGULA_ZITADEL_API_CLIENT_SECRET")),
 
 		PublicCacheMaxAge:          time.Duration(getInt("REGULA_PUBLIC_CACHE_MAX_AGE_SECONDS", 300)) * time.Second,
 		PublicCacheSharedMaxAge:    time.Duration(getInt("REGULA_PUBLIC_CACHE_SHARED_MAX_AGE_SECONDS", 3600)) * time.Second,
@@ -86,14 +82,8 @@ func Load() (*Config, error) {
 	if cfg.ZitadelProjectID == "" {
 		return nil, fmt.Errorf("ZITADEL_PROJECT_ID is required")
 	}
-	if cfg.ZitadelIntrospectionURI == "" {
-		return nil, fmt.Errorf("ZITADEL_INTROSPECTION_URI is required when ZITADEL_ISSUER is set")
-	}
-	if cfg.ZitadelAPIClientID == "" {
-		return nil, fmt.Errorf("REGULA_ZITADEL_API_CLIENT_ID is required")
-	}
-	if cfg.ZitadelAPIClientSecret == "" {
-		return nil, fmt.Errorf("REGULA_ZITADEL_API_CLIENT_SECRET is required")
+	if cfg.ZitadelJWKSURI == "" {
+		return nil, fmt.Errorf("ZITADEL_JWKS_URI is required when ZITADEL_ISSUER is set")
 	}
 	if len(cfg.ZitadelAllowedAudiences) == 0 {
 		return nil, fmt.Errorf("REGULA_ALLOWED_AUDIENCES or ZITADEL_PROJECT_ID must contain at least one value")

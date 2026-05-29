@@ -338,11 +338,11 @@ All routes except `/healthz` and `/readyz` require bearer authentication.
 All routes except `/healthz` and `/readyz` require bearer authentication.
 
 Primary production model:
-- Zitadel opaque access tokens validated via introspection
-- introspection with a dedicated Regula API client
+- Zitadel JWT access tokens validated locally via JWKS signature check
 - strict issuer check
 - strict audience allowlist
 - strict machine-identity allowlist
+- JWKS fetched from Zitadel and cached in-process
 
 The service intentionally does not trust `aud` alone. ZITADEL's own security guidance recommends validating issuer, expiration, and additional authorization signals beyond audience checks. Regula therefore requires both:
 - a configured allowed audience
@@ -351,22 +351,21 @@ The service intentionally does not trust `aud` alone. ZITADEL's own security gui
 Required production variables:
 - `ZITADEL_ISSUER`
 - `ZITADEL_PROJECT_ID`
-- `REGULA_ZITADEL_API_CLIENT_ID`
-- `REGULA_ZITADEL_API_CLIENT_SECRET`
 - `REGULA_ALLOWED_SERVICE_IDS`
 - optional `REGULA_ALLOWED_AUDIENCES` if you do not want to default to `ZITADEL_PROJECT_ID`
-- optional `ZITADEL_INTROSPECTION_URI` if you do not want it derived from the issuer
+- optional `ZITADEL_JWKS_URI` if you do not want it derived from the issuer
+- optional `ZITADEL_JWKS_CACHE_TTL_SECONDS` (default `3600`)
 
 Recommended caller model:
 - the monolith authenticates with Zitadel using `client_credentials`
-- the monolith requests a short-lived access token
+- the monolith requests a short-lived JWT access token
 - the token includes a known audience accepted by Regula
-- Regula introspects the access token against Zitadel and caches the result briefly to keep the service lightweight
+- Regula verifies the JWT signature against the cached JWKS and enforces issuer, audience, and service-id allowlists
 
 What Regula needs from Zitadel:
 - one machine client or service account for each calling service that needs access
-- short-lived access tokens obtained via OAuth 2.0 `client_credentials`
-- access tokens issued by Zitadel, validated through introspection
+- short-lived JWT access tokens obtained via OAuth 2.0 `client_credentials`
+- public JWKS endpoint reachable at startup and on key rotation
 
 What Regula does not need:
 - browser login
@@ -531,10 +530,8 @@ Required:
 Common:
 - `REGULA_SERVICE_NAME`
 - `REGULA_HTTP_PORT`
-- `ZITADEL_INTROSPECTION_URI`
-- `ZITADEL_INTROSPECTION_CACHE_TTL_SECONDS`
-- `REGULA_ZITADEL_API_CLIENT_ID`
-- `REGULA_ZITADEL_API_CLIENT_SECRET`
+- `ZITADEL_JWKS_URI`
+- `ZITADEL_JWKS_CACHE_TTL_SECONDS`
 - `REGULA_ALLOWED_AUDIENCES`
 - `REGULA_AUTO_MIGRATE`
 - `REGULA_LOG_LEVEL`
@@ -543,6 +540,14 @@ Common:
 - `REGULA_TRAEFIK_RATELIMIT_AVERAGE`
 - `REGULA_TRAEFIK_RATELIMIT_BURST`
 - `REGULA_TRAEFIK_RATELIMIT_PERIOD`
+- `REGULA_DASHBOARD_ENABLED`
+- `REGULA_DASHBOARD_USER`
+- `REGULA_DASHBOARD_PASSWORD`
+- `REGULA_DASHBOARD_REALM`
+- `REGULA_PUBLIC_CACHE_MAX_AGE_SECONDS`
+- `REGULA_PUBLIC_CACHE_SHARED_MAX_AGE_SECONDS`
+- `REGULA_PUBLIC_CACHE_STALE_REVALIDATE_SECONDS`
+- `REGULA_PUBLIC_CORS_ALLOWED_ORIGINS`
 
 Current production-style database target is Neon.
 
@@ -554,11 +559,9 @@ REGULA_DATABASE_URL=postgresql://USER:PASSWORD@HOST/DATABASE?sslmode=require
 
 ZITADEL_ISSUER=https://ztdl.apps.visifan.com
 ZITADEL_PROJECT_ID=366080639541182472
-ZITADEL_INTROSPECTION_URI=https://ztdl.apps.visifan.com/oauth/v2/introspect
-ZITADEL_INTROSPECTION_CACHE_TTL_SECONDS=15
+ZITADEL_JWKS_URI=https://ztdl.apps.visifan.com/oauth/v2/keys
+ZITADEL_JWKS_CACHE_TTL_SECONDS=3600
 
-REGULA_ZITADEL_API_CLIENT_ID=366254444754501640
-REGULA_ZITADEL_API_CLIENT_SECRET=replace-me
 REGULA_ALLOWED_SERVICE_IDS=pillion-svc
 REGULA_ALLOWED_AUDIENCES=366080639541182472
 
@@ -687,7 +690,7 @@ Done now:
 - hardcoded public host removal from stored content
 - seed/reset CLI support
 - live service verification
-- Zitadel M2M auth via opaque-token introspection
+- Zitadel M2M auth via JWT + JWKS validation
 - monolith legal-page reads from Regula
 - monolith acceptance and consent writes into Regula
 - structured access audit logging

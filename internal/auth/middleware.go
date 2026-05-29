@@ -23,6 +23,8 @@ type Identity struct {
 	Issuer          string
 	Audience        []string
 	Scopes          []string
+	Source          string
+	Service         bool
 }
 
 type Validator interface {

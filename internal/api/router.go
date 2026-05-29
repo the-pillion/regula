@@ -40,14 +40,12 @@ func NewRouter(cfg *config.Config, log *slog.Logger, queries *store.Queries, poo
 		docCache: cache.NewLatestDocumentCache(cfg.DocumentCacheTTL, cfg.DocumentCacheMaxItems),
 	}
 
-	validator, err := auth.NewZitadelIntrospectionValidator(auth.ZitadelIntrospectionConfig{
-		Issuer:            cfg.ZitadelIssuer,
-		IntrospectionURI:  cfg.ZitadelIntrospectionURI,
-		CacheTTL:          cfg.ZitadelIntrospectionTTL,
-		AllowedAudiences:  cfg.ZitadelAllowedAudiences,
-		AllowedServiceIDs: cfg.ZitadelAllowedServiceIDs,
-		APIClientID:       cfg.ZitadelAPIClientID,
-		APIClientSecret:   cfg.ZitadelAPIClientSecret,
+	validator, err := auth.NewZitadelJWTValidator(auth.ZitadelJWTConfig{
+		Issuer:           cfg.ZitadelIssuer,
+		JWKSURI:          cfg.ZitadelJWKSURI,
+		JWKSCacheTTL:     cfg.ZitadelJWKSCacheTTL,
+		AllowedAudiences: cfg.ZitadelAllowedAudiences,
+		AllowedClientIDs: cfg.ZitadelAllowedServiceIDs,
 	})
 	if err != nil {
 		return nil, err

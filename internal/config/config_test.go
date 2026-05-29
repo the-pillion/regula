@@ -18,8 +18,6 @@ func TestLoadIncludesCacheSettings(t *testing.T) {
 	t.Setenv("ZITADEL_ISSUER", "https://ztdl.example.com")
 	t.Setenv("ZITADEL_PROJECT_ID", "pillion-project")
 	t.Setenv("REGULA_ALLOWED_SERVICE_IDS", "pillion-svc")
-	t.Setenv("REGULA_ZITADEL_API_CLIENT_ID", "regula-api")
-	t.Setenv("REGULA_ZITADEL_API_CLIENT_SECRET", "secret")
 	t.Setenv("REGULA_DOCUMENT_CACHE_TTL_SECONDS", "45")
 	t.Setenv("REGULA_DOCUMENT_CACHE_MAX_ITEMS", "16")
 	t.Setenv("REGULA_SERVICE_NAME", "regula-test")
@@ -47,8 +45,8 @@ func TestLoadIncludesCacheSettings(t *testing.T) {
 	if cfg.DocumentCacheMaxItems != 16 {
 		t.Fatalf("unexpected cache max items: %d", cfg.DocumentCacheMaxItems)
 	}
-	if cfg.ZitadelIntrospectionURI != "https://ztdl.example.com/oauth/v2/introspect" {
-		t.Fatalf("unexpected introspection uri: %s", cfg.ZitadelIntrospectionURI)
+	if cfg.ZitadelJWKSURI != "https://ztdl.example.com/oauth/v2/keys" {
+		t.Fatalf("unexpected jwks uri: %s", cfg.ZitadelJWKSURI)
 	}
 }
 
@@ -57,8 +55,6 @@ func TestLoadRejectsNegativeCacheSize(t *testing.T) {
 	t.Setenv("ZITADEL_ISSUER", "https://ztdl.example.com")
 	t.Setenv("ZITADEL_PROJECT_ID", "pillion-project")
 	t.Setenv("REGULA_ALLOWED_SERVICE_IDS", "pillion-svc")
-	t.Setenv("REGULA_ZITADEL_API_CLIENT_ID", "regula-api")
-	t.Setenv("REGULA_ZITADEL_API_CLIENT_SECRET", "secret")
 	t.Setenv("REGULA_DOCUMENT_CACHE_MAX_ITEMS", "-1")
 
 	_, err := Load()
@@ -67,18 +63,6 @@ func TestLoadRejectsNegativeCacheSize(t *testing.T) {
 	}
 }
 
-func TestLoadRejectsMissingAPISecret(t *testing.T) {
-	t.Setenv("REGULA_DATABASE_URL", "postgresql://example")
-	t.Setenv("ZITADEL_ISSUER", "https://ztdl.example.com")
-	t.Setenv("ZITADEL_PROJECT_ID", "pillion-project")
-	t.Setenv("REGULA_ALLOWED_SERVICE_IDS", "pillion-svc")
-	t.Setenv("REGULA_ZITADEL_API_CLIENT_ID", "regula-api")
-
-	_, err := Load()
-	if err == nil {
-		t.Fatal("expected missing api secret to fail")
-	}
-}
 
 func TestMain(m *testing.M) {
 	code := m.Run()
