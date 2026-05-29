@@ -391,15 +391,14 @@ Regula does **not** serve a banner. Banner UX is a frontend concern, not a compl
 - `REGULA_DATABASE_URL`
 - `ZITADEL_ISSUER`
 - `ZITADEL_PROJECT_ID`
-- `REGULA_ALLOWED_SERVICE_IDS`
-- `REGULA_ZITADEL_API_CLIENT_SECRET`
+- `REGULA_ALLOWED_SERVICE_IDS` — Service User loginnames; canonical list in `../../raw/iam-and-service-call-graph.md`
 
 ### Common env
 
 - `REGULA_SERVICE_NAME` (default `regula`)
 - `REGULA_HTTP_PORT` (default `8085`)
-- `ZITADEL_INTROSPECTION_URI`
-- `ZITADEL_INTROSPECTION_CACHE_TTL_SECONDS` (default `15`)
+- `ZITADEL_JWKS_URI` (default `<issuer>/oauth/v2/keys`)
+- `ZITADEL_JWKS_CACHE_TTL_SECONDS` (default `3600`)
 - `REGULA_ALLOWED_AUDIENCES`
 - `REGULA_AUTO_MIGRATE`
 - `REGULA_LOG_LEVEL`

@@ -19,8 +19,7 @@ var templateFS embed.FS
 var assetFS embed.FS
 
 type templates struct {
-	pages    map[string]*template.Template
-	partials map[string]*template.Template
+	pages map[string]*template.Template
 }
 
 func loadTemplates() (*templates, error) {
@@ -53,21 +52,12 @@ func loadTemplates() (*templates, error) {
 	}
 
 	pages := map[string]*template.Template{}
-	partials := map[string]*template.Template{}
 	for _, e := range entries {
 		if e.IsDir() || !strings.HasSuffix(e.Name(), ".html") {
 			continue
 		}
 		name := e.Name()
-		if name == "layout.html" {
-			continue
-		}
-		if strings.HasSuffix(name, "_partial.html") {
-			t, err := template.New(name).Funcs(funcs).ParseFS(templateFS, "templates/"+name)
-			if err != nil {
-				return nil, fmt.Errorf("parse partial %s: %w", name, err)
-			}
-			partials[name] = t
+		if name == "layout.html" || strings.HasSuffix(name, "_partial.html") {
 			continue
 		}
 		t, err := template.New("layout.html").Funcs(funcs).ParseFS(
@@ -81,7 +71,7 @@ func loadTemplates() (*templates, error) {
 		pages[name] = t
 	}
 
-	return &templates{pages: pages, partials: partials}, nil
+	return &templates{pages: pages}, nil
 }
 
 func (t *templates) render(w io.Writer, name string, data any) error {
@@ -92,10 +82,3 @@ func (t *templates) render(w io.Writer, name string, data any) error {
 	return tpl.ExecuteTemplate(w, "layout.html", data)
 }
 
-func (t *templates) renderPartial(w io.Writer, name string, data any) error {
-	tpl, ok := t.partials[name]
-	if !ok {
-		return fmt.Errorf("partial %q not found", name)
-	}
-	return tpl.Execute(w, data)
-}
