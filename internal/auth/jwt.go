@@ -108,7 +108,12 @@ func (v *ZitadelJWTValidator) ValidateToken(ctx context.Context, rawToken string
 		}
 	}
 
-	if caller != "" && strings.TrimSpace(sub) == caller {
+	// regula's allowlist (REGULA_ALLOWED_SERVICE_IDS) is the set of service
+	// users; the public website uses a separate unauthenticated path. So any
+	// caller that passed the allowlist is a service. (The old sub==caller
+	// heuristic never matched Zitadel service tokens, where sub is a numeric id
+	// and client_id is the loginname.)
+	if caller != "" {
 		identity.Service = true
 		identity.Principal = caller
 		return identity, nil
