@@ -79,6 +79,84 @@
       "created_by": "seed:legal-refresh"
     },
     {
+      "key": "terms-of-service-passenger",
+      "display_name": "Passenger Terms of Service",
+      "category": "legal",
+      "version": "2026-06-08-launch",
+      "locale": "en",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/terms-of-service-passenger.en.html",
+      "is_published": true,
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
+    },
+    {
+      "key": "terms-of-service-passenger",
+      "display_name": "Passenger Terms of Service",
+      "category": "legal",
+      "version": "2026-06-08-launch",
+      "locale": "it",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/terms-of-service-passenger.it.html",
+      "is_published": true,
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
+    },
+    {
+      "key": "terms-of-service-passenger",
+      "display_name": "Passenger Terms of Service",
+      "category": "legal",
+      "version": "2026-06-08-launch",
+      "locale": "de",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/terms-of-service-passenger.de.html",
+      "is_published": true,
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
+    },
+    {
+      "key": "terms-of-service-driver",
+      "display_name": "Driver Terms of Service",
+      "category": "legal",
+      "version": "2026-06-08-launch",
+      "locale": "en",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/terms-of-service-driver.en.html",
+      "is_published": true,
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
+    },
+    {
+      "key": "terms-of-service-driver",
+      "display_name": "Driver Terms of Service",
+      "category": "legal",
+      "version": "2026-06-08-launch",
+      "locale": "it",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/terms-of-service-driver.it.html",
+      "is_published": true,
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
+    },
+    {
+      "key": "terms-of-service-driver",
+      "display_name": "Driver Terms of Service",
+      "category": "legal",
+      "version": "2026-06-08-launch",
+      "locale": "de",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/terms-of-service-driver.de.html",
+      "is_published": true,
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
+    },
+    {
       "key": "cookie-policy",
       "display_name": "Cookie Policy",
       "category": "legal",
@@ -215,28 +293,16 @@
   ],
   "processors": [
     {
-      "key": "zitadel",
-      "display_name": "Zitadel",
-      "relationship_type": "processor",
-      "service_area": "Identity and authentication",
-      "website_url": "https://zitadel.com",
-      "primary_country": "Switzerland",
-      "data_location": "EU / configured tenant region",
-      "transfer_mechanism": "Contractual controls and provider DPA review required",
-      "dpa_status": "pending",
-      "notes": "Identity provider for users, service accounts, and authorization context."
-    },
-    {
       "key": "stripe",
       "display_name": "Stripe",
       "relationship_type": "processor",
       "service_area": "Payments and payout operations",
       "website_url": "https://stripe.com",
-      "primary_country": "Ireland",
-      "data_location": "EU / Stripe-managed regions",
-      "transfer_mechanism": "Provider SCCs / DPA where applicable",
+      "primary_country": "Ireland (EEA) / United States",
+      "data_location": "EEA contracting via Stripe Technology Europe Ltd; US processing via Stripe LLC",
+      "transfer_mechanism": "EU-US Data Privacy Framework (Stripe LLC certified) + EU SCCs as backup",
       "dpa_status": "pending",
-      "notes": "Stores charge, payout, and financial operations data. Default payment provider (provider-agnostic interface)."
+      "notes": "Stores charge, payout, and financial operations data. Default payment provider (provider-agnostic interface). DPA auto-incorporated via ToS: https://stripe.com/legal/dpa . DPF policy: https://stripe.com/legal/data-privacy-framework — confirm our acceptance/execution."
     },
     {
       "key": "fastgeo",
@@ -248,7 +314,7 @@
       "data_location": "EU-hosted",
       "transfer_mechanism": "Intra-EEA; no third-country transfer",
       "dpa_status": "pending",
-      "notes": "Primary geo/routing provider (affiliated SaaS). Processes pickup/drop-off addresses and route requests."
+      "notes": "Primary geo/routing provider (affiliated EU SaaS, same founder). Processes pickup/drop-off addresses and route requests. Execute an Art. 28 DPA even though affiliated."
     },
     {
       "key": "tomtom",
@@ -258,21 +324,21 @@
       "website_url": "https://www.tomtom.com",
       "primary_country": "Netherlands",
       "data_location": "EU / provider-managed regions",
-      "transfer_mechanism": "Intra-EEA; provider DPA review required",
+      "transfer_mechanism": "Intra-EEA (TomTom International BV, Netherlands); no third-country transfer",
       "dpa_status": "pending",
-      "notes": "Configured fallback routing provider behind FastGeo."
+      "notes": "Configured fallback routing provider behind FastGeo. EEA-based controller/processor; standard DPA review."
     },
     {
       "key": "firebase",
-      "display_name": "Firebase",
+      "display_name": "Firebase (Google)",
       "relationship_type": "processor",
       "service_area": "Push notifications and mobile messaging",
       "website_url": "https://firebase.google.com",
       "primary_country": "United States",
-      "data_location": "Google-managed regions",
-      "transfer_mechanism": "Transfer assessment and Google contractual controls required",
+      "data_location": "Google-managed regions (EU regions available)",
+      "transfer_mechanism": "EU-US Data Privacy Framework (Google LLC certified) + EU SCCs",
       "dpa_status": "pending",
-      "notes": "Used for mobile push delivery via the Herald notification service."
+      "notes": "Used for mobile push delivery via the Herald notification service. Firebase Data Processing & Security Terms: https://firebase.google.com/terms/data-processing-terms . SCCs: https://firebase.google.com/terms/firebase-sccs"
     },
     {
       "key": "twilio",
@@ -282,33 +348,9 @@
       "website_url": "https://www.twilio.com",
       "primary_country": "United States",
       "data_location": "Twilio-managed regions",
-      "transfer_mechanism": "Transfer assessment and DPA review required",
+      "transfer_mechanism": "EU-US Data Privacy Framework (Twilio Inc. certified) + Binding Corporate Rules + EU SCCs",
       "dpa_status": "pending",
-      "notes": "Used for transactional and safety SMS messaging."
-    },
-    {
-      "key": "checkr",
-      "display_name": "Checkr",
-      "relationship_type": "processor",
-      "service_area": "Driver background and eligibility checks",
-      "website_url": "https://checkr.com",
-      "primary_country": "United States",
-      "data_location": "Provider-managed regions",
-      "transfer_mechanism": "Standard Contractual Clauses (SCCs) required",
-      "dpa_status": "pending",
-      "notes": "Background-check provider. Being superseded for new work by the internal PrefactGuard trust-and-safety service."
-    },
-    {
-      "key": "neon",
-      "display_name": "Neon",
-      "relationship_type": "subprocessor",
-      "service_area": "Managed PostgreSQL hosting",
-      "website_url": "https://neon.tech",
-      "primary_country": "United States",
-      "data_location": "EU region deployment",
-      "transfer_mechanism": "Hosting DPA and regional configuration review required",
-      "dpa_status": "pending",
-      "notes": "Managed database hosting for Regula."
+      "notes": "Used for transactional and safety SMS messaging. DPA: https://www.twilio.com/en-us/legal/data-protection-addendum"
     },
     {
       "key": "cloudflare",
@@ -318,9 +360,33 @@
       "website_url": "https://www.cloudflare.com",
       "primary_country": "United States",
       "data_location": "Provider-managed regions",
-      "transfer_mechanism": "Provider contractual controls and storage review required",
+      "transfer_mechanism": "EU-US Data Privacy Framework certified + EU SCCs",
       "dpa_status": "pending",
-      "notes": "Hosts the public dashboard worker and CDN; R2 is the planned storage target for exported compliance evidence bundles."
+      "notes": "Hosts the public dashboard, auth-gate and public-site Workers + CDN; R2 is the planned storage target for exported compliance evidence bundles. DPA: https://www.cloudflare.com/cloudflare-customer-dpa/ . Sub-processors: https://www.cloudflare.com/gdpr/subprocessors/"
+    },
+    {
+      "key": "ionos",
+      "display_name": "IONOS",
+      "relationship_type": "subprocessor",
+      "service_area": "Primary VPS and database hosting",
+      "website_url": "https://www.ionos.com",
+      "primary_country": "Germany",
+      "data_location": "EU (Germany)",
+      "transfer_mechanism": "Intra-EEA; no third-country transfer",
+      "dpa_status": "pending",
+      "notes": "Hosts the primary PostgreSQL database (IONOS A) and gps-ingest + Dragonfly cache (IONOS B). German provider — primary data residency for platform personal data."
+    },
+    {
+      "key": "hetzner",
+      "display_name": "Hetzner",
+      "relationship_type": "subprocessor",
+      "service_area": "Application VPS hosting",
+      "website_url": "https://www.hetzner.com",
+      "primary_country": "Germany",
+      "data_location": "EU (Germany)",
+      "transfer_mechanism": "Intra-EEA; no third-country transfer",
+      "dpa_status": "pending",
+      "notes": "Hosts pillion-core and the Go microservices (ride-matcher, compass, herald, prefactguard, price-arbiter, regula) plus a local Redis. German provider."
     }
   ],
   "retention_policies": [
@@ -460,8 +526,8 @@
       "legal_basis": "Contract and legitimate interests",
       "data_subject_categories": "Passengers, drivers, admins, support staff",
       "personal_data_categories": "Identity data, account identifiers, authentication metadata, role assignments",
-      "recipient_categories": "Zitadel, hosting providers, support staff",
-      "transfer_notes": "Review Zitadel and infrastructure transfer positions and DPAs.",
+      "recipient_categories": "Self-hosted identity service (Zitadel on EU VPS), hosting providers, support staff",
+      "transfer_notes": "Identity is self-hosted on EU VPS (IONOS/Hetzner, Germany); no third-country transfer for identity data.",
       "retention_summary": "Retain account and access records while account is active, then follow account closure and security retention rules.",
       "security_measures": "OIDC, role-based access, service-to-service auth, audit logging, TLS, environment-secret controls",
       "owner": "Engineering / Security",
@@ -502,8 +568,8 @@
       "legal_basis": "Contract, legal obligation, and legitimate interests",
       "data_subject_categories": "Drivers and driver applicants",
       "personal_data_categories": "Identity documents, licensing data, qualification records, screening outcomes, notes",
-      "recipient_categories": "Checkr, PrefactGuard, compliance/admin staff, support staff",
-      "transfer_notes": "High-risk data category requiring DPIA review and vendor controls; Checkr transfers rely on SCCs.",
+      "recipient_categories": "PrefactGuard (internal trust-and-safety service), compliance/admin staff, support staff",
+      "transfer_notes": "High-risk data category requiring DPIA review. Screening handled by the internal PrefactGuard service (same controller, EU VPS) — no external background-check processor in use.",
       "retention_summary": "Retain according to legal/regulatory obligations and approved retention policy.",
       "security_measures": "Restricted admin access, document verification workflow, status audit trail, encrypted storage",
       "owner": "Compliance / Operations",
