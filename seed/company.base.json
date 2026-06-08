@@ -1,8 +1,8 @@
 {
   "_instructions": "Language-NEUTRAL legal entity facts. Fill these once. They are injected into every legal document at seed time via {{placeholder}} tokens. Language-specific labels (legal form wording, supervisory-authority descriptor) live in company.<lang>.json and override the values here. Leave a field as an empty string until you have the official value; the seeder substitutes it as-is. Keys starting with _ are notes and are never substituted.",
 
-  "legal_name": "",
-  "brand_name": "Pillion",
+  "legal_name": "The Pillion",
+  "brand_name": "ThePillion",
   "vat_number": "",
   "tax_code": "",
   "rea_number": "",
