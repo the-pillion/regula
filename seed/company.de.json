@@ -1,0 +1,5 @@
+{
+  "_instructions": "Deutschsprachige Overrides für company.base.json. Nur Werte eintragen, die auf Deutsch abweichen müssen. Steuerliche Identifikatoren (USt-IdNr./P.IVA, REA, Anschrift) bleiben in company.base.json.",
+  "legal_form": "S.r.l. (italienische Gesellschaft mit beschränkter Haftung)",
+  "supervisory_authority": "Italienische Datenschutzbehörde (Garante per la protezione dei dati personali)"
+}

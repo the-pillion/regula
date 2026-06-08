@@ -1,644 +1,151 @@
-<main id="main-content" class="pt-16 outline-none">
-    <section
-        class="relative overflow-hidden bg-white border-b border-slate-100"
-    >
-        <div class="absolute inset-0 bg-grid opacity-20"></div>
-        <div
-            class="absolute top-0 right-0 w-[320px] h-[320px] bg-brand-100/40 rounded-full blur-3xl pointer-events-none"
-        ></div>
+<article class="legal-document" lang="it">
+    <header>
+        <h1>Informativa sulla Privacy</h1>
+        <p class="legal-meta">Ultimo aggiornamento: {{last_updated}} · In vigore dal: {{effective_date}}</p>
+        <p>
+            {{legal_name}} (&laquo;{{brand_name}}&raquo;, &laquo;noi&raquo;) &egrave; il titolare del trattamento dei dati
+            personali trattati tramite la piattaforma {{brand_name}}. Trattiamo i tuoi dati nel rispetto del Regolamento (UE)
+            2016/679 (&laquo;GDPR&raquo;) e del D.Lgs. 196/2003 e successive modifiche (&laquo;Codice Privacy&raquo;). La presente
+            informativa spiega quali dati raccogliamo, perch&eacute;, su quale base giuridica, per quanto tempo li conserviamo e
+            quali diritti hai.
+        </p>
+    </header>
 
-        <div
-            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative"
-        >
-            <div
-                class="grid grid-cols-1 lg:grid-cols-[1.1fr,0.9fr] gap-12 items-center"
-            >
-                <div class="relative z-10">
-                    <span class="eyebrow-pill"> Legale </span>
-                    <div
-                        class="font-display text-4xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-tight mt-5"
-                    >
-                        <h1>Informativa sulla Privacy</h1>
-                    </div>
-                    <div
-                        class="font-display text-2xl lg:text-3xl text-slate-700 mt-4"
-                    >
-                        <h3>
-                            Come raccogliamo, utilizziamo e proteggiamo i tuoi
-                            dati personali.
-                        </h3>
-                    </div>
-                    <div
-                        class="text-lg lg:text-xl text-slate-600 leading-relaxed mt-6 max-w-xl"
-                    >
-                        <p>
-                            Thepillion Technologies S.r.l. è impegnata a
-                            proteggere la tua privacy ai sensi del Regolamento
-                            UE 2016/679 (GDPR). Questa informativa spiega quali
-                            dati raccogliamo, per quale finalità e quali sono i
-                            tuoi diritti in qualità di interessato.
-                        </p>
-                    </div>
-                    <div class="mt-10">
-                        <p class="tag text-slate-400">Ultimo aggiornamento</p>
-                        <p class="text-sm font-semibold text-slate-700 mt-2">
-                            Marzo 2026
-                        </p>
-                    </div>
-                </div>
-
-                <div class="relative">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
-                        <div
-                            class="bg-white rounded-xl shadow-sm border border-slate-100 px-3.5 py-3 floaty"
-                            style="animation-delay: 0s"
-                        >
-                            <div class="flex items-center gap-3">
-                                <div
-                                    class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center shrink-0"
-                                >
-                                    <i
-                                        class="ph-bold ph-shield-check text-brand-600 text-xl"
-                                        aria-hidden="true"
-                                    ></i>
-                                </div>
-                                <div>
-                                    <p
-                                        class="text-xs text-slate-400 uppercase tracking-[0.15em]"
-                                    >
-                                        Normativa
-                                    </p>
-                                    <p
-                                        class="text-sm font-semibold text-slate-900 mt-0.5"
-                                    >
-                                        GDPR UE 2016/679
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="bg-white rounded-xl shadow-sm border border-slate-100 px-3.5 py-3 floaty"
-                            style="animation-delay: 0.5s"
-                        >
-                            <div class="flex items-center gap-3">
-                                <div
-                                    class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center shrink-0"
-                                >
-                                    <i
-                                        class="ph-bold ph-flag text-brand-600 text-xl"
-                                        aria-hidden="true"
-                                    ></i>
-                                </div>
-                                <div>
-                                    <p
-                                        class="text-xs text-slate-400 uppercase tracking-[0.15em]"
-                                    >
-                                        Titolare del trattamento
-                                    </p>
-                                    <p
-                                        class="text-sm font-semibold text-slate-900 mt-0.5"
-                                    >
-                                        Thepillion Technologies S.r.l.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section>
+        <h2>1. Titolare del trattamento e contatti</h2>
+        <p>
+            <strong>{{legal_name}}</strong> ({{legal_form}})<br />
+            {{registered_street}}, {{registered_postal_code}} {{registered_city}} ({{registered_province}}), {{registered_country}}<br />
+            P.IVA: {{vat_number}} · REA: {{rea_number}}<br />
+            Email: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>
+        </p>
+        <p>
+            Il Responsabile della Protezione dei Dati (RPD/DPO) &egrave; contattabile all&rsquo;indirizzo
+            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>{{dpo_name}}.
+        </p>
     </section>
-    <section class="py-20">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div
-                class="prose prose-slate prose-lg max-w-none bg-white rounded-[2.5rem] border border-slate-100 shadow-lg p-10"
-            >
-                <h2>1. Titolare del Trattamento</h2>
-                <p>Il titolare del trattamento è:</p>
-                <p>
-                    <strong>Pillion Technologies S.r.l.</strong><br />
-                    Via [PLACEHOLDER], Bolzano (BZ), 39100, Italia<br />
-                    P.IVA: IT[PLACEHOLDER]<br />
-                    Email:
-                    <a href="mailto:privacy@thepillion.com"
-                        >privacy@thepillion.com</a
-                    >
-                </p>
-                <p>
-                    Per richieste relative alla protezione dei dati, contattare
-                    il nostro Responsabile della Protezione dei Dati (DPO)
-                    all'indirizzo
-                    <a href="mailto:dpo@thepillion.com">dpo@thepillion.com</a>.
-                </p>
 
-                <h2>2. Dati Raccolti</h2>
-                <p>
-                    Raccogliamo dati personali in base alle modalità di
-                    interazione con la nostra piattaforma:
-                </p>
-
-                <h3>2.1 Registrazione dell'account</h3>
-                <ul>
-                    <li>
-                        Nome e cognome, indirizzo e-mail, numero di telefono
-                    </li>
-                    <li>
-                        Password (memorizzata come hash bcrypt — mai in chiaro)
-                    </li>
-                    <li>Foto profilo (facoltativa)</li>
-                    <li>
-                        Data di nascita (obbligatoria per i controlli di
-                        conformità degli autisti)
-                    </li>
-                    <li>Lingua e impostazioni locali preferite</li>
-                </ul>
-
-                <h3>2.2 Onboarding degli autisti</h3>
-                <ul>
-                    <li>
-                        Documento d'identità (passaporto, carta d'identità,
-                        patente di guida)
-                    </li>
-                    <li>
-                        Libretto di circolazione e certificato di assicurazione
-                        del veicolo
-                    </li>
-                    <li>
-                        Licenze professionali per il trasporto di persone
-                        applicabili alla città di operazione (es. NCC in Italia,
-                        VTC in Francia/Spagna, P-Schein in Germania)
-                    </li>
-                    <li>
-                        Esito dei controlli precedenti (solo il riepilogo della
-                        decisione — non il payload completo con dati personali)
-                    </li>
-                    <li>
-                        Coordinate bancarie per i pagamenti (gestiti da Stripe
-                        Connect — non memorizzati sui nostri server)
-                    </li>
-                </ul>
-
-                <h3>2.3 Dati delle corse</h3>
-                <ul>
-                    <li>Indirizzo di partenza e di destinazione</li>
-                    <li>Coordinate GPS del percorso durante le corse attive</li>
-                    <li>Orari, durata e distanza della corsa</li>
-                    <li>
-                        Importo della tariffa e modificatore di prezzo applicato
-                    </li>
-                    <li>Stato e ciclo di vita della corsa</li>
-                    <li>
-                        Codici OTP (monouso, immediatamente eliminati dopo
-                        l'utilizzo)
-                    </li>
-                </ul>
-
-                <h3>2.4 Dati di localizzazione</h3>
-                <ul>
-                    <li>
-                        Posizione GPS dell'autista durante il servizio attivo
-                        (utilizzata per il matching e il calcolo dell'ETA)
-                    </li>
-                    <li>
-                        Indirizzi di partenza/destinazione geocodificati
-                        (trattati tramite fastgeo.net, il nostro servizio
-                        interno ospitato nell'UE)
-                    </li>
-                    <li>
-                        I dati GPS storici delle corse completate vengono
-                        anonimizzati (coordinate azzerati) dopo 90 giorni
-                    </li>
-                </ul>
-
-                <h3>2.5 Dati di pagamento</h3>
-                <p>
-                    Tutte le transazioni di pagamento sono elaborate da
-                    <strong>Stripe</strong> (Stripe Technology Europe, Ltd.).
-                    Thepillion memorizza esclusivamente l'ID cliente Stripe, il
-                    riferimento del payment intent e lo stato della transazione.
-                    I dati completi della carta, il PAN e le credenziali
-                    bancarie non vengono mai memorizzati sulla nostra
-                    infrastruttura.
-                </p>
-
-                <h3>2.6 Comunicazioni</h3>
-                <ul>
-                    <li>Messaggi in-app e ticket di assistenza</li>
-                    <li>Token per le notifiche push (Firebase / OneSignal)</li>
-                    <li>
-                        Codici SMS di verifica (Twilio/Vonage — non memorizzati
-                        dopo la consegna)
-                    </li>
-                    <li>Corrispondenza e-mail</li>
-                </ul>
-
-                <h3>2.7 Dati tecnici</h3>
-                <ul>
-                    <li>
-                        Indirizzo IP, tipo di browser, modello e sistema
-                        operativo del dispositivo
-                    </li>
-                    <li>Versione dell'app e identificatori di sessione</li>
-                    <li>Log degli errori e rapporti di crash</li>
-                    <li>
-                        Identificatori dei cookie (vedere la nostra Cookie
-                        Policy)
-                    </li>
-                </ul>
-
-                <h2>3. Base Giuridica del Trattamento</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Finalità</th>
-                            <th>Base giuridica (art. GDPR)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                Creazione dell'account e accesso alla
-                                piattaforma
-                            </td>
-                            <td>Art. 6(1)(b) — Esecuzione del contratto</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Conformità degli autisti e verifica dei
-                                documenti
-                            </td>
-                            <td>
-                                Art. 6(1)(c) — Obbligo legale; Art. 6(1)(b) —
-                                Contratto
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Elaborazione dei pagamenti e dei bonifici</td>
-                            <td>Art. 6(1)(b) — Esecuzione del contratto</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Sicurezza e localizzazione in caso di emergenza
-                                SOS
-                            </td>
-                            <td>
-                                Art. 6(1)(d) — Interessi vitali; Art. 6(1)(f) —
-                                Legittimo interesse
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Analisi e miglioramento della piattaforma</td>
-                            <td>Art. 6(1)(f) — Legittimo interesse</td>
-                        </tr>
-                        <tr>
-                            <td>Comunicazioni di marketing</td>
-                            <td>Art. 6(1)(a) — Consenso</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Risoluzione delle controversie e prevenzione
-                                delle frodi
-                            </td>
-                            <td>Art. 6(1)(f) — Legittimo interesse</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Adempimento degli obblighi fiscali e finanziari
-                            </td>
-                            <td>Art. 6(1)(c) — Obbligo legale</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h2>4. Modalità di Utilizzo dei Dati</h2>
-                <ul>
-                    <li>
-                        Per gestire il marketplace e abbinare autisti e
-                        passeggeri
-                    </li>
-                    <li>
-                        Per verificare l'idoneità degli autisti e la conformità
-                        documentale secondo la normativa locale
-                    </li>
-                    <li>
-                        Per elaborare i pagamenti e trasferire i guadagni agli
-                        autisti tramite Stripe Connect
-                    </li>
-                    <li>
-                        Per fornire routing in tempo reale, calcolo dell'ETA e
-                        stime delle tariffe
-                    </li>
-                    <li>
-                        Per inviare comunicazioni transazionali (conferme di
-                        prenotazione, ricevute, codici OTP)
-                    </li>
-                    <li>
-                        Per gestire gli incidenti di sicurezza, gli allarmi SOS
-                        e i contatti di emergenza
-                    </li>
-                    <li>Per rilevare e prevenire frodi e abusi</li>
-                    <li>
-                        Per adempiere agli obblighi di rendicontazione fiscale
-                        (D.Lgs. 241/97; DAC7 UE)
-                    </li>
-                    <li>
-                        Per migliorare la piattaforma attraverso analisi
-                        aggregate e anonimizzate
-                    </li>
-                    <li>
-                        Per inviare aggiornamenti di marketing dove hai fornito
-                        il consenso esplicito
-                    </li>
-                </ul>
-
-                <h2>5. Conservazione dei Dati</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Categoria di dati</th>
-                            <th>Periodo di conservazione</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Dati dell'account (utenti attivi)</td>
-                            <td>Durata dell'account + 2 anni</td>
-                        </tr>
-                        <tr>
-                            <td>Coordinate GPS delle corse</td>
-                            <td>90 giorni, poi azzeramento</td>
-                        </tr>
-                        <tr>
-                            <td>Registrazioni delle corse (metadati)</td>
-                            <td>7 anni (normativa fiscale italiana)</td>
-                        </tr>
-                        <tr>
-                            <td>Documenti degli autisti</td>
-                            <td>Durata del contratto + 5 anni</td>
-                        </tr>
-                        <tr>
-                            <td>Esiti dei controlli precedenti</td>
-                            <td>Riepilogo decisionale conservato per 3 anni</td>
-                        </tr>
-                        <tr>
-                            <td>Registrazioni dei pagamenti</td>
-                            <td>10 anni (normativa contabile UE)</td>
-                        </tr>
-                        <tr>
-                            <td>Ticket di assistenza</td>
-                            <td>3 anni dalla chiusura</td>
-                        </tr>
-                        <tr>
-                            <td>Registrazioni del consenso marketing</td>
-                            <td>Fino alla revoca del consenso + 1 anno</td>
-                        </tr>
-                        <tr>
-                            <td>Account eliminati</td>
-                            <td>
-                                Anonimizzati immediatamente all'eliminazione
-                                (art. 17 GDPR)
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h2>6. Comunicazione dei Dati e Terze Parti</h2>
-                <p>
-                    Non vendiamo i tuoi dati personali. Li condividiamo
-                    esclusivamente con:
-                </p>
-                <ul>
-                    <li>
-                        <strong>Stripe</strong> — Elaborazione dei pagamenti e
-                        bonifici agli autisti (residenza dati UE)
-                    </li>
-                    <li>
-                        <strong>TomTom</strong> — Routing e tiles cartografiche
-                        (coordinate anonimizzate)
-                    </li>
-                    <li>
-                        <strong>fastgeo.net</strong> — Geocodifica degli
-                        indirizzi (servizio interno ospitato nell'UE)
-                    </li>
-                    <li>
-                        <strong>Checkr</strong> — Controlli precedenti per
-                        l'onboarding degli autisti (società USA, si applicano le
-                        SCC)
-                    </li>
-                    <li>
-                        <strong>Twilio / Vonage</strong> — Consegna di SMS per
-                        OTP e notifiche
-                    </li>
-                    <li>
-                        <strong>Firebase (Google)</strong> — Consegna delle
-                        notifiche push
-                    </li>
-                    <li>
-                        <strong>OneSignal</strong> — Gestione delle notifiche
-                        push
-                    </li>
-                    <li>
-                        <strong>Postmark</strong> — Consegna di e-mail
-                        transazionali
-                    </li>
-                    <li>
-                        <strong>Autorità competenti</strong> — Quando richiesto
-                        dalla legge (forze dell'ordine, autorità fiscali,
-                        autorità di regolamentazione)
-                    </li>
-                </ul>
-                <p>
-                    Tutti i responsabili del trattamento di terze parti sono
-                    vincolati da Accordi sul Trattamento dei Dati (DPA) conformi
-                    all'art. 28 GDPR. Per i trasferimenti al di fuori del SEE,
-                    sono in vigore adeguate garanzie (Clausole Contrattuali
-                    Standard o decisioni di adeguatezza).
-                </p>
-
-                <h2>7. I Tuoi Diritti ai Sensi del GDPR</h2>
-                <p>
-                    In qualità di interessato nell'UE/SEE, hai i seguenti
-                    diritti:
-                </p>
-                <ul>
-                    <li>
-                        <strong>Diritto di accesso (art. 15)</strong> —
-                        Richiedere una copia di tutti i dati personali che
-                        conserviamo su di te
-                    </li>
-                    <li>
-                        <strong>Diritto di rettifica (art. 16)</strong> —
-                        Correggere dati inesatti o incompleti
-                    </li>
-                    <li>
-                        <strong
-                            >Diritto alla cancellazione / "Diritto all'oblio"
-                            (art. 17)</strong
-                        >
-                        — Richiedere la cancellazione dei tuoi dati (salvo
-                        obblighi legali di conservazione)
-                    </li>
-                    <li>
-                        <strong
-                            >Diritto alla limitazione del trattamento (art.
-                            18)</strong
-                        >
-                        — Limitare le modalità di utilizzo dei tuoi dati in
-                        determinate circostanze
-                    </li>
-                    <li>
-                        <strong
-                            >Diritto alla portabilità dei dati (art. 20)</strong
-                        >
-                        — Ricevere i tuoi dati in un formato strutturato e
-                        leggibile da dispositivo automatico. Utilizza
-                        <code>GET /api/user/export-data</code> nell'app
-                        Thepillion.
-                    </li>
-                    <li>
-                        <strong>Diritto di opposizione (art. 21)</strong> —
-                        Opporti al trattamento basato su legittimo interesse,
-                        incluso il marketing diretto
-                    </li>
-                    <li>
-                        <strong
-                            >Diritto di revocare il consenso (art. 7(3))</strong
-                        >
-                        — Revocare il consenso al marketing in qualsiasi momento
-                        senza che ciò pregiudichi la liceità del trattamento
-                        precedente
-                    </li>
-                    <li>
-                        <strong
-                            >Diritto di non essere sottoposto a decisioni
-                            automatizzate (art. 22)</strong
-                        >
-                        — Richiedere la revisione umana delle decisioni
-                        automatizzate di conformità
-                    </li>
-                </ul>
-                <p>
-                    Per esercitare uno qualsiasi di questi diritti, scrivi a
-                    <a href="mailto:privacy@thepillion.com"
-                        >privacy@thepillion.com</a
-                    >. Rispondiamo entro 30 giorni. Hai inoltre il diritto di
-                    proporre reclamo all'autorità di controllo nazionale (in
-                    Italia:
-                    <a
-                        href="https://www.garanteprivacy.it"
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        >Garante per la protezione dei dati personali</a
-                    >).
-                </p>
-
-                <h2>8. Misure di Sicurezza</h2>
-                <p>
-                    Adottiamo misure tecniche e organizzative adeguate, tra cui:
-                </p>
-                <ul>
-                    <li>
-                        Cifratura TLS 1.3 in transito per tutte le comunicazioni
-                        API e web
-                    </li>
-                    <li>Cifratura AES-256 a riposo per i dati sensibili</li>
-                    <li>
-                        Hashing bcrypt delle password (fattore di costo 12+)
-                    </li>
-                    <li>
-                        Controllo degli accessi basato sui ruoli (RBAC) per i
-                        sistemi interni
-                    </li>
-                    <li>
-                        Audit periodici delle dipendenze e test di penetrazione
-                    </li>
-                    <li>Eliminazione automatica dei dati GPS dopo 90 giorni</li>
-                    <li>
-                        Anonimizzazione conforme al GDPR alla cancellazione
-                        dell'account
-                    </li>
-                </ul>
-
-                <h2>9. Cookie</h2>
-                <p>
-                    Utilizziamo cookie e tecnologie simili sul nostro sito web.
-                    Per informazioni complete, consulta la nostra
-                    <a href="/it/cookie-policy">Cookie Policy</a>.
-                </p>
-
-                <h2>10. Dati dei Minori</h2>
-                <p>
-                    La nostra piattaforma non è rivolta a persone di età
-                    inferiore ai 18 anni. Non raccogliamo consapevolmente dati
-                    personali di minori. Qualora venissimo a conoscenza della
-                    registrazione di un minore, elimineremo immediatamente
-                    l'account e i dati associati. Contattaci all'indirizzo
-                    <a href="mailto:privacy@thepillion.com"
-                        >privacy@thepillion.com</a
-                    >
-                    per segnalare tali casi.
-                </p>
-
-                <h2>11. Modifiche alla Presente Informativa</h2>
-                <p>
-                    Potremmo aggiornare la presente Informativa sulla Privacy
-                    per riflettere cambiamenti nelle nostre pratiche o nei
-                    requisiti legali. Le modifiche sostanziali verranno
-                    comunicate via e-mail o tramite notifica in-app con un
-                    preavviso di almeno 30 giorni prima della loro entrata in
-                    vigore. La data di "Ultimo aggiornamento" in cima a questa
-                    pagina indica la revisione più recente.
-                </p>
-
-                <h2>12. Contatti</h2>
-                <p>Per qualsiasi richiesta relativa alla privacy:</p>
-            </div>
-        </div>
+    <section>
+        <h2>2. Quali dati raccogliamo</h2>
+        <h3>2.1 Dati dell&rsquo;account</h3>
+        <ul>
+            <li>Nome e cognome, indirizzo email, numero di telefono</li>
+            <li>Credenziali di autenticazione (gestite dal fornitore di identit&agrave;; le password non sono mai memorizzate in chiaro)</li>
+            <li>Foto del profilo (facoltativa)</li>
+            <li>Data di nascita (necessaria per l&rsquo;idoneit&agrave; del conducente e la verifica dell&rsquo;et&agrave;)</li>
+            <li>Lingua e impostazioni locali preferite</li>
+        </ul>
+        <h3>2.2 Dati di onboarding del conducente</h3>
+        <ul>
+            <li>Documenti di identit&agrave; rilasciati da enti pubblici (carta d&rsquo;identit&agrave;, passaporto, patente)</li>
+            <li>Libretto di circolazione e certificati assicurativi</li>
+            <li>Licenze professionali per il trasporto ove richieste dalla normativa locale</li>
+            <li>Esiti delle verifiche di idoneit&agrave; (sintesi della decisione, non il fascicolo completo)</li>
+            <li>Coordinate bancarie per i pagamenti (gestite dal fornitore di pagamenti, non sui nostri server)</li>
+        </ul>
+        <h3>2.3 Dati di corsa e di geolocalizzazione</h3>
+        <ul>
+            <li>Luoghi di partenza e arrivo e indirizzi geocodificati</li>
+            <li>Coordinate GPS del percorso durante la corsa attiva</li>
+            <li>Orari, durata, distanza, tariffa e stato della corsa</li>
+            <li>Codici di verifica monouso per il ritiro (eliminati dopo l&rsquo;uso)</li>
+        </ul>
+        <h3>2.4 Dati di pagamento</h3>
+        <p>
+            I pagamenti sono gestiti dal nostro fornitore di servizi di pagamento. Conserviamo solo un riferimento cliente, il
+            riferimento dell&rsquo;operazione e lo stato della transazione. I numeri completi delle carte e le credenziali
+            bancarie non sono mai memorizzati sulla nostra infrastruttura.
+        </p>
+        <h3>2.5 Comunicazioni e dati tecnici</h3>
+        <ul>
+            <li>Messaggi in-app, ticket di assistenza e corrispondenza email</li>
+            <li>Token per le notifiche push e codici di verifica SMS (codici non conservati dopo l&rsquo;invio)</li>
+            <li>Indirizzo IP, modello del dispositivo, sistema operativo, versione dell&rsquo;app e identificativi di sessione</li>
+            <li>Log degli errori, report di crash e identificativi dei cookie (vedi la Cookie Policy)</li>
+        </ul>
     </section>
-    <div
-        class="not-prose mt-6 p-5 rounded-2xl bg-slate-50 border border-slate-100 text-sm text-slate-700 space-y-1.5"
-    >
-        <p class="font-semibold text-slate-900">The Thepillion</p>
-    </div>
 
-    <section class="section">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div
-                class="relative overflow-hidden rounded-[2.5rem] p-12 lg:p-20 bg-white border border-slate-100 text-slate-900"
-            >
-                <div class="absolute inset-0 bg-grid opacity-10"></div>
-                <div
-                    class="absolute -top-24 -right-24 w-96 h-96 bg-brand-500/20 rounded-full blur-3xl"
-                ></div>
-                <div
-                    class="absolute -bottom-24 -left-24 w-80 h-80 bg-accent-500/10 rounded-full blur-3xl"
-                ></div>
-                <div class="relative z-10 max-w-3xl">
-                    <p class="tag text-brand-600">Domande?</p>
-                    <h2
-                        class="font-display text-4xl lg:text-6xl font-bold mt-4 leading-tight"
-                    >
-                        Siamo qui per aiutarti con i tuoi diritti sui dati.
-                    </h2>
-                    <p
-                        class="text-lg mt-6 text-slate-600 max-w-xl leading-relaxed"
-                    >
-                        Contatta il nostro team per la privacy e risponderemo
-                        entro 30 giorni come previsto dal GDPR.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 mt-10">
-                        <a
-                            href="mailto:privacy@thepillion.com"
-                            class="btn btn-primary"
-                        >
-                            Scrivi a privacy@thepillion.com
-                        </a>
-                        <a href="/it/contact-form" class="btn btn-ghost">
-                            Esporta i miei dati
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section>
+        <h2>3. Base giuridica del trattamento</h2>
+        <table>
+            <thead>
+                <tr><th>Finalit&agrave;</th><th>Base giuridica (art. 6 GDPR)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Creazione account e accesso alla piattaforma</td><td>Art. 6(1)(b) — esecuzione di un contratto</td></tr>
+                <tr><td>Idoneit&agrave; del conducente e verifica documenti</td><td>Art. 6(1)(c) obbligo legale; Art. 6(1)(b) contratto</td></tr>
+                <tr><td>Pagamenti e accrediti</td><td>Art. 6(1)(b) — esecuzione di un contratto</td></tr>
+                <tr><td>Sicurezza, SOS ed emergenze</td><td>Art. 6(1)(d) interessi vitali; Art. 6(1)(f) legittimo interesse</td></tr>
+                <tr><td>Prevenzione frodi e sicurezza della piattaforma</td><td>Art. 6(1)(f) — legittimo interesse</td></tr>
+                <tr><td>Comunicazioni di marketing</td><td>Art. 6(1)(a) — consenso</td></tr>
+                <tr><td>Adempimenti fiscali e contabili</td><td>Art. 6(1)(c) — obbligo legale</td></tr>
+            </tbody>
+        </table>
     </section>
-</main>
+
+    <section>
+        <h2>4. Conservazione dei dati</h2>
+        <table>
+            <thead>
+                <tr><th>Categoria</th><th>Conservazione</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Dati account (utenti attivi)</td><td>Durata dell&rsquo;account, poi anonimizzati</td></tr>
+                <tr><td>Coordinate GPS delle corse</td><td>Cancellate o azzerate entro 30 giorni dal termine della corsa</td></tr>
+                <tr><td>Dati delle corse (metadati)</td><td>Fino a 10 anni (normativa fiscale e contabile)</td></tr>
+                <tr><td>Documenti del conducente</td><td>Durata del contratto pi&ugrave; il periodo previsto per legge</td></tr>
+                <tr><td>Dati di pagamento</td><td>Fino a 10 anni (norme contabili UE)</td></tr>
+                <tr><td>Casi di assistenza e contestazioni</td><td>Fino a 3 anni dalla chiusura</td></tr>
+                <tr><td>Registrazioni del consenso marketing</td><td>Fino alla revoca, pi&ugrave; un periodo di accountability</td></tr>
+                <tr><td>Account cancellati</td><td>Anonimizzati alla cancellazione (art. 17); dati conservati ove obbligatorio</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>5. Destinatari e terze parti</h2>
+        <p>Non vendiamo i tuoi dati personali. Li condividiamo solo con responsabili del trattamento che agiscono su nostre
+            istruzioni, tra cui fornitori di identit&agrave;, pagamenti, mappe e routing, invio di SMS e notifiche push, hosting e
+            verifiche sui conducenti, nonch&eacute; con le autorit&agrave; competenti ove richiesto dalla legge. I responsabili e
+            sub-responsabili attivi sono pubblicati nel nostro registro dei sub-responsabili. Tutti i responsabili sono vincolati
+            da accordi ai sensi dell&rsquo;art. 28; i trasferimenti extra-SEE si basano su decisioni di adeguatezza o Clausole
+            Contrattuali Tipo.</p>
+    </section>
+
+    <section>
+        <h2>6. I tuoi diritti</h2>
+        <p>Hai diritto di accesso, rettifica, cancellazione, limitazione, portabilit&agrave;, opposizione e revoca del consenso, e
+            il diritto di non essere sottoposto a decisioni automatizzate con effetti giuridici o significativi. Le modalit&agrave;
+            di esercizio sono indicate nella nostra informativa dedicata <em>I tuoi diritti sui dati</em>. Per una richiesta scrivi
+            a <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Rispondiamo entro un mese.</p>
+        <p>Puoi proporre reclamo al {{supervisory_authority}} (<a href="{{supervisory_authority_url}}" rel="noopener noreferrer" target="_blank">{{supervisory_authority_url}}</a>) o all&rsquo;autorit&agrave; di controllo della tua residenza abituale.</p>
+    </section>
+
+    <section>
+        <h2>7. Sicurezza</h2>
+        <p>Adottiamo misure tecniche e organizzative adeguate, tra cui cifratura in transito e a riposo, hashing robusto delle
+            password, controllo degli accessi basato sui ruoli, log di audit, accesso ai servizi con privilegi minimi e
+            cancellazione programmata dei dati di geolocalizzazione. In caso di violazione che comporti un rischio per i tuoi
+            diritti, notifichiamo l&rsquo;autorit&agrave; di controllo entro 72 ore e gli interessati senza ingiustificato ritardo
+            (artt. 33-34).</p>
+    </section>
+
+    <section>
+        <h2>8. Minori</h2>
+        <p>La piattaforma non &egrave; destinata a persone di et&agrave; inferiore a 18 anni. Non raccogliamo consapevolmente dati
+            di minori e li cancelleremo qualora ne veniamo a conoscenza.</p>
+    </section>
+
+    <section>
+        <h2>9. Modifiche</h2>
+        <p>Possiamo aggiornare la presente informativa per riflettere modifiche delle nostre pratiche o di legge. Le modifiche
+            sostanziali sono comunicate in anticipo via email o avviso in-app. La data di &laquo;Ultimo aggiornamento&raquo; indica
+            la revisione corrente.</p>
+    </section>
+
+    <section>
+        <h2>10. Contatti</h2>
+        <p>Richieste privacy: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> · Responsabile della Protezione dei Dati:
+            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>.</p>
+    </section>
+</article>

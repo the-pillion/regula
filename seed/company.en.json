@@ -1,0 +1,5 @@
+{
+  "_instructions": "English-language overrides for company.base.json. Only put values here that must read differently in English than the neutral facts. Hard identifiers (VAT, REA, address) stay in company.base.json.",
+  "legal_form": "S.r.l. (Italian limited liability company)",
+  "supervisory_authority": "Italian Data Protection Authority (Garante per la protezione dei dati personali)"
+}

@@ -1,0 +1,36 @@
+{
+  "_instructions": "Language-NEUTRAL legal entity facts. Fill these once. They are injected into every legal document at seed time via {{placeholder}} tokens. Language-specific labels (legal form wording, supervisory-authority descriptor) live in company.<lang>.json and override the values here. Leave a field as an empty string until you have the official value; the seeder substitutes it as-is. Keys starting with _ are notes and are never substituted.",
+
+  "legal_name": "",
+  "brand_name": "Pillion",
+  "vat_number": "",
+  "tax_code": "",
+  "rea_number": "",
+  "share_capital": "",
+  "chamber_of_commerce": "Camera di Commercio di Bolzano",
+
+  "registered_street": "",
+  "registered_postal_code": "39100",
+  "registered_city": "Bolzano",
+  "registered_province": "BZ",
+  "registered_country": "Italy",
+  "registered_country_code": "IT",
+
+  "email_privacy": "privacy@thepillion.com",
+  "email_dpo": "dpo@thepillion.com",
+  "email_legal": "legal@thepillion.com",
+  "email_support": "support@thepillion.com",
+  "phone": "",
+  "website": "https://www.thepillion.com",
+
+  "dpo_name": "",
+  "dpo_address": "",
+
+  "supervisory_authority": "Garante per la protezione dei dati personali",
+  "supervisory_authority_url": "https://www.garanteprivacy.it",
+  "odr_url": "https://ec.europa.eu/consumers/odr",
+
+  "legal_form": "S.r.l. (Italian limited liability company)",
+  "last_updated": "2026-06-08",
+  "effective_date": "2026-06-08"
+}

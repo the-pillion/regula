@@ -8,12 +8,18 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
+	"sort"
 	"strings"
 	"time"
 
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/pillion/regula/internal/store"
 )
+
+var placeholderPattern = regexp.MustCompile(`\{\{\s*([a-zA-Z0-9_]+)\s*\}\}`)
+
+const companyBaseFile = "company.base.json"
 
 type Manifest struct {
 	Documents            []DocumentSeed           `json:"documents"`
@@ -202,12 +208,30 @@ func Apply(ctx context.Context, queries *store.Queries, manifestPath string) err
 		}
 	}
 
+	companyVarsByLocale := map[string]map[string]string{}
+
 	for _, document := range manifest.Documents {
 		contentPath := filepath.Join(baseDir, document.ContentPath)
 		contentBytes, err := os.ReadFile(contentPath)
 		if err != nil {
 			return fmt.Errorf("read seed content %s: %w", contentPath, err)
 		}
+
+		locale := strings.ToLower(strings.TrimSpace(document.Locale))
+		vars, ok := companyVarsByLocale[locale]
+		if !ok {
+			vars, err = loadCompanyVars(baseDir, locale)
+			if err != nil {
+				return fmt.Errorf("load company vars for %s: %w", document.Key, err)
+			}
+			companyVarsByLocale[locale] = vars
+		}
+
+		rendered, err := applyPlaceholders(string(contentBytes), vars)
+		if err != nil {
+			return fmt.Errorf("render %s: %w", document.ContentPath, err)
+		}
+		contentBytes = []byte(rendered)
 
 		doc, err := queries.UpsertDocument(ctx, store.UpsertDocumentParams{
 			Key:         normalizeKey(document.Key),
@@ -254,6 +278,75 @@ func LoadManifest(path string) (*Manifest, string, error) {
 	}
 
 	return &manifest, filepath.Dir(path), nil
+}
+
+// loadCompanyVars merges the language-neutral company.base.json with the
+// language overlay company.<lang>.json (the latter wins on conflict). The
+// language is the primary subtag of the document locale (it-IT -> it).
+func loadCompanyVars(baseDir, locale string) (map[string]string, error) {
+	vars := map[string]string{}
+
+	if err := mergeCompanyFile(filepath.Join(baseDir, companyBaseFile), vars, true); err != nil {
+		return nil, err
+	}
+
+	lang := strings.SplitN(strings.ToLower(strings.TrimSpace(locale)), "-", 2)[0]
+	if lang != "" {
+		overlay := filepath.Join(baseDir, fmt.Sprintf("company.%s.json", lang))
+		if err := mergeCompanyFile(overlay, vars, false); err != nil {
+			return nil, err
+		}
+	}
+
+	return vars, nil
+}
+
+func mergeCompanyFile(path string, into map[string]string, required bool) error {
+	bytes, err := os.ReadFile(path)
+	if err != nil {
+		if os.IsNotExist(err) && !required {
+			return nil
+		}
+		return fmt.Errorf("read company file %s: %w", path, err)
+	}
+
+	values := map[string]string{}
+	if err := json.Unmarshal(bytes, &values); err != nil {
+		return fmt.Errorf("parse company file %s (all values must be strings): %w", path, err)
+	}
+
+	for key, value := range values {
+		into[key] = value
+	}
+	return nil
+}
+
+// applyPlaceholders substitutes every {{ key }} token with its company value.
+// It fails loud on an unknown key (typo guard) so a malformed legal document
+// can never be seeded silently. A declared-but-empty value is allowed: that is
+// the fillable-template state before official figures are entered.
+func applyPlaceholders(content string, vars map[string]string) (string, error) {
+	missing := map[string]struct{}{}
+
+	rendered := placeholderPattern.ReplaceAllStringFunc(content, func(token string) string {
+		key := placeholderPattern.FindStringSubmatch(token)[1]
+		if value, ok := vars[key]; ok {
+			return value
+		}
+		missing[key] = struct{}{}
+		return token
+	})
+
+	if len(missing) > 0 {
+		keys := make([]string, 0, len(missing))
+		for key := range missing {
+			keys = append(keys, key)
+		}
+		sort.Strings(keys)
+		return "", fmt.Errorf("unknown placeholders (not defined in company.*.json): %s", strings.Join(keys, ", "))
+	}
+
+	return rendered, nil
 }
 
 func parseTime(value string) (time.Time, error) {

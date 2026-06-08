@@ -4,157 +4,196 @@
       "key": "privacy-policy",
       "display_name": "Privacy Policy",
       "category": "legal",
-      "version": "2026-03-29-public-site",
+      "version": "2026-06-08-launch",
       "locale": "en",
       "audience": "all",
       "content_type": "html",
       "content_path": "legal_documents/privacy-policy.en.html",
       "is_published": true,
-      "effective_from": "2026-03-29T00:00:00Z",
-      "created_by": "seed:public-site"
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
     },
     {
       "key": "privacy-policy",
       "display_name": "Privacy Policy",
       "category": "legal",
-      "version": "2026-03-29-public-site",
+      "version": "2026-06-08-launch",
       "locale": "it",
       "audience": "all",
       "content_type": "html",
       "content_path": "legal_documents/privacy-policy.it.html",
       "is_published": true,
-      "effective_from": "2026-03-29T00:00:00Z",
-      "created_by": "seed:public-site"
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
     },
     {
       "key": "privacy-policy",
       "display_name": "Privacy Policy",
       "category": "legal",
-      "version": "2026-03-29-public-site",
+      "version": "2026-06-08-launch",
       "locale": "de",
       "audience": "all",
       "content_type": "html",
       "content_path": "legal_documents/privacy-policy.de.html",
       "is_published": true,
-      "effective_from": "2026-03-29T00:00:00Z",
-      "created_by": "seed:public-site"
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
     },
     {
       "key": "terms-of-service",
       "display_name": "Terms of Service",
       "category": "legal",
-      "version": "2026-03-29-public-site",
+      "version": "2026-06-08-launch",
       "locale": "en",
       "audience": "all",
       "content_type": "html",
       "content_path": "legal_documents/terms-of-service.en.html",
       "is_published": true,
-      "effective_from": "2026-03-29T00:00:00Z",
-      "created_by": "seed:public-site"
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
     },
     {
       "key": "terms-of-service",
       "display_name": "Terms of Service",
       "category": "legal",
-      "version": "2026-03-29-public-site",
+      "version": "2026-06-08-launch",
       "locale": "it",
       "audience": "all",
       "content_type": "html",
       "content_path": "legal_documents/terms-of-service.it.html",
       "is_published": true,
-      "effective_from": "2026-03-29T00:00:00Z",
-      "created_by": "seed:public-site"
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
     },
     {
       "key": "terms-of-service",
       "display_name": "Terms of Service",
       "category": "legal",
-      "version": "2026-03-29-public-site",
+      "version": "2026-06-08-launch",
       "locale": "de",
       "audience": "all",
       "content_type": "html",
       "content_path": "legal_documents/terms-of-service.de.html",
       "is_published": true,
-      "effective_from": "2026-03-29T00:00:00Z",
-      "created_by": "seed:public-site"
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
     },
     {
       "key": "cookie-policy",
       "display_name": "Cookie Policy",
       "category": "legal",
-      "version": "2026-03-29-public-site",
+      "version": "2026-06-08-launch",
       "locale": "en",
       "audience": "all",
       "content_type": "html",
       "content_path": "legal_documents/cookie-policy.en.html",
       "is_published": true,
-      "effective_from": "2026-03-29T00:00:00Z",
-      "created_by": "seed:public-site"
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
     },
     {
       "key": "cookie-policy",
       "display_name": "Cookie Policy",
       "category": "legal",
-      "version": "2026-03-29-public-site",
+      "version": "2026-06-08-launch",
       "locale": "it",
       "audience": "all",
       "content_type": "html",
       "content_path": "legal_documents/cookie-policy.it.html",
       "is_published": true,
-      "effective_from": "2026-03-29T00:00:00Z",
-      "created_by": "seed:public-site"
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
     },
     {
       "key": "cookie-policy",
       "display_name": "Cookie Policy",
       "category": "legal",
-      "version": "2026-03-29-public-site",
+      "version": "2026-06-08-launch",
       "locale": "de",
       "audience": "all",
       "content_type": "html",
       "content_path": "legal_documents/cookie-policy.de.html",
       "is_published": true,
-      "effective_from": "2026-03-29T00:00:00Z",
-      "created_by": "seed:public-site"
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
     },
     {
       "key": "impressum",
-      "display_name": "Impressum / Colofono",
+      "display_name": "Impressum / Legal Notice",
       "category": "legal",
-      "version": "2026-03-29-public-site",
+      "version": "2026-06-08-launch",
       "locale": "en",
       "audience": "all",
       "content_type": "html",
       "content_path": "legal_documents/impressum.en.html",
       "is_published": true,
-      "effective_from": "2026-03-29T00:00:00Z",
-      "created_by": "seed:public-site"
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
     },
     {
       "key": "impressum",
-      "display_name": "Impressum / Colofono",
+      "display_name": "Impressum / Legal Notice",
       "category": "legal",
-      "version": "2026-03-29-public-site",
+      "version": "2026-06-08-launch",
       "locale": "it",
       "audience": "all",
       "content_type": "html",
       "content_path": "legal_documents/impressum.it.html",
       "is_published": true,
-      "effective_from": "2026-03-29T00:00:00Z",
-      "created_by": "seed:public-site"
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
     },
     {
       "key": "impressum",
-      "display_name": "Impressum / Colofono",
+      "display_name": "Impressum / Legal Notice",
       "category": "legal",
-      "version": "2026-03-29-public-site",
+      "version": "2026-06-08-launch",
       "locale": "de",
       "audience": "all",
       "content_type": "html",
       "content_path": "legal_documents/impressum.de.html",
       "is_published": true,
-      "effective_from": "2026-03-29T00:00:00Z",
-      "created_by": "seed:public-site"
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
+    },
+    {
+      "key": "gdpr-rights",
+      "display_name": "Your Data Protection Rights",
+      "category": "legal",
+      "version": "2026-06-08-launch",
+      "locale": "en",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/gdpr-rights.en.html",
+      "is_published": true,
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
+    },
+    {
+      "key": "gdpr-rights",
+      "display_name": "Your Data Protection Rights",
+      "category": "legal",
+      "version": "2026-06-08-launch",
+      "locale": "it",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/gdpr-rights.it.html",
+      "is_published": true,
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
+    },
+    {
+      "key": "gdpr-rights",
+      "display_name": "Your Data Protection Rights",
+      "category": "legal",
+      "version": "2026-06-08-launch",
+      "locale": "de",
+      "audience": "all",
+      "content_type": "html",
+      "content_path": "legal_documents/gdpr-rights.de.html",
+      "is_published": true,
+      "effective_from": "2026-06-08T00:00:00Z",
+      "created_by": "seed:legal-refresh"
     }
   ],
   "consent_purposes": [
@@ -197,7 +236,31 @@
       "data_location": "EU / Stripe-managed regions",
       "transfer_mechanism": "Provider SCCs / DPA where applicable",
       "dpa_status": "pending",
-      "notes": "Stores charge, payout, and financial operations data."
+      "notes": "Stores charge, payout, and financial operations data. Default payment provider (provider-agnostic interface)."
+    },
+    {
+      "key": "fastgeo",
+      "display_name": "FastGeo",
+      "relationship_type": "processor",
+      "service_area": "Geocoding, reverse geocoding, and routing",
+      "website_url": "https://fastgeo.net",
+      "primary_country": "Italy",
+      "data_location": "EU-hosted",
+      "transfer_mechanism": "Intra-EEA; no third-country transfer",
+      "dpa_status": "pending",
+      "notes": "Primary geo/routing provider (affiliated SaaS). Processes pickup/drop-off addresses and route requests."
+    },
+    {
+      "key": "tomtom",
+      "display_name": "TomTom",
+      "relationship_type": "processor",
+      "service_area": "Routing fallback and map tiles",
+      "website_url": "https://www.tomtom.com",
+      "primary_country": "Netherlands",
+      "data_location": "EU / provider-managed regions",
+      "transfer_mechanism": "Intra-EEA; provider DPA review required",
+      "dpa_status": "pending",
+      "notes": "Configured fallback routing provider behind FastGeo."
     },
     {
       "key": "firebase",
@@ -209,7 +272,7 @@
       "data_location": "Google-managed regions",
       "transfer_mechanism": "Transfer assessment and Google contractual controls required",
       "dpa_status": "pending",
-      "notes": "Used for mobile push delivery."
+      "notes": "Used for mobile push delivery via the Herald notification service."
     },
     {
       "key": "twilio",
@@ -224,6 +287,18 @@
       "notes": "Used for transactional and safety SMS messaging."
     },
     {
+      "key": "checkr",
+      "display_name": "Checkr",
+      "relationship_type": "processor",
+      "service_area": "Driver background and eligibility checks",
+      "website_url": "https://checkr.com",
+      "primary_country": "United States",
+      "data_location": "Provider-managed regions",
+      "transfer_mechanism": "Standard Contractual Clauses (SCCs) required",
+      "dpa_status": "pending",
+      "notes": "Background-check provider. Being superseded for new work by the internal PrefactGuard trust-and-safety service."
+    },
+    {
       "key": "neon",
       "display_name": "Neon",
       "relationship_type": "subprocessor",
@@ -236,19 +311,30 @@
       "notes": "Managed database hosting for Regula."
     },
     {
-      "key": "cloudflare-r2",
-      "display_name": "Cloudflare R2",
+      "key": "cloudflare",
+      "display_name": "Cloudflare",
       "relationship_type": "subprocessor",
-      "service_area": "Object storage for future evidence bundles",
-      "website_url": "https://www.cloudflare.com/developer-platform/r2/",
+      "service_area": "Edge workers, CDN, and object storage (R2)",
+      "website_url": "https://www.cloudflare.com",
       "primary_country": "United States",
       "data_location": "Provider-managed regions",
       "transfer_mechanism": "Provider contractual controls and storage review required",
       "dpa_status": "pending",
-      "notes": "Optional future storage target for exported compliance evidence bundles."
+      "notes": "Hosts the public dashboard worker and CDN; R2 is the planned storage target for exported compliance evidence bundles."
     }
   ],
   "retention_policies": [
+    {
+      "key": "account-data",
+      "display_name": "Account data",
+      "data_category": "identity",
+      "description": "User profile, contact, and account-state records for active users.",
+      "trigger_event": "Account closure or erasure request",
+      "storage_scope": "Monolith user store and identity provider",
+      "deletion_method": "Anonymise on erasure; retain only legally required records",
+      "legal_basis": "Contract and accountability",
+      "notes": "Profile retained for the lifetime of the account, then anonymised per the Article 17 erasure saga."
+    },
     {
       "key": "legal-document-history",
       "display_name": "Legal document history",
@@ -302,9 +388,33 @@
       "retention_days": 30,
       "trigger_event": "Trip completion",
       "storage_scope": "Compass and monolith location stores",
-      "deletion_method": "Automated purge job",
+      "deletion_method": "Automated purge job (privacy:purge-old-locations)",
       "legal_basis": "Service delivery and safety",
       "notes": "Short retention strongly preferred unless incident evidence requires extension."
+    },
+    {
+      "key": "ride-records",
+      "display_name": "Ride records (metadata)",
+      "data_category": "transaction",
+      "description": "Trip metadata: timestamps, distance, fare, status (location coordinates excluded).",
+      "retention_days": 3650,
+      "trigger_event": "Trip completion",
+      "storage_scope": "Ride-matcher and monolith stores",
+      "deletion_method": "Delete/anonymise after the accounting and tax retention window",
+      "legal_basis": "Legal obligation (tax and accounting) and legal defense",
+      "notes": "Coordinates are purged separately on the 30-day cycle; metadata follows tax retention."
+    },
+    {
+      "key": "payment-records",
+      "display_name": "Payment and payout records",
+      "data_category": "financial",
+      "description": "Charge, capture, payout, refund, and reconciliation records.",
+      "retention_days": 3650,
+      "trigger_event": "Transaction completion",
+      "storage_scope": "Monolith payment tables and processor",
+      "deletion_method": "Retain for the statutory accounting period, then delete",
+      "legal_basis": "Legal obligation (EU accounting rules)",
+      "notes": "amount_cents and reconciliation evidence kept pristine for the full window."
     },
     {
       "key": "support-and-refunds",
@@ -317,6 +427,17 @@
       "deletion_method": "Delete/anonymize after retention period",
       "legal_basis": "Contract, legal defense, and fraud handling",
       "notes": "Longer retention may be justified for chargeback defense."
+    },
+    {
+      "key": "marketing-consent",
+      "display_name": "Marketing consent records",
+      "data_category": "consent",
+      "description": "Consent state and history for marketing channels.",
+      "trigger_event": "Consent withdrawal",
+      "storage_scope": "Regula consent ledger",
+      "deletion_method": "Retain until withdrawal plus a short accountability period, then archive",
+      "legal_basis": "Consent and accountability",
+      "notes": "Append-only; each change is a new event row."
     },
     {
       "key": "backups",
@@ -353,9 +474,9 @@
       "legal_basis": "Contract and legitimate interests",
       "data_subject_categories": "Passengers and drivers",
       "personal_data_categories": "Location data, trip metadata, route history, driver status, passenger pickup/drop-off data",
-      "recipient_categories": "Compass, drivers, passengers, safety/support staff",
+      "recipient_categories": "Compass, FastGeo, TomTom, drivers, passengers, safety/support staff",
       "transfer_notes": "Geolocation requires DPIA review and strict retention limits.",
-      "retention_summary": "Live tracking retained briefly; trip records retained according to service, safety, and dispute policy.",
+      "retention_summary": "Live tracking retained briefly (30 days); trip metadata retained per accounting and dispute policy.",
       "security_measures": "Short-lived tracking tokens, internal service auth, limited retention, operational access controls",
       "owner": "Operations / Engineering",
       "is_active": true
@@ -369,7 +490,7 @@
       "personal_data_categories": "Payment references, payout status, transaction metadata, refund evidence",
       "recipient_categories": "Stripe, finance/admin staff, support staff",
       "transfer_notes": "Vendor and transfer position must align with finance and processor review.",
-      "retention_summary": "Retain according to accounting, refund, and legal defense requirements.",
+      "retention_summary": "Retain according to accounting, refund, and legal defense requirements (up to 10 years).",
       "security_measures": "Processor isolation, webhook verification, least-privilege finance access, audit trails",
       "owner": "Finance / Engineering",
       "is_active": true
@@ -381,11 +502,67 @@
       "legal_basis": "Contract, legal obligation, and legitimate interests",
       "data_subject_categories": "Drivers and driver applicants",
       "personal_data_categories": "Identity documents, licensing data, qualification records, screening outcomes, notes",
-      "recipient_categories": "Checkr, compliance/admin staff, support staff",
-      "transfer_notes": "High-risk data category requiring DPIA review and vendor controls.",
+      "recipient_categories": "Checkr, PrefactGuard, compliance/admin staff, support staff",
+      "transfer_notes": "High-risk data category requiring DPIA review and vendor controls; Checkr transfers rely on SCCs.",
       "retention_summary": "Retain according to legal/regulatory obligations and approved retention policy.",
       "security_measures": "Restricted admin access, document verification workflow, status audit trail, encrypted storage",
       "owner": "Compliance / Operations",
+      "is_active": true
+    },
+    {
+      "key": "safety-sos-and-emergency-response",
+      "display_name": "Safety, SOS, and emergency response",
+      "purpose": "Handle SOS alerts, share live location with emergency contacts, and support incident response during trips.",
+      "legal_basis": "Vital interests and legitimate interests",
+      "data_subject_categories": "Passengers, drivers, nominated emergency contacts",
+      "personal_data_categories": "Real-time location, emergency contact details, incident metadata, safety-checklist responses",
+      "recipient_categories": "Safety/support staff, emergency contacts, SMS provider, competent authorities where required",
+      "transfer_notes": "Minimise data shared; share only what an emergency requires.",
+      "retention_summary": "Retain incident evidence for the dispute/legal window; otherwise follow location retention.",
+      "security_measures": "Restricted access, audit logging, encrypted transport, least-data sharing",
+      "owner": "Safety / Operations",
+      "is_active": true
+    },
+    {
+      "key": "customer-support-and-dispute-resolution",
+      "display_name": "Customer support and dispute resolution",
+      "purpose": "Respond to user enquiries, resolve disputes, process refunds, and handle chargebacks.",
+      "legal_basis": "Contract, legal obligation, and legitimate interests",
+      "data_subject_categories": "Passengers and drivers",
+      "personal_data_categories": "Contact details, ticket content, trip and payment references, correspondence",
+      "recipient_categories": "Support/admin staff, payment processor (for chargebacks)",
+      "transfer_notes": "Keep tooling within reviewed vendors; limit access to handling staff.",
+      "retention_summary": "Up to 3 years from case closure; longer for chargeback defense.",
+      "security_measures": "Role-based access, audit trail, correlation IDs across systems",
+      "owner": "Support / Operations",
+      "is_active": true
+    },
+    {
+      "key": "transactional-and-marketing-communications",
+      "display_name": "Transactional and marketing communications",
+      "purpose": "Send service messages (bookings, receipts, OTP, lifecycle notices) and, with consent, marketing.",
+      "legal_basis": "Contract (transactional) and consent (marketing)",
+      "data_subject_categories": "Passengers and drivers",
+      "personal_data_categories": "Contact details, push tokens, communication preferences, consent state",
+      "recipient_categories": "Herald, Firebase, Twilio, email provider",
+      "transfer_notes": "Push/SMS providers are non-EEA; rely on SCCs and transfer assessments.",
+      "retention_summary": "Transactional logs per service need; marketing consent until withdrawn plus accountability period.",
+      "security_measures": "Consent enforcement, suppression lists, provider DPAs, append-only consent ledger",
+      "owner": "Growth / Engineering",
+      "is_active": true
+    },
+    {
+      "key": "fraud-prevention-and-platform-integrity",
+      "display_name": "Fraud prevention and platform integrity",
+      "purpose": "Detect and prevent fraud, abuse, and policy violations; protect users and the platform.",
+      "legal_basis": "Legitimate interests and legal obligation",
+      "data_subject_categories": "Passengers and drivers",
+      "personal_data_categories": "Trust signals, device and session data, trip/payment patterns, decision outcomes",
+      "recipient_categories": "PrefactGuard, trust-and-safety/admin staff",
+      "transfer_notes": "Internal trust service; review any external enrichment vendors before use.",
+      "retention_summary": "Retain decision evidence for the dispute/legal window.",
+      "security_measures": "Fail-closed eligibility checks, audited admin overrides, least-privilege access",
+      "owner": "Trust & Safety / Engineering",
       "is_active": true
     },
     {
@@ -401,6 +578,20 @@
       "security_measures": "Internal-only API, machine auth, audit logging, append-only event design",
       "owner": "Compliance / Engineering",
       "is_active": true
+    },
+    {
+      "key": "data-protection-governance",
+      "display_name": "Data protection governance (DPO function)",
+      "purpose": "Operate the data protection programme: handle data-subject requests, maintain the RoPA, run DPIAs, manage processors and breach response.",
+      "legal_basis": "Legal obligation (GDPR Art. 37-39) and accountability",
+      "data_subject_categories": "All data subjects (via requests and complaints)",
+      "personal_data_categories": "Request and complaint records, identity-verification evidence, breach records",
+      "recipient_categories": "Data Protection Officer, compliance staff, supervisory authority where required",
+      "transfer_notes": "Records kept internal; shared with the supervisory authority on request.",
+      "retention_summary": "Retain request and breach records for the accountability and limitation period.",
+      "security_measures": "Restricted access, audit logging, documented procedures, append-only ledgers",
+      "owner": "Data Protection Officer",
+      "is_active": true
     }
   ],
   "dpia_records": [
@@ -411,9 +602,21 @@
       "summary": "DPIA covering live trip tracking, driver monitoring, and background-check-related processing before launch.",
       "scope": "Compass tracking, monolith location handling, driver compliance workflows, screening processors, safety escalation flows",
       "risk_level": "high",
-      "mitigating_measures": "Minimize retention, restrict operational access, audit admin actions, verify vendor contracts, document lawful basis and necessity, and define incident response.",
-      "owner": "Privacy / Compliance",
+      "mitigating_measures": "Minimize retention (30-day location purge), restrict operational access, audit admin actions, verify vendor contracts, document lawful basis and necessity, and define incident response.",
+      "owner": "Data Protection Officer",
       "review_due_at": "2026-06-30T00:00:00Z",
+      "is_active": true
+    },
+    {
+      "key": "automated-eligibility-decisions",
+      "display_name": "Automated driver eligibility decisions DPIA",
+      "status": "draft",
+      "summary": "DPIA for automated and semi-automated evaluation of driver eligibility and trust signals (GDPR Art. 22).",
+      "scope": "PrefactGuard trust scoring, fail-closed eligibility gating, admin override path, onboarding decisioning",
+      "risk_level": "high",
+      "mitigating_measures": "Provide human review on request, log and audit overrides, document logic and significance, limit signal retention, and inform data subjects in the privacy and rights notices.",
+      "owner": "Data Protection Officer",
+      "review_due_at": "2026-07-31T00:00:00Z",
       "is_active": true
     }
   ]

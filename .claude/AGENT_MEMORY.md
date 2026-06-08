@@ -512,6 +512,13 @@ Regula stays narrow. That narrowness is why it can run reliably on a small VPS.
 
 **Content seeding (existing):**
 15. Seed Italian (`it-IT` + `it`) versions of the launch document set when legal text is ready (iubenda or lawyer output).
+
+**Legal-content refresh (done 2026-06-08):**
+- Rewrote all seeded legal bodies (`privacy-policy`, `terms-of-service`, `cookie-policy`, `impressum`) to **clean body-only HTML** (removed the Tailwind marketing chrome that violated the body-only rule) across `en`/`it`/`de`, version `2026-06-08-launch` (old `2026-03-29-public-site` rows preserved — append-only).
+- Added a new document key **`gdpr-rights`** (data-subject rights notice) en/it/de.
+- Introduced **legal-entity templating**: `seed/company.base.json` (neutral facts: P.IVA, REA, address, share capital, DPO, supervisory authority) + `seed/company.{en,it,de}.json` (localized overrides). `internal/seed/seed.go` merges base+lang per locale and substitutes `{{ key }}` tokens before storing; **fails loud on unknown placeholder**, allows declared-but-empty. Founder fills `company.base.json`, re-seeds. Tests added in `seed_test.go` (`TestApplyPlaceholders`, `TestLoadCompanyVars`, `TestSeedDocumentsRenderWithoutUnknownPlaceholders`).
+- Expanded accountability registers in `foundation.json`: processors (added fastgeo, tomtom, checkr; renamed cloudflare-r2 → cloudflare), retention policies (added account-data, ride-records, payment-records, marketing-consent), Article 30 RoPA (added safety/SOS, support/disputes, communications/marketing, fraud-prevention, **data-protection-governance = DPO function**), and DPIA (added automated-eligibility-decisions). DPO designation flows into docs via company JSON; no new DB table introduced.
+- **Founder action required before publishing:** fill the empty fields in `company.base.json` (legal_name, vat_number, tax_code, rea_number, share_capital, registered_street, phone, dpo_name) with official figures, then re-seed. Docs are seeded `is_published=true` but visibility still gated by `documents.is_publicly_visible` (lawyer toggle).
 16. When second country launches, decide: per-country addenda doc or fully separate per-country terms doc. Either works; pick before seeding multi-country.
 
 ---

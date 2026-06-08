@@ -1,0 +1,5 @@
+{
+  "_instructions": "Override in lingua italiana per company.base.json. Inserire qui solo i valori che devono apparire in italiano. Gli identificativi fiscali (P.IVA, REA, indirizzo) restano in company.base.json.",
+  "legal_form": "S.r.l. (Società a responsabilità limitata)",
+  "supervisory_authority": "Garante per la protezione dei dati personali"
+}
