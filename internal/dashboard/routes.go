@@ -32,8 +32,8 @@ func (s *Server) routesOverview(w http.ResponseWriter, r *http.Request) {
 	}
 
 	s.render(w, r, "routes.html", map[string]any{
-		"Title":             "Routes",
-		"Routes":            entries,
+		"Title":              "Routes",
+		"Routes":             entries,
 		"PublicDocumentKeys": publicKeys,
 	})
 }

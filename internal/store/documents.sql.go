@@ -179,17 +179,17 @@ ORDER BY dv.effective_from DESC, dv.created_at DESC
 `
 
 type ListDocumentVersionsByKeyRow struct {
-	DocumentKey  string             `json:"document_key"`
-	DisplayName  string             `json:"display_name"`
-	ID           int64              `json:"id"`
-	Version      string             `json:"version"`
-	Locale       string             `json:"locale"`
-	Audience     string             `json:"audience"`
-	ContentType  string             `json:"content_type"`
-	IsPublished  bool               `json:"is_published"`
+	DocumentKey   string             `json:"document_key"`
+	DisplayName   string             `json:"display_name"`
+	ID            int64              `json:"id"`
+	Version       string             `json:"version"`
+	Locale        string             `json:"locale"`
+	Audience      string             `json:"audience"`
+	ContentType   string             `json:"content_type"`
+	IsPublished   bool               `json:"is_published"`
 	EffectiveFrom pgtype.Timestamptz `json:"effective_from"`
-	CreatedBy    string             `json:"created_by"`
-	CreatedAt    pgtype.Timestamptz `json:"created_at"`
+	CreatedBy     string             `json:"created_by"`
+	CreatedAt     pgtype.Timestamptz `json:"created_at"`
 }
 
 func (q *Queries) ListDocumentVersionsByKey(ctx context.Context, key string) ([]ListDocumentVersionsByKeyRow, error) {

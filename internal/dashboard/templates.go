@@ -81,4 +81,3 @@ func (t *templates) render(w io.Writer, name string, data any) error {
 	}
 	return tpl.ExecuteTemplate(w, "layout.html", data)
 }
-
