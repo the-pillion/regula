@@ -1,59 +1,104 @@
 <article class="legal-document" lang="de">
+    <aside class="legal-draft-banner">
+        <strong>Technischer Entwurf.</strong> Vom Produktteam verfasst, noch nicht von qualifizierten italienischen Rechtsanwalten gepr&uuml;ft.
+    </aside>
+
     <header>
         <h1>Impressum / Rechtliche Hinweise</h1>
-        <p class="legal-meta">Zuletzt aktualisiert: {{last_updated}}</p>
-        <p>Angaben gem&auml;&szlig; den geltenden EU- und nationalen Informationspflichten (u.&nbsp;a. § 5 DDG/TMG f&uuml;r
-            Deutschland und Art. 7 D.Lgs. 70/2003 f&uuml;r Italien).</p>
+        <p class="legal-meta">Version {{version}} &middot; Zuletzt aktualisiert: {{last_updated}} &middot; In Kraft seit: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>Auf einen Blick</h2>
+            <ul>
+                <li>Identifikation des Anbieters von Informationsgesellschaftsdiensten (D.Lgs. 70/2003 Art. 7).</li>
+                <li>Angaben gem&auml;ss Art. 49 ital. Verbrauchergesetz.</li>
+                <li>ODR-Plattform f&uuml;r Verbraucherstreitigkeiten.</li>
+                <li>Haftungsgrenzen f&uuml;r Inhalte und externe Links.</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
-        <h2>Unternehmensangaben</h2>
-        <p>
-            <strong>{{legal_name}}</strong><br />
-            Rechtsform: {{legal_form}}<br />
-            Sitz: {{registered_street}}, {{registered_postal_code}} {{registered_city}} ({{registered_province}}), {{registered_country}}<br />
-            USt-IdNr. / P.IVA: {{vat_number}}<br />
-            Steuernummer / Codice fiscale: {{tax_code}}<br />
-            Handelsregister (REA): {{rea_number}} — {{chamber_of_commerce}}<br />
-            Stammkapital: {{share_capital}}
-        </p>
-    </section>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Anbieter</a></li>
+            <li><a href="#sec-2">Registereintrag</a></li>
+            <li><a href="#sec-3">Streitbeilegung (ODR)</a></li>
+            <li><a href="#sec-4">Inhaltshaftung</a></li>
+            <li><a href="#sec-5">Externe Links</a></li>
+            <li><a href="#sec-6">Urheberrecht</a></li>
+            <li><a href="#sec-7">Kontakte</a></li>
+        </ol>
+    </nav>
 
-    <section>
-        <h2>Kontakt</h2>
+    <section id="sec-1">
+        <h2>1. Anbieter (D.Lgs. 70/2003 Art. 7)</h2>
         <p>
-            E-Mail: <a href="mailto:{{email_support}}">{{email_support}}</a><br />
-            Rechtsabteilung: <a href="mailto:{{email_legal}}">{{email_legal}}</a><br />
+            <strong>{{legal_name}}</strong> ({{legal_form}})<br />
+            Sitz: {{registered_street}}, {{registered_postal_code}} {{registered_city}} ({{registered_province}}), {{registered_country}}<br />
+            E-Mail: <a href="mailto:{{email_legal}}">{{email_legal}}</a><br />
             Telefon: {{phone}}<br />
             Website: <a href="{{website}}" rel="noopener noreferrer" target="_blank">{{website}}</a>
         </p>
     </section>
 
-    <section>
-        <h2>Datenschutz</h2>
-        <p>Datenschutzbeauftragter (DSB/DPO): <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>. Vollst&auml;ndige Informationen zur
-            Verarbeitung personenbezogener Daten finden Sie in unserer Datenschutzerkl&auml;rung und in der Information zu Ihren
-            Datenschutzrechten.</p>
+    <section id="sec-2">
+        <h2>2. Registereintrag</h2>
+        <p>
+            USt-IdNr.: {{vat_number}}<br />
+            Steuer-ID: {{tax_code}}<br />
+            REA: {{rea_number}}<br />
+            Stammkapital: {{share_capital}}<br />
+            Eintragung: {{chamber_of_commerce}}
+        </p>
     </section>
 
-    <section>
-        <h2>Streitbeilegung</h2>
-        <p>Die Europ&auml;ische Kommission stellt gem&auml;&szlig; Verordnung (EU) 524/2013 eine Plattform zur
-            Online-Streitbeilegung bereit: <a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>. Wir sind
-            weder verpflichtet noch generell bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
-            teilzunehmen, soweit nicht gesetzlich vorgeschrieben.</p>
+    <section id="sec-3">
+        <h2>3. Streitbeilegung (ODR)</h2>
+        <p>
+            Nach Art. 14 Verordnung (EU) 524/2013 und Art. 141-bis ital. Verbrauchergesetz ist die EU-ODR-Plattform unter
+            <a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a> verf&uuml;gbar. Beschwerden:
+            <a href="mailto:{{email_legal}}">{{email_legal}}</a>. Bef&ouml;rderungsstreitigkeiten: ital.
+            Verkehrsregulierungsbeh&ouml;rde (ART) oder NCC-Konsortium. Gesch&auml;ftspraktiken: AGCM
+            (<a href="https://www.agcm.it" rel="noopener noreferrer" target="_blank">https://www.agcm.it</a>).
+        </p>
     </section>
 
-    <section>
-        <h2>Haftung f&uuml;r Inhalte und Links</h2>
-        <p>Die Inhalte unserer Seiten werden mit Sorgfalt erstellt, eine Gew&auml;hr f&uuml;r Richtigkeit und
-            Vollst&auml;ndigkeit &uuml;bernehmen wir jedoch nicht. F&uuml;r Inhalte externer, von der Plattform verlinkter Seiten
-            sind wir nicht verantwortlich; hierf&uuml;r haften deren jeweilige Betreiber.</p>
+    <section id="sec-4">
+        <h2>4. Inhaltshaftung</h2>
+        <p>
+            Inhalte auf {{website}} und in der App {{brand_name}} sind sorgf&auml;ltig erstellt, jedoch keine Rechts-,
+            Steuer- oder Fachberatung. Operative Angaben zu Tarifen, Zeiten, Fahrerverf&uuml;gbarkeit sind indikativ.
+            {{brand_name}} haftet nicht f&uuml;r Missbrauch der Inhalte oder Fehler ohne grobe Fahrl&auml;ssigkeit oder
+            Vorsatz.
+        </p>
     </section>
 
-    <section>
-        <h2>Urheberrecht</h2>
-        <p>Die Inhalte und Werke auf dieser Plattform unterliegen dem italienischen Urheberrecht (Gesetz 633/1941) und dem
-            anwendbaren EU-Recht. Jede nicht genehmigte Vervielf&auml;ltigung, Bearbeitung oder Verbreitung ist untersagt.</p>
+    <section id="sec-5">
+        <h2>5. Externe Links</h2>
+        <p>
+            Links zu Drittseiten: keine Kontrolle, keine Haftung f&uuml;r deren Datenpraxis oder Bedingungen.
+        </p>
     </section>
+
+    <section id="sec-6">
+        <h2>6. Urheberrecht</h2>
+        <p>
+            Marke "{{brand_name}}", Logos, GUIs, Quellcode, Icons und redaktionelle Inhalte sind Eigentum von
+            {{legal_name}} oder lizenziert. Reproduktion ohne Genehmigung verboten.
+            <a href="mailto:{{email_legal}}">{{email_legal}}</a>.
+        </p>
+    </section>
+
+    <section id="sec-7">
+        <h2>7. Kontakte</h2>
+        <p>
+            Allgemein: <a href="mailto:{{email_legal}}">{{email_legal}}</a> &middot; Support:
+            <a href="mailto:{{email_support}}">{{email_support}}</a> &middot; Datenschutz:
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; USt-IdNr. {{vat_number}} &middot; {{registered_country}}</p>
+        <p class="legal-translation-note">Informative &Uuml;bersetzung. Bei Abweichung gilt die italienische Fassung.</p>
+    </footer>
 </article>

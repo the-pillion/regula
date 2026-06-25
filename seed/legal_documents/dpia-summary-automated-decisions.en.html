@@ -1,0 +1,113 @@
+<article class="legal-document" lang="en">
+    <aside class="legal-draft-banner">
+        <strong>Technical draft.</strong> Plain-language summary of an internal DPIA still in draft.
+    </aside>
+
+    <header>
+        <h1>DPIA Summary &mdash; Automated Decisions</h1>
+        <p class="legal-meta">Version {{version}} &middot; Last updated: {{last_updated}} &middot; Effective: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>At a glance</h2>
+            <ul>
+                <li>Four platform decisions are partially automated: <strong>matching</strong>, offer-pool <strong>ranking</strong>, <strong>eligibility filters</strong>, <strong>safety blocks</strong>.</li>
+                <li><strong>Price</strong> calculation uses declared deterministic rules (zone band + surge cap + driver modifier), not an opaque ML model.</li>
+                <li><strong>Suspension</strong> is always confirmed by a human operator before becoming final.</li>
+                <li>You have the right to obtain human intervention, express your view and contest the decision (GDPR Art. 22).</li>
+                <li>The full DPIA file is available to supervisory authorities on request.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Why a DPIA</a></li>
+            <li><a href="#sec-2">What is automated</a></li>
+            <li><a href="#sec-3">What is <em>not</em> automated</a></li>
+            <li><a href="#sec-4">Risks and mitigations</a></li>
+            <li><a href="#sec-5">Right to human intervention</a></li>
+            <li><a href="#sec-6">Transparency on inputs</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Why a DPIA</h2>
+        <p>
+            GDPR Art. 22 limits decisions based solely on automated processing that produce legal or significant effects.
+            For drivers, an automatic suspension would have significant effects on work; for passengers, a matching decision
+            may affect access to the service. This DPIA documents design choices preventing a disproportionate effect.
+        </p>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. What is automated</h2>
+        <table>
+            <thead>
+                <tr><th>Decision</th><th>Inputs</th><th>Logic</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Matching</td><td>driver position, passenger position, vehicle type, eligibility flags</td><td>radius search + ranking; offer fanout to a pool of N (default 3)</td></tr>
+                <tr><td>Offer-pool ranking</td><td>distance, rating, completed_rides, presence in zone</td><td>linear combination with zone-configurable weights</td></tr>
+                <tr><td>Eligibility filters</td><td>expired docs, missing NCC, invalid RCA, zone block</td><td>deterministic boolean rule (compliance rules engine)</td></tr>
+                <tr><td>Safety blocks</td><td>PrefactGuard signals, background check outcomes, user reports</td><td>configurable thresholds; temporary block pending human review</td></tr>
+                <tr><td>Price calculation</td><td>distance, duration, zone base, surge multiplier, driver modifier, fee/tax stack</td><td>additive formula declared in price-arbiter (no ML)</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. What is <em>not</em> automated</h2>
+        <ul>
+            <li><strong>Initial driver approval</strong>: a human operator verifies documents, NCC, garage, "uso terzi", RCA.</li>
+            <li><strong>Final suspension</strong>: the automation may temporarily block; suspension lasting beyond the review window is confirmed by an operator.</li>
+            <li><strong>Reinstatement</strong>: always human.</li>
+            <li><strong>Cancellation and no-show dispute resolution</strong>: human.</li>
+            <li><strong>Safety-report decisions</strong>: the PrefactGuard flow includes human review.</li>
+            <li><strong>Per-zone price band</strong>: set by a human operator based on local NCC tariff references, not by an algorithm.</li>
+        </ul>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Risks and mitigations</h2>
+        <table>
+            <thead>
+                <tr><th>Risk</th><th>Mitigation</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Indirect discrimination in ranking</td><td>Weights published to driver in app; periodic audit of per-zone metrics</td></tr>
+                <tr><td>Erroneous suspension</td><td>Mandatory human confirmation, 14-day contestation window</td></tr>
+                <tr><td>Price opacity</td><td>Declared breakdown (base, surge, modifier, fee, tax) visible in app before confirming the ride</td></tr>
+                <tr><td>Excessive surge</td><td>Zone ceiling (typically 2.0&times;); surge can never lower the price below the driver modifier</td></tr>
+                <tr><td>Compliance bias</td><td>Rules are deterministic and declared; same configuration applies to every driver in the zone</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Right to human intervention (GDPR Art. 22)</h2>
+        <p>For every automated decision concerning you, you can:</p>
+        <ol>
+            <li>Ask for human intervention by writing to <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>.</li>
+            <li>Express your view and provide additional information.</li>
+            <li>Contest the decision and request review.</li>
+        </ol>
+        <p>
+            We reply within <strong>14 days</strong>. During the review, any automatic blocks are suspended unless an
+            ascertained safety risk applies.
+        </p>
+    </section>
+
+    <section id="sec-6">
+        <h2>6. Transparency on inputs</h2>
+        <p>
+            Through your right of access (Art. 15) you can obtain a copy of the inputs that produced a decision concerning
+            you: online presence at the time, compliance outcome, any relevant PrefactGuard signals, offer data used for
+            matching. We do not share the internal weights of fine-grained models for anti-fraud reasons, but we provide a
+            comprehensible explanation of the logic.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; Full DPIA file: <a href="mailto:{{email_dpo}}">{{email_dpo}}</a></p>
+        <p class="legal-translation-note">Informational translation. In case of conflict, the Italian version prevails.</p>
+    </footer>
+</article>

@@ -1,105 +1,172 @@
 <article class="legal-document" lang="en">
+    <aside class="legal-draft-banner">
+        <strong>Technical draft.</strong> Written by the product team, not yet reviewed by qualified Italian counsel. Do not
+        publish until counsel signs off. Remove this banner only after approval.
+    </aside>
+
     <header>
-        <h1>Terms of Service</h1>
-        <p class="legal-meta">Last updated: {{last_updated}} · Effective: {{effective_date}}</p>
-        <p>
-            These Terms govern your use of the {{brand_name}} platform operated by {{legal_name}} ({{legal_form}}),
-            VAT {{vat_number}}, {{registered_city}} ({{registered_province}}), {{registered_country}}. By creating an account or
-            using the platform you agree to these Terms.
-        </p>
+        <h1>Terms of Service &mdash; General Framework</h1>
+        <p class="legal-meta">Version {{version}} &middot; Last updated: {{last_updated}} &middot; Effective: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>At a glance</h2>
+            <ul>
+                <li>{{brand_name}} is a <strong>technology marketplace</strong> connecting passengers with independent NCC drivers. Not a carrier.</li>
+                <li>There are role-specific terms for <a href="/legal/terms-of-service-passenger">passengers</a> and <a href="/legal/terms-of-service-driver">drivers</a>. This document is the umbrella that ties them together.</li>
+                <li>The transport contract is concluded directly between passenger and driver. {{brand_name}} is not a party to it.</li>
+                <li>Some decisions (matching, ranking, eligibility) are automated. You have the right to human intervention (GDPR Art. 22).</li>
+                <li>Italian law applies. Consumers retain the forum of their habitual residence (art. 33 Italian Consumer Code).</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
-        <h2>1. The service</h2>
-        <p>{{brand_name}} is a technology platform that connects independent motorcycle-taxi drivers with passengers seeking
-            transport. We provide the intermediation technology, matching, fare calculation and payment facilitation. We are not a
-            transport carrier and do not employ drivers; transport is supplied by independent drivers.</p>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Who we are and what this document is</a></li>
+            <li><a href="#sec-2">Marketplace role</a></li>
+            <li><a href="#sec-3">Role-specific terms</a></li>
+            <li><a href="#sec-4">Account, identity, access</a></li>
+            <li><a href="#sec-5">Payments, fees, taxes</a></li>
+            <li><a href="#sec-6">Automated decisions</a></li>
+            <li><a href="#sec-7">EU Platform Work Directive</a></li>
+            <li><a href="#sec-8">Suspension and termination</a></li>
+            <li><a href="#sec-9">Liability limits</a></li>
+            <li><a href="#sec-10">Changes</a></li>
+            <li><a href="#sec-11">Law, forum, contacts</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Who we are and what this document is</h2>
+        <p>
+            The {{brand_name}} platform is operated by <strong>{{legal_name}}</strong> ({{legal_form}}), with registered
+            office at {{registered_street}}, {{registered_postal_code}} {{registered_city}} ({{registered_province}}),
+            {{registered_country}} &mdash; VAT {{vat_number}}, REA {{rea_number}}. Registered with {{chamber_of_commerce}}.
+        </p>
+        <p>
+            These terms set the common rules for any use of the platform. Role-specific rules &mdash; for passengers and for
+            drivers &mdash; live in their dedicated documents and prevail over the general provisions here in case of
+            conflict.
+        </p>
     </section>
 
-    <section>
-        <h2>2. Eligibility and accounts</h2>
-        <ul>
-            <li>You must be at least 18 years old and able to enter into a binding contract.</li>
-            <li>You must provide accurate information and keep your account credentials secure.</li>
-            <li>You are responsible for activity under your account.</li>
-            <li>Drivers must hold all licences, permits, insurance and vehicle documents required by local law and pass our
-                onboarding and eligibility checks before accepting rides.</li>
-        </ul>
+    <section id="sec-2">
+        <h2>2. Marketplace role</h2>
+        <p>
+            {{brand_name}} is an information society service that matches demand and supply of urban passenger transport. We
+            do not own vehicles, we do not employ drivers, we do not issue tickets as a carrier. The <strong>transport
+            contract is concluded directly between passenger and driver</strong>; {{brand_name}} provides the digital
+            infrastructure, payment intermediation and supply-side compliance checks.
+        </p>
+        <aside class="legal-honest">
+            <strong>Honest limit.</strong> Marketplace is the legal model we chose, but final qualification is a court's
+            call. European case-law (CJEU C-434/15) showed that factors like price-setting, quality control and push
+            matching can shift the qualification toward a transport service. {{brand_name}} designed the platform to stay
+            inside the intermediation perimeter (zone-set price bands sourced from local NCC tariffs, already-licensed
+            drivers only, no employment relationship), but cannot promise future judicial outcomes.
+        </aside>
     </section>
 
-    <section>
-        <h2>3. Bookings, fares and payment</h2>
-        <ul>
-            <li>A booking forms a transport contract between the passenger and the driver. {{brand_name}} acts as intermediary.</li>
-            <li>Fares are calculated from base rates, distance, time and applicable zone pricing, and are shown before
-                confirmation.</li>
-            <li>{{brand_name}} charges drivers a platform commission, disclosed during onboarding and configurable by operating
-                zone.</li>
-            <li>Payments are processed by our payment provider. Driver payouts are made to the driver&rsquo;s connected account.</li>
-        </ul>
+    <section id="sec-3">
+        <h2>3. Role-specific terms</h2>
+        <p>
+            If you are a passenger, the <a href="/legal/terms-of-service-passenger">Passenger Terms of Service</a> apply. If
+            you are a driver, the <a href="/legal/terms-of-service-driver">Driver Terms of Service</a> and the
+            <a href="/legal/driver-settlement">Settlement &amp; Payment Disclosure</a> apply. If your activity in Italy falls
+            under the NCC regime, the <a href="/legal/ncc-italia">NCC Italy specific schedule</a> also applies.
+        </p>
     </section>
 
-    <section>
-        <h2>4. Cancellations and no-shows</h2>
-        <p>Cancellations are free before a driver is assigned and within a short grace window after assignment. After the grace
-            window, or once the driver has arrived or the trip is in progress, a cancellation or no-show fee may apply, as shown
-            in the app at the time of booking.</p>
+    <section id="sec-4">
+        <h2>4. Account, identity, access</h2>
+        <p>
+            Identity is managed via our identity provider (Zitadel). You must provide truthful information, keep it up to
+            date and protect your credentials. {{brand_name}} is not liable for third-party use of your account if you have
+            not reported unauthorised access in time. Minimum age: 18.
+        </p>
     </section>
 
-    <section>
-        <h2>5. Conduct and safety</h2>
-        <ul>
-            <li>Use the platform lawfully and treat other users with respect. Harassment, discrimination, violence and illegal
-                activity are prohibited.</li>
-            <li>Passengers must wear the safety equipment provided and follow reasonable driver safety instructions.</li>
-            <li>Drivers must operate safely, keep documents valid and maintain their vehicle.</li>
-            <li>The platform provides safety features including trip tracking and an SOS function for emergencies.</li>
-        </ul>
+    <section id="sec-5">
+        <h2>5. Payments, fees, taxes</h2>
+        <p>
+            Passenger payments are collected by our payment service provider (Stripe Connect) into the driver's account, net
+            of the platform fee and any applicable local taxes or authority levies. The economic detail &mdash; fare,
+            commission, taxes, authority levies &mdash; is computed by the price-arbiter service from the Cadastre zone
+            rate card. Each party is responsible for its own tax obligations; {{brand_name}} fulfils platform reporting
+            obligations under the DAC7 directive (D.Lgs. 32/2023).
+        </p>
     </section>
 
-    <section>
-        <h2>6. Driver status</h2>
-        <p>Drivers act as independent contractors and are not employees, agents or partners of {{brand_name}}. Drivers are
-            responsible for their own tax, social-security and regulatory obligations arising from their activity.</p>
+    <section id="sec-6">
+        <h2>6. Automated decisions (GDPR Art. 22)</h2>
+        <p>
+            Some platform functions use <strong>automated decisions</strong>: driver matching, candidate ranking, compliance
+            filters, dynamic surge inside the zone price band, safety blocks on expired documents. You have the right to
+            obtain human intervention, express your view and contest the decision by writing to
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. A driver suspension is always confirmed by a human
+            operator before becoming final.
+        </p>
     </section>
 
-    <section>
-        <h2>7. Marketplace role, disclaimer of warranties, and liability</h2>
-        <p>{{brand_name}} is a marketplace and intermediation platform only. It is not a transport provider, carrier, or employer
-            of drivers, and is not a party to the transport contract concluded between passenger and driver.</p>
-        <p>To the extent permitted by law, the platform is provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo;. We do not
-            guarantee the availability, timeliness, quality, safety or outcome of any ride, the conduct, acts or omissions of any
-            driver or passenger, the condition or roadworthiness of any vehicle, or that the service will be uninterrupted or
-            error-free. Drivers are solely responsible for the transport they provide.</p>
-        <p>To the extent permitted by law, {{brand_name}} is liable only for the intermediation service it provides and not for
-            the transport performed by independent drivers. Nothing in these Terms excludes or limits liability for death or
-            personal injury caused by our negligence, for fraud, or any liability that cannot be excluded under applicable law,
-            including mandatory consumer-protection rights.</p>
+    <section id="sec-7">
+        <h2>7. EU Platform Work Directive</h2>
+        <p>
+            Directive (EU) 2024/2831 on improving working conditions in platform work is in force and must be transposed by
+            Member States by 2 December 2026. The Directive introduces a <em>legal presumption</em> of subordinate employment
+            when certain control indicators are present. {{brand_name}} acknowledges the Directive and has designed the
+            marketplace to <em>not</em> exercise the listed indicators (no imposed shifts, no exclusivity, no disciplinary
+            sanctions beyond safety and compliance). Final qualification is determined by the applicable law at the moment
+            of transposition.
+        </p>
     </section>
 
-    <section>
+    <section id="sec-8">
         <h2>8. Suspension and termination</h2>
-        <p>We may suspend or terminate an account for breach of these Terms, safety risk, fraud, or legal requirement. You may
-            close your account at any time. Provisions that by their nature survive termination continue to apply.</p>
+        <p>
+            We may suspend or disable your access for safety risk, expired documents, suspected fraud, serious or repeated
+            breach of terms or by legal obligation. Suspension is always communicated by email or in-app notice, with
+            reasons. You have the right to request human review. Otherwise, either party may terminate with reasonable
+            notice. Clauses on liability limits, confidentiality and applicable law survive termination.
+        </p>
     </section>
 
-    <section>
-        <h2>9. Consumer rights and dispute resolution</h2>
-        <p>Mandatory consumer protections under the law of your country of residence are unaffected by these Terms. The European
-            Commission&rsquo;s Online Dispute Resolution platform is available at
-            <a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>. You may also contact us at
-            <a href="mailto:{{email_support}}">{{email_support}}</a>.</p>
+    <section id="sec-9">
+        <h2>9. Liability limits</h2>
+        <p>
+            Our total liability is limited to the intermediation service actually provided. We are not liable for the
+            transport itself, indirect damages, lost profits, or interruptions not attributable to our wilful misconduct or
+            gross negligence. <strong>Nothing in these terms excludes or limits liability for wilful misconduct or gross
+            negligence (art. 1229 Italian Civil Code), for death or personal injury caused by our negligence, nor any
+            liability that cannot be excluded by law.</strong>
+        </p>
     </section>
 
-    <section>
-        <h2>10. Governing law</h2>
-        <p>These Terms are governed by Italian law, without prejudice to the mandatory consumer-protection rules of your country
-            of habitual residence. Place of jurisdiction is, where permitted, the court of the consumer&rsquo;s residence.</p>
+    <section id="sec-10">
+        <h2>10. Changes</h2>
+        <p>
+            We may update these terms to reflect product, regulatory or corporate changes. Material changes are notified at
+            least 30 days in advance by email or in-app, with a summary. Consumer protections under art. 33 of the Italian
+            Consumer Code on unfair terms apply.
+        </p>
     </section>
 
-    <section>
-        <h2>11. Changes and contact</h2>
-        <p>We may amend these Terms; material changes are notified in advance and continued use constitutes acceptance. Legal
-            contact: <a href="mailto:{{email_legal}}">{{email_legal}}</a>.</p>
+    <section id="sec-11">
+        <h2>11. Law, forum, contacts</h2>
+        <p>
+            These terms are governed by Italian law. For disputes with consumers, the competent forum is that of the
+            consumer's residence or domicile (art. 33 Italian Consumer Code), without prejudice to the consumer's choice of
+            the general forum. For disputes with drivers (professional operators) the forum is {{registered_city}}. The
+            European Commission ODR platform remains available
+            (<a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>).
+        </p>
+        <p>
+            General contact: <a href="mailto:{{email_legal}}">{{email_legal}}</a> &middot; Privacy:
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> &middot; Support:
+            <a href="mailto:{{email_support}}">{{email_support}}</a>.
+        </p>
     </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; {{registered_street}}, {{registered_postal_code}} {{registered_city}} &middot; VAT {{vat_number}}</p>
+        <p class="legal-translation-note">Informational translation. In case of conflict, the Italian version prevails.</p>
+    </footer>
 </article>

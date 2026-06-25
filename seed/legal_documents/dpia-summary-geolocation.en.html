@@ -1,0 +1,102 @@
+<article class="legal-document" lang="en">
+    <aside class="legal-draft-banner">
+        <strong>Technical draft.</strong> Plain-language summary of an internal DPIA still in draft. The full file is not public; available to supervisory authorities on request.
+    </aside>
+
+    <header>
+        <h1>DPIA Summary &mdash; Geolocation</h1>
+        <p class="legal-meta">Version {{version}} &middot; Last updated: {{last_updated}} &middot; Effective: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>At a glance</h2>
+            <ul>
+                <li>We track driver position only when online, and vehicle position only during an active ride. Never 24/7.</li>
+                <li>Precision is what matching and safety need: no behavioural fingerprint.</li>
+                <li>Ride GPS traces are deleted within 30 days; only aggregated metadata stays for audit and internal analytics.</li>
+                <li>You can limit tracking by going offline (driver) or ending the ride (passenger).</li>
+                <li>The full DPIA is available to supervisory authorities on request.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Why a DPIA</a></li>
+            <li><a href="#sec-2">What we collect</a></li>
+            <li><a href="#sec-3">When we collect it</a></li>
+            <li><a href="#sec-4">Risks and mitigations</a></li>
+            <li><a href="#sec-5">Retention</a></li>
+            <li><a href="#sec-6">Data subject rights</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Why a DPIA</h2>
+        <p>
+            Systematic location monitoring is one of the activities for which the Italian Garante (decision no. 467 of 11
+            October 2018) and the EDPB consider an Art. 35 GDPR impact assessment necessary. This summary describes our
+            design choices and the limits we set.
+        </p>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. What we collect</h2>
+        <ul>
+            <li><strong>Online-driver position</strong>: latitude, longitude, accuracy, timestamp.</li>
+            <li><strong>Vehicle position during an active ride</strong>: same structure, adaptive frequency (higher in pickup phase, lower on smooth tracks).</li>
+            <li><strong>Passenger position at request time</strong>: used for matching and then discarded.</li>
+        </ul>
+        <p>
+            We do not collect position outside these windows. We do not build historical mobility profiles on individuals.
+            We do not sell location data to third parties.
+        </p>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. When we collect it</h2>
+        <ul>
+            <li><strong>Driver:</strong> while you are online (in dispatch). Going offline stops the stream.</li>
+            <li><strong>Passenger:</strong> only at ride request time (for matching) and during the active ride (for tracking).</li>
+            <li><strong>SOS:</strong> triggered on explicit request; shared with emergency contacts and operator.</li>
+        </ul>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Risks and mitigations</h2>
+        <table>
+            <thead>
+                <tr><th>Risk</th><th>Mitigation</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Unauthorised surveillance of driver off-hours</td><td>Streaming only when online; immediate stop on offline.</td></tr>
+                <tr><td>Behavioural profiling of users</td><td>No ML on individual mobility patterns; aggregated metrics only.</td></tr>
+                <tr><td>Unauthorised access to GPS traces</td><td>At-rest encryption, RBAC, audit logs, access only by security operators.</td></tr>
+                <tr><td>Excessive retention</td><td>Automatic deletion of traces at 30 days (<code>privacy:purge-old-locations</code> job).</td></tr>
+                <tr><td>Cleartext transmission</td><td>TLS 1.2+ mandatory on client &harr; gps-ingest &harr; compass paths.</td></tr>
+                <tr><td>Disclosure to third parties</td><td>Only to explicitly enabled emergency contacts or authorities by law.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Retention</h2>
+        <p>
+            Ride GPS traces are deleted within <strong>30 days</strong>. Ride metadata (distance, duration, fare) is kept
+            for tax obligations (10 years) but <em>does not</em> include the route geometry, only geocoded pickup and
+            dropoff points. Deletion is automatic and tracked.
+        </p>
+    </section>
+
+    <section id="sec-6">
+        <h2>6. Data subject rights</h2>
+        <p>
+            For exercising rights (access, erasure, objection) see <a href="/legal/gdpr-rights">Your GDPR Rights</a>. To
+            object to geolocation during a ride, you must end it. To disable tracking as a driver, go offline. The platform
+            cannot operate without active geolocation during an active ride.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; Full DPIA file: <a href="mailto:{{email_dpo}}">{{email_dpo}}</a></p>
+        <p class="legal-translation-note">Informational translation. In case of conflict, the Italian version prevails.</p>
+    </footer>
+</article>

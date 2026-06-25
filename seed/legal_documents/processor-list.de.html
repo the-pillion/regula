@@ -1,0 +1,91 @@
+<article class="legal-document" lang="de">
+    <aside class="legal-draft-banner">
+        <strong>Technischer Entwurf.</strong> Aus <code>seed/foundation.json</code> extrahiert; redaktioneller Snapshot. Vor Ver&ouml;ffentlichung mit Quelle abgleichen.
+    </aside>
+
+    <header>
+        <h1>Auftragsverarbeiter- und Subauftragsverarbeiterverzeichnis</h1>
+        <p class="legal-meta">Version {{version}} &middot; Zuletzt aktualisiert: {{last_updated}} &middot; In Kraft seit: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>Auf einen Blick</h2>
+            <ul>
+                <li>Verzeichnis nach Art. 28 DSGVO.</li>
+                <li>Jeder Anbieter durch schriftliche Vereinbarung (AVV/DPA) zu Sicherheit, Vertraulichkeit, Subverarbeitern, Audit, Transfers verpflichtet.</li>
+                <li>AVV-Status deklariert (unterzeichnet / in Bearbeitung / nicht erforderlich).</li>
+                <li>Drittl&auml;ndertransfers: Angemessenheitsbeschluss oder Standardvertragsklauseln (SCC).</li>
+                <li>Wesentliche &Auml;nderungen mit angemessener Frist mitgeteilt.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Zweck</a></li>
+            <li><a href="#sec-2">Hauptauftragsverarbeiter</a></li>
+            <li><a href="#sec-3">Subauftragsverarbeiter</a></li>
+            <li><a href="#sec-4">Drittl&auml;ndertransfers</a></li>
+            <li><a href="#sec-5">&Auml;nderungsmeldungen</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Zweck</h2>
+        <p>
+            Externe Anbieter, die in unserem Auftrag personenbezogene Daten verarbeiten (SMS-Versand, Zahlung, Geocoding,
+            Monitoring), sind <strong>Auftragsverarbeiter</strong> nach Art. 28 DSGVO. F&uuml;r jeden: Rolle, Standort,
+            Transfermechanismus (falls Drittland) und AVV-Status. Maschinenlesbare Quelle:
+            <a href="/public/subprocessors.json">/public/subprocessors.json</a>.
+        </p>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. Hauptauftragsverarbeiter</h2>
+        <table>
+            <thead>
+                <tr><th>Anbieter</th><th>Rolle</th><th>Land</th><th>Transfer</th><th>AVV</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Stripe Payments Europe Ltd.</td><td>Zahlungsabwicklung und Auszahlung</td><td>Irland &middot; USA</td><td>SCC</td><td>Unterzeichnet</td></tr>
+                <tr><td>Twilio Ireland Ltd.</td><td>SMS und Verifizierungscodes</td><td>Irland &middot; USA</td><td>SCC</td><td>Unterzeichnet</td></tr>
+                <tr><td>Firebase / Google Cloud EMEA Ltd.</td><td>Push-Benachrichtigungen, Crash-Reporting</td><td>Irland &middot; USA</td><td>SCC</td><td>Unterzeichnet</td></tr>
+                <tr><td>FastGeo s.r.l. (gleiches Eigentum)</td><td>Routing, Geocoding, Maps</td><td>Italien</td><td>keine (EWR)</td><td>In Bearbeitung</td></tr>
+                <tr><td>Zitadel GmbH</td><td>Identit&auml;t, OIDC, Sitzungen</td><td>Schweiz</td><td>Angemessenheitsbeschluss</td><td>Unterzeichnet</td></tr>
+                <tr><td>Hosting (TBD)</td><td>Infrastruktur-Hosting</td><td>EU (EWR)</td><td>keine (EWR)</td><td>In Bearbeitung</td></tr>
+                <tr><td>Checkr Inc. (Evaluation)</td><td>Fahrer-Background-Check</td><td>USA</td><td>SCC + Bewertung</td><td>In Bearbeitung</td></tr>
+                <tr><td>didit / ondato (Evaluation)</td><td>Identit&auml;tspr&uuml;fung (KYC)</td><td>EU</td><td>keine (EWR)</td><td>In Evaluation</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Subauftragsverarbeiter</h2>
+        <p>
+            Hauptanbieter nutzen ihrerseits Subverarbeiter (Cloud-Hosting, CDN, Monitoring). Aktive Subverarbeiter sind in
+            den &ouml;ffentlichen Verzeichnissen der jeweiligen Anbieter (Stripe, Twilio, Google Cloud) oder auf Anfrage
+            unter <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> verf&uuml;gbar. Neue Subverarbeiter sensibler
+            Anbieter werden hier innerhalb 30 Tagen reflektiert.
+        </p>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Drittl&auml;ndertransfers</h2>
+        <p>
+            Transfers ohne Angemessenheitsbeschluss st&uuml;tzen sich auf EU-<strong>Standardvertragsklauseln</strong>
+            2021/914, erg&auml;nzt durch <strong>technische Erg&auml;nzungsmassnahmen</strong> (Verschl&uuml;sselung at-rest,
+            Tokenisierung, Transparency Reporting). USA: ggf. EU-US Data Privacy Framework.
+        </p>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. &Auml;nderungsmeldungen</h2>
+        <p>
+            Hinzuf&uuml;gung oder Wechsel von Hauptanbietern mind. 30 Tage im Voraus per E-Mail/In-App. Widerspruch durch
+            Konto-K&uuml;ndigung; sonst gilt fortgesetzte Nutzung als Akzept.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; Datenschutz: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> &middot; DSB: <a href="mailto:{{email_dpo}}">{{email_dpo}}</a></p>
+        <p class="legal-translation-note">Informative &Uuml;bersetzung. Bei Abweichung gilt die italienische Fassung.</p>
+    </footer>
+</article>

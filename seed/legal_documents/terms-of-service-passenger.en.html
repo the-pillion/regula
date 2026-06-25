@@ -1,115 +1,178 @@
 <article class="legal-document" lang="en">
+    <aside class="legal-draft-banner">
+        <strong>Technical draft.</strong> Written by the product team, not yet reviewed by qualified Italian counsel.
+    </aside>
+
     <header>
-        <h1>Passenger Terms of Service</h1>
-        <p class="legal-meta">Last updated: {{last_updated}} · Effective: {{effective_date}}</p>
-        <p>
-            These Passenger Terms govern your use of the {{brand_name}} platform operated by {{legal_name}} ({{legal_form}}),
-            VAT {{vat_number}}, {{registered_city}} ({{registered_province}}), {{registered_country}}. By creating an account or
-            booking a ride you agree to these Terms. If you also drive on the platform, the separate Driver Terms apply to that
-            activity.
-        </p>
+        <h1>Terms of Service &mdash; Passengers</h1>
+        <p class="legal-meta">Version {{version}} &middot; Last updated: {{last_updated}} &middot; Effective: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>At a glance</h2>
+            <ul>
+                <li>You book a ride with an independent NCC driver via our platform. {{brand_name}} is an intermediary, not a carrier.</li>
+                <li>Price is transparent before you confirm. The fare can move inside a per-zone <em>band</em>; the driver picks the value inside that band.</li>
+                <li>At pickup you must share a <strong>6-digit PIN</strong>. Without the PIN, the ride does not start.</li>
+                <li>Cancellation: free inside the grace window; afterwards a per-stage fee applies. Mid-ride mutual cancellation uses a 3-way handshake.</li>
+                <li>You are a consumer: you keep the forum of your domicile (art. 33 Italian Consumer Code). The right of withdrawal does not apply to passenger transport (art. 59 lett. l).</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
-        <h2>1. Our role — marketplace only</h2>
-        <p>{{brand_name}} is a technology marketplace that connects you with independent motorcycle-taxi drivers. We provide the
-            matching, fare calculation and payment-facilitation technology. <strong>We are not a transport provider, carrier or
-            employer of drivers</strong>, and we are not a party to the transport contract, which is concluded directly between you
-            and the driver. The driver alone provides and is responsible for the transport.</p>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">What this contract is</a></li>
+            <li><a href="#sec-2">Account and eligibility</a></li>
+            <li><a href="#sec-3">Booking and price</a></li>
+            <li><a href="#sec-4">Pickup PIN</a></li>
+            <li><a href="#sec-5">Cancellation, no-show, handshake</a></li>
+            <li><a href="#sec-6">Payment and receipt</a></li>
+            <li><a href="#sec-7">Ratings and reports</a></li>
+            <li><a href="#sec-8">Safety and SOS</a></li>
+            <li><a href="#sec-9">Automated decisions</a></li>
+            <li><a href="#sec-10">Right of withdrawal</a></li>
+            <li><a href="#sec-11">Liability limits</a></li>
+            <li><a href="#sec-12">Law, forum, ODR</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. What this contract is</h2>
+        <p>
+            When you book a ride, you enter into two distinct contracts: (a) the <strong>transport contract</strong> directly
+            with the independent NCC driver who accepts the request; (b) the <strong>intermediation contract</strong> with
+            {{legal_name}} for use of the {{brand_name}} platform, governed by these terms. {{brand_name}} is not a carrier
+            and is not a party to the transport contract.
+        </p>
     </section>
 
-    <section>
-        <h2>2. Eligibility and account</h2>
+    <section id="sec-2">
+        <h2>2. Account and eligibility</h2>
+        <p>
+            You must be at least 18 and hold an account authenticated via Zitadel (our identity provider). You must provide
+            truthful information and protect your credentials. You may book a ride for another person; in that case you
+            remain responsible for performance toward the driver.
+        </p>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Booking and price</h2>
+        <p>
+            Before booking you see a <strong>quote</strong> computed by price-arbiter from the zone rate card (Cadastre):
+            base fare, distance, time, any surge and driver-modifier surcharges. Surge surcharges are capped by a zone
+            ceiling (typically 2.0&times;); the driver modifier moves within a <strong>per-zone min/max band</strong>. Surge
+            and modifier are <em>additive</em> on the subtotal, not multiplicative.
+        </p>
+        <p>
+            Confirming a ride authorises a <strong>pre-authorisation</strong> on your payment method for the maximum
+            quoted amount. At the end, the actual amount is captured and any excess released. The platform refuses rides
+            beyond a maximum per-zone distance and verifies the fare server-side (signed quote_id).
+        </p>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Pickup PIN</h2>
+        <p>
+            When the driver arrives at the pickup point, you receive in-app a <strong>6-digit PIN</strong> generated
+            server-side (CSPRNG, 5-minute TTL, max 3 attempts). You must share the PIN with the driver before departure.
+            Without verified PIN, the ride does not transition to "in progress". The PIN protects against person swaps and
+            fraudulent pickups.
+        </p>
+        <aside class="legal-honest">
+            <strong>Honest limit.</strong> The PIN is stored server-side as a <em>salted SHA-256 hash</em>; the plaintext
+            value is visible to you for the window (5 minutes) and then only the hash survives for audit.
+        </aside>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Cancellation, no-show, mutual handshake</h2>
+        <p>
+            You can cancel for free inside the <strong>grace window</strong> (zone-configurable, typically 2 minutes).
+            Beyond that, the zone cancellation policy applies, split into three stages:
+        </p>
         <ul>
-            <li>You must be at least 18 and able to enter into a binding contract.</li>
-            <li>You must provide accurate information and keep your credentials secure; you are responsible for activity under your
-                account.</li>
-            <li>We may refuse, suspend or close an account to protect users, comply with law, or prevent fraud or abuse.</li>
+            <li><strong>after_grace</strong> &mdash; passenger cancels before pickup: platform fee + driver compensation, per zone percentages.</li>
+            <li><strong>in_progress</strong> &mdash; cancellation during the ride: <em>mutual handshake</em> with three outcomes: <em>full_refund</em>, <em>full_pay</em>, <em>partial:NN</em> (a partial share between 1 and 99%). The platform retains its fee per zone policy.</li>
+            <li><strong>no_show</strong> &mdash; the driver reports your absence at pickup after the wait timer expires: zone no_show fee applies.</li>
         </ul>
+        <p>
+            Per-stage percentages and min/max caps are published in your zone's Cadastre section and visible in app when the
+            fee is computed. A cancellation dispute is resolved via <a href="mailto:{{email_support}}">{{email_support}}</a>;
+            the final decision is taken by a human operator.
+        </p>
     </section>
 
-    <section>
-        <h2>3. Bookings and fares</h2>
-        <ul>
-            <li>A confirmed booking forms a transport contract between you and the driver; {{brand_name}} acts solely as
-                intermediary.</li>
-            <li>Fares are calculated from base rates, distance, time and applicable zone pricing and are shown before you confirm.</li>
-            <li>Estimates are indicative; the final fare reflects the actual ride. Tolls, waiting time and surcharges may apply where
-                disclosed.</li>
-        </ul>
+    <section id="sec-6">
+        <h2>6. Payment and receipt</h2>
+        <p>
+            Payment is processed via Stripe Connect with <em>destination charge</em>: the passenger amount lands on the
+            driver's account, net of the platform fee and any tax/levy. You receive a receipt by email and in-app. The
+            driver, where applicable, issues their own NCC invoice/receipt under Italian law. {{brand_name}} is not the
+            carrier and does not issue the transport invoice; we issue our own invoice for the platform fee where
+            applicable.
+        </p>
     </section>
 
-    <section>
-        <h2>4. Payment</h2>
-        <p>You authorise us, through our payment processor, to charge your selected payment method for the fare and any applicable
-            fees (including cancellation or no-show fees). Receipts are provided in-app. We facilitate payment on the driver&rsquo;s
-            behalf; we do not store full card details.</p>
+    <section id="sec-7">
+        <h2>7. Ratings and reports</h2>
+        <p>
+            You can rate a ride along multiple dimensions (hygiene, safety, driving quality). Ratings are a transparency
+            tool, not automatic sanctions: they do not cause deactivation without human intervention. A serious safety
+            report triggers the PrefactGuard flow and is always reviewed by an operator.
+        </p>
     </section>
 
-    <section>
-        <h2>5. Cancellations and no-shows</h2>
-        <p>Cancellation is free before a driver is assigned and within a short grace window after assignment. After the grace
-            window, or once the driver has arrived or the trip is in progress, a cancellation or no-show fee may apply, as shown in
-            the app at the time of booking.</p>
+    <section id="sec-8">
+        <h2>8. Safety and SOS</h2>
+        <p>
+            The in-app SOS feature shares your position with the emergency contacts you configured and with our team. In
+            an emergency, always call <strong>112</strong> (European single emergency number) first. Pillion does not
+            replace emergency services.
+        </p>
     </section>
 
-    <section>
-        <h2>6. Your conduct and safety</h2>
-        <ul>
-            <li>Wear the safety equipment provided and follow the driver&rsquo;s reasonable safety instructions and applicable
-                traffic rules.</li>
-            <li>Do not use the service while intoxicated to a degree that creates risk, carry prohibited items, or behave in a way
-                that is unlawful, abusive, discriminatory or dangerous.</li>
-            <li>You are responsible for damage you cause to a vehicle through misuse, and for losses arising from your breach of
-                these Terms.</li>
-            <li>We may suspend access or refuse service for safety, legal or fraud reasons.</li>
-        </ul>
+    <section id="sec-9">
+        <h2>9. Automated decisions (GDPR Art. 22)</h2>
+        <p>
+            Driver matching, ranking, price calculation (band + surge) and safety blocks are partially automated. You have
+            the right to request human intervention, express your view and contest the decision by writing to
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Details in our
+            <a href="/legal/dpia-summary-automated-decisions">DPIA Summary &mdash; Automated Decisions</a>.
+        </p>
     </section>
 
-    <section>
-        <h2>7. Disclaimer of warranties</h2>
-        <p>To the extent permitted by law, the platform is provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo;. We do not
-            guarantee the availability, timeliness, quality, safety or outcome of any ride, the conduct, acts or omissions of any
-            driver, the condition or roadworthiness of any vehicle, or that the service will be uninterrupted or error-free. Any
-            ratings, estimated times or driver information are indicative only.</p>
+    <section id="sec-10">
+        <h2>10. Right of withdrawal</h2>
+        <p>
+            The 14-day right of withdrawal under arts. 52 ff. of the Italian Consumer Code <strong>does not apply to
+            passenger transport services</strong> (art. 59 para. 1 lett. l). This exclusion is by law and we surface it
+            clearly before you book.
+        </p>
     </section>
 
-    <section>
-        <h2>8. Limitation of liability</h2>
-        <p>To the extent permitted by law, {{brand_name}} is responsible only for the intermediation service it provides and not
-            for the transport performed by independent drivers or for their acts or omissions. Our aggregate liability arising from
-            the intermediation service is limited to the platform fees attributable to the ride concerned. We are not liable for
-            indirect or consequential loss. <strong>Nothing in these Terms excludes or limits liability for death or personal injury
-            caused by our negligence, for fraud, or any liability that cannot be excluded under applicable law, including mandatory
-            consumer-protection rights.</strong></p>
+    <section id="sec-11">
+        <h2>11. Liability limits</h2>
+        <p>
+            {{brand_name}} is liable for its intermediation service. It is not liable for the performance of transport,
+            which is the driver's obligation. <strong>Nothing excludes liability for wilful misconduct or gross negligence
+            (art. 1229 Italian Civil Code), for death or personal injury caused by our negligence, nor any liability that
+            cannot be excluded by law.</strong> For transport-related damage claims, name the driver as the primary
+            counterparty; {{brand_name}} helps you retrieve contact data for the claim.
+        </p>
     </section>
 
-    <section>
-        <h2>9. Indemnity</h2>
-        <p>To the extent permitted by law, you agree to indemnify {{brand_name}} against claims, losses and costs arising from your
-            misuse of the platform, your breach of these Terms, or your violation of law or of the rights of a driver or third
-            party.</p>
+    <section id="sec-12">
+        <h2>12. Law, forum, ODR</h2>
+        <p>
+            Italian law applies. <strong>As a consumer, you have the right to the forum of your residence or domicile
+            (art. 33 Italian Consumer Code)</strong>; clauses restricting it are void. The European Commission ODR platform
+            is always available (<a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>).
+            Complaints: <a href="mailto:{{email_legal}}">{{email_legal}}</a>. For disputes with the driver, you can also
+            contact the driver's NCC consortium or the Italian Transport Regulatory Authority (ART).
+        </p>
     </section>
 
-    <section>
-        <h2>10. Suspension and termination</h2>
-        <p>You may close your account at any time. We may suspend or terminate access for breach of these Terms, safety risk, fraud
-            or legal requirement. Provisions that by their nature survive termination continue to apply.</p>
-    </section>
-
-    <section>
-        <h2>11. Complaints, consumer rights and dispute resolution</h2>
-        <p>Issues with a ride should be raised with us at <a href="mailto:{{email_support}}">{{email_support}}</a>; complaints about
-            the transport itself concern the driver as service provider. Mandatory consumer protections under the law of your
-            country of residence are unaffected by these Terms. The EU Online Dispute Resolution platform is available at
-            <a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>.</p>
-    </section>
-
-    <section>
-        <h2>12. Governing law, changes and contact</h2>
-        <p>These Terms are governed by Italian law, without prejudice to the mandatory consumer-protection rules of your country of
-            habitual residence; the court of the consumer&rsquo;s residence has jurisdiction where the law so provides. We may amend
-            these Terms with advance notice of material changes; continued use constitutes acceptance. Legal contact:
-            <a href="mailto:{{email_legal}}">{{email_legal}}</a>.</p>
-    </section>
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; VAT {{vat_number}} &middot; <a href="mailto:{{email_support}}">{{email_support}}</a></p>
+        <p class="legal-translation-note">Informational translation. In case of conflict, the Italian version prevails.</p>
+    </footer>
 </article>

@@ -1,0 +1,97 @@
+<article class="legal-document" lang="de">
+    <aside class="legal-draft-banner">
+        <strong>Technischer Entwurf.</strong> Laienverst&auml;ndliche Zusammenfassung einer internen DPIA im Entwurfsstatus.
+    </aside>
+
+    <header>
+        <h1>DPIA-Zusammenfassung &mdash; Geolokalisierung</h1>
+        <p class="legal-meta">Version {{version}} &middot; Zuletzt aktualisiert: {{last_updated}} &middot; In Kraft seit: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>Auf einen Blick</h2>
+            <ul>
+                <li>Fahrerstandort nur wenn online; Fahrzeugstandort nur w&auml;hrend aktiver Fahrt. Niemals 24/7.</li>
+                <li>Genauigkeit nur soweit f&uuml;r Matching/Sicherheit n&ouml;tig &mdash; kein Verhaltensfingerabdruck.</li>
+                <li>GPS-Spuren der Fahrt nach 30 Tagen gel&ouml;scht; nur aggregierte Metadaten f&uuml;r Audit/Analyse.</li>
+                <li>Tracking begrenzbar: Fahrer offline gehen, Fahrgast Fahrt beenden.</li>
+                <li>Vollst&auml;ndige DPIA auf Anfrage der Aufsichtsbeh&ouml;rden.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Warum eine DPIA</a></li>
+            <li><a href="#sec-2">Was wir erfassen</a></li>
+            <li><a href="#sec-3">Wann wir erfassen</a></li>
+            <li><a href="#sec-4">Risiken und Massnahmen</a></li>
+            <li><a href="#sec-5">Aufbewahrung</a></li>
+            <li><a href="#sec-6">Betroffenenrechte</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Warum eine DPIA</h2>
+        <p>
+            Systematisches Standortmonitoring ist eine Aktivit&auml;t, f&uuml;r die der ital. Garante (Beschluss 467 vom 11.
+            Oktober 2018) und der EDSA eine Folgenabsch&auml;tzung nach Art. 35 DSGVO f&uuml;r erforderlich halten.
+        </p>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. Was wir erfassen</h2>
+        <ul>
+            <li>Online-Fahrerstandort: Latitude, Longitude, Genauigkeit, Zeitstempel.</li>
+            <li>Fahrzeugstandort w&auml;hrend aktiver Fahrt: adaptive Frequenz.</li>
+            <li>Fahrgaststandort zum Anfragezeitpunkt: nur f&uuml;r Matching, dann verworfen.</li>
+        </ul>
+        <p>Kein Profil historischer Mobilit&auml;t auf Einzelpersonen. Kein Verkauf von Standortdaten.</p>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Wann wir erfassen</h2>
+        <ul>
+            <li>Fahrer: solange online; Offline stoppt den Stream sofort.</li>
+            <li>Fahrgast: nur bei Fahrtanfrage (Matching) und w&auml;hrend aktiver Fahrt (Tracking).</li>
+            <li>SOS: nur auf explizite Anfrage; geteilt mit Notfallkontakten und Operator.</li>
+        </ul>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Risiken und Massnahmen</h2>
+        <table>
+            <thead>
+                <tr><th>Risiko</th><th>Massnahme</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Unbefugtes Tracking ausserhalb Arbeitszeit</td><td>Stream nur online; Stopp bei Offline.</td></tr>
+                <tr><td>Verhaltensprofilbildung</td><td>Kein ML auf individuelle Muster; nur aggregierte Metriken.</td></tr>
+                <tr><td>Unbefugter Zugriff auf GPS-Spuren</td><td>Verschl&uuml;sselung at-rest, RBAC, Audit-Logs, nur Security-Operatoren.</td></tr>
+                <tr><td>&Uuml;berlange Aufbewahrung</td><td>Automatische L&ouml;schung nach 30 Tagen (<code>privacy:purge-old-locations</code>).</td></tr>
+                <tr><td>Klartext&uuml;bertragung</td><td>TLS 1.2+ Pflicht auf Client &harr; gps-ingest &harr; compass.</td></tr>
+                <tr><td>Weitergabe an Dritte</td><td>Nur an freigeschaltete Notfallkontakte oder Beh&ouml;rden auf gesetzlicher Grundlage.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Aufbewahrung</h2>
+        <p>
+            GPS-Spuren nach <strong>30 Tagen</strong> gel&ouml;scht. Fahrt-Metadaten 10 Jahre (Steuer) ohne Routengeometrie,
+            nur geokodierte Start-/Zielpunkte. L&ouml;schung automatisch und protokolliert.
+        </p>
+    </section>
+
+    <section id="sec-6">
+        <h2>6. Betroffenenrechte</h2>
+        <p>
+            Aus&uuml;bung &uuml;ber <a href="/legal/gdpr-rights">Ihre DSGVO-Rechte</a>. Widerspruch gegen Geolokalisierung
+            w&auml;hrend einer Fahrt erfordert Fahrtende. Als Fahrer: Offline gehen. Plattform funktioniert nicht ohne
+            aktive Geolokalisierung w&auml;hrend aktiver Fahrt.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; DPIA-Vollakte: <a href="mailto:{{email_dpo}}">{{email_dpo}}</a></p>
+        <p class="legal-translation-note">Informative &Uuml;bersetzung. Bei Abweichung gilt die italienische Fassung.</p>
+    </footer>
+</article>

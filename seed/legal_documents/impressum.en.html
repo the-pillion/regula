@@ -1,58 +1,110 @@
 <article class="legal-document" lang="en">
+    <aside class="legal-draft-banner">
+        <strong>Technical draft.</strong> Written by the product team, not yet reviewed by qualified Italian counsel.
+    </aside>
+
     <header>
-        <h1>Impressum / Legal Notice</h1>
-        <p class="legal-meta">Last updated: {{last_updated}}</p>
-        <p>Information pursuant to applicable EU and national disclosure obligations (incl. § 5 DDG/TMG for Germany and
-            Art. 7 D.Lgs. 70/2003 for Italy).</p>
+        <h1>Legal Notice / Impressum</h1>
+        <p class="legal-meta">Version {{version}} &middot; Last updated: {{last_updated}} &middot; Effective: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>At a glance</h2>
+            <ul>
+                <li>Identification of the information society service provider (D.Lgs. 70/2003 art. 7).</li>
+                <li>Company information under art. 49 Italian Consumer Code.</li>
+                <li>ODR platform for consumer disputes.</li>
+                <li>Liability limits on content and external links.</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
-        <h2>Company details</h2>
-        <p>
-            <strong>{{legal_name}}</strong><br />
-            Legal form: {{legal_form}}<br />
-            Registered office: {{registered_street}}, {{registered_postal_code}} {{registered_city}} ({{registered_province}}), {{registered_country}}<br />
-            VAT / P.IVA: {{vat_number}}<br />
-            Tax code / Codice fiscale: {{tax_code}}<br />
-            REA (Chamber of Commerce reg. no.): {{rea_number}} — {{chamber_of_commerce}}<br />
-            Share capital: {{share_capital}}
-        </p>
-    </section>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Provider identification</a></li>
+            <li><a href="#sec-2">Registration and company data</a></li>
+            <li><a href="#sec-3">Dispute resolution (ODR)</a></li>
+            <li><a href="#sec-4">Content liability</a></li>
+            <li><a href="#sec-5">External links</a></li>
+            <li><a href="#sec-6">Copyright and IP</a></li>
+            <li><a href="#sec-7">Contacts</a></li>
+        </ol>
+    </nav>
 
-    <section>
-        <h2>Contact</h2>
+    <section id="sec-1">
+        <h2>1. Provider identification (D.Lgs. 70/2003 art. 7)</h2>
         <p>
-            Email: <a href="mailto:{{email_support}}">{{email_support}}</a><br />
-            Legal: <a href="mailto:{{email_legal}}">{{email_legal}}</a><br />
+            <strong>{{legal_name}}</strong> ({{legal_form}})<br />
+            Registered office: {{registered_street}}, {{registered_postal_code}} {{registered_city}} ({{registered_province}}),
+            {{registered_country}}<br />
+            Email: <a href="mailto:{{email_legal}}">{{email_legal}}</a><br />
             Phone: {{phone}}<br />
             Website: <a href="{{website}}" rel="noopener noreferrer" target="_blank">{{website}}</a>
         </p>
     </section>
 
-    <section>
-        <h2>Data protection</h2>
-        <p>Data Protection Officer: <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>. For full information on how we process
-            personal data, see our Privacy Policy and Data Protection Rights notice.</p>
+    <section id="sec-2">
+        <h2>2. Registration and company data</h2>
+        <p>
+            VAT: {{vat_number}}<br />
+            Tax code: {{tax_code}}<br />
+            REA: {{rea_number}}<br />
+            Share capital: {{share_capital}}<br />
+            Registration: {{chamber_of_commerce}}
+        </p>
     </section>
 
-    <section>
-        <h2>Dispute resolution</h2>
-        <p>The European Commission provides an Online Dispute Resolution platform under Regulation (EU) 524/2013:
-            <a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>. We are neither obliged nor
-            generally willing to participate in dispute-resolution proceedings before a consumer arbitration board, except where
-            required by law.</p>
+    <section id="sec-3">
+        <h2>3. Dispute resolution (ODR)</h2>
+        <p>
+            Under art. 14 of Regulation (EU) 524/2013 and art. 141-bis of the Italian Consumer Code, the European online
+            dispute resolution platform (ODR) is available at
+            <a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>. For complaints:
+            <a href="mailto:{{email_legal}}">{{email_legal}}</a>.
+        </p>
+        <p>
+            For disputes with drivers about transport, you can contact the Italian Transport Regulatory Authority (ART) or
+            the driver's NCC consortium. For commercial practices, the competent authority is AGCM
+            (<a href="https://www.agcm.it" rel="noopener noreferrer" target="_blank">https://www.agcm.it</a>).
+        </p>
     </section>
 
-    <section>
-        <h2>Liability for content and links</h2>
-        <p>Content on our sites is prepared with care but we give no warranty as to its accuracy or completeness. We are not
-            responsible for the content of external sites linked from our platform; responsibility lies with their respective
-            operators.</p>
+    <section id="sec-4">
+        <h2>4. Content liability</h2>
+        <p>
+            Content on {{website}} and the {{brand_name}} app is prepared with care but does not constitute legal, tax or
+            technical advice. Operational information on fares, times and driver availability is indicative and may vary.
+            {{brand_name}} is not liable for misuse of content or for errors not attributable to gross negligence or wilful
+            misconduct.
+        </p>
     </section>
 
-    <section>
-        <h2>Copyright</h2>
-        <p>Content and works on this platform are protected by Italian copyright law (Law 633/1941) and applicable EU law.
-            Unauthorised reproduction, adaptation or distribution is prohibited.</p>
+    <section id="sec-5">
+        <h2>5. External links</h2>
+        <p>
+            The site and app may contain links to third-party sites. {{brand_name}} does not control their content and is
+            not liable for their data practices or terms.
+        </p>
     </section>
+
+    <section id="sec-6">
+        <h2>6. Copyright and IP</h2>
+        <p>
+            The "{{brand_name}}" mark, logos, GUIs, source code, icons and editorial content are owned by {{legal_name}} or
+            licensed. Reproduction, even partial, without authorisation is prohibited. For mark use requests:
+            <a href="mailto:{{email_legal}}">{{email_legal}}</a>.
+        </p>
+    </section>
+
+    <section id="sec-7">
+        <h2>7. Contacts</h2>
+        <p>
+            General: <a href="mailto:{{email_legal}}">{{email_legal}}</a> &middot; Support:
+            <a href="mailto:{{email_support}}">{{email_support}}</a> &middot; Privacy:
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; VAT {{vat_number}} &middot; {{registered_country}}</p>
+        <p class="legal-translation-note">Informational translation. In case of conflict, the Italian version prevails.</p>
+    </footer>
 </article>

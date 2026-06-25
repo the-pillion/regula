@@ -1,0 +1,109 @@
+<article class="legal-document" lang="de">
+    <aside class="legal-draft-banner">
+        <strong>Technischer Entwurf.</strong> Laienverst&auml;ndliche Zusammenfassung einer internen DPIA im Entwurfsstatus.
+    </aside>
+
+    <header>
+        <h1>DPIA-Zusammenfassung &mdash; Automatisierte Entscheidungen</h1>
+        <p class="legal-meta">Version {{version}} &middot; Zuletzt aktualisiert: {{last_updated}} &middot; In Kraft seit: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>Auf einen Blick</h2>
+            <ul>
+                <li>Vier Plattformentscheidungen sind teilautomatisiert: <strong>Matching</strong>, Pool-<strong>Ranking</strong>, <strong>Eignungsfilter</strong>, <strong>Sicherheitsblocks</strong>.</li>
+                <li><strong>Preis</strong>berechnung: deterministische, deklarierte Regeln (Zonenband + Surge-Cap + Fahrermodifikator), kein opakes ML.</li>
+                <li><strong>Sperrung</strong>: stets von Person best&auml;tigt vor Bestandskraft.</li>
+                <li>Recht auf menschliches Eingreifen, Stellungnahme, Anfechtung (Art. 22 DSGVO).</li>
+                <li>Vollst&auml;ndige DPIA auf Anfrage der Aufsichtsbeh&ouml;rden.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Warum eine DPIA</a></li>
+            <li><a href="#sec-2">Was automatisiert ist</a></li>
+            <li><a href="#sec-3">Was <em>nicht</em> automatisiert ist</a></li>
+            <li><a href="#sec-4">Risiken und Massnahmen</a></li>
+            <li><a href="#sec-5">Recht auf menschliches Eingreifen</a></li>
+            <li><a href="#sec-6">Transparenz der Inputs</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Warum eine DPIA</h2>
+        <p>
+            Art. 22 DSGVO beschr&auml;nkt ausschliesslich automatisierte Entscheidungen mit rechtlicher oder erheblicher
+            Wirkung. F&uuml;r Fahrer h&auml;tte eine automatische Sperre erhebliche Wirkung; f&uuml;r Fahrg&auml;ste kann
+            eine Matching-Entscheidung den Zugang zum Dienst beeintr&auml;chtigen.
+        </p>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. Was automatisiert ist</h2>
+        <table>
+            <thead>
+                <tr><th>Entscheidung</th><th>Inputs</th><th>Logik</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Matching</td><td>Fahrer-/Fahrgastposition, vehicle type, Eignungsflags</td><td>Radius-Suche + Ranking; Offer-Fanout an Pool von N (Standard 3)</td></tr>
+                <tr><td>Pool-Ranking</td><td>Distanz, Rating, completed_rides, Zonenpr&auml;senz</td><td>Lineare Kombination, zonenspezifische Gewichte</td></tr>
+                <tr><td>Eignungsfilter</td><td>abgelaufene Dokumente, fehlende NCC, ung&uuml;ltige RCA, Zonensperre</td><td>Deterministische Boolean-Regel</td></tr>
+                <tr><td>Sicherheitsblocks</td><td>PrefactGuard-Signale, Background-Check, Meldungen</td><td>Konfigurierbare Schwellen; tempor&auml;rer Block bis menschliche Pr&uuml;fung</td></tr>
+                <tr><td>Preisberechnung</td><td>Distanz, Dauer, Zonenbasis, Surge, Modifikator, Geb&uuml;hren/Steuern</td><td>Additive Formel in price-arbiter (kein ML)</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Was <em>nicht</em> automatisiert ist</h2>
+        <ul>
+            <li>Erstgenehmigung Fahrer: Mensch pr&uuml;ft Dokumente, NCC, Garage, "uso terzi", RCA.</li>
+            <li>Endg&uuml;ltige Sperrung: Best&auml;tigung durch Operator.</li>
+            <li>Wiederaufnahme: stets menschlich.</li>
+            <li>Stornierung-/No-show-Streitigkeiten: menschlich.</li>
+            <li>Sicherheitsmeldungen: PrefactGuard-Flow mit menschlicher Pr&uuml;fung.</li>
+            <li>Preisband: vom Operator anhand lokaler NCC-Tarife, nicht algorithmisch.</li>
+        </ul>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Risiken und Massnahmen</h2>
+        <table>
+            <thead>
+                <tr><th>Risiko</th><th>Massnahme</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Indirekte Diskriminierung im Ranking</td><td>Gewichte in App publiziert; periodisches Audit pro Zone</td></tr>
+                <tr><td>Fehlerhafte Sperrung</td><td>Menschliche Best&auml;tigung Pflicht, 14-Tage-Anfechtung</td></tr>
+                <tr><td>Preisopakheit</td><td>Breakdown in App vor Best&auml;tigung sichtbar</td></tr>
+                <tr><td>&Uuml;berm&auml;ssiger Surge</td><td>Zonen-Cap (i.d.R. 2,0&times;); Surge kann Preis nie unter Modifikator senken</td></tr>
+                <tr><td>Compliance-Bias</td><td>Deterministische, deklarierte Regeln gleich f&uuml;r jeden in Zone</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Recht auf menschliches Eingreifen (Art. 22 DSGVO)</h2>
+        <p>F&uuml;r jede automatisierte Entscheidung k&ouml;nnen Sie:</p>
+        <ol>
+            <li>Menschliches Eingreifen verlangen &uuml;ber <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>.</li>
+            <li>Standpunkt darlegen und Zusatzinformationen liefern.</li>
+            <li>Entscheidung anfechten und Pr&uuml;fung anfordern.</li>
+        </ol>
+        <p>Antwort binnen <strong>14 Tagen</strong>. Auto-Blocks w&auml;hrend Pr&uuml;fung ausgesetzt (ausser festgestelltes Sicherheitsrisiko).</p>
+    </section>
+
+    <section id="sec-6">
+        <h2>6. Transparenz der Inputs</h2>
+        <p>
+            &Uuml;ber das Auskunftsrecht (Art. 15) erhalten Sie eine Kopie der Inputs einer Sie betreffenden Entscheidung:
+            Online-Pr&auml;senz, Compliance-Ergebnis, relevante PrefactGuard-Signale, Offer-Daten. Interne Modellgewichte
+            werden aus Anti-Betrugs-Gr&uuml;nden nicht geteilt; eine verst&auml;ndliche Logik-Erkl&auml;rung wird geliefert.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; DPIA-Vollakte: <a href="mailto:{{email_dpo}}">{{email_dpo}}</a></p>
+        <p class="legal-translation-note">Informative &Uuml;bersetzung. Bei Abweichung gilt die italienische Fassung.</p>
+    </footer>
+</article>

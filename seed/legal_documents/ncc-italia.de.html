@@ -1,0 +1,138 @@
+<article class="legal-document" lang="de">
+    <aside class="legal-draft-banner">
+        <strong>Technischer Entwurf.</strong> Vom Produktteam verfasst, noch nicht von qualifizierten italienischen Rechtsanwalten gepr&uuml;ft.
+    </aside>
+
+    <header>
+        <h1>NCC Italien &mdash; Fahrerspezifische Voraussetzungen</h1>
+        <p class="legal-meta">Version {{version}} &middot; Zuletzt aktualisiert: {{last_updated}} &middot; In Kraft seit: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>Auf einen Blick</h2>
+            <ul>
+                <li>T&auml;tigkeit in Italien als <strong>NCC (Noleggio Con Conducente)</strong> unter Gesetz 21/1992.</li>
+                <li>Kommunale Genehmigung, Garage in derselben Gemeinde, Fahrerverzeichnis, CAP KB, RCA "uso terzi", USt., "uso terzi" Zulassung erforderlich.</li>
+                <li><strong>R&uuml;ckkehr zur Garage</strong> (Bersani-Dekret) und Art. 82 ital. StVG zur Fahrzeughomologation.</li>
+                <li>Wir pr&uuml;fen vorgelegte Dokumente; G&uuml;ltigkeit/Aktualit&auml;t bleibt Ihre Verantwortung.</li>
+                <li>Fehlende/abgelaufene Voraussetzungen blockieren neue Fahrtannahmen.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Regulatorischer Rahmen</a></li>
+            <li><a href="#sec-2">Erforderliche Dokumente</a></li>
+            <li><a href="#sec-3">R&uuml;ckkehrregel</a></li>
+            <li><a href="#sec-4">"Uso terzi"</a></li>
+            <li><a href="#sec-5">Was wir pr&uuml;fen</a></li>
+            <li><a href="#sec-6">Was Sie selbst best&auml;tigen</a></li>
+            <li><a href="#sec-7">Abl&auml;ufe und Erneuerungen</a></li>
+            <li><a href="#sec-8">Kontrollen und Sperrung</a></li>
+            <li><a href="#sec-9">Gerichtsstand und Kontakte</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Regulatorischer Rahmen</h2>
+        <ul>
+            <li><strong>Gesetz 21/1992</strong>: nicht-linienm&auml;ssige &ouml;ffentliche Personenbef&ouml;rderung (Taxi/NCC).</li>
+            <li><strong>D.L. 223/2006 (Bersani)</strong>, L. 248/2006: R&uuml;ckkehr zur Garage.</li>
+            <li><strong>D.M. 215/1991</strong>: Voraussetzungen Fahrerverzeichnis.</li>
+            <li><strong>D.Lgs. 285/1992 (StVG)</strong>, insb. Art. 82 "uso proprio" vs "uso terzi".</li>
+            <li>Regionale/kommunale Umsetzungen (Tarife, Liveries, Plaketten).</li>
+        </ul>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. Erforderliche Dokumente</h2>
+        <table>
+            <thead>
+                <tr><th>Dokument</th><th>Slug</th><th>Hinweise</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Kommunale NCC-Genehmigung</td><td><code>autorizzazione_ncc</code></td><td>Garagengemeinde. Felder: Nummer, ausstellende Gemeinde, Ablauf.</td></tr>
+                <tr><td>Garagenanmeldung</td><td><code>rimessa_declaration</code></td><td>Adresse in der ausstellenden Gemeinde. Cross-Check automatisch.</td></tr>
+                <tr><td>Fahrerverzeichnis</td><td><code>ruolo_conducenti</code></td><td>Handelskammer, NCC-Sektion.</td></tr>
+                <tr><td>CAP KB</td><td><code>cap_kb</code></td><td>Berufsfahrerzertifikat.</td></tr>
+                <tr><td>F&uuml;hrerschein A oder B</td><td><code>patente_a</code> / <code>patente_b</code></td><td>Mind. 3 Jahre Besitz.</td></tr>
+                <tr><td>Zulassungsbescheinigung</td><td><code>vehicle_registration</code></td><td>Pflicht "uso terzi" Vermerk (siehe &sect;4).</td></tr>
+                <tr><td>RCA-Police</td><td><code>insurance_rca</code></td><td>Mit "uso terzi" Erweiterung.</td></tr>
+                <tr><td>USt.</td><td><code>partita_iva</code></td><td>Aktiv f&uuml;r Bef&ouml;rderung (ATECO 49.32 oder 49.39).</td></tr>
+                <tr><td>Steuer-ID</td><td><code>codice_fiscale</code></td><td>F&uuml;r Identifikation und DAC7.</td></tr>
+                <tr><td>F&uuml;hrungszeugnis</td><td><code>criminal_record</code></td><td>Aktuell binnen 6 Monaten.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. R&uuml;ckkehr zur Garage</h2>
+        <p>
+            Bersani-Dekret: Zwischen Fahrten muss das NCC-Fahrzeug <strong>zur Garage zur&uuml;ckkehren (oder in der
+            Provinz bleiben)</strong>. Plattform erzwingt kein R&uuml;ckkehr-Tracking, setzt aber Einhaltung voraus.
+            Meldungen von Versto&szlig; k&ouml;nnen zu Sperrung und Beh&ouml;rdenkommunikation f&uuml;hren.
+        </p>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. "Uso terzi" Fahrzeug</h2>
+        <p>
+            Art. 82 StVG unterscheidet "uso proprio" und "uso terzi". F&uuml;r NCC obligatorisch "uso terzi" mit Vermerk auf
+            Zulassungsbescheinigung. Plattform lehnt "uso proprio" Fahrzeuge beim Onboarding ab; Pr&uuml;fung via
+            <em>uso_terzi</em>-Checkbox und manueller Review des Bildes.
+        </p>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Was wir pr&uuml;fen</h2>
+        <ul>
+            <li>Vorhandensein/Lesbarkeit aller Dokumente aus &sect;2.</li>
+            <li>Konsistenz NCC-Gemeinde &harr; Garagengemeinde (automatischer Cross-Check).</li>
+            <li>"Uso terzi" Vermerk auf Zulassung (manuelle Review).</li>
+            <li>Mind. 3 Jahre F&uuml;hrerschein.</li>
+            <li>Abl&auml;ufe: System blockiert neue Annahmen beim ersten abgelaufenen Dokument.</li>
+        </ul>
+    </section>
+
+    <section id="sec-6">
+        <h2>6. Was Sie selbst best&auml;tigen</h2>
+        <ul>
+            <li>Tats&auml;chliche Inhaberschaft NCC-Genehmigung und Garage.</li>
+            <li>Aktualit&auml;t von Erneuerungen.</li>
+            <li>Einhaltung kommunaler/regionaler Beschl&uuml;sse (Liveries, Plaketten, Mindesttarife).</li>
+            <li>R&uuml;ckkehrregel.</li>
+            <li>Fahrzeugwartung und Hauptuntersuchung.</li>
+        </ul>
+    </section>
+
+    <section id="sec-7">
+        <h2>7. Abl&auml;ufe und Erneuerungen</h2>
+        <p>
+            Wir benachrichtigen kommende Abl&auml;ufe (30/7 Tage vorher) per E-Mail und in App. Erneuerung ist Ihre
+            Verantwortung. Abgelaufene Dokumente blockieren neue Annahmen.
+        </p>
+    </section>
+
+    <section id="sec-8">
+        <h2>8. Kontrollen und Sperrung</h2>
+        <p>
+            Bei Kontrolle (Polizia Locale, Carabinieri, Guardia di Finanza) zeigen Sie Originale. Plattform kooperiert mit
+            Beh&ouml;rden bei begr&uuml;ndeten Anfragen. Substantiierte Verstossmeldungen k&ouml;nnen zu vorsorglicher
+            Sperrung f&uuml;hren; stets von Person best&auml;tigt und anfechtbar
+            (<a href="/legal/terms-of-service-driver">Driver TOS &sect;14</a>).
+        </p>
+    </section>
+
+    <section id="sec-9">
+        <h2>9. Gerichtsstand und Kontakte</h2>
+        <p>
+            Anlage zu Driver TOS; bei Konflikt gehen Driver TOS vor. Gerichtsstand {{registered_city}} f&uuml;r Streit mit
+            Plattform. F&uuml;r Streit mit Kommune gilt das jeweilige Kommunalrecht. Kontakt:
+            <a href="mailto:{{email_legal}}">{{email_legal}}</a>.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; USt-IdNr. {{vat_number}} &middot; siehe auch <a href="/legal/terms-of-service-driver">Driver TOS</a></p>
+        <p class="legal-translation-note">Informative &Uuml;bersetzung. Bei Abweichung gilt die italienische Fassung.</p>
+    </footer>
+</article>

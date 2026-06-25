@@ -1,152 +1,240 @@
 <article class="legal-document" lang="de">
+    <aside class="legal-draft-banner">
+        <strong>Technischer Entwurf.</strong> Vom Produktteam verfasst, noch nicht von qualifizierten italienischen Rechtsanwalten gepr&uuml;ft.
+    </aside>
+
     <header>
         <h1>Datenschutzerkl&auml;rung</h1>
-        <p class="legal-meta">Zuletzt aktualisiert: {{last_updated}} · G&uuml;ltig ab: {{effective_date}}</p>
-        <p>
-            {{legal_name}} (&bdquo;{{brand_name}}&ldquo;, &bdquo;wir&ldquo;) ist der Verantwortliche f&uuml;r die &uuml;ber die
-            {{brand_name}}-Plattform verarbeiteten personenbezogenen Daten. Wir verarbeiten Ihre Daten gem&auml;&szlig; der
-            Verordnung (EU) 2016/679 (&bdquo;DSGVO&ldquo;) und dem italienischen Gesetzesdekret 196/2003 in der jeweils geltenden
-            Fassung. Diese Erkl&auml;rung beschreibt, welche Daten wir erheben, warum, auf welcher Rechtsgrundlage, wie lange wir
-            sie speichern und welche Rechte Sie haben.
-        </p>
+        <p class="legal-meta">Version {{version}} &middot; Zuletzt aktualisiert: {{last_updated}} &middot; In Kraft seit: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>Auf einen Blick</h2>
+            <ul>
+                <li>Verantwortlicher: <strong>{{legal_name}}</strong>. DSB unter <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>.</li>
+                <li>4 Rechtsgrundlagen: Vertrag, rechtliche Verpflichtung, lebenswichtige Interessen (SOS), berechtigtes Interesse (Sicherheit/Anti-Betrug). Marketing nur mit Einwilligung.</li>
+                <li>GPS-Spuren der Fahrt nach 30 Tagen gel&ouml;scht; Fahrt-Metadaten 10 Jahre (Steuerpflichten). Abhol-PIN nach Verwendung nur als Salt-Hash.</li>
+                <li>Automatisierte Entscheidungen (Matching, Eignung): Anspruch auf menschliches Eingreifen (Art. 22 DSGVO).</li>
+                <li>DAC7-Meldung an ital. Steuerbeh&ouml;rde. Volle Auftragsverarbeiterliste in <a href="/legal/processor-list">Auftragsverarbeiterverzeichnis</a>.</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
-        <h2>1. Verantwortlicher und Kontakt</h2>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Verantwortlicher und Kontakte</a></li>
+            <li><a href="#sec-2">Welche Daten</a></li>
+            <li><a href="#sec-3">Rechtsgrundlagen und Zwecke</a></li>
+            <li><a href="#sec-4">Aufbewahrung</a></li>
+            <li><a href="#sec-5">Service-Architektur</a></li>
+            <li><a href="#sec-6">Empf&auml;nger, Auftragsverarbeiter, Transfers</a></li>
+            <li><a href="#sec-7">Automatisierte Entscheidungen (Art. 22)</a></li>
+            <li><a href="#sec-8">DAC7-Meldung</a></li>
+            <li><a href="#sec-9">Abhol-PIN</a></li>
+            <li><a href="#sec-10">Ihre Rechte</a></li>
+            <li><a href="#sec-11">Sicherheit</a></li>
+            <li><a href="#sec-12">Minderj&auml;hrige</a></li>
+            <li><a href="#sec-13">&Auml;nderungen und Kontakte</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Verantwortlicher und Kontakte</h2>
         <p>
             <strong>{{legal_name}}</strong> ({{legal_form}})<br />
             {{registered_street}}, {{registered_postal_code}} {{registered_city}} ({{registered_province}}), {{registered_country}}<br />
-            USt-IdNr. / P.IVA: {{vat_number}} · REA: {{rea_number}}<br />
-            E-Mail: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>
+            USt-IdNr. {{vat_number}} &middot; REA {{rea_number}}<br />
+            Datenschutz: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>
         </p>
         <p>
-            Unseren Datenschutzbeauftragten (DSB/DPO) erreichen Sie unter
-            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>{{dpo_name}}.
+            Datenschutzbeauftragte/r {{dpo_name}} erreichbar unter <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>.
+            Verarbeitung nach Verordnung (EU) 2016/679 (DSGVO) und ital. Datenschutzkodex (D.Lgs. 196/2003 i.d.g.F.).
         </p>
     </section>
 
-    <section>
-        <h2>2. Welche Daten wir erheben</h2>
+    <section id="sec-2">
+        <h2>2. Welche Daten</h2>
         <h3>2.1 Kontodaten</h3>
         <ul>
-            <li>Vor- und Nachname, E-Mail-Adresse, Telefonnummer</li>
-            <li>Anmeldedaten (verwaltet durch unseren Identit&auml;tsanbieter; Passw&ouml;rter werden nie im Klartext gespeichert)</li>
-            <li>Profilfoto (optional)</li>
-            <li>Geburtsdatum (erforderlich f&uuml;r die Fahrer-Eignung und Altersverifikation)</li>
-            <li>Bevorzugte Sprache und Spracheinstellungen</li>
+            <li>Name, E-Mail, Telefon, Profilbild (optional), Sprache</li>
+            <li>Geburtsdatum (Altersnachweis und Fahrereignung)</li>
+            <li>Zugangsdaten via Zitadel (Passw&ouml;rter nie im Klartext)</li>
         </ul>
         <h3>2.2 Fahrer-Onboarding-Daten</h3>
         <ul>
-            <li>Amtliche Ausweisdokumente (Personalausweis, Reisepass, F&uuml;hrerschein)</li>
-            <li>Fahrzeugzulassung und Versicherungsnachweise</li>
-            <li>Berufliche Bef&ouml;rderungslizenzen, soweit nach lokalem Recht erforderlich</li>
-            <li>Ergebnisse der Eignungspr&uuml;fungen (Entscheidungszusammenfassung, nicht die vollst&auml;ndige Akte)</li>
-            <li>Bankverbindung f&uuml;r Auszahlungen (beim Zahlungsdienstleister, nicht auf unseren Servern)</li>
+            <li>Ausweise und F&uuml;hrerscheine</li>
+            <li>NCC-Genehmigung, Fahrerverzeichnis, CAP KB, Garagenanmeldung</li>
+            <li>Zulassungsbescheinigung (mit "uso terzi" Vermerk), RCA-Versicherung</li>
+            <li>Steuer-ID, USt., Bankdaten (beim Zahlungsdienstleister)</li>
+            <li>Pr&uuml;fungsergebnisse (Entscheidungszusammenfassung, nicht die volle Akte)</li>
         </ul>
         <h3>2.3 Fahrt- und Standortdaten</h3>
         <ul>
-            <li>Abhol- und Zielorte sowie geokodierte Adressen</li>
-            <li>GPS-Routenkoordinaten w&auml;hrend einer aktiven Fahrt</li>
-            <li>Zeitstempel, Dauer, Distanz, Fahrpreis und Status der Fahrt</li>
-            <li>Einmalige Abhol-Best&auml;tigungscodes (nach Verwendung verworfen)</li>
+            <li>Start-/Zielpunkte, geokodierte Adressen</li>
+            <li>GPS-Spuren w&auml;hrend aktiver Fahrt</li>
+            <li>Zeiten, Dauer, Distanz, Tarif, Fahrtstatus</li>
+            <li>Abhol-PIN (siehe &sect;9)</li>
         </ul>
         <h3>2.4 Zahlungsdaten</h3>
         <p>
-            Zahlungen werden von unserem Zahlungsdienstleister abgewickelt. Wir speichern nur eine Kundenreferenz, eine
-            Zahlungsreferenz und den Transaktionsstatus. Vollst&auml;ndige Kartennummern und Bankzugangsdaten werden niemals auf
-            unserer Infrastruktur gespeichert.
+            Zahlungen werden vom Zahlungsdienstleister (Stripe) bearbeitet. Wir halten nur Kunden- und Transaktionsreferenz
+            und Status. Vollst&auml;ndige Kartennummern und Bankzugangsdaten sind <strong>nie auf unseren Servern</strong>.
         </p>
         <h3>2.5 Kommunikation und technische Daten</h3>
         <ul>
-            <li>In-App-Nachrichten, Support-Tickets und E-Mail-Korrespondenz</li>
-            <li>Push-Benachrichtigungs-Token und SMS-Verifizierungscodes (Codes nach Zustellung nicht gespeichert)</li>
-            <li>IP-Adresse, Ger&auml;temodell, Betriebssystem, App-Version und Sitzungskennungen</li>
-            <li>Fehlerprotokolle, Absturzberichte und Cookie-Kennungen (siehe Cookie-Richtlinie)</li>
+            <li>In-App-Nachrichten, Support-Tickets, E-Mail</li>
+            <li>Push-Tokens, SMS-Codes (Codes nicht nach Versand gespeichert)</li>
+            <li>IP, Ger&auml;temodell, OS, App-Version, Sitzungs-IDs</li>
+            <li>Fehler-Logs, Crash-Reports, Cookie-IDs (siehe <a href="/legal/cookie-policy">Cookie-Richtlinie</a>)</li>
         </ul>
     </section>
 
-    <section>
-        <h2>3. Rechtsgrundlagen der Verarbeitung</h2>
+    <section id="sec-3">
+        <h2>3. Rechtsgrundlagen und Zwecke</h2>
         <table>
             <thead>
                 <tr><th>Zweck</th><th>Rechtsgrundlage (Art. 6 DSGVO)</th></tr>
             </thead>
             <tbody>
-                <tr><td>Kontoerstellung und Plattformzugang</td><td>Art. 6(1)(b) — Vertragserf&uuml;llung</td></tr>
-                <tr><td>Fahrer-Eignung und Dokumentenpr&uuml;fung</td><td>Art. 6(1)(c) rechtliche Verpflichtung; Art. 6(1)(b) Vertrag</td></tr>
-                <tr><td>Zahlungen und Auszahlungen</td><td>Art. 6(1)(b) — Vertragserf&uuml;llung</td></tr>
-                <tr><td>Sicherheit, SOS und Notf&auml;lle</td><td>Art. 6(1)(d) lebenswichtige Interessen; Art. 6(1)(f) berechtigtes Interesse</td></tr>
-                <tr><td>Betrugspr&auml;vention und Plattformsicherheit</td><td>Art. 6(1)(f) — berechtigtes Interesse</td></tr>
-                <tr><td>Marketingkommunikation</td><td>Art. 6(1)(a) — Einwilligung</td></tr>
-                <tr><td>Steuer- und buchhalterische Pflichten</td><td>Art. 6(1)(c) — rechtliche Verpflichtung</td></tr>
+                <tr><td>Kontoerstellung und Login</td><td>Art. 6(1)(b) &mdash; Vertrag</td></tr>
+                <tr><td>Dokumenten- und Eignungspr&uuml;fung Fahrer</td><td>Art. 6(1)(c) rechtliche Verpflichtung; (b) Vertrag</td></tr>
+                <tr><td>Fahrtausf&uuml;hrung und Matching</td><td>Art. 6(1)(b)</td></tr>
+                <tr><td>Zahlungen und Abrechnung</td><td>Art. 6(1)(b)</td></tr>
+                <tr><td>Sicherheit, SOS, Notf&auml;lle</td><td>Art. 6(1)(d) lebenswichtige Interessen; (f) berechtigtes Interesse</td></tr>
+                <tr><td>Betrugspr&auml;vention und Plattformsicherheit</td><td>Art. 6(1)(f)</td></tr>
+                <tr><td>DAC7-Meldung an Agenzia delle Entrate</td><td>Art. 6(1)(c)</td></tr>
+                <tr><td>Steuer und Buchhaltung</td><td>Art. 6(1)(c)</td></tr>
+                <tr><td>Direktmarketing</td><td>Art. 6(1)(a) &mdash; Einwilligung (widerruflich)</td></tr>
             </tbody>
         </table>
     </section>
 
-    <section>
-        <h2>4. Speicherdauer</h2>
+    <section id="sec-4">
+        <h2>4. Aufbewahrung</h2>
         <table>
             <thead>
-                <tr><th>Kategorie</th><th>Speicherdauer</th></tr>
+                <tr><th>Kategorie</th><th>Aufbewahrung</th></tr>
             </thead>
             <tbody>
-                <tr><td>Kontodaten (aktive Nutzer)</td><td>Dauer des Kontos, danach anonymisiert</td></tr>
-                <tr><td>GPS-Koordinaten der Fahrten</td><td>Innerhalb von 30 Tagen nach Fahrtende gel&ouml;scht oder anonymisiert</td></tr>
-                <tr><td>Fahrtdaten (Metadaten)</td><td>Bis zu 10 Jahre (Steuer- und Buchhaltungsrecht)</td></tr>
-                <tr><td>Fahrerdokumente</td><td>Vertragsdauer zuz&uuml;glich gesetzlicher Frist</td></tr>
-                <tr><td>Zahlungsunterlagen</td><td>Bis zu 10 Jahre (EU-Buchhaltungsregeln)</td></tr>
-                <tr><td>Support- und Streitf&auml;lle</td><td>Bis zu 3 Jahre nach Abschluss</td></tr>
-                <tr><td>Marketing-Einwilligungen</td><td>Bis zum Widerruf, zuz&uuml;glich Rechenschaftszeitraum</td></tr>
-                <tr><td>Gel&ouml;schte Konten</td><td>Bei L&ouml;schung anonymisiert (Art. 17); gesetzlich erforderliche Daten bleiben erhalten</td></tr>
+                <tr><td>Kontodaten (aktive Nutzer)</td><td>Konto-Lebensdauer, danach anonymisiert</td></tr>
+                <tr><td>GPS-Spuren der Fahrt</td><td>Gel&ouml;scht/genullt binnen 30 Tagen</td></tr>
+                <tr><td>Fahrt-Metadaten</td><td>10 Jahre (Steuerpflichten)</td></tr>
+                <tr><td>Fahrerdokumente</td><td>Vertragsdauer + gesetzliche Frist</td></tr>
+                <tr><td>Zahlungsdaten</td><td>10 Jahre (EU-Buchhaltung)</td></tr>
+                <tr><td>Abhol-PIN</td><td>Klartext 5 Min; Salt-Hash f&uuml;r Audit bis 30 Tage</td></tr>
+                <tr><td>Support-Tickets</td><td>3 Jahre ab Abschluss</td></tr>
+                <tr><td>Marketing-Einwilligung</td><td>Bis Widerruf + Rechenschaftszeit</td></tr>
+                <tr><td>Gel&ouml;schte Konten</td><td>Anonymisiert (Art. 17); Steuerdaten wo erforderlich</td></tr>
             </tbody>
         </table>
     </section>
 
-    <section>
-        <h2>5. Empf&auml;nger und Dritte</h2>
-        <p>Wir verkaufen Ihre personenbezogenen Daten nicht. Wir geben sie nur an Auftragsverarbeiter weiter, die auf unsere
-            Weisung handeln, darunter Anbieter f&uuml;r Zahlungen, Karten und Routing, SMS- und Push-Zustellung sowie
-            Hosting, sowie an zust&auml;ndige Beh&ouml;rden, soweit gesetzlich vorgeschrieben. Unsere
-            aktiven Auftragsverarbeiter und Unterauftragsverarbeiter sind in unserem Unterauftragsverarbeiter-Register
-            ver&ouml;ffentlicht. Alle Auftragsverarbeiter sind durch Vereinbarungen nach Art. 28 gebunden; Daten&uuml;bermittlungen
-            au&szlig;erhalb des EWR st&uuml;tzen sich auf Angemessenheitsbeschl&uuml;sse oder Standardvertragsklauseln.</p>
+    <section id="sec-5">
+        <h2>5. Service-Architektur (wer verarbeitet was)</h2>
+        <p>Die Plattform {{brand_name}} besteht aus spezialisierten Diensten:</p>
+        <ul>
+            <li><strong>pillion-core</strong> &mdash; Identit&auml;t, Onboarding, Compliance, Zahlungen, Audit.</li>
+            <li><strong>ride-matcher</strong> &mdash; Fahrtmatching/Orchestrierung. Kein PII; nullable externe IDs.</li>
+            <li><strong>price-arbiter</strong> &mdash; Preis-, Geb&uuml;hren-, Steuerberechnung. Kein PII.</li>
+            <li><strong>cadastre</strong> &mdash; Zonengeometrie und Tarifkarten.</li>
+            <li><strong>compass / gps-ingest</strong> &mdash; GPS-Erfassung/Streaming.</li>
+            <li><strong>prefactguard</strong> &mdash; Trust &amp; Safety, Background Check, Risikosignale.</li>
+            <li><strong>regula</strong> &mdash; Rechtsdokumente, Annahmen, Einwilligungen, Auftragsverarbeiterverzeichnis.</li>
+            <li><strong>herald</strong> &mdash; Benachrichtigungen (Push, SMS, E-Mail).</li>
+            <li><strong>fastgeo</strong> &mdash; Routing und Geocoding.</li>
+        </ul>
     </section>
 
-    <section>
-        <h2>6. Ihre Rechte</h2>
-        <p>Sie haben das Recht auf Auskunft, Berichtigung, L&ouml;schung, Einschr&auml;nkung, Daten&uuml;bertragbarkeit,
-            Widerspruch und Widerruf der Einwilligung sowie das Recht, nicht einer ausschlie&szlig;lich automatisierten
-            Entscheidung mit rechtlicher oder &auml;hnlich erheblicher Wirkung unterworfen zu werden. Die Aus&uuml;bung ist in
-            unserer gesonderten Information <em>Ihre Datenschutzrechte</em> beschrieben. F&uuml;r eine Anfrage schreiben Sie an
-            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Wir antworten innerhalb eines Monats.</p>
-        <p>Sie k&ouml;nnen Beschwerde bei der {{supervisory_authority}} (<a href="{{supervisory_authority_url}}" rel="noopener noreferrer" target="_blank">{{supervisory_authority_url}}</a>) oder bei der Aufsichtsbeh&ouml;rde Ihres gew&ouml;hnlichen Aufenthalts einlegen.</p>
+    <section id="sec-6">
+        <h2>6. Empf&auml;nger, Auftragsverarbeiter, Transfers</h2>
+        <p>
+            Wir verkaufen Ihre Daten nicht. Weitergabe nur an weisungsgebundene Auftragsverarbeiter (Zahlungen, Maps,
+            SMS/Push, Hosting, Monitoring) und an zust&auml;ndige Beh&ouml;rden, soweit gesetzlich vorgeschrieben. Vollst&auml;ndige
+            Liste im <a href="/legal/processor-list">Auftragsverarbeiter- und Subauftragsverarbeiterverzeichnis</a>. Alle
+            sind durch Art. 28 DSGVO-Vereinbarungen gebunden. Drittl&auml;ndertransfers st&uuml;tzen sich auf
+            Angemessenheitsbeschl&uuml;sse oder EU-Standardvertragsklauseln (SCC).
+        </p>
     </section>
 
-    <section>
-        <h2>7. Sicherheit</h2>
-        <p>Wir treffen geeignete technische und organisatorische Ma&szlig;nahmen, darunter Verschl&uuml;sselung bei der
-            &Uuml;bertragung und im Ruhezustand, starkes Passwort-Hashing, rollenbasierte Zugriffskontrolle, Audit-Protokollierung,
-            Dienstzugriff mit minimalen Rechten und planm&auml;&szlig;ige L&ouml;schung von Standortdaten. Bei einer
-            Datenschutzverletzung mit Risiko f&uuml;r Ihre Rechte benachrichtigen wir die Aufsichtsbeh&ouml;rde innerhalb von 72
-            Stunden und die Betroffenen unverz&uuml;glich (Art. 33-34).</p>
+    <section id="sec-7">
+        <h2>7. Automatisierte Entscheidungen (Art. 22 DSGVO)</h2>
+        <p>Manche Plattformfunktionen treffen <strong>automatisierte Entscheidungen</strong>:</p>
+        <ul>
+            <li>Matching und Ranking in der Angebotspool;</li>
+            <li>Preisberechnung (Band + Surge + Fahrermodifikator);</li>
+            <li>Eignungsfilter (abgelaufene Dokumente, Versicherung, erlaubte Zone);</li>
+            <li>Sicherheitsblocks bei kritischem Signal.</li>
+        </ul>
+        <p>
+            <strong>Fahrersperre</strong> wird stets von einer Person best&auml;tigt. Anspruch auf menschliches Eingreifen,
+            Stellungnahme, Anfechtung &uuml;ber <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Antwort binnen 1
+            Monat. Details: <a href="/legal/dpia-summary-automated-decisions">DPIA-Zusammenfassung</a>.
+        </p>
     </section>
 
-    <section>
-        <h2>8. Minderj&auml;hrige</h2>
-        <p>Die Plattform richtet sich nicht an Personen unter 18 Jahren. Wir erheben wissentlich keine Daten von
-            Minderj&auml;hrigen und l&ouml;schen solche Daten, sobald uns dies bekannt wird.</p>
+    <section id="sec-8">
+        <h2>8. DAC7-Meldung</h2>
+        <p>
+            Nach Richtlinie (EU) 2021/514 / D.Lgs. 32/2023 melden wir j&auml;hrlich der Agenzia delle Entrate Identifikations-
+            und Umsatzdaten der Fahrer. Rechtsgrundlage: rechtliche Verpflichtung (Art. 6(1)(c)). Meldung als XML &uuml;ber
+            offizielle AdE-Kan&auml;le.
+        </p>
     </section>
 
-    <section>
-        <h2>9. &Auml;nderungen</h2>
-        <p>Wir k&ouml;nnen diese Erkl&auml;rung aktualisieren, um &Auml;nderungen unserer Praxis oder der Rechtslage abzubilden.
-            Wesentliche &Auml;nderungen werden vorab per E-Mail oder In-App-Hinweis mitgeteilt. Das Datum &bdquo;Zuletzt
-            aktualisiert&ldquo; gibt die aktuelle Fassung an.</p>
+    <section id="sec-9">
+        <h2>9. Abhol-PIN</h2>
+        <p>
+            Bei Fahrer-Ankunft erzeugen wir einen 6-stelligen PIN mit kryptographisch sicherem RNG. Klartext 5 Min sichtbar,
+            max. 3 Versuche. Auf Server nur <strong>Salt-Hash SHA-256</strong>. Nach Nutzung/Ablauf nur Hash f&uuml;r Audit
+            bis 30 Tage. Zweck: Schutz vor Personenverwechslung und betr&uuml;gerischen Abholungen.
+        </p>
     </section>
 
-    <section>
-        <h2>10. Kontakt</h2>
-        <p>Datenschutzanfragen: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> · Datenschutzbeauftragter:
-            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>.</p>
+    <section id="sec-10">
+        <h2>10. Ihre Rechte</h2>
+        <p>
+            Recht auf <strong>Auskunft, Berichtigung, L&ouml;schung, Einschr&auml;nkung, Daten&uuml;bertragbarkeit, Widerspruch,
+            Einwilligungswiderruf</strong> und <strong>keine automatisierten Einzelentscheidungen</strong>. Praktische Anleitung
+            in <a href="/legal/gdpr-rights">Ihre DSGVO-Rechte</a>. Anfragen:
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Antwort binnen 1 Monat.
+        </p>
+        <p>
+            Beschwerde m&ouml;glich beim <strong>{{supervisory_authority}}</strong>
+            (<a href="{{supervisory_authority_url}}" rel="noopener noreferrer" target="_blank">{{supervisory_authority_url}}</a>)
+            oder bei der Aufsichtsbeh&ouml;rde Ihres gew&ouml;hnlichen Aufenthaltsorts.
+        </p>
     </section>
+
+    <section id="sec-11">
+        <h2>11. Sicherheit</h2>
+        <p>
+            Geeignete technische und organisatorische Massnahmen: TLS 1.2+, Verschl&uuml;sselung at-rest, robustes
+            Passwort-Hashing &uuml;ber Zitadel, RBAC, Audit-Logs, Least-Privilege, Netzwerk-Isolation sensibler Dienste,
+            planm&auml;ssige L&ouml;schung von GPS-Daten. Datenpanne mit Risiko: Meldung an Aufsichtsbeh&ouml;rde binnen 72h
+            (Art. 33), an Betroffene unverz&uuml;glich (Art. 34).
+        </p>
+    </section>
+
+    <section id="sec-12">
+        <h2>12. Minderj&auml;hrige</h2>
+        <p>
+            Plattform nicht f&uuml;r unter 18-J&auml;hrige. Wir erfassen wissentlich keine Minderj&auml;hrigen-Daten und
+            l&ouml;schen sie bei Kenntnis.
+        </p>
+    </section>
+
+    <section id="sec-13">
+        <h2>13. &Auml;nderungen und Kontakte</h2>
+        <p>
+            Aktualisierung bei &Auml;nderungen von Praxis oder Recht. Wesentliche &Auml;nderungen im Voraus per E-Mail oder
+            In-App. "Zuletzt aktualisiert" markiert die aktuelle Revision.
+        </p>
+        <p>
+            Datenschutz: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> &middot; DSB:
+            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; {{registered_street}}, {{registered_postal_code}} {{registered_city}} &middot; USt-IdNr. {{vat_number}}</p>
+        <p class="legal-translation-note">Informative &Uuml;bersetzung. Bei Abweichung gilt die italienische Fassung.</p>
+    </footer>
 </article>

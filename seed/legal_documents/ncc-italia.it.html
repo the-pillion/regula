@@ -1,0 +1,147 @@
+<article class="legal-document" lang="it">
+    <aside class="legal-draft-banner">
+        <strong>Bozza tecnica.</strong> Documento redatto dal team di prodotto e non ancora rivisto da un legale italiano qualificato.
+    </aside>
+
+    <header>
+        <h1>NCC Italia &mdash; Requisiti Specifici per i Conducenti</h1>
+        <p class="legal-meta">Versione {{version}} &middot; Ultimo aggiornamento: {{last_updated}} &middot; In vigore dal: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>In sintesi</h2>
+            <ul>
+                <li>Operi in Italia come <strong>NCC (Noleggio Con Conducente)</strong> indipendente, ai sensi della Legge 15 gennaio 1992, n. 21.</li>
+                <li>Devi avere autorizzazione comunale, rimessa nello stesso comune, ruolo conducenti, CAP KB, RCA uso terzi, P.IVA, veicolo &laquo;uso terzi&raquo;.</li>
+                <li>Vige la regola del <strong>rientro in rimessa</strong> (decreto Bersani) e l&rsquo;art. 82 Codice della Strada sull&rsquo;omologazione veicolare.</li>
+                <li>Noi verifichiamo i documenti che ci consegni; la responsabilit&agrave; della validit&agrave; e dell&rsquo;aggiornamento resta tua.</li>
+                <li>Il mancato possesso o la scadenza di un requisito blocca l&rsquo;accettazione di nuove corse.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Quadro normativo</a></li>
+            <li><a href="#sec-2">Documenti richiesti</a></li>
+            <li><a href="#sec-3">Regola del rientro in rimessa</a></li>
+            <li><a href="#sec-4">Veicolo &laquo;uso terzi&raquo;</a></li>
+            <li><a href="#sec-5">Cosa verifichiamo noi</a></li>
+            <li><a href="#sec-6">Cosa autocertifichi tu</a></li>
+            <li><a href="#sec-7">Scadenze e rinnovi</a></li>
+            <li><a href="#sec-8">Controlli e sospensione</a></li>
+            <li><a href="#sec-9">Foro e contatti</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Quadro normativo</h2>
+        <p>
+            L&rsquo;attivit&agrave; NCC &egrave; regolata in Italia da:
+        </p>
+        <ul>
+            <li><strong>Legge 15 gennaio 1992, n. 21</strong> &mdash; disciplina del trasporto di persone mediante autoservizi pubblici non di linea (taxi e NCC).</li>
+            <li><strong>D.L. 4 luglio 2006, n. 223 (decreto Bersani)</strong>, convertito in L. 248/2006 &mdash; regola del rientro in rimessa.</li>
+            <li><strong>D.M. 215/1991</strong> &mdash; requisiti per l&rsquo;iscrizione al ruolo dei conducenti.</li>
+            <li><strong>D.Lgs. 285/1992 (Codice della Strada)</strong>, in particolare l&rsquo;art. 82 sull&rsquo;omologazione &laquo;uso proprio&raquo; vs &laquo;uso terzi&raquo;.</li>
+            <li>Norme regionali e regolamenti comunali attuativi, che possono integrare i requisiti (tariffe minime, livree, contrassegni).</li>
+        </ul>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. Documenti richiesti</h2>
+        <table>
+            <thead>
+                <tr><th>Documento</th><th>Slug onboarding</th><th>Note</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Autorizzazione comunale NCC</td><td><code>autorizzazione_ncc</code></td><td>Rilasciata dal comune sede della rimessa. Campi richiesti: numero, comune emittente, scadenza.</td></tr>
+                <tr><td>Dichiarazione di rimessa</td><td><code>rimessa_declaration</code></td><td>Indirizzo della rimessa nello stesso comune dell&rsquo;autorizzazione. Cross-check automatico.</td></tr>
+                <tr><td>Iscrizione al Ruolo dei Conducenti</td><td><code>ruolo_conducenti</code></td><td>Camera di Commercio, sezione NCC.</td></tr>
+                <tr><td>CAP KB</td><td><code>cap_kb</code></td><td>Certificato di abilitazione professionale.</td></tr>
+                <tr><td>Patente A o B</td><td><code>patente_a</code> / <code>patente_b</code></td><td>Anzianit&agrave; minima 3 anni. Patente A per moto, B per auto.</td></tr>
+                <tr><td>Libretto di circolazione</td><td><code>vehicle_registration</code></td><td>Annotazione &laquo;uso terzi&raquo; obbligatoria (vedi §4).</td></tr>
+                <tr><td>Polizza RCA</td><td><code>insurance_rca</code></td><td>Estesa al trasporto di persone con conducente per uso terzi.</td></tr>
+                <tr><td>Partita IVA</td><td><code>partita_iva</code></td><td>Attiva per attivit&agrave; di trasporto (codice ATECO 49.32 o 49.39 a seconda dell&rsquo;assetto).</td></tr>
+                <tr><td>Codice fiscale</td><td><code>codice_fiscale</code></td><td>Per identificazione e comunicazione DAC7.</td></tr>
+                <tr><td>Certificato carichi pendenti / casellario</td><td><code>criminal_record</code></td><td>Aggiornato negli ultimi 6 mesi.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Regola del rientro in rimessa</h2>
+        <p>
+            Il decreto Bersani prevede che, tra una corsa e l&rsquo;altra, l&rsquo;auto NCC <strong>rientri (o resti nella
+            provincia)</strong> della rimessa dichiarata. La piattaforma non impone tracciamento del rientro, ma assume che
+            tu rispetti la regola; segnalazioni di violazione possono portare a sospensione e a comunicazioni
+            all&rsquo;autorit&agrave; competente. La portata e l&rsquo;interpretazione della regola sono state oggetto di
+            interventi legislativi e ricorsi; verifica le delibere comunali della tua zona.
+        </p>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Veicolo &laquo;uso terzi&raquo;</h2>
+        <p>
+            L&rsquo;art. 82 del Codice della Strada distingue tra omologazione &laquo;uso proprio&raquo; (trasporto privato) e
+            &laquo;uso terzi&raquo; (trasporto a pagamento per conto di altri). Per l&rsquo;NCC il veicolo deve essere immatricolato
+            o riomologato per uso terzi, con apposita annotazione sulla Carta di Circolazione. La piattaforma rifiuta
+            l&rsquo;onboarding di veicoli &laquo;uso proprio&raquo;: la verifica avviene in fase di approvazione del libretto
+            tramite checkbox <em>uso_terzi</em> e revisione manuale dell&rsquo;immagine.
+        </p>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Cosa verifichiamo noi</h2>
+        <ul>
+            <li>Presenza e leggibilit&agrave; di tutti i documenti elencati al §2.</li>
+            <li>Coerenza tra comune di autorizzazione NCC e comune della rimessa (cross-check automatico al momento dell&rsquo;approvazione del documento rimessa).</li>
+            <li>Annotazione &laquo;uso terzi&raquo; sul libretto di circolazione (review manuale).</li>
+            <li>Anzianit&agrave; minima patente di 3 anni.</li>
+            <li>Scadenze: il sistema blocca l&rsquo;accettazione di nuove corse al primo documento scaduto.</li>
+        </ul>
+    </section>
+
+    <section id="sec-6">
+        <h2>6. Cosa autocertifichi tu</h2>
+        <ul>
+            <li>Effettiva titolarit&agrave; dell&rsquo;autorizzazione NCC e della rimessa nei dati dichiarati.</li>
+            <li>Aggiornamento dei rinnovi presso il comune e la Camera di Commercio.</li>
+            <li>Rispetto delle delibere comunali e regionali (livree, contrassegni, tariffe minime).</li>
+            <li>Rispetto della regola del rientro in rimessa.</li>
+            <li>Manutenzione del veicolo e validit&agrave; della revisione.</li>
+        </ul>
+    </section>
+
+    <section id="sec-7">
+        <h2>7. Scadenze e rinnovi</h2>
+        <p>
+            Ti notifichiamo via email e in app le scadenze imminenti (30 giorni e 7 giorni prima). La rinotifica della
+            scadenza &egrave; un servizio di cortesia: la responsabilit&agrave; del rinnovo &egrave; tua. Documenti scaduti
+            bloccano l&rsquo;accettazione di nuove corse fino al rinnovo.
+        </p>
+    </section>
+
+    <section id="sec-8">
+        <h2>8. Controlli e sospensione</h2>
+        <p>
+            In caso di controllo della Polizia Locale, Carabinieri o Guardia di Finanza, devi esibire i documenti originali.
+            La piattaforma collabora con le autorit&agrave; nelle richieste motivate. Segnalazioni circostanziate di
+            violazione (rimessa non corrispondente, uso proprio, autorizzazione revocata) possono portare a sospensione
+            cautelare; la sospensione &egrave; sempre confermata da un operatore umano e &egrave; contestabile (vedi
+            <a href="/legal/terms-of-service-driver">TOS Conducenti §14</a>).
+        </p>
+    </section>
+
+    <section id="sec-9">
+        <h2>9. Foro e contatti</h2>
+        <p>
+            Allegato ai Termini Conducenti; in caso di conflitto, prevalgono i Termini. Foro: {{registered_city}} per
+            controversie con la piattaforma. Per controversie con l&rsquo;autorit&agrave; comunale, valgono le regole del
+            comune emittente. Contatto:
+            <a href="mailto:{{email_legal}}">{{email_legal}}</a>.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; P.IVA {{vat_number}} &middot; Vedi anche <a href="/legal/terms-of-service-driver">TOS Conducenti</a></p>
+    </footer>
+</article>

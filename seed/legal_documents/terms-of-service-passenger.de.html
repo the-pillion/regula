@@ -1,120 +1,176 @@
 <article class="legal-document" lang="de">
+    <aside class="legal-draft-banner">
+        <strong>Technischer Entwurf.</strong> Vom Produktteam verfasst, noch nicht von qualifizierten italienischen Rechtsanwalten gepr&uuml;ft.
+    </aside>
+
     <header>
-        <h1>Allgemeine Gesch&auml;ftsbedingungen &mdash; Fahrg&auml;ste</h1>
-        <p class="legal-meta">Zuletzt aktualisiert: {{last_updated}} · G&uuml;ltig ab: {{effective_date}}</p>
-        <p>
-            Diese Fahrgast-Bedingungen regeln die Nutzung der {{brand_name}}-Plattform, betrieben von {{legal_name}}
-            ({{legal_form}}), USt-IdNr. {{vat_number}}, {{registered_city}} ({{registered_province}}), {{registered_country}}. Mit der
-            Erstellung eines Kontos oder der Buchung einer Fahrt stimmen Sie diesen Bedingungen zu. Wenn Sie auch als Fahrer t&auml;tig
-            sind, gelten daf&uuml;r die gesonderten Fahrer-Bedingungen.
-        </p>
+        <h1>Nutzungsbedingungen &mdash; Fahrg&auml;ste</h1>
+        <p class="legal-meta">Version {{version}} &middot; Zuletzt aktualisiert: {{last_updated}} &middot; In Kraft seit: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>Auf einen Blick</h2>
+            <ul>
+                <li>Sie buchen eine Fahrt bei einem unabh&auml;ngigen NCC-Fahrer &uuml;ber unsere Plattform. {{brand_name}} ist Vermittler, kein Verkehrsunternehmen.</li>
+                <li>Transparenter Preis vor Best&auml;tigung. Der Tarif kann innerhalb eines Zonen-<em>Bandes</em> schwanken; der Fahrer w&auml;hlt den Wert im Band.</li>
+                <li>Bei Fahrtbeginn teilen Sie einen <strong>6-stelligen Abhol-PIN</strong> mit. Ohne PIN keine Fahrt.</li>
+                <li>Stornierung: kostenlos innerhalb der Toleranzfrist; danach Stufengeb&uuml;hr. Stornierung w&auml;hrend der Fahrt &uuml;ber Gegenseitigkeits-Handshake.</li>
+                <li>Sie sind Verbraucher: Gerichtsstand am Wohnsitz bleibt (Art. 33 ital. Verbrauchergesetz). Widerrufsrecht gilt nicht f&uuml;r Personenbef&ouml;rderung (Art. 59 lett. l).</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
-        <h2>1. Unsere Rolle &mdash; nur Marktplatz</h2>
-        <p>{{brand_name}} ist ein technologischer Marktplatz, der Sie mit unabh&auml;ngigen Motorradtaxi-Fahrern zusammenbringt. Wir
-            stellen die Technologie f&uuml;r Vermittlung, Fahrpreisberechnung und Zahlungsabwicklung bereit. <strong>Wir sind kein
-            Bef&ouml;rderungsanbieter, kein Bef&ouml;rderer und kein Arbeitgeber der Fahrer</strong> und nicht Partei des
-            Bef&ouml;rderungsvertrags, der unmittelbar zwischen Ihnen und dem Fahrer zustande kommt. Allein der Fahrer erbringt die
-            Bef&ouml;rderung und ist daf&uuml;r verantwortlich.</p>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Was dieser Vertrag ist</a></li>
+            <li><a href="#sec-2">Konto und Eignung</a></li>
+            <li><a href="#sec-3">Buchung und Preis</a></li>
+            <li><a href="#sec-4">Abhol-PIN</a></li>
+            <li><a href="#sec-5">Stornierung, No-show, Handshake</a></li>
+            <li><a href="#sec-6">Zahlung und Beleg</a></li>
+            <li><a href="#sec-7">Bewertungen und Meldungen</a></li>
+            <li><a href="#sec-8">Sicherheit und SOS</a></li>
+            <li><a href="#sec-9">Automatisierte Entscheidungen</a></li>
+            <li><a href="#sec-10">Widerrufsrecht</a></li>
+            <li><a href="#sec-11">Haftungsgrenzen</a></li>
+            <li><a href="#sec-12">Recht, Gerichtsstand, ODR</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Was dieser Vertrag ist</h2>
+        <p>
+            Mit der Buchung schliessen Sie zwei Vertr&auml;ge: (a) den <strong>Bef&ouml;rderungsvertrag</strong> direkt mit
+            dem unabh&auml;ngigen NCC-Fahrer; (b) den <strong>Vermittlungsvertrag</strong> mit {{legal_name}} f&uuml;r die
+            Nutzung von {{brand_name}}. {{brand_name}} ist nicht Verkehrsunternehmen und nicht Partei des
+            Bef&ouml;rderungsvertrags.
+        </p>
     </section>
 
-    <section>
-        <h2>2. Voraussetzungen und Konto</h2>
+    <section id="sec-2">
+        <h2>2. Konto und Eignung</h2>
+        <p>
+            Mindestalter 18, Konto authentifiziert &uuml;ber Zitadel. Wahre Angaben, sichere Zugangsdaten. Sie d&uuml;rfen f&uuml;r
+            eine andere Person buchen; Sie bleiben gegen&uuml;ber dem Fahrer haftbar.
+        </p>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Buchung und Preis</h2>
+        <p>
+            Vor der Buchung sehen Sie einen vom <code>price-arbiter</code> aus dem Cadastre-Zonentarif berechneten
+            <strong>Kostenvoranschlag</strong>: Grundpreis, Distanz, Zeit, etwaige Surge- und Fahrermodifikator-Zuschl&auml;ge.
+            Surge ist durch eine Zonenobergrenze (i.d.R. 2,0&times;) gedeckelt; der Fahrermodifikator bewegt sich in einem
+            <strong>Zonen-Min/Max-Band</strong>. Surge und Modifikator sind <em>additiv</em> auf der Zwischensumme, nicht
+            multiplikativ.
+        </p>
+        <p>
+            Die Best&auml;tigung autorisiert eine <strong>Vorautorisierung</strong> auf Ihr Zahlungsmittel f&uuml;r den
+            quotierten H&ouml;chstbetrag. Am Ende wird der tats&auml;chliche Betrag eingezogen, der &Uuml;berschuss
+            freigegeben. Die Plattform lehnt Fahrten &uuml;ber eine zonenspezifische Maximaldistanz hinaus ab und
+            verifiziert den Tarif serverseitig (signed quote_id).
+        </p>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Abhol-PIN</h2>
+        <p>
+            Wenn der Fahrer am Abholpunkt eintrifft, erhalten Sie einen serverseitig erzeugten <strong>6-stelligen PIN</strong>
+            (CSPRNG, G&uuml;ltigkeit 5 Min, max. 3 Versuche). Sie m&uuml;ssen ihn dem Fahrer vor der Abfahrt mitteilen. Ohne
+            verifizierten PIN startet die Fahrt nicht. Der PIN sch&uuml;tzt vor Verwechslungen und betr&uuml;gerischen
+            Abholungen.
+        </p>
+        <aside class="legal-honest">
+            <strong>Ehrliche Grenze.</strong> Der PIN wird serverseitig als <em>salt-Hash SHA-256</em> gespeichert; der
+            Klartext ist Ihnen 5 Min sichtbar, danach &uuml;berlebt nur der Hash f&uuml;r Audits.
+        </aside>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Stornierung, No-show, Handshake</h2>
+        <p>
+            Kostenlose Stornierung innerhalb der <strong>Toleranzfrist</strong> (zonenkonfigurierbar, i.d.R. 2 Min).
+            Dar&uuml;ber hinaus drei Stufen:
+        </p>
         <ul>
-            <li>Sie m&uuml;ssen mindestens 18 Jahre alt und gesch&auml;ftsf&auml;hig sein.</li>
-            <li>Sie m&uuml;ssen zutreffende Angaben machen und Ihre Zugangsdaten sichern; Sie sind f&uuml;r Aktivit&auml;ten unter
-                Ihrem Konto verantwortlich.</li>
-            <li>Wir k&ouml;nnen ein Konto ablehnen, sperren oder schlie&szlig;en, um Nutzer zu sch&uuml;tzen, Recht einzuhalten oder
-                Betrug und Missbrauch zu verhindern.</li>
+            <li><strong>after_grace</strong> &mdash; Fahrgast storniert vor Abholung: Plattformgeb&uuml;hr + Fahrerentsch&auml;digung pro Zone.</li>
+            <li><strong>in_progress</strong> &mdash; Stornierung w&auml;hrend der Fahrt via gegenseitigem Handshake (<em>full_refund</em>, <em>full_pay</em>, <em>partial:NN</em>).</li>
+            <li><strong>no_show</strong> &mdash; der Fahrer meldet Abwesenheit nach Wartezeitablauf: zonenspezifische no_show-Geb&uuml;hr.</li>
         </ul>
+        <p>
+            Zonens&auml;tze sichtbar in App und im Cadastre-Panel. Streit: <a href="mailto:{{email_support}}">{{email_support}}</a> &mdash; endg&uuml;ltige Entscheidung durch Person.
+        </p>
     </section>
 
-    <section>
-        <h2>3. Buchungen und Fahrpreise</h2>
-        <ul>
-            <li>Eine best&auml;tigte Buchung begr&uuml;ndet einen Bef&ouml;rderungsvertrag zwischen Ihnen und dem Fahrer;
-                {{brand_name}} handelt ausschlie&szlig;lich als Vermittler.</li>
-            <li>Die Fahrpreise berechnen sich aus Grundtarifen, Distanz, Zeit und geltenden Zonenpreisen und werden vor der
-                Best&auml;tigung angezeigt.</li>
-            <li>Sch&auml;tzungen sind unverbindlich; der Endpreis richtet sich nach der tats&auml;chlichen Fahrt. Maut, Wartezeit und
-                Zuschl&auml;ge k&ouml;nnen anfallen, soweit ausgewiesen.</li>
-        </ul>
+    <section id="sec-6">
+        <h2>6. Zahlung und Beleg</h2>
+        <p>
+            Zahlung &uuml;ber Stripe Connect mit <em>destination charge</em>: der Fahrgastbetrag fliesst dem Fahrer zu,
+            abz&uuml;glich Plattformgeb&uuml;hr und Steuer/Abgaben. Sie erhalten einen Beleg per E-Mail und in der App. Der
+            Fahrer stellt ggf. eine eigene NCC-Rechnung nach italienischem Recht aus. {{brand_name}} ist nicht
+            Verkehrsunternehmen und stellt die Bef&ouml;rderungsrechnung nicht aus; eine eigene Rechnung f&uuml;r die
+            Plattformgeb&uuml;hr wird ggf. erstellt.
+        </p>
     </section>
 
-    <section>
-        <h2>4. Zahlung</h2>
-        <p>Sie erm&auml;chtigen uns, &uuml;ber unseren Zahlungsdienstleister Ihren gew&auml;hlten Zahlungsweg mit dem Fahrpreis und
-            etwaigen Geb&uuml;hren (einschlie&szlig;lich Storno- oder No-Show-Geb&uuml;hren) zu belasten. Belege werden in der App
-            bereitgestellt. Wir wickeln die Zahlung im Namen des Fahrers ab und speichern keine vollst&auml;ndigen Kartendaten.</p>
+    <section id="sec-7">
+        <h2>7. Bewertungen und Meldungen</h2>
+        <p>
+            Sie k&ouml;nnen die Fahrt mehrdimensional bewerten (Hygiene, Sicherheit, Fahrqualit&auml;t). Bewertungen sind
+            Transparenz, keine automatische Strafe: keine Deaktivierung ohne menschliche Pr&uuml;fung. Eine schwere
+            Sicherheitsmeldung l&ouml;st den PrefactGuard-Fluss aus und wird stets von einer Person gepr&uuml;ft.
+        </p>
     </section>
 
-    <section>
-        <h2>5. Stornierungen und Nichterscheinen</h2>
-        <p>Die Stornierung ist vor der Zuweisung eines Fahrers und innerhalb eines kurzen Kulanzzeitraums nach der Zuweisung
-            kostenlos. Nach Ablauf dieses Zeitraums oder sobald der Fahrer eingetroffen ist bzw. die Fahrt l&auml;uft, kann eine
-            Geb&uuml;hr anfallen, wie in der App zum Zeitpunkt der Buchung angezeigt.</p>
+    <section id="sec-8">
+        <h2>8. Sicherheit und SOS</h2>
+        <p>
+            Die In-App-SOS-Funktion teilt Ihre Position mit den konfigurierten Notfallkontakten und unserem Team. Im
+            Notfall stets zuerst <strong>112</strong> w&auml;hlen. Pillion ersetzt keine Rettungsdienste.
+        </p>
     </section>
 
-    <section>
-        <h2>6. Ihr Verhalten und Sicherheit</h2>
-        <ul>
-            <li>Tragen Sie die bereitgestellte Schutzausr&uuml;stung und befolgen Sie die angemessenen Sicherheitshinweise des
-                Fahrers sowie die Verkehrsregeln.</li>
-            <li>Nutzen Sie den Dienst nicht in einem Zustand, der Gefahren schafft, f&uuml;hren Sie keine verbotenen Gegenst&auml;nde
-                mit und verhalten Sie sich nicht rechtswidrig, beleidigend, diskriminierend oder gef&auml;hrlich.</li>
-            <li>Sie haften f&uuml;r Sch&auml;den, die Sie durch unsachgem&auml;&szlig;en Gebrauch an einem Fahrzeug verursachen, und
-                f&uuml;r Sch&auml;den aus Ihrem Versto&szlig; gegen diese Bedingungen.</li>
-            <li>Wir k&ouml;nnen den Zugang aus Sicherheits-, Rechts- oder Betrugsgr&uuml;nden sperren oder den Dienst verweigern.</li>
-        </ul>
+    <section id="sec-9">
+        <h2>9. Automatisierte Entscheidungen (Art. 22 DSGVO)</h2>
+        <p>
+            Matching, Ranking, Preisberechnung (Band + Surge) und Sicherheitsblocks sind teilautomatisiert. Anspruch auf
+            menschliches Eingreifen, Stellungnahme, Anfechtung: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>.
+            Details: <a href="/legal/dpia-summary-automated-decisions">DPIA-Zusammenfassung &mdash; Automatisierte
+            Entscheidungen</a>.
+        </p>
     </section>
 
-    <section>
-        <h2>7. Gew&auml;hrleistungsausschluss</h2>
-        <p>Soweit gesetzlich zul&auml;ssig, wird die Plattform &bdquo;wie besehen&ldquo; und &bdquo;wie verf&uuml;gbar&ldquo;
-            bereitgestellt. Wir &uuml;bernehmen keine Gew&auml;hr f&uuml;r Verf&uuml;gbarkeit, P&uuml;nktlichkeit, Qualit&auml;t,
-            Sicherheit oder Ergebnis einer Fahrt, f&uuml;r das Verhalten, Handeln oder Unterlassen eines Fahrers, f&uuml;r den
-            Zustand oder die Verkehrst&uuml;chtigkeit eines Fahrzeugs oder daf&uuml;r, dass der Dienst ununterbrochen oder fehlerfrei
-            ist. Bewertungen, gesch&auml;tzte Zeiten und Fahrerangaben sind unverbindlich.</p>
+    <section id="sec-10">
+        <h2>10. Widerrufsrecht</h2>
+        <p>
+            Das 14-t&auml;gige Widerrufsrecht nach Art. 52 ff. ital. Verbrauchergesetz <strong>gilt nicht f&uuml;r
+            Personenbef&ouml;rderung</strong> (Art. 59 Abs. 1 lett. l). Diese Ausnahme ist gesetzlich und wird vor der
+            Buchung klar dargestellt.
+        </p>
     </section>
 
-    <section>
-        <h2>8. Haftungsbeschr&auml;nkung</h2>
-        <p>Soweit gesetzlich zul&auml;ssig, haftet {{brand_name}} nur f&uuml;r die erbrachte Vermittlungsleistung und nicht f&uuml;r
-            die von unabh&auml;ngigen Fahrern durchgef&uuml;hrte Bef&ouml;rderung oder deren Handeln oder Unterlassen. Unsere
-            Gesamthaftung aus der Vermittlungsleistung ist auf die der betreffenden Fahrt zuzuordnenden Plattformgeb&uuml;hren
-            beschr&auml;nkt. F&uuml;r mittelbare oder Folgesch&auml;den haften wir nicht. <strong>Diese Bedingungen schlie&szlig;en
-            die Haftung f&uuml;r Tod oder K&ouml;rperverletzung infolge unserer Fahrl&auml;ssigkeit, f&uuml;r Vorsatz oder eine
-            gesetzlich nicht ausschlie&szlig;bare Haftung einschlie&szlig;lich zwingender Verbraucherschutzrechte nicht aus.</strong></p>
+    <section id="sec-11">
+        <h2>11. Haftungsgrenzen</h2>
+        <p>
+            {{brand_name}} haftet f&uuml;r die Vermittlung. Nicht f&uuml;r die Ausf&uuml;hrung der Bef&ouml;rderung
+            (Fahrerpflicht). <strong>Keine Beschr&auml;nkung der Haftung f&uuml;r Vorsatz oder grobe Fahrl&auml;ssigkeit
+            (Art. 1229 ital. ZGB), f&uuml;r Tod oder K&ouml;rperverletzung durch unsere Fahrl&auml;ssigkeit oder eine
+            gesetzlich nicht ausschliessbare Haftung.</strong> F&uuml;r bef&ouml;rderungsbezogene Schadensersatzanspr&uuml;che
+            ist der Fahrer Hauptpartei.
+        </p>
     </section>
 
-    <section>
-        <h2>9. Freistellung</h2>
-        <p>Soweit gesetzlich zul&auml;ssig, stellen Sie {{brand_name}} von Anspr&uuml;chen, Sch&auml;den und Kosten frei, die aus
-            Ihrer missbr&auml;uchlichen Nutzung der Plattform, Ihrem Versto&szlig; gegen diese Bedingungen oder Ihrer Verletzung von
-            Recht oder Rechten eines Fahrers oder Dritter entstehen.</p>
+    <section id="sec-12">
+        <h2>12. Recht, Gerichtsstand, ODR</h2>
+        <p>
+            Italienisches Recht. <strong>Als Verbraucher Gerichtsstand am Wohnsitz (Art. 33 ital. Verbrauchergesetz)</strong>;
+            einschr&auml;nkende Klauseln nichtig. EU-ODR-Plattform stets verf&uuml;gbar
+            (<a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>). Beschwerden:
+            <a href="mailto:{{email_legal}}">{{email_legal}}</a>. Streit mit Fahrer: auch das NCC-Konsortium oder die
+            ital. Verkehrsregulierungsbeh&ouml;rde (ART).
+        </p>
     </section>
 
-    <section>
-        <h2>10. Sperrung und Beendigung</h2>
-        <p>Sie k&ouml;nnen Ihr Konto jederzeit schlie&szlig;en. Wir k&ouml;nnen den Zugang bei Versto&szlig; gegen diese Bedingungen,
-            Sicherheitsrisiko, Betrug oder rechtlicher Verpflichtung sperren oder beenden. Bestimmungen, die ihrer Natur nach
-            fortgelten, bleiben anwendbar.</p>
-    </section>
-
-    <section>
-        <h2>11. Beschwerden, Verbraucherrechte und Streitbeilegung</h2>
-        <p>Probleme mit einer Fahrt melden Sie uns unter <a href="mailto:{{email_support}}">{{email_support}}</a>; Beschwerden &uuml;ber
-            die Bef&ouml;rderung selbst betreffen den Fahrer als Leistungserbringer. Zwingende Verbraucherschutzrechte nach dem Recht
-            Ihres Wohnsitzlandes bleiben unber&uuml;hrt. Die EU-Plattform zur Online-Streitbeilegung ist erreichbar unter
-            <a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>.</p>
-    </section>
-
-    <section>
-        <h2>12. Anwendbares Recht, &Auml;nderungen und Kontakt</h2>
-        <p>Diese Bedingungen unterliegen italienischem Recht, unbeschadet der zwingenden Verbraucherschutzvorschriften Ihres
-            gew&ouml;hnlichen Aufenthaltslandes; zust&auml;ndig ist, soweit das Gesetz dies vorsieht, das Gericht am Wohnsitz des
-            Verbrauchers. Wir k&ouml;nnen diese Bedingungen mit vorheriger Ank&uuml;ndigung wesentlicher &Auml;nderungen anpassen; die
-            fortgesetzte Nutzung gilt als Zustimmung. Rechtlicher Kontakt: <a href="mailto:{{email_legal}}">{{email_legal}}</a>.</p>
-    </section>
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; USt-IdNr. {{vat_number}} &middot; <a href="mailto:{{email_support}}">{{email_support}}</a></p>
+        <p class="legal-translation-note">Informative &Uuml;bersetzung. Bei Abweichung gilt die italienische Fassung.</p>
+    </footer>
 </article>

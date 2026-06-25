@@ -1,119 +1,183 @@
 <article class="legal-document" lang="it">
+    <aside class="legal-draft-banner">
+        <strong>Bozza tecnica.</strong> Documento redatto dal team di prodotto e non ancora rivisto da un legale italiano qualificato.
+        Non utilizzare per la pubblicazione effettiva fino al via libera del legale.
+    </aside>
+
     <header>
         <h1>Termini di Servizio &mdash; Passeggeri</h1>
-        <p class="legal-meta">Ultimo aggiornamento: {{last_updated}} · In vigore dal: {{effective_date}}</p>
-        <p>
-            I presenti Termini per i Passeggeri disciplinano l&rsquo;uso della piattaforma {{brand_name}} gestita da {{legal_name}}
-            ({{legal_form}}), P.IVA {{vat_number}}, {{registered_city}} ({{registered_province}}), {{registered_country}}. Creando un
-            account o prenotando una corsa accetti i presenti Termini. Se guidi anche sulla piattaforma, a tale attivit&agrave; si
-            applicano i separati Termini per i Conducenti.
-        </p>
+        <p class="legal-meta">Versione {{version}} &middot; Ultimo aggiornamento: {{last_updated}} &middot; In vigore dal: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>In sintesi</h2>
+            <ul>
+                <li>Prenoti una corsa con un conducente NCC indipendente tramite la nostra piattaforma. {{brand_name}} &egrave; intermediario, non vettore.</li>
+                <li>Prezzo trasparente prima di confermare. La tariffa pu&ograve; oscillare entro una <em>banda</em> impostata dalla zona; il conducente sceglie il proprio valore dentro quella banda.</li>
+                <li>All&rsquo;inizio della corsa devi comunicare un <strong>codice PIN di ritiro</strong> di 6 cifre. Senza codice, la corsa non parte.</li>
+                <li>Annullamento: gratuita entro la finestra di tolleranza; oltre, si applica una tariffa per stage. La cancellazione mutua durante la corsa &egrave; possibile con &laquo;handshake&raquo; tra le parti.</li>
+                <li>Sei consumatore: mantieni il foro del tuo domicilio (art. 33 c. cons.). Il diritto di recesso non si applica al trasporto di persone (art. 59 lett. l c. cons.).</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
-        <h2>1. Il nostro ruolo &mdash; solo marketplace</h2>
-        <p>{{brand_name}} &egrave; un marketplace tecnologico che ti mette in contatto con conducenti indipendenti di moto-taxi.
-            Forniamo la tecnologia di abbinamento, calcolo della tariffa e facilitazione del pagamento. <strong>Non siamo un
-            fornitore di trasporto, un vettore o un datore di lavoro dei conducenti</strong> e non siamo parte del contratto di
-            trasporto, concluso direttamente tra te e il conducente. Il conducente fornisce ed &egrave; l&rsquo;unico responsabile
-            del trasporto.</p>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Cosa &egrave; questo contratto</a></li>
+            <li><a href="#sec-2">Account e idoneit&agrave;</a></li>
+            <li><a href="#sec-3">Prenotazione e prezzo</a></li>
+            <li><a href="#sec-4">Codice PIN di ritiro</a></li>
+            <li><a href="#sec-5">Cancellazione, no-show, handshake</a></li>
+            <li><a href="#sec-6">Pagamento e ricevuta</a></li>
+            <li><a href="#sec-7">Valutazioni e segnalazioni</a></li>
+            <li><a href="#sec-8">Sicurezza e SOS</a></li>
+            <li><a href="#sec-9">Decisioni automatizzate</a></li>
+            <li><a href="#sec-10">Diritto di recesso</a></li>
+            <li><a href="#sec-11">Limiti di responsabilit&agrave;</a></li>
+            <li><a href="#sec-12">Legge, foro, ODR</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Cosa &egrave; questo contratto</h2>
+        <p>
+            Quando prenoti una corsa, concludi due rapporti contrattuali distinti: (a) il <strong>contratto di trasporto</strong>
+            direttamente con il conducente NCC indipendente che accetta la richiesta; (b) il <strong>contratto di
+            intermediazione</strong> con {{legal_name}} per l&rsquo;uso della piattaforma {{brand_name}}, regolato da questi
+            termini. {{brand_name}} non &egrave; un vettore e non &egrave; parte del contratto di trasporto.
+        </p>
     </section>
 
-    <section>
-        <h2>2. Requisiti e account</h2>
+    <section id="sec-2">
+        <h2>2. Account e idoneit&agrave;</h2>
+        <p>
+            Devi avere almeno 18 anni e un account autenticato tramite Zitadel (il nostro fornitore di identit&agrave;). Devi
+            indicare informazioni veritiere e mantenere le credenziali al sicuro. Puoi prenotare una corsa per un&rsquo;altra
+            persona; in tal caso resti responsabile dell&rsquo;esecuzione del contratto verso il conducente.
+        </p>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Prenotazione e prezzo</h2>
+        <p>
+            Prima della prenotazione vedi un <strong>preventivo</strong> calcolato dal servizio price-arbiter sulla base del
+            listino della zona (Cadastre): tariffa base, distanza, tempo, eventuali maggiorazioni di surge e di
+            modificatore conducente. Le maggiorazioni di surge sono cappate da un tetto della zona (di norma 2,0&times;); il
+            modificatore conducente si muove entro una <strong>banda min/max impostata per la zona</strong>. Surge e
+            modificatore si sommano (additivi sulla subtotale), non si moltiplicano.
+        </p>
+        <p>
+            Confermando la corsa autorizzi una <strong>pre-autorizzazione</strong> sul tuo strumento di pagamento per
+            l&rsquo;importo massimo previsto. Al termine, l&rsquo;importo effettivo viene addebitato (capture) e
+            l&rsquo;eventuale eccedenza rilasciata. La piattaforma rifiuta corse oltre una distanza massima per zona e
+            verifica la tariffa lato server (signed quote_id).
+        </p>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Codice PIN di ritiro</h2>
+        <p>
+            All&rsquo;arrivo del conducente al punto di ritiro, ricevi in app un <strong>PIN di 6 cifre</strong> generato dal
+            server (CSPRNG, validit&agrave; 5 minuti, massimo 3 tentativi). Devi comunicare il PIN al conducente prima della
+            partenza. Senza PIN verificato, la corsa non passa in stato &laquo;in corso&raquo;. Il PIN protegge da scambi di
+            persona e da ritiri fraudolenti.
+        </p>
+        <aside class="legal-honest">
+            <strong>Limite onesto.</strong> Il PIN &egrave; conservato sul server come <em>hash salato SHA-256</em>; il
+            valore in chiaro &egrave; visibile a te per la durata della finestra (5 minuti) e poi solo l&rsquo;hash
+            sopravvive per audit.
+        </aside>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Cancellazione, no-show, handshake mutuale</h2>
+        <p>
+            Puoi cancellare la corsa gratuitamente entro la <strong>finestra di tolleranza</strong> (configurabile per zona,
+            di norma 2 minuti). Oltre la finestra si applica la politica di cancellazione della zona, suddivisa in tre stage:
+        </p>
         <ul>
-            <li>Devi avere almeno 18 anni e capacit&agrave; di contrarre.</li>
-            <li>Devi fornire informazioni accurate e custodire le credenziali; sei responsabile delle attivit&agrave; svolte tramite
-                il tuo account.</li>
-            <li>Possiamo rifiutare, sospendere o chiudere un account per tutelare gli utenti, rispettare la legge o prevenire frodi e
-                abusi.</li>
+            <li><strong>after_grace</strong> &mdash; cancellazione del passeggero prima del ritiro: fee piattaforma + compensazione conducente, secondo le percentuali della zona.</li>
+            <li><strong>in_progress</strong> &mdash; cancellazione durante la corsa: &laquo;handshake mutuale&raquo; tra le parti, con tre esiti possibili: <em>full_refund</em> (rimborso pieno), <em>full_pay</em> (pagamento pieno), <em>partial:NN</em> (quota parziale tra 1 e 99%). La piattaforma trattiene la propria fee come da policy di zona.</li>
+            <li><strong>no_show</strong> &mdash; il conducente segnala la tua assenza al punto di ritiro dopo il timer di attesa: si applica la tariffa no_show della zona.</li>
         </ul>
+        <p>
+            Le percentuali per stage e i tetti minimi/massimi sono pubblicati nella sezione Cadastre della tua zona e
+            visibili in app al momento del calcolo della fee. Una controversia sulla cancellazione si risolve tramite
+            <a href="mailto:{{email_support}}">{{email_support}}</a>; la decisione finale &egrave; presa da un operatore umano.
+        </p>
     </section>
 
-    <section>
-        <h2>3. Prenotazioni e tariffe</h2>
-        <ul>
-            <li>Una prenotazione confermata costituisce un contratto di trasporto tra te e il conducente; {{brand_name}} agisce
-                esclusivamente da intermediario.</li>
-            <li>Le tariffe sono calcolate in base a tariffe base, distanza, tempo e prezzi di zona applicabili e sono mostrate prima
-                della conferma.</li>
-            <li>Le stime sono indicative; la tariffa finale riflette la corsa effettiva. Pedaggi, tempi di attesa e supplementi
-                possono applicarsi ove indicato.</li>
-        </ul>
+    <section id="sec-6">
+        <h2>6. Pagamento e ricevuta</h2>
+        <p>
+            Il pagamento &egrave; gestito tramite Stripe Connect con <em>destination charge</em>: l&rsquo;importo passeggero
+            confluisce sul conto del conducente, al netto della commissione di piattaforma e di eventuali tasse/levy. Ricevi
+            una ricevuta via email e in app. Il conducente, ove applicabile, emette la propria fattura/ricevuta NCC ai sensi
+            della normativa italiana. {{brand_name}} non &egrave; il vettore e non emette la fattura del trasporto; emette
+            una propria fattura per la commissione di piattaforma se applicabile.
+        </p>
     </section>
 
-    <section>
-        <h2>4. Pagamento</h2>
-        <p>Ci autorizzi, tramite il nostro fornitore di pagamenti, ad addebitare sul metodo di pagamento scelto la tariffa e gli
-            eventuali oneri applicabili (incluse penali di cancellazione o di mancata presentazione). Le ricevute sono fornite
-            in-app. Facilitiamo il pagamento per conto del conducente e non conserviamo i dati completi delle carte.</p>
+    <section id="sec-7">
+        <h2>7. Valutazioni e segnalazioni</h2>
+        <p>
+            Puoi valutare la corsa su pi&ugrave; dimensioni (igiene, sicurezza, qualit&agrave; della guida). Le valutazioni sono
+            uno strumento di trasparenza, non di sanzione automatica: non causano disattivazioni senza intervento umano.
+            Una segnalazione di sicurezza grave attiva il flusso PrefactGuard ed &egrave; sempre revisionata da un
+            operatore.
+        </p>
     </section>
 
-    <section>
-        <h2>5. Cancellazioni e mancata presentazione</h2>
-        <p>La cancellazione &egrave; gratuita prima dell&rsquo;assegnazione di un conducente ed entro una breve finestra di
-            tolleranza dopo l&rsquo;assegnazione. Trascorsa tale finestra, o una volta che il conducente &egrave; arrivato o la corsa
-            &egrave; in corso, pu&ograve; essere applicata una penale, come indicato nell&rsquo;app al momento della prenotazione.</p>
+    <section id="sec-8">
+        <h2>8. Sicurezza e SOS</h2>
+        <p>
+            La funzione SOS in app condivide la tua posizione con i contatti di emergenza che hai configurato e con il nostro
+            team. In caso di emergenza chiama sempre prima il <strong>112</strong> (numero unico europeo). Pillion non
+            sostituisce i servizi di emergenza.
+        </p>
     </section>
 
-    <section>
-        <h2>6. La tua condotta e la sicurezza</h2>
-        <ul>
-            <li>Indossa i dispositivi di sicurezza forniti e segui le ragionevoli istruzioni del conducente e le norme stradali.</li>
-            <li>Non utilizzare il servizio in stato di alterazione tale da creare rischio, non trasportare oggetti vietati e non
-                tenere condotte illecite, offensive, discriminatorie o pericolose.</li>
-            <li>Sei responsabile dei danni causati a un veicolo per uso improprio e delle perdite derivanti dalla violazione dei
-                presenti Termini.</li>
-            <li>Possiamo sospendere l&rsquo;accesso o rifiutare il servizio per motivi di sicurezza, legali o di frode.</li>
-        </ul>
+    <section id="sec-9">
+        <h2>9. Decisioni automatizzate (art. 22 GDPR)</h2>
+        <p>
+            Matching del conducente, ranking, calcolo prezzo (banda + surge) e blocchi di sicurezza sono parzialmente
+            automatizzati. Hai diritto di richiedere un intervento umano, esprimere la tua opinione e contestare la decisione
+            scrivendo a <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Trovi i dettagli nella nostra
+            <a href="/legal/dpia-summary-automated-decisions">Sintesi DPIA &mdash; Decisioni Automatizzate</a>.
+        </p>
     </section>
 
-    <section>
-        <h2>7. Esclusione di garanzie</h2>
-        <p>Nei limiti consentiti dalla legge, la piattaforma &egrave; fornita &laquo;cos&igrave; com&rsquo;&egrave;&raquo; e
-            &laquo;secondo disponibilit&agrave;&raquo;. Non garantiamo la disponibilit&agrave;, la puntualit&agrave;, la
-            qualit&agrave;, la sicurezza o l&rsquo;esito di alcuna corsa, la condotta, gli atti o le omissioni di alcun conducente, le
-            condizioni o l&rsquo;idoneit&agrave; alla circolazione di alcun veicolo, n&eacute; che il servizio sia ininterrotto o
-            privo di errori. Valutazioni, tempi stimati e informazioni sui conducenti sono puramente indicativi.</p>
+    <section id="sec-10">
+        <h2>10. Diritto di recesso</h2>
+        <p>
+            Il diritto di recesso di 14 giorni previsto dagli artt. 52 e seguenti del Codice del Consumo
+            <strong>non si applica al servizio di trasporto di persone</strong> (art. 59, comma 1, lett. l c. cons.). Questa
+            esclusione &egrave; di legge ed &egrave; nel tuo interesse essere informato/a chiaramente prima della prenotazione.
+        </p>
     </section>
 
-    <section>
-        <h2>8. Limitazione di responsabilit&agrave;</h2>
-        <p>Nei limiti consentiti dalla legge, {{brand_name}} risponde solo del servizio di intermediazione fornito e non del
-            trasporto eseguito da conducenti indipendenti n&eacute; dei loro atti o omissioni. La nostra responsabilit&agrave;
-            complessiva derivante dal servizio di intermediazione &egrave; limitata alle commissioni di piattaforma relative alla
-            corsa interessata. Non rispondiamo di danni indiretti o consequenziali. <strong>Nulla nei presenti Termini esclude o
-            limita la responsabilit&agrave; per morte o lesioni personali causate da nostra negligenza, per dolo, o qualsiasi
-            responsabilit&agrave; non escludibile per legge, inclusi i diritti inderogabili a tutela dei consumatori.</strong></p>
+    <section id="sec-11">
+        <h2>11. Limiti di responsabilit&agrave;</h2>
+        <p>
+            {{brand_name}} risponde del proprio servizio di intermediazione. Non risponde dell&rsquo;esecuzione del trasporto, che
+            &egrave; obbligo del conducente. <strong>Nulla esclude la responsabilit&agrave; per dolo o colpa grave (art. 1229
+            c.c.), per morte o lesioni personali causate da nostra negligenza, n&eacute; qualsiasi responsabilit&agrave; non
+            escludibile per legge.</strong> Per richieste di risarcimento legate al trasporto, indica il conducente come
+            controparte principale; {{brand_name}} ti aiuta a recuperare i dati di contatto per la richiesta.
+        </p>
     </section>
 
-    <section>
-        <h2>9. Manleva</h2>
-        <p>Nei limiti consentiti dalla legge, ti impegni a manlevare {{brand_name}} da pretese, perdite e costi derivanti dal tuo uso
-            improprio della piattaforma, dalla violazione dei presenti Termini o dalla violazione di legge o dei diritti di un
-            conducente o di terzi.</p>
+    <section id="sec-12">
+        <h2>12. Legge applicabile, foro e ODR</h2>
+        <p>
+            Si applica la legge italiana. <strong>In quanto consumatore, hai diritto al foro della tua residenza o
+            domicilio (art. 33 c. cons.)</strong>; eventuali clausole che lo restringono sono nulle. &Egrave; sempre disponibile
+            la piattaforma ODR della Commissione Europea (<a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>).
+            Contatto reclami: <a href="mailto:{{email_legal}}">{{email_legal}}</a>. Per controversie con il conducente, puoi
+            rivolgerti anche al consorzio NCC di appartenenza del conducente o all&rsquo;Autorit&agrave; di regolamentazione
+            dei trasporti (ART).
+        </p>
     </section>
 
-    <section>
-        <h2>10. Sospensione e cessazione</h2>
-        <p>Puoi chiudere il tuo account in qualsiasi momento. Possiamo sospendere o cessare l&rsquo;accesso in caso di violazione dei
-            Termini, rischio per la sicurezza, frode o obbligo di legge. Le clausole destinate per natura a sopravvivere continuano
-            ad applicarsi.</p>
-    </section>
-
-    <section>
-        <h2>11. Reclami, diritti dei consumatori e controversie</h2>
-        <p>Le problematiche relative a una corsa vanno segnalate a <a href="mailto:{{email_support}}">{{email_support}}</a>; i reclami
-            sul trasporto in s&eacute; riguardano il conducente quale prestatore del servizio. Le tutele inderogabili dei consumatori
-            previste dalla legge del tuo Paese di residenza non sono pregiudicate. La piattaforma ODR dell&rsquo;UE &egrave;
-            disponibile su <a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>.</p>
-    </section>
-
-    <section>
-        <h2>12. Legge applicabile, modifiche e contatti</h2>
-        <p>I presenti Termini sono regolati dalla legge italiana, fatte salve le norme inderogabili a tutela del consumatore del
-            Paese di residenza abituale; &egrave; competente, ove la legge lo preveda, il foro di residenza del consumatore. Possiamo
-            modificare i presenti Termini con preavviso delle modifiche sostanziali; l&rsquo;uso continuato ne costituisce
-            accettazione. Contatto legale: <a href="mailto:{{email_legal}}">{{email_legal}}</a>.</p>
-    </section>
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; P.IVA {{vat_number}} &middot; <a href="mailto:{{email_support}}">{{email_support}}</a></p>
+    </footer>
 </article>

@@ -1,0 +1,103 @@
+<article class="legal-document" lang="it">
+    <aside class="legal-draft-banner">
+        <strong>Bozza tecnica.</strong> Sintesi divulgativa di una DPIA interna ancora in stato draft. Il fascicolo completo non &egrave; pubblicato; &egrave; consultabile su richiesta delle autorit&agrave; di controllo.
+    </aside>
+
+    <header>
+        <h1>Sintesi DPIA &mdash; Geolocalizzazione</h1>
+        <p class="legal-meta">Versione {{version}} &middot; Ultimo aggiornamento: {{last_updated}} &middot; In vigore dal: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>In sintesi</h2>
+            <ul>
+                <li>Tracciamo la posizione del conducente solo quando &egrave; online e di un veicolo durante una corsa attiva. Mai 24/7.</li>
+                <li>La precisione &egrave; quella necessaria al matching e alla sicurezza: niente fingerprint comportamentale.</li>
+                <li>Le tracce GPS della corsa sono cancellate entro 30 giorni; restano solo metadati aggregati per audit e analytics interni.</li>
+                <li>Puoi limitare il tracciamento mettendoti offline (conducente) o terminando la corsa (passeggero).</li>
+                <li>Il fascicolo completo della DPIA &egrave; disponibile per le autorit&agrave; di controllo su richiesta.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Perch&eacute; una DPIA</a></li>
+            <li><a href="#sec-2">Cosa raccogliamo</a></li>
+            <li><a href="#sec-3">Quando lo raccogliamo</a></li>
+            <li><a href="#sec-4">Rischi identificati e mitigazioni</a></li>
+            <li><a href="#sec-5">Conservazione</a></li>
+            <li><a href="#sec-6">Diritti dell&rsquo;interessato</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Perch&eacute; una DPIA</h2>
+        <p>
+            Il monitoraggio sistematico della posizione &egrave; una delle attivit&agrave; per cui il Garante (provvedimento
+            n. 467 del 11 ottobre 2018) e l&rsquo;EDPB ritengono necessaria una valutazione d&rsquo;impatto ai sensi
+            dell&rsquo;art. 35 GDPR. La presente sintesi rende conto delle scelte progettuali e dei limiti che abbiamo
+            adottato.
+        </p>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. Cosa raccogliamo</h2>
+        <ul>
+            <li><strong>Posizione del conducente online</strong>: latitudine, longitudine, accuratezza, timestamp.</li>
+            <li><strong>Posizione del veicolo durante la corsa attiva</strong>: stessa struttura, frequenza adattiva (pi&ugrave; alta in fase di ritiro, pi&ugrave; bassa in tratta scorrevole).</li>
+            <li><strong>Posizione del passeggero al momento della richiesta</strong>: usata per il matching e poi scartata.</li>
+        </ul>
+        <p>
+            Non raccogliamo posizione fuori da queste finestre. Non costruiamo profili di mobilit&agrave; storici sulle
+            singole persone. Non vendiamo dati di localizzazione a terzi.
+        </p>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Quando lo raccogliamo</h2>
+        <ul>
+            <li><strong>Conducente:</strong> finch&eacute; sei online (in dispatch). Andando offline, lo streaming si ferma.</li>
+            <li><strong>Passeggero:</strong> solo al momento della richiesta di corsa (per il matching) e per la durata della corsa attiva (per il tracking).</li>
+            <li><strong>SOS:</strong> trigger su richiesta esplicita; condivisione con contatti di emergenza e operatore.</li>
+        </ul>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Rischi identificati e mitigazioni</h2>
+        <table>
+            <thead>
+                <tr><th>Rischio</th><th>Mitigazione</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Sorveglianza non autorizzata del conducente fuori orario</td><td>Streaming solo se online; arresto immediato all&rsquo;offline.</td></tr>
+                <tr><td>Profilazione comportamentale dell&rsquo;utente</td><td>Niente ML su pattern di mobilit&agrave; individuali; metriche solo aggregate.</td></tr>
+                <tr><td>Accesso non autorizzato alle tracce GPS</td><td>Cifratura at-rest, RBAC, log di audit, accesso solo a operatori di sicurezza.</td></tr>
+                <tr><td>Conservazione eccessiva</td><td>Cancellazione automatica delle tracce a 30 giorni (job <code>privacy:purge-old-locations</code>).</td></tr>
+                <tr><td>Trasmissione in chiaro</td><td>TLS 1.2+ obbligatorio sul tragitto client &harr; gps-ingest &harr; compass.</td></tr>
+                <tr><td>Diffusione a terze parti</td><td>Solo a contatti di emergenza esplicitamente abilitati o autorit&agrave; di legge.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Conservazione</h2>
+        <p>
+            Le tracce GPS della corsa sono cancellate entro <strong>30 giorni</strong>. I metadati della corsa (distanza,
+            durata, fare) sono conservati per gli obblighi fiscali (10 anni) ma <em>non</em> contengono la geometria del
+            percorso, solo punti di partenza e arrivo geocodificati. La cancellazione &egrave; automatica e tracciata.
+        </p>
+    </section>
+
+    <section id="sec-6">
+        <h2>6. Diritti dell&rsquo;interessato</h2>
+        <p>
+            Per le modalit&agrave; di esercizio (accesso, cancellazione, opposizione) vedi <a href="/legal/gdpr-rights">I tuoi
+            diritti GDPR</a>. Per opporti alla geolocalizzazione durante una corsa, devi terminarla. Per disattivare il
+            tracciamento come conducente, mettiti offline. La piattaforma non funziona senza geolocalizzazione attiva
+            durante una corsa attiva.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; Fascicolo DPIA completo: <a href="mailto:{{email_dpo}}">{{email_dpo}}</a></p>
+    </footer>
+</article>

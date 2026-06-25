@@ -1,0 +1,96 @@
+<article class="legal-document" lang="en">
+    <aside class="legal-draft-banner">
+        <strong>Technical draft.</strong> Extracted from <code>seed/foundation.json</code>; this document is an editorial snapshot. Verify alignment with the source before publishing.
+    </aside>
+
+    <header>
+        <h1>Processor and Sub-Processor Register</h1>
+        <p class="legal-meta">Version {{version}} &middot; Last updated: {{last_updated}} &middot; Effective: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>At a glance</h2>
+            <ul>
+                <li>We publish the <strong>Processor Register</strong> under Art. 28 GDPR.</li>
+                <li>Every supplier is bound by a written agreement (DPA) accepting our requirements on security, confidentiality, sub-processors, audit, transfers.</li>
+                <li>DPA status is declared (signed / in progress / not required).</li>
+                <li>Extra-EEA transfers rely on adequacy decisions or Standard Contractual Clauses (SCCs).</li>
+                <li>We notify material changes with reasonable advance notice.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">What this register is</a></li>
+            <li><a href="#sec-2">Main processors</a></li>
+            <li><a href="#sec-3">Sub-processors</a></li>
+            <li><a href="#sec-4">Extra-EEA transfers</a></li>
+            <li><a href="#sec-5">Change notifications</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. What this register is</h2>
+        <p>
+            When we entrust an external supplier with processing personal data on our behalf (e.g. SMS delivery, payment
+            processing, geocoding, monitoring), that supplier is a <strong>data processor</strong> under Art. 28 GDPR. For
+            each one we indicate role, location, transfer mechanism (if extra-EEA) and DPA status.
+        </p>
+        <p>
+            The document is an editorial version of the technical register kept in <code>regula</code>. Machine-readable
+            source: <a href="/public/subprocessors.json">/public/subprocessors.json</a>.
+        </p>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. Main processors</h2>
+        <table>
+            <thead>
+                <tr><th>Supplier</th><th>Role</th><th>Country</th><th>Transfer</th><th>DPA</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Stripe Payments Europe Ltd.</td><td>Payment processing and payouts</td><td>Ireland &middot; USA</td><td>SCC (USA sub-flow)</td><td>Signed</td></tr>
+                <tr><td>Twilio Ireland Ltd.</td><td>SMS and verification codes</td><td>Ireland &middot; USA</td><td>SCC</td><td>Signed</td></tr>
+                <tr><td>Firebase / Google Cloud EMEA Ltd.</td><td>Push notifications, crash reporting</td><td>Ireland &middot; USA</td><td>SCC</td><td>Signed</td></tr>
+                <tr><td>FastGeo s.r.l. (same ownership)</td><td>Routing, geocoding, maps</td><td>Italy</td><td>None (EEA)</td><td>In progress</td></tr>
+                <tr><td>Zitadel GmbH</td><td>Identity, OIDC, sessions</td><td>Switzerland</td><td>Adequacy decision</td><td>Signed</td></tr>
+                <tr><td>Hosting provider (TBD)</td><td>Infrastructure hosting</td><td>EU (EEA)</td><td>None (EEA)</td><td>In progress</td></tr>
+                <tr><td>Checkr Inc. (under evaluation)</td><td>Driver background check</td><td>USA</td><td>SCC + assessment</td><td>In progress</td></tr>
+                <tr><td>didit / ondato (under evaluation)</td><td>Identity verification (KYC)</td><td>EU</td><td>None (EEA)</td><td>Under evaluation</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Sub-processors</h2>
+        <p>
+            Main processors in turn rely on sub-processors (e.g. cloud hosting, CDN, monitoring). Active sub-processors are
+            listed in the public registers of the respective suppliers (Stripe, Twilio, Google Cloud) or, on request,
+            communicated at <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Any new sub-processor of sensitive
+            suppliers (payments, identity, communications) is notified to us and reflected here within 30 days.
+        </p>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Extra-EEA transfers</h2>
+        <p>
+            Transfers to third countries without adequacy decisions rely on the EU Commission <strong>Standard Contractual
+            Clauses</strong> 2021/914 (SCCs), supplemented by <strong>technical supplementary measures</strong> where needed
+            (at-rest encryption, tokenisation, contractual transparency reporting, authority-request standards). For the
+            United States we consider the EU-US Data Privacy Framework where the supplier adheres.
+        </p>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Change notifications</h2>
+        <p>
+            We notify the addition or change of main processors with reasonable advance notice (at least 30 days), via
+            email to drivers and in-app. You have the right to object by terminating the account; otherwise continued use
+            constitutes acceptance.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; Privacy: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> &middot; DPO: <a href="mailto:{{email_dpo}}">{{email_dpo}}</a></p>
+        <p class="legal-translation-note">Informational translation. In case of conflict, the Italian version prevails.</p>
+    </footer>
+</article>

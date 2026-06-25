@@ -1,123 +1,240 @@
 <article class="legal-document" lang="it">
+    <aside class="legal-draft-banner">
+        <strong>Bozza tecnica.</strong> Documento redatto dal team di prodotto e non ancora rivisto da un legale italiano qualificato.
+        Non utilizzare per la pubblicazione effettiva fino al via libera del legale.
+    </aside>
+
     <header>
         <h1>Termini di Servizio &mdash; Conducenti</h1>
-        <p class="legal-meta">Ultimo aggiornamento: {{last_updated}} · In vigore dal: {{effective_date}}</p>
-        <p>
-            I presenti Termini per i Conducenti disciplinano l&rsquo;uso della piattaforma {{brand_name}} in qualit&agrave; di
-            conducente. La piattaforma &egrave; gestita da {{legal_name}} ({{legal_form}}), P.IVA {{vat_number}},
-            {{registered_city}} ({{registered_province}}), {{registered_country}}. Completando l&rsquo;onboarding o accettando corse
-            accetti i presenti Termini.
-        </p>
+        <p class="legal-meta">Versione {{version}} &middot; Ultimo aggiornamento: {{last_updated}} &middot; In vigore dal: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>In sintesi</h2>
+            <ul>
+                <li>Operi come <strong>lavoratore autonomo NCC indipendente</strong>. Niente subordinazione, niente esclusiva, niente turni imposti.</li>
+                <li>Porti tu le licenze (NCC, ruolo conducenti, CAP KB, RCA, P.IVA, rimessa). Vedi l&rsquo;allegato <a href="/legal/ncc-italia">NCC Italia</a>.</li>
+                <li>La commissione di piattaforma e le levy d&rsquo;autorit&agrave; sono trasparenti, per zona, e dettagliate nella <a href="/legal/driver-settlement">Disclosure di Regolamento</a>.</li>
+                <li>Puoi muovere la tariffa entro una banda min/max per zona (driver multiplier). Surge cappato a tetto zona, additivo con il tuo modificatore.</li>
+                <li>Sei un titolare autonomo per i dati dei passeggeri durante la corsa, non puoi riutilizzarli per altre finalit&agrave;.</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Rapporto di lavoro autonomo</a></li>
+            <li><a href="#sec-2">Requisiti e conformit&agrave; continuativa</a></li>
+            <li><a href="#sec-3">Italia &mdash; quadro NCC</a></li>
+            <li><a href="#sec-4">Obblighi e dichiarazioni</a></li>
+            <li><a href="#sec-5">Imposte, contributi, DAC7</a></li>
+            <li><a href="#sec-6">Commissione, regolamento, pagamenti</a></li>
+            <li><a href="#sec-7">Banda prezzo e modificatore conducente</a></li>
+            <li><a href="#sec-8">Cancellazioni, no-show, handshake</a></li>
+            <li><a href="#sec-9">Decisioni automatizzate</a></li>
+            <li><a href="#sec-10">Direttiva UE sul lavoro tramite piattaforma</a></li>
+            <li><a href="#sec-11">Ruolo di marketplace e responsabilit&agrave;</a></li>
+            <li><a href="#sec-12">Manleva</a></li>
+            <li><a href="#sec-13">Protezione dei dati</a></li>
+            <li><a href="#sec-14">Sospensione, disattivazione, cessazione</a></li>
+            <li><a href="#sec-15">Legge, foro, contatti</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
         <h2>1. Rapporto di lavoro autonomo</h2>
-        <p>Operi come <strong>lavoratore autonomo indipendente</strong>. Nulla nei presenti Termini crea un rapporto di lavoro
-            subordinato, di agenzia, di associazione o di joint venture tra te e {{brand_name}}. Non vi &egrave; esclusiva: sei libero
-            di prestare servizi tramite altre piattaforme e di accettare o rifiutare qualsiasi richiesta. {{brand_name}} non dirige le
-            modalit&agrave; con cui esegui il trasporto, oltre a quanto richiesto dalla sicurezza e dalla conformit&agrave; legale, e
-            <strong>non garantisce alcun volume di richieste, guadagni o disponibilit&agrave; di lavoro.</strong></p>
+        <p>
+            Operi come <strong>lavoratore autonomo indipendente</strong>. Nulla in questi termini costituisce rapporto di lavoro
+            subordinato, di agenzia, di associazione o di joint venture tra te e {{brand_name}}. Non vi &egrave; esclusiva:
+            puoi lavorare con altre piattaforme, accettare o rifiutare qualunque richiesta, scegliere orari e zone. {{brand_name}}
+            non dirige le modalit&agrave; di esecuzione del trasporto, oltre a quanto richiesto da sicurezza e conformit&agrave;,
+            e <strong>non garantisce volumi di richieste, guadagni minimi o continuit&agrave; di lavoro.</strong>
+        </p>
     </section>
 
-    <section>
+    <section id="sec-2">
         <h2>2. Requisiti e conformit&agrave; continuativa</h2>
+        <p>Devi possedere e mantenere in corso di validit&agrave;:</p>
         <ul>
-            <li>Devi possedere e mantenere tutte le licenze, autorizzazioni, iscrizioni e coperture assicurative richieste dalla
-                legge per il trasporto di persone nella tua area operativa.</li>
-            <li>Il veicolo e i dispositivi di sicurezza devono rispettare gli standard di legge ed essere mantenuti idonei alla
-                circolazione e in efficienza.</li>
-            <li>Devi superare e mantenere in regola le nostre verifiche di onboarding, dei documenti e di idoneit&agrave;. Possiamo
-                richiedere una nuova verifica in qualsiasi momento.</li>
-            <li>Devi comunicarci tempestivamente la scadenza, la sospensione o l&rsquo;invalidit&agrave; di qualsiasi licenza,
-                autorizzazione, assicurazione o documento.</li>
+            <li>tutte le <strong>licenze, autorizzazioni e iscrizioni</strong> richieste dalla legge per il trasporto di persone nella zona in cui operi;</li>
+            <li>una <strong>copertura assicurativa RCA</strong> idonea al trasporto di persone (uso terzi);</li>
+            <li>un <strong>veicolo</strong> omologato per l&rsquo;uso commerciale, mantenuto in efficienza e in regola con i tagliandi;</li>
+            <li>le <strong>verifiche di onboarding</strong>, dei documenti e di idoneit&agrave; che {{brand_name}} richiede. Possiamo richiedere nuova verifica in qualsiasi momento.</li>
         </ul>
+        <p>
+            Devi comunicarci tempestivamente la scadenza, sospensione o invalidit&agrave; di qualunque licenza, autorizzazione,
+            assicurazione o documento. La piattaforma blocca l&rsquo;accettazione di nuove corse al primo documento scaduto.
+        </p>
     </section>
 
-    <section>
-        <h2>3. Obblighi e dichiarazioni</h2>
-        <p>Dichiari e garantisci in via continuativa che opererai in modo lecito e sicuro, che possiedi documenti e assicurazione
-            validi, che tratterai i passeggeri con rispetto e senza discriminazioni e che rispetterai tutte le norme applicabili in
-            materia di trasporto, circolazione, fiscalit&agrave; e consumo. Sei l&rsquo;unico responsabile del trasporto che fornisci
-            e dei tuoi atti e omissioni.</p>
-    </section>
-
-    <section>
-        <h2>4. Imposte e contributi</h2>
-        <p>Sei <strong>l&rsquo;unico responsabile</strong> della tua posizione fiscale, degli obblighi IVA, della dichiarazione dei
-            redditi e dei contributi previdenziali derivanti dalla tua attivit&agrave;. {{brand_name}} non opera ritenute per tuo
-            conto, salvo ove strettamente richiesto dalla legge (ad es. obblighi di comunicazione delle piattaforme come la DAC7),
-            nel qual caso autorizzi tale comunicazione.</p>
-    </section>
-
-    <section>
-        <h2>5. Commissione, accrediti e compensazione</h2>
+    <section id="sec-3">
+        <h2>3. Italia &mdash; quadro NCC</h2>
+        <p>
+            Se operi in Italia ricadi nel quadro del <strong>Noleggio Con Conducente (NCC)</strong> disciplinato dalla
+            Legge 15 gennaio 1992, n. 21 e dalle norme regionali e comunali attuative. Sono requisiti minimi non negoziabili:
+        </p>
         <ul>
-            <li>{{brand_name}} applica una commissione di piattaforma su ogni corsa completata, comunicata in fase di onboarding e
-                configurabile per zona operativa. La commissione &egrave; il corrispettivo del servizio di intermediazione.</li>
-            <li>Le tariffe sono incassate per tuo conto tramite il fornitore di pagamenti e accreditate sul tuo conto collegato, al
-                netto della commissione e di quanto eventualmente dovuto.</li>
-            <li>Possiamo compensare, trattenere o recuperare dagli accrediti rimborsi, storni (chargeback), reversal di
-                cancellazione, penali o importi indebitamente ricevuti, nei limiti consentiti dalla legge.</li>
+            <li><strong>Autorizzazione comunale NCC</strong> rilasciata dal comune dove ha sede la rimessa (doc type <code>autorizzazione_ncc</code>).</li>
+            <li><strong>Dichiarazione di rimessa</strong> in regola; la rimessa deve insistere nello stesso comune dell&rsquo;autorizzazione (doc type <code>rimessa_declaration</code>; vedi anche la regola del rientro in rimessa &mdash; decreto Bersani).</li>
+            <li><strong>Iscrizione al Ruolo dei Conducenti</strong> presso la Camera di Commercio (doc type <code>ruolo_conducenti</code>).</li>
+            <li><strong>CAP KB</strong> &mdash; certificato di abilitazione professionale (doc type <code>cap_kb</code>).</li>
+            <li><strong>Patente di guida</strong> con anzianit&agrave; minima di 3 anni (Patente A per moto, Patente B per auto).</li>
+            <li><strong>Veicolo immatricolato in &laquo;uso terzi&raquo;</strong> ai sensi dell&rsquo;art. 82 Codice della Strada (Carta di Circolazione con annotazione idonea).</li>
+            <li><strong>Polizza RCA</strong> estesa al trasporto di persone con conducente per uso terzi.</li>
+            <li><strong>Partita IVA</strong> attiva per l&rsquo;attivit&agrave; di trasporto.</li>
         </ul>
+        <p>
+            Maggior dettaglio (procedura, documenti, controlli) nell&rsquo;allegato
+            <a href="/legal/ncc-italia">NCC Italia &mdash; requisiti specifici</a>.
+        </p>
     </section>
 
-    <section>
-        <h2>6. Ruolo di marketplace</h2>
-        <p>{{brand_name}} &egrave; un marketplace tecnologico e un intermediario. Il contratto di trasporto &egrave; concluso
-            direttamente tra te e il passeggero. {{brand_name}} non &egrave; un fornitore di trasporto, un vettore o un datore di
-            lavoro e non &egrave; parte di tale contratto. Sei l&rsquo;unico a fornire ed essere responsabile del trasporto.</p>
+    <section id="sec-4">
+        <h2>4. Obblighi e dichiarazioni</h2>
+        <p>
+            Dichiari e garantisci, in modo continuativo, che operi in modo lecito e sicuro, possiedi documenti e assicurazione
+            validi, tratti i passeggeri con rispetto e senza discriminazioni, e rispetti tutte le norme applicabili (trasporto,
+            circolazione, fiscalit&agrave;, consumo, salute, privacy). Sei l&rsquo;unico responsabile del trasporto che fornisci
+            e dei tuoi atti e omissioni.
+        </p>
     </section>
 
-    <section>
-        <h2>7. Ripartizione della responsabilit&agrave; e manleva</h2>
-        <p>Nei limiti consentiti dalla legge, sei responsabile di ogni responsabilit&agrave; derivante dal trasporto che fornisci e
-            dall&rsquo;uso della piattaforma. <strong>Ti impegni a manlevare e tenere indenne {{brand_name}}, i suoi amministratori e
-            il personale da qualsiasi pretesa, perdita, sanzione, danno o costo</strong> (incluse ragionevoli spese legali) derivanti
-            da: i tuoi servizi di trasporto; i tuoi atti, omissioni o negligenza; la violazione dei presenti Termini o di qualsiasi
-            legge; i tuoi obblighi fiscali o previdenziali; lesioni o danni a passeggeri, terzi o cose; o qualsiasi pretesa secondo
-            cui saresti o saresti stato dipendente, lavoratore o agente di {{brand_name}}.</p>
+    <section id="sec-5">
+        <h2>5. Imposte, contributi, DAC7</h2>
+        <p>
+            Sei <strong>l&rsquo;unico responsabile</strong> della tua posizione fiscale: IVA, dichiarazione redditi, contributi
+            previdenziali (Gestione Separata INPS o altra cassa di riferimento), ritenute. {{brand_name}} non opera
+            ritenute per tuo conto, salvo ove richiesto dalla legge.
+        </p>
+        <p>
+            <strong>DAC7.</strong> Ai sensi della Direttiva (UE) 2021/514 recepita dal D.Lgs. 32/2023, {{brand_name}} comunica
+            annualmente all&rsquo;Agenzia delle Entrate i dati identificativi, i corrispettivi e il numero di operazioni
+            relativi a ciascun conducente. Autorizzi tale comunicazione e ti impegni a fornire i dati necessari (P.IVA,
+            codice fiscale, indirizzo di residenza). Ricevi una copia dei dati comunicati a tuo nome.
+        </p>
     </section>
 
-    <section>
-        <h2>8. Limitazione della responsabilit&agrave; di {{brand_name}}</h2>
-        <p>Nei limiti consentiti dalla legge, {{brand_name}} risponde solo del servizio di intermediazione fornito. La nostra
-            responsabilit&agrave; complessiva nei tuoi confronti derivante dalla piattaforma &egrave; limitata alle commissioni
-            trattenute sulle corse all&rsquo;origine della pretesa nei tre mesi precedenti. Non rispondiamo di danni indiretti o
-            consequenziali, di mancati guadagni o di perdite derivanti da sospensioni o disattivazioni adottate su basi ragionevoli.
-            <strong>Nulla esclude la responsabilit&agrave; per morte o lesioni personali causate da nostra negligenza, per dolo, o
-            qualsiasi responsabilit&agrave; non escludibile per legge.</strong></p>
+    <section id="sec-6">
+        <h2>6. Commissione, regolamento, pagamenti</h2>
+        <p>
+            {{brand_name}} applica una <strong>commissione di piattaforma</strong> su ogni corsa completata, configurabile per
+            zona, comunicata in fase di onboarding e in app prima dell&rsquo;accettazione di ciascuna corsa. La commissione
+            &egrave; il corrispettivo del servizio di intermediazione e fattura.
+        </p>
+        <p>
+            Le tariffe sono incassate per tuo conto tramite Stripe Connect (destination charge) e accreditate sul tuo conto
+            collegato. Possiamo compensare, trattenere o recuperare dagli accrediti rimborsi, storni (chargeback), reversal
+            di cancellazione, penali o importi indebitamente ricevuti, nei limiti di legge. Dettaglio numerico (esempio
+            calcolo, calendario payout, stack fee/tax/levy) nella <a href="/legal/driver-settlement">Disclosure di
+            Regolamento e Pagamento</a>.
+        </p>
     </section>
 
-    <section>
-        <h2>9. Protezione dei dati e riservatezza</h2>
-        <p>Puoi trattare i dati personali dei passeggeri (come luoghi di ritiro/arrivo e contatti) solo per quanto necessario a
-            eseguire una corsa e nel rispetto della normativa sulla protezione dei dati; non devi conservare, riutilizzare,
-            indirizzare a fini di marketing o divulgare i dati dei passeggeri per altre finalit&agrave;. Devi mantenere riservate le
-            informazioni della piattaforma. Ciascuna parte &egrave; titolare autonomo per i dati che determina; i nostri trattamenti
-            sono descritti nell&rsquo;Informativa sulla Privacy.</p>
+    <section id="sec-7">
+        <h2>7. Banda prezzo e modificatore conducente</h2>
+        <p>
+            Hai autonomia tariffaria entro una <strong>banda min/max</strong> impostata per la zona (Cadastre
+            <code>modifier_min_multiplier</code> / <code>modifier_max_multiplier</code>). Il tuo modificatore (es. +10% / &minus;5%)
+            &egrave; additivo, non moltiplicativo, sulla subtotale: surge e modificatore si sommano, non si compongono.
+            Surge &egrave; cappato dal tetto della zona (di norma 2,0&times;) e non pu&ograve; mai abbassare il prezzo sotto il
+            tuo modificatore (lower-bound a livello arbiter).
+        </p>
+        <aside class="legal-honest">
+            <strong>Limite onesto.</strong> La banda &egrave; impostata per zona dall&rsquo;operatore della piattaforma sulla
+            base dei riferimenti di tariffa NCC locale. Anche se tu scegli il valore dentro la banda, la banda stessa &egrave;
+            fissata da noi. Questo &egrave; un fattore considerato dalla giurisprudenza sulla qualificazione marketplace vs
+            vettore (CGUE C-434/15) ed &egrave; una scelta consapevole di progettazione.
+        </aside>
     </section>
 
-    <section>
-        <h2>10. Marchio e propriet&agrave; intellettuale</h2>
-        <p>{{brand_name}} ti concede una licenza limitata, revocabile e non esclusiva per usare l&rsquo;app e il marchio al solo fine
-            di fornire corse sulla piattaforma. Non devi usare impropriamente il marchio, far intendere un rapporto di lavoro o
-            partnership, n&eacute; usare la propriet&agrave; intellettuale oltre tale licenza.</p>
+    <section id="sec-8">
+        <h2>8. Cancellazioni, no-show, handshake mutuale</h2>
+        <p>
+            Le politiche di cancellazione per zona definiscono la <strong>tariffa piattaforma</strong> e la <strong>tua
+            compensazione</strong> per ognuno dei tre stage: <em>after_grace</em> (cancellazione passeggero prima del ritiro),
+            <em>in_progress</em> (cancellazione durante la corsa, gestita tramite handshake mutuale &mdash; <em>full_refund</em>,
+            <em>full_pay</em>, <em>partial:NN</em>), <em>no_show</em> (assenza del passeggero al ritiro). Tutte le quote sono
+            pubblicate nella sezione Cadastre della tua zona e visibili in app.
+        </p>
     </section>
 
-    <section>
-        <h2>11. Sospensione, disattivazione e cessazione</h2>
-        <p>Possiamo sospendere o disattivare immediatamente il tuo accesso per rischio per la sicurezza, documenti scaduti o non
-            validi, sospetta frode, violazione grave o reiterata, oppure obbligo di legge. Negli altri casi possiamo recedere con
-            ragionevole preavviso. Puoi cessare l&rsquo;uso della piattaforma in qualsiasi momento. Le clausole su conformit&agrave;,
-            manleva, compensazione, riservatezza e responsabilit&agrave; sopravvivono alla cessazione.</p>
+    <section id="sec-9">
+        <h2>9. Decisioni automatizzate (art. 22 GDPR)</h2>
+        <p>
+            Matching, ranking dei candidati nella pool di offerta, filtri di idoneit&agrave; e blocchi di sicurezza sono
+            decisioni automatizzate. Hai diritto di ottenere un intervento umano, esprimere la tua opinione e contestare la
+            decisione scrivendo a <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. La <strong>sospensione</strong>
+            del tuo account &egrave; sempre confermata da un operatore umano prima di diventare definitiva. Dettagli nella
+            <a href="/legal/dpia-summary-automated-decisions">Sintesi DPIA &mdash; Decisioni Automatizzate</a>.
+        </p>
     </section>
 
-    <section>
-        <h2>12. Qualificazione, legge applicabile e controversie</h2>
-        <p>Le parti intendono e tu riconosci che agisci come lavoratore autonomo indipendente; la qualificazione &egrave; in ultima
-            istanza determinata dalla legge applicabile e dall&rsquo;autorit&agrave; competente. I presenti Termini sono regolati
-            dalla legge italiana. Le controversie sono soggette al foro di {{registered_city}}, fatti salvi i diritti inderogabili.
-            Possiamo modificare i presenti Termini con preavviso delle modifiche sostanziali; l&rsquo;uso continuato ne costituisce
-            accettazione. Contatto: <a href="mailto:{{email_legal}}">{{email_legal}}</a>.</p>
+    <section id="sec-10">
+        <h2>10. Direttiva UE sul lavoro tramite piattaforma</h2>
+        <p>
+            La Direttiva (UE) 2024/2831 (Platform Work Directive) entra in vigore con il recepimento entro il 2 dicembre 2026.
+            Introduce una <em>presunzione legale</em> di rapporto di lavoro subordinato quando ricorrono determinati indici di
+            controllo. {{brand_name}} ha disegnato la piattaforma per <em>non</em> esercitare tali indici: niente orari
+            imposti, niente esclusiva, niente sanzioni disciplinari oltre la sicurezza e la conformit&agrave;, valutazioni
+            con funzione di trasparenza non punitiva. La qualificazione finale &egrave; comunque determinata dalla legge al
+            momento del recepimento e dall&rsquo;autorit&agrave; competente.
+        </p>
     </section>
+
+    <section id="sec-11">
+        <h2>11. Ruolo di marketplace e responsabilit&agrave;</h2>
+        <p>
+            {{brand_name}} &egrave; marketplace tecnologico e intermediario. Il contratto di trasporto si conclude direttamente tra
+            te e il passeggero. {{brand_name}} non &egrave; vettore, n&eacute; datore di lavoro, e non &egrave; parte del contratto di
+            trasporto. La responsabilit&agrave; complessiva di {{brand_name}} verso di te per l&rsquo;uso della piattaforma
+            &egrave; limitata alle commissioni effettivamente trattenute sulle corse all&rsquo;origine della pretesa nei tre
+            mesi precedenti. <strong>Nulla esclude o limita la responsabilit&agrave; per dolo o colpa grave (art. 1229 c.c.),
+            per morte o lesioni personali da nostra negligenza, n&eacute; qualsiasi responsabilit&agrave; non escludibile per
+            legge.</strong>
+        </p>
+    </section>
+
+    <section id="sec-12">
+        <h2>12. Manleva</h2>
+        <p>
+            Ti impegni a manlevare e tenere indenne {{brand_name}}, i suoi amministratori e il personale da qualunque pretesa,
+            perdita, sanzione, danno o costo (incluse ragionevoli spese legali) derivanti da: i tuoi servizi di trasporto;
+            i tuoi atti, omissioni o negligenza; la violazione di questi termini o di qualsiasi legge; i tuoi obblighi
+            fiscali o previdenziali; lesioni o danni a passeggeri, terzi o cose; qualsiasi pretesa secondo cui saresti o
+            saresti stato/a dipendente, lavoratore o agente di {{brand_name}}.
+        </p>
+    </section>
+
+    <section id="sec-13">
+        <h2>13. Protezione dei dati</h2>
+        <p>
+            Trattamento dei dati personali tuoi e dei passeggeri secondo l&rsquo;<a href="/legal/privacy-policy">Informativa
+            sulla Privacy</a>. Sei <strong>titolare autonomo</strong> dei dati dei passeggeri solo per l&rsquo;esecuzione
+            della corsa: non puoi conservarli, riutilizzarli, indirizzarli a fini di marketing o cederli a terzi. Devi
+            mantenere riservate le informazioni della piattaforma. In caso di data breach, comunica entro 24 ore a
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>.
+        </p>
+    </section>
+
+    <section id="sec-14">
+        <h2>14. Sospensione, disattivazione, cessazione</h2>
+        <p>
+            Possiamo sospendere o disattivare immediatamente il tuo accesso per: rischio per la sicurezza; documenti scaduti
+            o non validi; sospetta frode; violazione grave o reiterata; obbligo di legge. La sospensione &egrave; sempre
+            comunicata con motivazione e &egrave; soggetta a revisione umana su tua richiesta. Negli altri casi, ciascuna
+            parte pu&ograve; recedere con preavviso ragionevole (di norma 30 giorni). Le clausole su conformit&agrave;,
+            manleva, compensazione, riservatezza e responsabilit&agrave; sopravvivono alla cessazione.
+        </p>
+    </section>
+
+    <section id="sec-15">
+        <h2>15. Legge applicabile, foro, contatti</h2>
+        <p>
+            Questi termini sono regolati dalla legge italiana. Per le controversie tra te e {{brand_name}} (rapporto B2B tra
+            operatori professionali), foro esclusivo &egrave; quello di {{registered_city}}, salvo norme inderogabili. Contatto:
+            <a href="mailto:{{email_legal}}">{{email_legal}}</a>.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; P.IVA {{vat_number}} &middot; Per il regolamento economico vedi <a href="/legal/driver-settlement">Disclosure di Regolamento</a> &middot; Per i requisiti NCC vedi <a href="/legal/ncc-italia">NCC Italia</a></p>
+    </footer>
 </article>

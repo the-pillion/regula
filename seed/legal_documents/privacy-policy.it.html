@@ -1,151 +1,261 @@
 <article class="legal-document" lang="it">
+    <aside class="legal-draft-banner">
+        <strong>Bozza tecnica.</strong> Documento redatto dal team di prodotto e non ancora rivisto da un legale italiano qualificato.
+        Non utilizzare per la pubblicazione effettiva fino al via libera del legale.
+    </aside>
+
     <header>
         <h1>Informativa sulla Privacy</h1>
-        <p class="legal-meta">Ultimo aggiornamento: {{last_updated}} · In vigore dal: {{effective_date}}</p>
-        <p>
-            {{legal_name}} (&laquo;{{brand_name}}&raquo;, &laquo;noi&raquo;) &egrave; il titolare del trattamento dei dati
-            personali trattati tramite la piattaforma {{brand_name}}. Trattiamo i tuoi dati nel rispetto del Regolamento (UE)
-            2016/679 (&laquo;GDPR&raquo;) e del D.Lgs. 196/2003 e successive modifiche (&laquo;Codice Privacy&raquo;). La presente
-            informativa spiega quali dati raccogliamo, perch&eacute;, su quale base giuridica, per quanto tempo li conserviamo e
-            quali diritti hai.
-        </p>
+        <p class="legal-meta">Versione {{version}} &middot; Ultimo aggiornamento: {{last_updated}} &middot; In vigore dal: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>In sintesi</h2>
+            <ul>
+                <li>Titolare del trattamento: <strong>{{legal_name}}</strong>. DPO contattabile a <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>.</li>
+                <li>Trattiamo i dati su 4 basi giuridiche: contratto, obbligo legale, interesse vitale (SOS), interesse legittimo (sicurezza/antifrode). Marketing solo con consenso.</li>
+                <li>GPS della corsa cancellato entro 30 giorni; metadati di ride conservati per gli obblighi fiscali (10 anni). PIN di ritiro tenuto come hash salato dopo l&rsquo;uso.</li>
+                <li>Decisioni automatizzate (matching, eligibility): hai diritto di chiedere intervento umano (art. 22 GDPR).</li>
+                <li>Comunichiamo i dati DAC7 all&rsquo;Agenzia delle Entrate. Lista completa dei responsabili nel <a href="/legal/processor-list">Registro dei Responsabili</a>.</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Titolare del trattamento e contatti</a></li>
+            <li><a href="#sec-2">Quali dati raccogliamo</a></li>
+            <li><a href="#sec-3">Basi giuridiche e finalit&agrave;</a></li>
+            <li><a href="#sec-4">Conservazione dei dati</a></li>
+            <li><a href="#sec-5">Architettura di servizio (chi tratta cosa)</a></li>
+            <li><a href="#sec-6">Destinatari, responsabili, trasferimenti extra-SEE</a></li>
+            <li><a href="#sec-7">Decisioni automatizzate (art. 22)</a></li>
+            <li><a href="#sec-8">Comunicazione DAC7</a></li>
+            <li><a href="#sec-9">PIN di ritiro</a></li>
+            <li><a href="#sec-10">I tuoi diritti</a></li>
+            <li><a href="#sec-11">Sicurezza</a></li>
+            <li><a href="#sec-12">Minori</a></li>
+            <li><a href="#sec-13">Modifiche e contatti</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
         <h2>1. Titolare del trattamento e contatti</h2>
         <p>
             <strong>{{legal_name}}</strong> ({{legal_form}})<br />
             {{registered_street}}, {{registered_postal_code}} {{registered_city}} ({{registered_province}}), {{registered_country}}<br />
-            P.IVA: {{vat_number}} · REA: {{rea_number}}<br />
-            Email: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>
+            P.IVA {{vat_number}} &middot; REA {{rea_number}}<br />
+            Email privacy: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>
         </p>
         <p>
-            Il Responsabile della Protezione dei Dati (RPD/DPO) &egrave; contattabile all&rsquo;indirizzo
-            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>{{dpo_name}}.
+            Il Responsabile della Protezione dei Dati (RPD/DPO) {{dpo_name}} &egrave; contattabile a
+            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>. Trattiamo i dati nel rispetto del Regolamento (UE) 2016/679
+            (&laquo;GDPR&raquo;) e del D.Lgs. 196/2003 e successive modifiche (&laquo;Codice Privacy&raquo;).
         </p>
     </section>
 
-    <section>
+    <section id="sec-2">
         <h2>2. Quali dati raccogliamo</h2>
         <h3>2.1 Dati dell&rsquo;account</h3>
         <ul>
-            <li>Nome e cognome, indirizzo email, numero di telefono</li>
-            <li>Credenziali di autenticazione (gestite dal fornitore di identit&agrave;; le password non sono mai memorizzate in chiaro)</li>
-            <li>Foto del profilo (facoltativa)</li>
-            <li>Data di nascita (necessaria per l&rsquo;idoneit&agrave; del conducente e la verifica dell&rsquo;et&agrave;)</li>
-            <li>Lingua e impostazioni locali preferite</li>
+            <li>Nome e cognome, email, telefono, foto profilo (facoltativa), lingua</li>
+            <li>Data di nascita (verifica et&agrave; e idoneit&agrave; conducente)</li>
+            <li>Credenziali gestite da Zitadel (password non memorizzate in chiaro)</li>
         </ul>
         <h3>2.2 Dati di onboarding del conducente</h3>
         <ul>
-            <li>Documenti di identit&agrave; rilasciati da enti pubblici (carta d&rsquo;identit&agrave;, passaporto, patente)</li>
-            <li>Libretto di circolazione e certificati assicurativi</li>
-            <li>Licenze professionali per il trasporto ove richieste dalla normativa locale</li>
-            <li>Esiti delle verifiche di idoneit&agrave; (sintesi della decisione, non il fascicolo completo)</li>
-            <li>Coordinate bancarie per i pagamenti (gestite dal fornitore di pagamenti, non sui nostri server)</li>
+            <li>Documenti di identit&agrave; e patenti</li>
+            <li>Autorizzazione NCC, ruolo conducenti, CAP KB, dichiarazione di rimessa</li>
+            <li>Libretto di circolazione (con annotazione &laquo;uso terzi&raquo;), polizza RCA</li>
+            <li>Codice fiscale, P.IVA, dati bancari (presso il fornitore di pagamenti)</li>
+            <li>Esiti delle verifiche (sintesi della decisione, non il fascicolo completo)</li>
         </ul>
-        <h3>2.3 Dati di corsa e di geolocalizzazione</h3>
+        <h3>2.3 Dati di corsa e geolocalizzazione</h3>
         <ul>
-            <li>Luoghi di partenza e arrivo e indirizzi geocodificati</li>
-            <li>Coordinate GPS del percorso durante la corsa attiva</li>
-            <li>Orari, durata, distanza, tariffa e stato della corsa</li>
-            <li>Codici di verifica monouso per il ritiro (eliminati dopo l&rsquo;uso)</li>
+            <li>Punti di partenza e arrivo, indirizzi geocodificati</li>
+            <li>Tracce GPS durante la corsa attiva</li>
+            <li>Orari, durata, distanza, tariffa, stato della corsa</li>
+            <li>PIN di ritiro (vedi §9)</li>
         </ul>
         <h3>2.4 Dati di pagamento</h3>
         <p>
-            I pagamenti sono gestiti dal nostro fornitore di servizi di pagamento. Conserviamo solo un riferimento cliente, il
-            riferimento dell&rsquo;operazione e lo stato della transazione. I numeri completi delle carte e le credenziali
-            bancarie non sono mai memorizzati sulla nostra infrastruttura.
+            I pagamenti sono gestiti dal fornitore di servizi di pagamento (Stripe). Conserviamo solo un riferimento cliente,
+            il riferimento operazione e lo stato della transazione. Numeri completi delle carte e credenziali bancarie
+            <strong>non sono mai sui nostri server</strong>.
         </p>
         <h3>2.5 Comunicazioni e dati tecnici</h3>
         <ul>
-            <li>Messaggi in-app, ticket di assistenza e corrispondenza email</li>
-            <li>Token per le notifiche push e codici di verifica SMS (codici non conservati dopo l&rsquo;invio)</li>
-            <li>Indirizzo IP, modello del dispositivo, sistema operativo, versione dell&rsquo;app e identificativi di sessione</li>
-            <li>Log degli errori, report di crash e identificativi dei cookie (vedi la Cookie Policy)</li>
+            <li>Messaggi in-app, ticket di assistenza, email</li>
+            <li>Token di notifiche push, codici SMS (codici non conservati dopo l&rsquo;invio)</li>
+            <li>IP, modello del dispositivo, sistema operativo, versione app, identificativi di sessione</li>
+            <li>Log errori, report di crash, identificativi di cookie (vedi <a href="/legal/cookie-policy">Cookie Policy</a>)</li>
         </ul>
     </section>
 
-    <section>
-        <h2>3. Base giuridica del trattamento</h2>
+    <section id="sec-3">
+        <h2>3. Basi giuridiche e finalit&agrave;</h2>
         <table>
             <thead>
                 <tr><th>Finalit&agrave;</th><th>Base giuridica (art. 6 GDPR)</th></tr>
             </thead>
             <tbody>
-                <tr><td>Creazione account e accesso alla piattaforma</td><td>Art. 6(1)(b) — esecuzione di un contratto</td></tr>
-                <tr><td>Idoneit&agrave; del conducente e verifica documenti</td><td>Art. 6(1)(c) obbligo legale; Art. 6(1)(b) contratto</td></tr>
-                <tr><td>Pagamenti e accrediti</td><td>Art. 6(1)(b) — esecuzione di un contratto</td></tr>
-                <tr><td>Sicurezza, SOS ed emergenze</td><td>Art. 6(1)(d) interessi vitali; Art. 6(1)(f) legittimo interesse</td></tr>
-                <tr><td>Prevenzione frodi e sicurezza della piattaforma</td><td>Art. 6(1)(f) — legittimo interesse</td></tr>
-                <tr><td>Comunicazioni di marketing</td><td>Art. 6(1)(a) — consenso</td></tr>
-                <tr><td>Adempimenti fiscali e contabili</td><td>Art. 6(1)(c) — obbligo legale</td></tr>
+                <tr><td>Creazione account e accesso</td><td>art. 6(1)(b) &mdash; contratto</td></tr>
+                <tr><td>Verifica documenti e idoneit&agrave; conducente</td><td>art. 6(1)(c) obbligo legale; (b) contratto</td></tr>
+                <tr><td>Esecuzione delle corse e matching</td><td>art. 6(1)(b) &mdash; contratto</td></tr>
+                <tr><td>Pagamenti e regolamento</td><td>art. 6(1)(b) &mdash; contratto</td></tr>
+                <tr><td>Sicurezza, SOS, emergenze</td><td>art. 6(1)(d) interessi vitali; (f) legittimo interesse</td></tr>
+                <tr><td>Prevenzione frodi e sicurezza piattaforma</td><td>art. 6(1)(f) &mdash; legittimo interesse</td></tr>
+                <tr><td>Comunicazione DAC7 all&rsquo;Agenzia delle Entrate</td><td>art. 6(1)(c) &mdash; obbligo legale</td></tr>
+                <tr><td>Adempimenti fiscali e contabili</td><td>art. 6(1)(c) &mdash; obbligo legale</td></tr>
+                <tr><td>Marketing diretto</td><td>art. 6(1)(a) &mdash; consenso (revocabile)</td></tr>
             </tbody>
         </table>
     </section>
 
-    <section>
+    <section id="sec-4">
         <h2>4. Conservazione dei dati</h2>
         <table>
             <thead>
                 <tr><th>Categoria</th><th>Conservazione</th></tr>
             </thead>
             <tbody>
-                <tr><td>Dati account (utenti attivi)</td><td>Durata dell&rsquo;account, poi anonimizzati</td></tr>
-                <tr><td>Coordinate GPS delle corse</td><td>Cancellate o azzerate entro 30 giorni dal termine della corsa</td></tr>
-                <tr><td>Dati delle corse (metadati)</td><td>Fino a 10 anni (normativa fiscale e contabile)</td></tr>
-                <tr><td>Documenti del conducente</td><td>Durata del contratto pi&ugrave; il periodo previsto per legge</td></tr>
-                <tr><td>Dati di pagamento</td><td>Fino a 10 anni (norme contabili UE)</td></tr>
-                <tr><td>Casi di assistenza e contestazioni</td><td>Fino a 3 anni dalla chiusura</td></tr>
-                <tr><td>Registrazioni del consenso marketing</td><td>Fino alla revoca, pi&ugrave; un periodo di accountability</td></tr>
-                <tr><td>Account cancellati</td><td>Anonimizzati alla cancellazione (art. 17); dati conservati ove obbligatorio</td></tr>
+                <tr><td>Dati account (utenti attivi)</td><td>Durata account, poi anonimizzazione</td></tr>
+                <tr><td>Tracce GPS della corsa</td><td>Cancellate o azzerate entro 30 giorni</td></tr>
+                <tr><td>Metadati ride (id, distanza, durata, fare)</td><td>10 anni (obblighi fiscali)</td></tr>
+                <tr><td>Documenti conducente</td><td>Durata del rapporto + periodo previsto per legge</td></tr>
+                <tr><td>Dati di pagamento</td><td>10 anni (norme contabili UE)</td></tr>
+                <tr><td>PIN di ritiro</td><td>In chiaro 5 minuti; hash salato per audit per 30 giorni</td></tr>
+                <tr><td>Ticket assistenza</td><td>3 anni dalla chiusura</td></tr>
+                <tr><td>Registrazione consenso marketing</td><td>Fino a revoca + periodo di accountability</td></tr>
+                <tr><td>Account cancellati</td><td>Anonimizzati (art. 17); metadati fiscali conservati ove obbligatorio</td></tr>
             </tbody>
         </table>
     </section>
 
-    <section>
-        <h2>5. Destinatari e terze parti</h2>
-        <p>Non vendiamo i tuoi dati personali. Li condividiamo solo con responsabili del trattamento che agiscono su nostre
-            istruzioni, tra cui fornitori di pagamenti, mappe e routing, invio di SMS e notifiche push e hosting,
-            nonch&eacute; con le autorit&agrave; competenti ove richiesto dalla legge. I responsabili e
-            sub-responsabili attivi sono pubblicati nel nostro registro dei sub-responsabili. Tutti i responsabili sono vincolati
-            da accordi ai sensi dell&rsquo;art. 28; i trasferimenti extra-SEE si basano su decisioni di adeguatezza o Clausole
-            Contrattuali Tipo.</p>
+    <section id="sec-5">
+        <h2>5. Architettura di servizio (chi tratta cosa)</h2>
+        <p>
+            La piattaforma {{brand_name}} &egrave; composta da servizi specializzati, ciascuno con uno scopo definito:
+        </p>
+        <ul>
+            <li><strong>pillion-core</strong> &mdash; identit&agrave;, onboarding, compliance, payments, audit. Detentore della verit&agrave; sulle persone.</li>
+            <li><strong>ride-matcher</strong> &mdash; matching e orchestrazione delle corse. Non conserva PII; usa id esterni nullable.</li>
+            <li><strong>price-arbiter</strong> &mdash; calcolo del prezzo, fee, tasse. Non conserva PII.</li>
+            <li><strong>cadastre</strong> &mdash; geometria delle zone e listini per citt&agrave;.</li>
+            <li><strong>compass / gps-ingest</strong> &mdash; raccolta e streaming dei punti GPS.</li>
+            <li><strong>prefactguard</strong> &mdash; trust &amp; safety, background check, segnali di rischio.</li>
+            <li><strong>regula</strong> &mdash; documenti legali, accettazioni, consensi, registro responsabili.</li>
+            <li><strong>herald</strong> &mdash; recapito delle notifiche (push, SMS, email).</li>
+            <li><strong>fastgeo</strong> &mdash; routing e geocoding.</li>
+        </ul>
+        <p>
+            Questa separazione tecnica corrisponde a una separazione delle finalit&agrave;: ogni servizio tratta solo i dati
+            che gli servono. Il <a href="/legal/processor-list">Registro dei Responsabili</a> dichiara i fornitori esterni
+            collegati a ciascun servizio.
+        </p>
     </section>
 
-    <section>
-        <h2>6. I tuoi diritti</h2>
-        <p>Hai diritto di accesso, rettifica, cancellazione, limitazione, portabilit&agrave;, opposizione e revoca del consenso, e
-            il diritto di non essere sottoposto a decisioni automatizzate con effetti giuridici o significativi. Le modalit&agrave;
-            di esercizio sono indicate nella nostra informativa dedicata <em>I tuoi diritti sui dati</em>. Per una richiesta scrivi
-            a <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Rispondiamo entro un mese.</p>
-        <p>Puoi proporre reclamo al {{supervisory_authority}} (<a href="{{supervisory_authority_url}}" rel="noopener noreferrer" target="_blank">{{supervisory_authority_url}}</a>) o all&rsquo;autorit&agrave; di controllo della tua residenza abituale.</p>
+    <section id="sec-6">
+        <h2>6. Destinatari, responsabili, trasferimenti extra-SEE</h2>
+        <p>
+            Non vendiamo i tuoi dati personali. Li condividiamo solo con responsabili del trattamento che agiscono su nostre
+            istruzioni (pagamenti, mappe e routing, SMS e notifiche push, hosting, monitoraggio) e con autorit&agrave;
+            competenti ove richiesto dalla legge. La lista completa &egrave; nel <a href="/legal/processor-list">Registro dei
+            Responsabili e Sub-Responsabili</a>. Tutti i responsabili sono vincolati da accordi ai sensi dell&rsquo;art. 28
+            GDPR. I trasferimenti extra-SEE si basano su decisioni di adeguatezza o Clausole Contrattuali Tipo (SCC) della
+            Commissione UE.
+        </p>
     </section>
 
-    <section>
-        <h2>7. Sicurezza</h2>
-        <p>Adottiamo misure tecniche e organizzative adeguate, tra cui cifratura in transito e a riposo, hashing robusto delle
-            password, controllo degli accessi basato sui ruoli, log di audit, accesso ai servizi con privilegi minimi e
-            cancellazione programmata dei dati di geolocalizzazione. In caso di violazione che comporti un rischio per i tuoi
-            diritti, notifichiamo l&rsquo;autorit&agrave; di controllo entro 72 ore e gli interessati senza ingiustificato ritardo
-            (artt. 33-34).</p>
+    <section id="sec-7">
+        <h2>7. Decisioni automatizzate (art. 22 GDPR)</h2>
+        <p>
+            Alcune funzioni della piattaforma comportano <strong>decisioni automatizzate</strong>:
+        </p>
+        <ul>
+            <li>Matching del conducente e ranking nella pool di offerta;</li>
+            <li>Calcolo del prezzo (banda + surge + modificatore conducente);</li>
+            <li>Filtri di idoneit&agrave; (documenti scaduti, copertura assicurativa, zona consentita);</li>
+            <li>Blocchi di sicurezza al primo segnale critico.</li>
+        </ul>
+        <p>
+            La <strong>sospensione</strong> di un conducente &egrave; sempre confermata da un operatore umano prima di
+            diventare definitiva. Hai diritto di ottenere intervento umano, esprimere la tua opinione, contestare la
+            decisione scrivendo a <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Risposta entro un mese (art. 12).
+            Dettagli nella <a href="/legal/dpia-summary-automated-decisions">Sintesi DPIA &mdash; Decisioni
+            Automatizzate</a>.
+        </p>
     </section>
 
-    <section>
-        <h2>8. Minori</h2>
-        <p>La piattaforma non &egrave; destinata a persone di et&agrave; inferiore a 18 anni. Non raccogliamo consapevolmente dati
-            di minori e li cancelleremo qualora ne veniamo a conoscenza.</p>
+    <section id="sec-8">
+        <h2>8. Comunicazione DAC7</h2>
+        <p>
+            Ai sensi della Direttiva (UE) 2021/514 recepita dal D.Lgs. 32/2023, comunichiamo annualmente all&rsquo;Agenzia
+            delle Entrate i dati identificativi dei conducenti (nome, codice fiscale, P.IVA, data di nascita, residenza), i
+            corrispettivi lordi percepiti, il numero di operazioni e le commissioni trattenute. La base giuridica &egrave;
+            l&rsquo;obbligo legale (art. 6(1)(c) GDPR). La comunicazione &egrave; effettuata in formato XML attraverso i
+            canali ufficiali dell&rsquo;Agenzia.
+        </p>
     </section>
 
-    <section>
-        <h2>9. Modifiche</h2>
-        <p>Possiamo aggiornare la presente informativa per riflettere modifiche delle nostre pratiche o di legge. Le modifiche
-            sostanziali sono comunicate in anticipo via email o avviso in-app. La data di &laquo;Ultimo aggiornamento&raquo; indica
-            la revisione corrente.</p>
+    <section id="sec-9">
+        <h2>9. PIN di ritiro</h2>
+        <p>
+            All&rsquo;arrivo del conducente al punto di ritiro, generiamo un PIN di 6 cifre con generatore crittografico
+            sicuro (CSPRNG). Il PIN &egrave; visibile al passeggero per 5 minuti e accetta al massimo 3 tentativi di verifica.
+            Sul server conserviamo solo l&rsquo;<strong>hash salato SHA-256</strong> del PIN; il valore in chiaro non viene
+            mai persistito. Dopo l&rsquo;uso o lo scadere della finestra, sopravvive solo l&rsquo;hash per audit fino a 30
+            giorni. Finalit&agrave;: prevenire scambi di persona e ritiri fraudolenti.
+        </p>
     </section>
 
-    <section>
-        <h2>10. Contatti</h2>
-        <p>Richieste privacy: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> · Responsabile della Protezione dei Dati:
-            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>.</p>
+    <section id="sec-10">
+        <h2>10. I tuoi diritti</h2>
+        <p>
+            Hai diritto di <strong>accesso, rettifica, cancellazione, limitazione, portabilit&agrave;, opposizione, revoca del
+            consenso</strong> e di <strong>non essere sottoposto a decisioni automatizzate</strong> con effetti giuridici o
+            significativi. Modalit&agrave; ed esempi pratici nella nostra <a href="/legal/gdpr-rights">Guida ai Diritti GDPR</a>.
+            Richieste: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Risposta entro un mese (art. 12 GDPR), salvo
+            proroga giustificata.
+        </p>
+        <p>
+            Puoi proporre reclamo al <strong>{{supervisory_authority}}</strong>
+            (<a href="{{supervisory_authority_url}}" rel="noopener noreferrer" target="_blank">{{supervisory_authority_url}}</a>)
+            o all&rsquo;autorit&agrave; di controllo della tua residenza abituale.
+        </p>
     </section>
+
+    <section id="sec-11">
+        <h2>11. Sicurezza</h2>
+        <p>
+            Adottiamo misure tecniche e organizzative adeguate: cifratura in transito (TLS 1.2+) e a riposo, hashing robusto
+            delle password tramite Zitadel, controllo degli accessi basato sui ruoli (RBAC), log di audit, principio del
+            minimo privilegio, isolamento di rete dei servizi sensibili, cancellazione programmata dei dati GPS. In caso di
+            violazione che comporti un rischio per i tuoi diritti, notifichiamo all&rsquo;autorit&agrave; di controllo entro
+            72 ore (art. 33) e a te senza ingiustificato ritardo (art. 34).
+        </p>
+    </section>
+
+    <section id="sec-12">
+        <h2>12. Minori</h2>
+        <p>
+            La piattaforma non &egrave; destinata a persone di et&agrave; inferiore a 18 anni. Non raccogliamo
+            consapevolmente dati di minori e li cancelliamo qualora ne veniamo a conoscenza.
+        </p>
+    </section>
+
+    <section id="sec-13">
+        <h2>13. Modifiche e contatti</h2>
+        <p>
+            Possiamo aggiornare la presente informativa per riflettere modifiche delle nostre pratiche o di legge. Le
+            modifiche sostanziali sono comunicate in anticipo via email o avviso in-app. La data di &laquo;Ultimo
+            aggiornamento&raquo; indica la revisione corrente.
+        </p>
+        <p>
+            Privacy: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> &middot; DPO:
+            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; {{registered_street}}, {{registered_postal_code}} {{registered_city}} &middot; P.IVA {{vat_number}}</p>
+    </footer>
 </article>

@@ -1,146 +1,251 @@
 <article class="legal-document" lang="en">
+    <aside class="legal-draft-banner">
+        <strong>Technical draft.</strong> Written by the product team, not yet reviewed by qualified Italian counsel.
+    </aside>
+
     <header>
         <h1>Privacy Policy</h1>
-        <p class="legal-meta">Last updated: {{last_updated}} · Effective: {{effective_date}}</p>
-        <p>
-            {{legal_name}} (&ldquo;{{brand_name}}&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) is the data controller for the
-            personal data processed through the {{brand_name}} platform. We process your personal data in accordance with
-            Regulation (EU) 2016/679 (&ldquo;GDPR&rdquo;) and Italian Legislative Decree 196/2003 as amended (&ldquo;Codice
-            Privacy&rdquo;). This policy explains what we collect, why, the legal basis, how long we keep it, and the rights you have.
-        </p>
+        <p class="legal-meta">Version {{version}} &middot; Last updated: {{last_updated}} &middot; Effective: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>At a glance</h2>
+            <ul>
+                <li>Controller: <strong>{{legal_name}}</strong>. DPO at <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>.</li>
+                <li>We process data on 4 legal bases: contract, legal obligation, vital interest (SOS), legitimate interest (safety/anti-fraud). Marketing only with consent.</li>
+                <li>Ride GPS deleted within 30 days; ride metadata kept for tax obligations (10 years). Pickup PIN kept as a salted hash after use.</li>
+                <li>Automated decisions (matching, eligibility): you have the right to request human intervention (GDPR Art. 22).</li>
+                <li>We report DAC7 data to the Italian Tax Agency. Full list of processors in the <a href="/legal/processor-list">Processor Register</a>.</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
-        <h2>1. Data controller and contact</h2>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Controller and contacts</a></li>
+            <li><a href="#sec-2">What we collect</a></li>
+            <li><a href="#sec-3">Legal bases and purposes</a></li>
+            <li><a href="#sec-4">Data retention</a></li>
+            <li><a href="#sec-5">Service architecture (who processes what)</a></li>
+            <li><a href="#sec-6">Recipients, processors, extra-EEA transfers</a></li>
+            <li><a href="#sec-7">Automated decisions (Art. 22)</a></li>
+            <li><a href="#sec-8">DAC7 reporting</a></li>
+            <li><a href="#sec-9">Pickup PIN</a></li>
+            <li><a href="#sec-10">Your rights</a></li>
+            <li><a href="#sec-11">Security</a></li>
+            <li><a href="#sec-12">Minors</a></li>
+            <li><a href="#sec-13">Changes and contacts</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Controller and contacts</h2>
         <p>
             <strong>{{legal_name}}</strong> ({{legal_form}})<br />
             {{registered_street}}, {{registered_postal_code}} {{registered_city}} ({{registered_province}}), {{registered_country}}<br />
-            VAT / P.IVA: {{vat_number}} · REA: {{rea_number}}<br />
-            Email: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>
+            VAT {{vat_number}} &middot; REA {{rea_number}}<br />
+            Privacy email: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>
         </p>
         <p>
-            Our Data Protection Officer (DPO) can be reached at
-            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>{{dpo_name}}.
+            The Data Protection Officer (DPO) {{dpo_name}} can be reached at
+            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>. We process data under Regulation (EU) 2016/679 ("GDPR") and
+            D.Lgs. 196/2003 as amended ("Italian Privacy Code").
         </p>
     </section>
 
-    <section>
-        <h2>2. What data we collect</h2>
+    <section id="sec-2">
+        <h2>2. What we collect</h2>
         <h3>2.1 Account data</h3>
         <ul>
-            <li>Full name, email address, phone number</li>
-            <li>Authentication credentials (managed by our identity provider; passwords are never stored in plaintext)</li>
-            <li>Profile photo (optional)</li>
-            <li>Date of birth (required for driver eligibility and age verification)</li>
-            <li>Preferred language and locale</li>
+            <li>Name, email, phone, profile photo (optional), language</li>
+            <li>Date of birth (age check and driver eligibility)</li>
+            <li>Credentials managed by Zitadel (passwords never stored in clear)</li>
         </ul>
         <h3>2.2 Driver onboarding data</h3>
         <ul>
-            <li>Government-issued identity documents (ID card, passport, driving licence)</li>
-            <li>Vehicle registration and insurance certificates</li>
-            <li>Professional transport licences where required by local law</li>
-            <li>Background and eligibility check outcomes (decision summary, not the full underlying file)</li>
-            <li>Payout bank details (held by our payment processor, not on our servers)</li>
+            <li>ID documents and driving licences</li>
+            <li>NCC authorisation, drivers register, CAP KB, garage declaration</li>
+            <li>Vehicle registration (with "uso terzi" annotation), RCA insurance</li>
+            <li>Tax code, VAT, bank data (held by the payment processor)</li>
+            <li>Verification outcomes (decision summary, not the full file)</li>
         </ul>
-        <h3>2.3 Ride and location data</h3>
+        <h3>2.3 Ride and geolocation data</h3>
         <ul>
-            <li>Pickup and drop-off locations and geocoded addresses</li>
-            <li>GPS route coordinates during an active trip</li>
-            <li>Trip timestamps, duration, distance, fare and status</li>
-            <li>One-time pickup verification codes (discarded after use)</li>
+            <li>Pickup/dropoff points, geocoded addresses</li>
+            <li>GPS traces during the active ride</li>
+            <li>Times, duration, distance, fare, ride status</li>
+            <li>Pickup PIN (see &sect;9)</li>
         </ul>
         <h3>2.4 Payment data</h3>
         <p>
-            Payments are handled by our payment processor. We store only a customer reference, payment-intent reference and
-            transaction status. Full card numbers and bank credentials are never stored on our infrastructure.
+            Payments are handled by the payment service provider (Stripe). We keep only a customer reference, the operation
+            reference and the transaction status. Full card numbers and bank credentials are <strong>never on our
+            servers</strong>.
         </p>
         <h3>2.5 Communications and technical data</h3>
         <ul>
-            <li>In-app messages, support tickets and email correspondence</li>
-            <li>Push notification tokens and SMS verification codes (codes not retained after delivery)</li>
-            <li>IP address, device model, operating system, app version and session identifiers</li>
-            <li>Error logs, crash reports and cookie identifiers (see our Cookie Policy)</li>
+            <li>In-app messages, support tickets, email</li>
+            <li>Push notification tokens, SMS codes (codes not stored after sending)</li>
+            <li>IP, device model, OS, app version, session identifiers</li>
+            <li>Error logs, crash reports, cookie identifiers (see <a href="/legal/cookie-policy">Cookie Policy</a>)</li>
         </ul>
     </section>
 
-    <section>
-        <h2>3. Legal basis for processing</h2>
+    <section id="sec-3">
+        <h2>3. Legal bases and purposes</h2>
         <table>
             <thead>
                 <tr><th>Purpose</th><th>Legal basis (GDPR Art. 6)</th></tr>
             </thead>
             <tbody>
-                <tr><td>Account creation and platform access</td><td>Art. 6(1)(b) — performance of a contract</td></tr>
-                <tr><td>Driver eligibility and document verification</td><td>Art. 6(1)(c) legal obligation; Art. 6(1)(b) contract</td></tr>
-                <tr><td>Payment processing and payouts</td><td>Art. 6(1)(b) — performance of a contract</td></tr>
-                <tr><td>Safety, SOS and emergency response</td><td>Art. 6(1)(d) vital interests; Art. 6(1)(f) legitimate interests</td></tr>
-                <tr><td>Fraud prevention and platform security</td><td>Art. 6(1)(f) — legitimate interests</td></tr>
-                <tr><td>Marketing communications</td><td>Art. 6(1)(a) — consent</td></tr>
-                <tr><td>Tax and accounting compliance</td><td>Art. 6(1)(c) — legal obligation</td></tr>
+                <tr><td>Account creation and login</td><td>Art. 6(1)(b) &mdash; contract</td></tr>
+                <tr><td>Driver document and eligibility verification</td><td>Art. 6(1)(c) legal obligation; (b) contract</td></tr>
+                <tr><td>Ride execution and matching</td><td>Art. 6(1)(b) &mdash; contract</td></tr>
+                <tr><td>Payments and settlement</td><td>Art. 6(1)(b) &mdash; contract</td></tr>
+                <tr><td>Safety, SOS, emergencies</td><td>Art. 6(1)(d) vital interest; (f) legitimate interest</td></tr>
+                <tr><td>Fraud prevention and platform safety</td><td>Art. 6(1)(f) &mdash; legitimate interest</td></tr>
+                <tr><td>DAC7 reporting to Italian Tax Agency</td><td>Art. 6(1)(c) &mdash; legal obligation</td></tr>
+                <tr><td>Tax and accounting</td><td>Art. 6(1)(c) &mdash; legal obligation</td></tr>
+                <tr><td>Direct marketing</td><td>Art. 6(1)(a) &mdash; consent (revocable)</td></tr>
             </tbody>
         </table>
     </section>
 
-    <section>
+    <section id="sec-4">
         <h2>4. Data retention</h2>
         <table>
             <thead>
                 <tr><th>Category</th><th>Retention</th></tr>
             </thead>
             <tbody>
-                <tr><td>Account data (active users)</td><td>Duration of the account, then anonymised</td></tr>
-                <tr><td>Ride GPS coordinates</td><td>Purged or nullified within 30 days of trip completion</td></tr>
-                <tr><td>Ride records (metadata)</td><td>Up to 10 years (tax and accounting law)</td></tr>
-                <tr><td>Driver documents</td><td>Driver contract duration plus the statutory period</td></tr>
-                <tr><td>Payment records</td><td>Up to 10 years (EU accounting rules)</td></tr>
-                <tr><td>Support and dispute cases</td><td>Up to 3 years from closure</td></tr>
-                <tr><td>Marketing consent records</td><td>Until consent is withdrawn, plus an accountability period</td></tr>
-                <tr><td>Deleted accounts</td><td>Anonymised on erasure (Art. 17), legal records retained where required</td></tr>
+                <tr><td>Active account data</td><td>Account lifetime, then anonymised</td></tr>
+                <tr><td>Ride GPS traces</td><td>Deleted/zeroed within 30 days</td></tr>
+                <tr><td>Ride metadata (id, distance, duration, fare)</td><td>10 years (tax obligations)</td></tr>
+                <tr><td>Driver documents</td><td>Contract duration + statutory period</td></tr>
+                <tr><td>Payment data</td><td>10 years (EU accounting rules)</td></tr>
+                <tr><td>Pickup PIN</td><td>Plaintext 5 minutes; salted hash for audit up to 30 days</td></tr>
+                <tr><td>Support tickets</td><td>3 years from closure</td></tr>
+                <tr><td>Marketing consent records</td><td>Until withdrawal + accountability period</td></tr>
+                <tr><td>Deleted accounts</td><td>Anonymised (Art. 17); tax metadata retained where required</td></tr>
             </tbody>
         </table>
     </section>
 
-    <section>
-        <h2>5. Recipients and third parties</h2>
-        <p>We do not sell your personal data. We share it only with processors acting on our instructions, including providers of
-            payments, mapping and routing, SMS and push delivery, and hosting, and with
-            competent authorities where required by law. Our current processors and sub-processors are published in our
-            sub-processor register. All processors are bound by Article 28 data processing agreements; transfers outside the EEA
-            rely on adequacy decisions or Standard Contractual Clauses.</p>
+    <section id="sec-5">
+        <h2>5. Service architecture (who processes what)</h2>
+        <p>The {{brand_name}} platform is composed of specialised services, each with a defined purpose:</p>
+        <ul>
+            <li><strong>pillion-core</strong> &mdash; identity, onboarding, compliance, payments, audit. Source of truth on people.</li>
+            <li><strong>ride-matcher</strong> &mdash; ride matching and orchestration. No PII; uses nullable external ids.</li>
+            <li><strong>price-arbiter</strong> &mdash; price, fee, tax computation. No PII.</li>
+            <li><strong>cadastre</strong> &mdash; zone geometry and per-city rate cards.</li>
+            <li><strong>compass / gps-ingest</strong> &mdash; GPS collection and streaming.</li>
+            <li><strong>prefactguard</strong> &mdash; trust &amp; safety, background check, risk signals.</li>
+            <li><strong>regula</strong> &mdash; legal documents, acceptances, consents, processor register.</li>
+            <li><strong>herald</strong> &mdash; notification delivery (push, SMS, email).</li>
+            <li><strong>fastgeo</strong> &mdash; routing and geocoding.</li>
+        </ul>
+        <p>
+            This technical separation matches a separation of purposes: each service handles only the data it needs. The
+            <a href="/legal/processor-list">Processor Register</a> lists the external suppliers attached to each service.
+        </p>
     </section>
 
-    <section>
-        <h2>6. Your rights</h2>
-        <p>You have the rights of access, rectification, erasure, restriction, portability, objection, and withdrawal of consent,
-            and the right not to be subject to solely automated decisions with legal or similarly significant effects. How to
-            exercise them is set out in our dedicated <em>Data Protection Rights</em> notice. To make a request, email
-            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. We respond within one month.</p>
-        <p>You may lodge a complaint with the {{supervisory_authority}} (<a href="{{supervisory_authority_url}}" rel="noopener noreferrer" target="_blank">{{supervisory_authority_url}}</a>) or with the supervisory authority of your habitual residence.</p>
+    <section id="sec-6">
+        <h2>6. Recipients, processors, extra-EEA transfers</h2>
+        <p>
+            We do not sell your personal data. We share it only with processors acting on our instructions (payments, maps
+            and routing, SMS and push notifications, hosting, monitoring) and with competent authorities where required by
+            law. The full list is in the <a href="/legal/processor-list">Processor and Sub-Processor Register</a>. All
+            processors are bound by Art. 28 GDPR agreements. Extra-EEA transfers rely on adequacy decisions or EU Commission
+            Standard Contractual Clauses (SCCs).
+        </p>
     </section>
 
-    <section>
-        <h2>7. Security</h2>
-        <p>We apply appropriate technical and organisational measures including encryption in transit and at rest, strong password
-            hashing, role-based access control, audit logging, least-privilege service access and scheduled purging of location
-            data. In the event of a personal data breach posing a risk to your rights, we notify the supervisory authority within
-            72 hours and affected users without undue delay (Art. 33–34).</p>
+    <section id="sec-7">
+        <h2>7. Automated decisions (GDPR Art. 22)</h2>
+        <p>Some platform functions involve <strong>automated decisions</strong>:</p>
+        <ul>
+            <li>Driver matching and ranking in the offer pool;</li>
+            <li>Price calculation (band + surge + driver modifier);</li>
+            <li>Eligibility filters (expired documents, insurance coverage, allowed zone);</li>
+            <li>Safety blocks on the first critical signal.</li>
+        </ul>
+        <p>
+            Driver <strong>suspension</strong> is always confirmed by a human operator before becoming final. You have the
+            right to obtain human intervention, express your view, contest the decision by writing to
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Reply within one month (Art. 12). Details in
+            <a href="/legal/dpia-summary-automated-decisions">DPIA Summary &mdash; Automated Decisions</a>.
+        </p>
     </section>
 
-    <section>
-        <h2>8. Children</h2>
-        <p>The platform is not directed at persons under 18. We do not knowingly collect data from minors and will delete such
-            data if we become aware of it.</p>
+    <section id="sec-8">
+        <h2>8. DAC7 reporting</h2>
+        <p>
+            Under Directive (EU) 2021/514 transposed by D.Lgs. 32/2023, we report annually to the Italian Tax Agency
+            (Agenzia delle Entrate) driver identifying data (name, tax code, VAT, date of birth, residence), gross
+            consideration earned, number of operations and commissions retained. Legal basis: legal obligation (Art. 6(1)(c)
+            GDPR). Reporting is performed in XML through official AdE channels.
+        </p>
     </section>
 
-    <section>
-        <h2>9. Changes</h2>
-        <p>We may update this policy to reflect changes in our practices or the law. Material changes are communicated in advance
-            by email or in-app notice. The &ldquo;Last updated&rdquo; date above indicates the current revision.</p>
+    <section id="sec-9">
+        <h2>9. Pickup PIN</h2>
+        <p>
+            When the driver arrives at pickup, we generate a 6-digit PIN with a cryptographically secure RNG (CSPRNG). The
+            PIN is visible to the passenger for 5 minutes and accepts a maximum of 3 verification attempts. On the server
+            we keep only the <strong>salted SHA-256 hash</strong> of the PIN; the plaintext is never persisted. After use
+            or window expiry, only the hash survives for audit up to 30 days. Purpose: prevent person swaps and fraudulent
+            pickups.
+        </p>
     </section>
 
-    <section>
-        <h2>10. Contact</h2>
-        <p>Privacy enquiries: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> · Data Protection Officer:
-            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>.</p>
+    <section id="sec-10">
+        <h2>10. Your rights</h2>
+        <p>
+            You have the right to <strong>access, rectification, erasure, restriction, portability, objection, withdrawal
+            of consent</strong> and to <strong>not be subject to automated decisions</strong> producing legal or significant
+            effects. Practical guidance in our <a href="/legal/gdpr-rights">GDPR Rights Guide</a>. Requests:
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Reply within one month (Art. 12 GDPR), with justified
+            extension where applicable.
+        </p>
+        <p>
+            You may lodge a complaint with the <strong>{{supervisory_authority}}</strong>
+            (<a href="{{supervisory_authority_url}}" rel="noopener noreferrer" target="_blank">{{supervisory_authority_url}}</a>)
+            or the supervisory authority of your habitual residence.
+        </p>
     </section>
+
+    <section id="sec-11">
+        <h2>11. Security</h2>
+        <p>
+            We adopt appropriate technical and organisational measures: TLS 1.2+ in transit and encryption at rest, robust
+            password hashing through Zitadel, role-based access control (RBAC), audit logs, least privilege, network
+            isolation of sensitive services, scheduled deletion of GPS data. In case of a breach posing risk to your
+            rights, we notify the supervisory authority within 72 hours (Art. 33) and you without undue delay (Art. 34).
+        </p>
+    </section>
+
+    <section id="sec-12">
+        <h2>12. Minors</h2>
+        <p>
+            The platform is not intended for individuals under 18. We do not knowingly collect data of minors and we delete
+            it if we become aware.
+        </p>
+    </section>
+
+    <section id="sec-13">
+        <h2>13. Changes and contacts</h2>
+        <p>
+            We may update this policy to reflect changes in our practices or in law. Material changes are notified in
+            advance by email or in-app notice. The "Last updated" date marks the current revision.
+        </p>
+        <p>
+            Privacy: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> &middot; DPO:
+            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; {{registered_street}}, {{registered_postal_code}} {{registered_city}} &middot; VAT {{vat_number}}</p>
+        <p class="legal-translation-note">Informational translation. In case of conflict, the Italian version prevails.</p>
+    </footer>
 </article>

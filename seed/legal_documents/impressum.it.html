@@ -1,60 +1,110 @@
 <article class="legal-document" lang="it">
+    <aside class="legal-draft-banner">
+        <strong>Bozza tecnica.</strong> Documento redatto dal team di prodotto e non ancora rivisto da un legale italiano qualificato.
+    </aside>
+
     <header>
         <h1>Note Legali / Impressum</h1>
-        <p class="legal-meta">Ultimo aggiornamento: {{last_updated}}</p>
-        <p>Informazioni rese ai sensi degli obblighi di trasparenza UE e nazionali (tra cui l&rsquo;art. 7 del D.Lgs. 70/2003 per
-            l&rsquo;Italia e il § 5 DDG/TMG per la Germania).</p>
+        <p class="legal-meta">Versione {{version}} &middot; Ultimo aggiornamento: {{last_updated}} &middot; In vigore dal: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>In sintesi</h2>
+            <ul>
+                <li>Identificazione del prestatore di servizi della societ&agrave; dell&rsquo;informazione (D.Lgs. 70/2003 art. 7).</li>
+                <li>Informazioni sull&rsquo;impresa secondo l&rsquo;art. 49 del Codice del Consumo.</li>
+                <li>Piattaforma ODR per le controversie con i consumatori.</li>
+                <li>Limiti di responsabilit&agrave; sui contenuti e sui link esterni.</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
-        <h2>Dati societari</h2>
-        <p>
-            <strong>{{legal_name}}</strong><br />
-            Forma giuridica: {{legal_form}}<br />
-            Sede legale: {{registered_street}}, {{registered_postal_code}} {{registered_city}} ({{registered_province}}), {{registered_country}}<br />
-            P.IVA: {{vat_number}}<br />
-            Codice fiscale: {{tax_code}}<br />
-            REA: {{rea_number}} — {{chamber_of_commerce}}<br />
-            Capitale sociale: {{share_capital}}
-        </p>
-    </section>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Identificazione del prestatore</a></li>
+            <li><a href="#sec-2">Iscrizione e dati d&rsquo;impresa</a></li>
+            <li><a href="#sec-3">Risoluzione delle controversie (ODR)</a></li>
+            <li><a href="#sec-4">Responsabilit&agrave; sui contenuti</a></li>
+            <li><a href="#sec-5">Link esterni</a></li>
+            <li><a href="#sec-6">Copyright e propriet&agrave; intellettuale</a></li>
+            <li><a href="#sec-7">Contatti</a></li>
+        </ol>
+    </nav>
 
-    <section>
-        <h2>Contatti</h2>
+    <section id="sec-1">
+        <h2>1. Identificazione del prestatore (D.Lgs. 70/2003 art. 7)</h2>
         <p>
-            Email: <a href="mailto:{{email_support}}">{{email_support}}</a><br />
-            Ufficio legale: <a href="mailto:{{email_legal}}">{{email_legal}}</a><br />
+            <strong>{{legal_name}}</strong> ({{legal_form}})<br />
+            Sede legale: {{registered_street}}, {{registered_postal_code}} {{registered_city}} ({{registered_province}}),
+            {{registered_country}}<br />
+            Email: <a href="mailto:{{email_legal}}">{{email_legal}}</a><br />
             Telefono: {{phone}}<br />
             Sito web: <a href="{{website}}" rel="noopener noreferrer" target="_blank">{{website}}</a>
         </p>
     </section>
 
-    <section>
-        <h2>Protezione dei dati</h2>
-        <p>Responsabile della Protezione dei Dati (RPD/DPO): <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>. Per informazioni
-            complete sul trattamento dei dati personali, consulta l&rsquo;Informativa sulla Privacy e l&rsquo;informativa sui
-            diritti dell&rsquo;interessato.</p>
+    <section id="sec-2">
+        <h2>2. Iscrizione e dati d&rsquo;impresa</h2>
+        <p>
+            P.IVA: {{vat_number}}<br />
+            Codice fiscale: {{tax_code}}<br />
+            REA: {{rea_number}}<br />
+            Capitale sociale: {{share_capital}}<br />
+            Iscrizione: {{chamber_of_commerce}}
+        </p>
     </section>
 
-    <section>
-        <h2>Risoluzione delle controversie</h2>
-        <p>La Commissione Europea mette a disposizione una piattaforma di risoluzione online delle controversie ai sensi del
-            Regolamento (UE) 524/2013: <a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>. Non siamo
-            obbligati n&eacute;, in via generale, disponibili a partecipare a procedure di conciliazione dinanzi a organismi di
-            risoluzione delle controversie dei consumatori, salvo ove previsto dalla legge.</p>
+    <section id="sec-3">
+        <h2>3. Risoluzione delle controversie (ODR)</h2>
+        <p>
+            Ai sensi dell&rsquo;art. 14 del Regolamento (UE) 524/2013 e dell&rsquo;art. 141-bis del Codice del Consumo, &egrave;
+            disponibile la piattaforma europea di risoluzione delle controversie online (ODR) al link
+            <a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>. Per reclami:
+            <a href="mailto:{{email_legal}}">{{email_legal}}</a>.
+        </p>
+        <p>
+            Per le controversie con conducenti relative al trasporto, ci si pu&ograve; rivolgere all&rsquo;Autorit&agrave; di
+            regolamentazione dei trasporti (ART) o al consorzio NCC di appartenenza del conducente. Per le pratiche
+            commerciali, &egrave; competente l&rsquo;AGCM (<a href="https://www.agcm.it" rel="noopener noreferrer" target="_blank">https://www.agcm.it</a>).
+        </p>
     </section>
 
-    <section>
-        <h2>Responsabilit&agrave; per contenuti e link</h2>
-        <p>I contenuti dei nostri siti sono redatti con cura ma non garantiamo l&rsquo;esattezza o la completezza. Non siamo
-            responsabili dei contenuti dei siti esterni collegati dalla piattaforma; la responsabilit&agrave; &egrave; dei
-            rispettivi gestori.</p>
+    <section id="sec-4">
+        <h2>4. Responsabilit&agrave; sui contenuti</h2>
+        <p>
+            I contenuti pubblicati sul sito {{website}} e nell&rsquo;app {{brand_name}} sono redatti con la massima cura, ma
+            non costituiscono consulenza legale, fiscale o tecnica. Le informazioni operative su tariffe, tempi e
+            disponibilit&agrave; dei conducenti sono indicative e possono variare. {{brand_name}} non risponde dell&rsquo;uso
+            improprio dei contenuti o di errori non imputabili a colpa grave o dolo.
+        </p>
     </section>
 
-    <section>
-        <h2>Diritto d&rsquo;autore</h2>
-        <p>I contenuti e le opere presenti su questa piattaforma sono protetti dalla legge italiana sul diritto d&rsquo;autore
-            (Legge 633/1941) e dalla normativa UE applicabile. Ogni riproduzione, adattamento o distribuzione non autorizzata
-            &egrave; vietata.</p>
+    <section id="sec-5">
+        <h2>5. Link esterni</h2>
+        <p>
+            Il sito e l&rsquo;app possono contenere link a siti di terzi. {{brand_name}} non controlla i contenuti di tali
+            siti e non risponde delle loro pratiche di trattamento dei dati o dei loro termini.
+        </p>
     </section>
+
+    <section id="sec-6">
+        <h2>6. Copyright e propriet&agrave; intellettuale</h2>
+        <p>
+            Il marchio &laquo;{{brand_name}}&raquo;, i loghi, le interfacce grafiche, il codice sorgente, le icone e i
+            contenuti editoriali sono di propriet&agrave; di {{legal_name}} o concessi in licenza. La riproduzione, anche
+            parziale, senza autorizzazione &egrave; vietata. Per richieste di uso del marchio:
+            <a href="mailto:{{email_legal}}">{{email_legal}}</a>.
+        </p>
+    </section>
+
+    <section id="sec-7">
+        <h2>7. Contatti</h2>
+        <p>
+            Generale: <a href="mailto:{{email_legal}}">{{email_legal}}</a> &middot; Supporto:
+            <a href="mailto:{{email_support}}">{{email_support}}</a> &middot; Privacy:
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; P.IVA {{vat_number}} &middot; {{registered_country}}</p>
+    </footer>
 </article>

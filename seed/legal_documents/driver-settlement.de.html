@@ -1,0 +1,136 @@
+<article class="legal-document" lang="de">
+    <aside class="legal-draft-banner">
+        <strong>Technischer Entwurf.</strong> Vom Produktteam verfasst, noch nicht von qualifizierten italienischen Rechtsanwalten gepr&uuml;ft.
+    </aside>
+
+    <header>
+        <h1>Abrechnung &amp; Zahlung &mdash; Offenlegung f&uuml;r Fahrer</h1>
+        <p class="legal-meta">Version {{version}} &middot; Zuletzt aktualisiert: {{last_updated}} &middot; In Kraft seit: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>Auf einen Blick</h2>
+            <ul>
+                <li>Preis aus <code>price-arbiter</code> &uuml;ber Cadastre-Zonentarif.</li>
+                <li>Geb&uuml;hren-Stack: <strong>Basis &rarr; Surge &rarr; Fahrermodifikator &rarr; Rabatte &rarr; Zwischensumme &rarr; Plattformgeb&uuml;hr &rarr; Steuern &rarr; Gesamt</strong>.</li>
+                <li>Stripe Connect <em>destination charge</em>: Fahrgast zahlt Gesamt; Stripe &uuml;berweist Netto.</li>
+                <li>W&ouml;chentliche Auszahlung (i.d.R. Montag) f&uuml;r Fahrten capturet bis Sonntag.</li>
+                <li>Stornierungen: Stufengeb&uuml;hr (after_grace / in_progress / no_show) mit Zonenkompensation.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Pricing-Architektur</a></li>
+            <li><a href="#sec-2">Rechenbeispiel</a></li>
+            <li><a href="#sec-3">Preisband und Modifikator</a></li>
+            <li><a href="#sec-4">Stripe Connect &mdash; Geldfluss</a></li>
+            <li><a href="#sec-5">W&ouml;chentliche Auszahlung</a></li>
+            <li><a href="#sec-6">Stornierungen und No-show</a></li>
+            <li><a href="#sec-7">Verrechnung, Holdback, Chargeback</a></li>
+            <li><a href="#sec-8">DAC7 und Rechnung</a></li>
+            <li><a href="#sec-9">Kontrollwerkzeuge</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Pricing-Architektur</h2>
+        <pre>basis      = base_fare + (distance_m/1000)*per_km + (duration_s/60)*per_min   &larr; Cadastre-Zone
+&times; Fahrermodifikator   (im Zonenband, additiv mit Surge)
+&times; Zeitmodifikator     (Nacht/Wochenende, wenn konfiguriert)
+&times; Surge               (gedeckelt am Zonen-Cap, i.d.R. 2,0&times;)
+&minus; Rabatte             (Plattformfinanzierte Coupons, Fahrgastseite)
+= Zwischensumme
++ Geb&uuml;hren[]        (Plattformprovision, ggf. Beh&ouml;rdenabgaben)
++ Steuern[]            (USt. nach Zonen-Steuerprofil)
+= Gesamt (Fahrgastbetrag)</pre>
+        <p>
+            <strong>Plattformprovision</strong> standardm&auml;ssig <code>{{platform_commission_percent}}%</code> auf
+            Zwischensumme (Standard {{platform_commission_default}}). Zonenspezifisch &uuml;berschreibbar.
+        </p>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. Rechenbeispiel</h2>
+        <p>Bolzano Zentrum &rarr; Bolzano S&uuml;d, 5 km, 12 min, Zonenbasis 3,00&euro;, per_km 1,80, per_min 0,30, Geb. 12,5%.</p>
+        <pre>basis        = 3,00 + 5*1,80 + 12*0,30 = 15,60
+Surge x1.0                                      = 15,60
+Modifikator +5%                15,60 + 0,78    = 16,38
+Rabatt       = 0
+Zwischensumme                                   = 16,38
+Geb. 12,5%   = 16,38 * 0,125                    = 2,05
+Fahrgast Gesamt                                 = 18,43
+
+Stripe Connect:
+- Fahrgast-Charge                               = 18,43
+- destination amount Fahrer  (Gesamt - Geb.)    = 16,38
+- Plattform application_fee                     = 2,05</pre>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Preisband und Modifikator</h2>
+        <p>
+            Pro Zone <code>modifier_min_multiplier</code> und <code>modifier_max_multiplier</code>. Modifikator additiv auf
+            Zwischensumme, nicht multiplikativ. Band an lokale NCC-Tarife angelehnt (Marktplatzperimeter, EuGH C-434/15).
+        </p>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Stripe Connect &mdash; Geldfluss</h2>
+        <p>
+            Stripe Connect mit <em>destination charge</em>: Zahlung an Plattformkonto, automatischer Transfer netto an
+            Fahrerkonto (<em>application_fee</em>). Atomar bei Capture.
+        </p>
+        <p>
+            Aktivierung &uuml;ber Stripe-Connect-Onboarding (KYC: Steuer-ID, USt., IBAN). Status in App als
+            <em>payouts_enabled</em>.
+        </p>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. W&ouml;chentliche Auszahlung</h2>
+        <p>
+            Payout-Job montags 03:00 UTC f&uuml;r erfolgreich capturete Fahrten bis Sonntag. &Uuml;berweisung 1-3 Werktage.
+            Schwelle und Kadenz operativ konfigurierbar. Bei Stripe-Sperre/-Verifizierungsfehlen: Status <em>held</em>.
+        </p>
+    </section>
+
+    <section id="sec-6">
+        <h2>6. Stornierungen und No-show</h2>
+        <ul>
+            <li><strong>after_grace</strong>: Plattformgeb&uuml;hr + Kompensation pro Zone.</li>
+            <li><strong>in_progress</strong>: Handshake (full_refund/full_pay/partial:NN); Plattformgeb&uuml;hr pro Zone.</li>
+            <li><strong>no_show</strong>: zonenspezifische Geb&uuml;hr auf Fahrgastzahlungsmittel.</li>
+        </ul>
+    </section>
+
+    <section id="sec-7">
+        <h2>7. Verrechnung, Holdback, Chargeback</h2>
+        <p>
+            Verrechnung von R&uuml;ckerstattungen, Chargebacks, Strafen, unrechtm&auml;ssig erhaltenen Betr&auml;gen mit
+            Begr&uuml;ndung; Anfechtung binnen 14 Tagen.
+        </p>
+    </section>
+
+    <section id="sec-8">
+        <h2>8. DAC7 und Rechnung</h2>
+        <p>
+            J&auml;hrliche Meldung an Agenzia delle Entrate gem. D.Lgs. 32/2023. Sie sind Verkehrsunternehmen und stellen
+            die Fahrtrechnung an Fahrgast aus. Plattform stellt eigene Rechnung f&uuml;r Provision aus.
+        </p>
+    </section>
+
+    <section id="sec-9">
+        <h2>9. Kontrollwerkzeuge</h2>
+        <ul>
+            <li>Earnings-Panel in App.</li>
+            <li>Monatlicher CSV-Export &uuml;ber Einstellungen &rarr; Steuerdokumente.</li>
+            <li>Zonentarifverlauf im Cadastre-Panel.</li>
+            <li>Streitf&auml;lle: <a href="mailto:{{email_support}}">{{email_support}}</a>.</li>
+        </ul>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; <a href="mailto:{{email_support}}">{{email_support}}</a> &middot; siehe auch <a href="/legal/terms-of-service-driver">Driver TOS</a> und <a href="/legal/ncc-italia">NCC Italien</a></p>
+        <p class="legal-translation-note">Informative &Uuml;bersetzung. Bei Abweichung gilt die italienische Fassung.</p>
+    </footer>
+</article>

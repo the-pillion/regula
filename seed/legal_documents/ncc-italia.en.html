@@ -1,0 +1,144 @@
+<article class="legal-document" lang="en">
+    <aside class="legal-draft-banner">
+        <strong>Technical draft.</strong> Written by the product team, not yet reviewed by qualified Italian counsel.
+    </aside>
+
+    <header>
+        <h1>NCC Italy &mdash; Driver-Specific Requirements</h1>
+        <p class="legal-meta">Version {{version}} &middot; Last updated: {{last_updated}} &middot; Effective: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>At a glance</h2>
+            <ul>
+                <li>You operate in Italy as an independent <strong>NCC (Noleggio Con Conducente)</strong> driver under Law No. 21 of 15 January 1992.</li>
+                <li>You must have municipal authorisation, garage in the same comune, drivers register entry, CAP KB, RCA "uso terzi", VAT, "uso terzi" vehicle registration.</li>
+                <li>The <strong>return-to-garage</strong> rule applies (Bersani decree); vehicle homologation under art. 82 Italian Highway Code.</li>
+                <li>We verify the documents you submit; their validity and currency remain your responsibility.</li>
+                <li>Missing or expired requirements block new ride acceptance.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Regulatory framework</a></li>
+            <li><a href="#sec-2">Required documents</a></li>
+            <li><a href="#sec-3">Return-to-garage rule</a></li>
+            <li><a href="#sec-4">"Uso terzi" vehicle</a></li>
+            <li><a href="#sec-5">What we verify</a></li>
+            <li><a href="#sec-6">What you self-certify</a></li>
+            <li><a href="#sec-7">Expiries and renewals</a></li>
+            <li><a href="#sec-8">Checks and suspension</a></li>
+            <li><a href="#sec-9">Forum and contacts</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Regulatory framework</h2>
+        <p>NCC activity in Italy is governed by:</p>
+        <ul>
+            <li><strong>Law No. 21 of 15 January 1992</strong> &mdash; regulation of non-scheduled public passenger transport (taxi and NCC).</li>
+            <li><strong>D.L. 4 July 2006 No. 223 (Bersani decree)</strong>, converted into L. 248/2006 &mdash; return-to-garage rule.</li>
+            <li><strong>D.M. 215/1991</strong> &mdash; requirements for drivers register entry.</li>
+            <li><strong>D.Lgs. 285/1992 (Italian Highway Code)</strong>, in particular art. 82 on "uso proprio" vs "uso terzi" homologation.</li>
+            <li>Regional and municipal implementing rules, which may add requirements (minimum tariffs, liveries, badges).</li>
+        </ul>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. Required documents</h2>
+        <table>
+            <thead>
+                <tr><th>Document</th><th>Onboarding slug</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Municipal NCC authorisation</td><td><code>autorizzazione_ncc</code></td><td>Issued by the comune of the garage. Required fields: number, issuing comune, expiry.</td></tr>
+                <tr><td>Garage declaration</td><td><code>rimessa_declaration</code></td><td>Address in the same comune as the authorisation. Automatic cross-check.</td></tr>
+                <tr><td>Drivers Register entry</td><td><code>ruolo_conducenti</code></td><td>Chamber of Commerce, NCC section.</td></tr>
+                <tr><td>CAP KB</td><td><code>cap_kb</code></td><td>Professional driving certificate.</td></tr>
+                <tr><td>Driving licence A or B</td><td><code>patente_a</code> / <code>patente_b</code></td><td>Minimum 3-year seniority. A for moto, B for car.</td></tr>
+                <tr><td>Vehicle registration book</td><td><code>vehicle_registration</code></td><td>Mandatory "uso terzi" annotation (see &sect;4).</td></tr>
+                <tr><td>RCA insurance policy</td><td><code>insurance_rca</code></td><td>Extended to passenger transport with driver, "uso terzi".</td></tr>
+                <tr><td>VAT</td><td><code>partita_iva</code></td><td>Active for transport (ATECO code 49.32 or 49.39 depending on setup).</td></tr>
+                <tr><td>Tax code</td><td><code>codice_fiscale</code></td><td>For identification and DAC7 reporting.</td></tr>
+                <tr><td>Criminal record / pending charges certificate</td><td><code>criminal_record</code></td><td>Updated within the last 6 months.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Return-to-garage rule</h2>
+        <p>
+            The Bersani decree requires that, between rides, the NCC car <strong>return (or remain in the province)</strong>
+            of the declared garage. The platform does not impose return tracking, but assumes you respect the rule; reports
+            of violation may lead to suspension and to communications to the competent authority. The scope and
+            interpretation of the rule have been subject to legislative and judicial interventions; check your area's
+            municipal resolutions.
+        </p>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. "Uso terzi" vehicle</h2>
+        <p>
+            Art. 82 of the Italian Highway Code distinguishes between "uso proprio" (private transport) and "uso terzi"
+            (paid third-party transport) homologation. For NCC the vehicle must be registered or re-homologated for "uso
+            terzi", with the proper annotation on the registration book. The platform refuses onboarding of "uso proprio"
+            vehicles: verification happens at registration approval via the <em>uso_terzi</em> checkbox and manual review of
+            the image.
+        </p>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. What we verify</h2>
+        <ul>
+            <li>Presence and legibility of all documents listed in &sect;2.</li>
+            <li>Consistency between NCC authorisation comune and garage comune (automatic cross-check at garage document approval).</li>
+            <li>"Uso terzi" annotation on the vehicle registration (manual review).</li>
+            <li>Minimum 3-year licence seniority.</li>
+            <li>Expiries: the system blocks new ride acceptance at the first expired document.</li>
+        </ul>
+    </section>
+
+    <section id="sec-6">
+        <h2>6. What you self-certify</h2>
+        <ul>
+            <li>Actual ownership of the NCC authorisation and garage as declared.</li>
+            <li>Renewals at the comune and Chamber of Commerce kept up to date.</li>
+            <li>Compliance with municipal and regional resolutions (liveries, badges, minimum tariffs).</li>
+            <li>Compliance with the return-to-garage rule.</li>
+            <li>Vehicle maintenance and roadworthiness inspection (revisione) validity.</li>
+        </ul>
+    </section>
+
+    <section id="sec-7">
+        <h2>7. Expiries and renewals</h2>
+        <p>
+            We notify upcoming expiries by email and in app (30 days and 7 days before). The expiry notice is a courtesy:
+            renewal is your responsibility. Expired documents block new ride acceptance until renewed.
+        </p>
+    </section>
+
+    <section id="sec-8">
+        <h2>8. Checks and suspension</h2>
+        <p>
+            During a check by Polizia Locale, Carabinieri or Guardia di Finanza, you must show original documents. The
+            platform cooperates with authorities on motivated requests. Substantiated reports of violation (non-matching
+            garage, "uso proprio", revoked authorisation) may lead to precautionary suspension; suspension is always
+            confirmed by a human operator and can be contested (see <a href="/legal/terms-of-service-driver">Driver TOS
+            &sect;14</a>).
+        </p>
+    </section>
+
+    <section id="sec-9">
+        <h2>9. Forum and contacts</h2>
+        <p>
+            Annex to the Driver Terms; in case of conflict, the Driver Terms prevail. Forum: {{registered_city}} for
+            disputes with the platform. For disputes with the municipal authority, the rules of the issuing comune apply.
+            Contact: <a href="mailto:{{email_legal}}">{{email_legal}}</a>.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; VAT {{vat_number}} &middot; See also <a href="/legal/terms-of-service-driver">Driver TOS</a></p>
+        <p class="legal-translation-note">Informational translation. In case of conflict, the Italian version prevails.</p>
+    </footer>
+</article>

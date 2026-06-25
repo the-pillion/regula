@@ -1,56 +1,122 @@
 <article class="legal-document" lang="en">
+    <aside class="legal-draft-banner">
+        <strong>Technical draft.</strong> Written by the product team, not yet reviewed by qualified Italian counsel.
+    </aside>
+
     <header>
         <h1>Cookie Policy</h1>
-        <p class="legal-meta">Last updated: {{last_updated}} · Effective: {{effective_date}}</p>
-        <p>
-            This Cookie Policy explains how {{legal_name}} (&ldquo;{{brand_name}}&rdquo;) uses cookies and similar technologies on
-            our websites and apps. It should be read together with our Privacy Policy.
-        </p>
+        <p class="legal-meta">Version {{version}} &middot; Last updated: {{last_updated}} &middot; Effective: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>At a glance</h2>
+            <ul>
+                <li>We use cookies and similar technologies. Strictly necessary cookies are always active; the others require your consent.</li>
+                <li>The banner has a "Reject all" button with the same visual prominence as "Accept all" (Italian Garante guidelines, 10 June 2021).</li>
+                <li>Scroll or dwell time does <strong>not</strong> equal consent.</li>
+                <li>You can withdraw or change consent at any time from the "Cookie preferences" link in the footer.</li>
+                <li>We keep proof of consent (date, time, choice, policy version) for 12 months.</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">What cookies are</a></li>
+            <li><a href="#sec-2">Categories and purposes</a></li>
+            <li><a href="#sec-3">Cookie table</a></li>
+            <li><a href="#sec-4">Consent management</a></li>
+            <li><a href="#sec-5">Extra-EEA transfers</a></li>
+            <li><a href="#sec-6">Consent retention</a></li>
+            <li><a href="#sec-7">Contacts</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
         <h2>1. What cookies are</h2>
-        <p>Cookies are small text files stored on your device. Similar technologies include local storage, pixels and software
-            development kits. They let a service recognise your device, remember preferences and measure usage.</p>
+        <p>
+            Cookies are small text files the site or app stores on your device. We also use similar technologies such as
+            web storage, pixels, third-party SDKs. In this policy "cookie" covers these technologies too. Collection follows
+            Regulation (EU) 2016/679 (GDPR), art. 122 of the Italian Privacy Code (D.Lgs. 196/2003), and the Garante
+            guidelines of 10 June 2021.
+        </p>
     </section>
 
-    <section>
-        <h2>2. Categories we use</h2>
+    <section id="sec-2">
+        <h2>2. Categories and purposes</h2>
+        <p>We split cookies into four categories:</p>
         <table>
             <thead>
-                <tr><th>Category</th><th>Purpose</th><th>Legal basis</th></tr>
+                <tr><th>Category</th><th>Consent</th><th>Purpose</th></tr>
             </thead>
             <tbody>
-                <tr><td>Strictly necessary</td><td>Authentication, security, session, load balancing</td><td>Legitimate interest / necessary for the service — no consent required</td></tr>
-                <tr><td>Functional</td><td>Remember language, locale and preferences</td><td>Consent</td></tr>
-                <tr><td>Analytics</td><td>Aggregated, privacy-respecting usage measurement</td><td>Consent</td></tr>
-                <tr><td>Marketing</td><td>Measure campaigns and relevance (only if used)</td><td>Consent</td></tr>
+                <tr><td><strong>Strictly necessary</strong></td><td>Not required (art. 122(2))</td><td>Authentication, security, load balancing, storage of consent preferences. The service does not work without them.</td></tr>
+                <tr><td><strong>Functional</strong></td><td>Required</td><td>Store language, last zone, UI preferences. Improve the experience but are not necessary.</td></tr>
+                <tr><td><strong>Analytics</strong></td><td>Required</td><td>Measure use of the site/app in aggregated form. May include third-party tools.</td></tr>
+                <tr><td><strong>Marketing</strong></td><td>Required</td><td>Personalised content and campaign effectiveness measurement. May involve profiling.</td></tr>
             </tbody>
         </table>
     </section>
 
-    <section>
-        <h2>3. Consent</h2>
-        <p>Strictly necessary cookies are set when you use the platform. All other categories are set only after you give consent
-            through our cookie banner. You can change or withdraw your choice at any time via the cookie settings link, with no
-            effect on the lawfulness of processing carried out before withdrawal.</p>
+    <section id="sec-3">
+        <h2>3. Cookie table</h2>
+        <p>
+            Updated at publication. The current version, with full technical names, duration and domain, is always available
+            in the "Cookie preferences" panel.
+        </p>
+        <table>
+            <thead>
+                <tr><th>Name</th><th>Category</th><th>Owner</th><th>Duration</th><th>Country</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>session_id</td><td>Strictly necessary</td><td>{{brand_name}}</td><td>Session</td><td>EEA</td></tr>
+                <tr><td>consent_choice</td><td>Strictly necessary</td><td>{{brand_name}}</td><td>12 months</td><td>EEA</td></tr>
+                <tr><td>locale</td><td>Functional</td><td>{{brand_name}}</td><td>12 months</td><td>EEA</td></tr>
+                <tr><td>analytics_*</td><td>Analytics</td><td>See <a href="/legal/processor-list">Processor Register</a></td><td>up to 13 months</td><td>EEA/USA (SCC)</td></tr>
+                <tr><td>marketing_*</td><td>Marketing</td><td>See <a href="/legal/processor-list">Processor Register</a></td><td>up to 13 months</td><td>EEA/USA (SCC)</td></tr>
+            </tbody>
+        </table>
     </section>
 
-    <section>
-        <h2>4. Third-party cookies</h2>
-        <p>Some cookies may be set by processors that help us operate the service (for example payments, mapping or analytics).
-            These providers act under data processing agreements; our current sub-processors are listed in our sub-processor
-            register.</p>
+    <section id="sec-4">
+        <h2>4. Consent management</h2>
+        <p>
+            On first access you see a banner with three equally prominent options: <strong>Accept all</strong>,
+            <strong>Reject all</strong>, <strong>Customise</strong>. Scrolling, closing the banner with the "X" or staying
+            on the site <strong>do not constitute consent</strong> and leave you in the default state (only strictly
+            necessary cookies active).
+        </p>
+        <p>
+            You can change or withdraw consent at any time via the "Cookie preferences" link in the footer or in app
+            settings. Withdrawal does not affect processing already performed.
+        </p>
     </section>
 
-    <section>
-        <h2>5. Managing cookies</h2>
-        <p>You can also block or delete cookies through your browser settings. Disabling strictly necessary cookies may prevent
-            the platform from working correctly.</p>
+    <section id="sec-5">
+        <h2>5. Extra-EEA transfers</h2>
+        <p>
+            Some suppliers (especially analytics and marketing) are based in the United States or other non-EEA countries.
+            Transfers rely on EU Commission Standard Contractual Clauses (SCCs) 2021/914 and case-by-case supplementary
+            measures. Detail in the <a href="/legal/processor-list">Processor Register</a>.
+        </p>
     </section>
 
-    <section>
-        <h2>6. Contact</h2>
-        <p>Questions about this policy: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>.</p>
+    <section id="sec-6">
+        <h2>6. Consent retention</h2>
+        <p>
+            We keep proof of consent (date, time, category choice, policy version, cookie banner identifier) for 12 months
+            from collection or withdrawal, for accountability (Art. 7(1) GDPR).
+        </p>
     </section>
+
+    <section id="sec-7">
+        <h2>7. Contacts</h2>
+        <p>
+            Cookie questions: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. For your GDPR rights see the
+            <a href="/legal/gdpr-rights">Rights Guide</a>.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; <a href="mailto:{{email_privacy}}">{{email_privacy}}</a></p>
+        <p class="legal-translation-note">Informational translation. In case of conflict, the Italian version prevails.</p>
+    </footer>
 </article>

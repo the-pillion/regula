@@ -1,58 +1,111 @@
 <article class="legal-document" lang="de">
+    <aside class="legal-draft-banner">
+        <strong>Technischer Entwurf.</strong> Vom Produktteam verfasst, noch nicht von qualifizierten italienischen Rechtsanwalten gepr&uuml;ft.
+    </aside>
+
     <header>
         <h1>Cookie-Richtlinie</h1>
-        <p class="legal-meta">Zuletzt aktualisiert: {{last_updated}} · G&uuml;ltig ab: {{effective_date}}</p>
-        <p>
-            Diese Cookie-Richtlinie erl&auml;utert, wie {{legal_name}} (&bdquo;{{brand_name}}&ldquo;) Cookies und &auml;hnliche
-            Technologien auf unseren Websites und Apps einsetzt. Sie ist zusammen mit unserer Datenschutzerkl&auml;rung zu lesen.
-        </p>
+        <p class="legal-meta">Version {{version}} &middot; Zuletzt aktualisiert: {{last_updated}} &middot; In Kraft seit: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>Auf einen Blick</h2>
+            <ul>
+                <li>Wir verwenden Cookies und &auml;hnliche Technologien. Streng notwendige sind immer aktiv; f&uuml;r die anderen fragen wir Einwilligung.</li>
+                <li>Banner mit gleichgewichtigem "Alle ablehnen" und "Alle akzeptieren" (Garante-Leitlinien 10. Juni 2021).</li>
+                <li>Scrollen oder Verweilen <strong>gilt nicht</strong> als Einwilligung.</li>
+                <li>Widerruf jederzeit &uuml;ber "Cookie-Einstellungen" im Footer.</li>
+                <li>Nachweis 12 Monate.</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Was Cookies sind</a></li>
+            <li><a href="#sec-2">Kategorien und Zwecke</a></li>
+            <li><a href="#sec-3">Cookie-Tabelle</a></li>
+            <li><a href="#sec-4">Einwilligungsverwaltung</a></li>
+            <li><a href="#sec-5">Drittl&auml;nder</a></li>
+            <li><a href="#sec-6">Nachweis</a></li>
+            <li><a href="#sec-7">Kontakte</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
         <h2>1. Was Cookies sind</h2>
-        <p>Cookies sind kleine Textdateien, die auf Ihrem Ger&auml;t gespeichert werden. Zu &auml;hnlichen Technologien
-            geh&ouml;ren Local Storage, Pixel und SDKs. Sie erm&ouml;glichen es einem Dienst, das Ger&auml;t wiederzuerkennen,
-            Einstellungen zu speichern und die Nutzung zu messen.</p>
+        <p>
+            Cookies sind kleine Textdateien, die Site oder App auf dem Ger&auml;t speichern. "Cookie" umfasst hier auch
+            Web Storage, Pixel, SDKs. Grundlage: DSGVO, Art. 122 ital. Datenschutzkodex, Garante-Leitlinien 10. Juni 2021.
+        </p>
     </section>
 
-    <section>
-        <h2>2. Verwendete Kategorien</h2>
+    <section id="sec-2">
+        <h2>2. Kategorien und Zwecke</h2>
         <table>
             <thead>
-                <tr><th>Kategorie</th><th>Zweck</th><th>Rechtsgrundlage</th></tr>
+                <tr><th>Kategorie</th><th>Einwilligung</th><th>Zweck</th></tr>
             </thead>
             <tbody>
-                <tr><td>Unbedingt erforderlich</td><td>Authentifizierung, Sicherheit, Sitzung, Lastverteilung</td><td>Berechtigtes Interesse / f&uuml;r den Dienst erforderlich — keine Einwilligung n&ouml;tig</td></tr>
-                <tr><td>Funktional</td><td>Sprache, Spracheinstellungen und Pr&auml;ferenzen merken</td><td>Einwilligung</td></tr>
-                <tr><td>Analyse</td><td>Aggregierte, datenschutzfreundliche Nutzungsmessung</td><td>Einwilligung</td></tr>
-                <tr><td>Marketing</td><td>Kampagnenmessung und Relevanz (nur falls genutzt)</td><td>Einwilligung</td></tr>
+                <tr><td><strong>Streng notwendig</strong></td><td>nicht erforderlich</td><td>Authentifizierung, Sicherheit, Lastverteilung, Speicherung von Einstellungen.</td></tr>
+                <tr><td><strong>Funktional</strong></td><td>erforderlich</td><td>Sprache, letzte Zone, UI-Pr&auml;ferenzen.</td></tr>
+                <tr><td><strong>Analyse</strong></td><td>erforderlich</td><td>Aggregierte Nutzungsmessung.</td></tr>
+                <tr><td><strong>Marketing</strong></td><td>erforderlich</td><td>Personalisierte Inhalte, Kampagnenmessung; ggf. Profilbildung.</td></tr>
             </tbody>
         </table>
     </section>
 
-    <section>
-        <h2>3. Einwilligung</h2>
-        <p>Unbedingt erforderliche Cookies werden bei der Nutzung der Plattform gesetzt. Alle anderen Kategorien werden erst nach
-            Ihrer Einwilligung &uuml;ber unser Cookie-Banner gesetzt. Sie k&ouml;nnen Ihre Auswahl jederzeit &uuml;ber den
-            Cookie-Einstellungslink &auml;ndern oder widerrufen, ohne dass die Rechtm&auml;&szlig;igkeit der vor dem Widerruf
-            erfolgten Verarbeitung ber&uuml;hrt wird.</p>
+    <section id="sec-3">
+        <h2>3. Cookie-Tabelle</h2>
+        <table>
+            <thead>
+                <tr><th>Name</th><th>Kategorie</th><th>Inhaber</th><th>Dauer</th><th>Land</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>session_id</td><td>Streng notwendig</td><td>{{brand_name}}</td><td>Sitzung</td><td>EWR</td></tr>
+                <tr><td>consent_choice</td><td>Streng notwendig</td><td>{{brand_name}}</td><td>12 Monate</td><td>EWR</td></tr>
+                <tr><td>locale</td><td>Funktional</td><td>{{brand_name}}</td><td>12 Monate</td><td>EWR</td></tr>
+                <tr><td>analytics_*</td><td>Analyse</td><td>siehe <a href="/legal/processor-list">Auftragsverarbeiterverzeichnis</a></td><td>bis 13 Monate</td><td>EWR/USA (SCC)</td></tr>
+                <tr><td>marketing_*</td><td>Marketing</td><td>siehe <a href="/legal/processor-list">Auftragsverarbeiterverzeichnis</a></td><td>bis 13 Monate</td><td>EWR/USA (SCC)</td></tr>
+            </tbody>
+        </table>
     </section>
 
-    <section>
-        <h2>4. Cookies von Dritten</h2>
-        <p>Einige Cookies k&ouml;nnen von Auftragsverarbeitern gesetzt werden, die uns beim Betrieb des Dienstes unterst&uuml;tzen
-            (z.&nbsp;B. Zahlungen, Karten oder Analyse). Diese Anbieter handeln auf Grundlage von Auftragsverarbeitungsvertr&auml;gen;
-            unsere aktiven Unterauftragsverarbeiter sind in unserem Register aufgef&uuml;hrt.</p>
+    <section id="sec-4">
+        <h2>4. Einwilligungsverwaltung</h2>
+        <p>
+            Banner mit drei gleichgewichtigen Optionen: <strong>Alle akzeptieren</strong>, <strong>Alle ablehnen</strong>,
+            <strong>Anpassen</strong>. Scrollen, Schliessen mit "X" oder Verweilen <strong>gilt nicht als Einwilligung</strong>.
+            Widerruf jederzeit &uuml;ber "Cookie-Einstellungen" im Footer oder in den App-Einstellungen. Widerruf ber&uuml;hrt
+            bereits erfolgte Verarbeitung nicht.
+        </p>
     </section>
 
-    <section>
-        <h2>5. Cookies verwalten</h2>
-        <p>Sie k&ouml;nnen Cookies auch &uuml;ber Ihre Browsereinstellungen blockieren oder l&ouml;schen. Das Deaktivieren
-            unbedingt erforderlicher Cookies kann die einwandfreie Funktion der Plattform verhindern.</p>
+    <section id="sec-5">
+        <h2>5. Drittl&auml;ndertransfers</h2>
+        <p>
+            Einige Anbieter (insb. Analyse/Marketing) sind in den USA oder anderen Nicht-EWR-L&auml;ndern. Transfer st&uuml;tzt
+            sich auf EU-Standardvertragsklauseln 2021/914 (SCC) und fallbezogene Erg&auml;nzungsmassnahmen. Detail in
+            <a href="/legal/processor-list">Auftragsverarbeiterverzeichnis</a>.
+        </p>
     </section>
 
-    <section>
-        <h2>6. Kontakt</h2>
-        <p>Fragen zu dieser Richtlinie: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>.</p>
+    <section id="sec-6">
+        <h2>6. Nachweis</h2>
+        <p>
+            Nachweis der Einwilligung (Datum, Uhrzeit, Kategorie, Policy-Version, Banner-ID) 12 Monate ab Erfassung oder
+            Widerruf (Rechenschaftspflicht Art. 7(1) DSGVO).
+        </p>
     </section>
+
+    <section id="sec-7">
+        <h2>7. Kontakte</h2>
+        <p>
+            Cookie-Fragen: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. F&uuml;r DSGVO-Rechte:
+            <a href="/legal/gdpr-rights">Ihre DSGVO-Rechte</a>.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; <a href="mailto:{{email_privacy}}">{{email_privacy}}</a></p>
+        <p class="legal-translation-note">Informative &Uuml;bersetzung. Bei Abweichung gilt die italienische Fassung.</p>
+    </footer>
 </article>

@@ -1,113 +1,172 @@
 <article class="legal-document" lang="de">
+    <aside class="legal-draft-banner">
+        <strong>Technischer Entwurf.</strong> Vom Produktteam verfasst, noch nicht von qualifizierten italienischen Rechtsanwalten gepr&uuml;ft.
+    </aside>
+
     <header>
-        <h1>Allgemeine Gesch&auml;ftsbedingungen</h1>
-        <p class="legal-meta">Zuletzt aktualisiert: {{last_updated}} · G&uuml;ltig ab: {{effective_date}}</p>
-        <p>
-            Diese Bedingungen regeln die Nutzung der von {{legal_name}} ({{legal_form}}) betriebenen {{brand_name}}-Plattform,
-            USt-IdNr. {{vat_number}}, {{registered_city}} ({{registered_province}}), {{registered_country}}. Mit der Erstellung
-            eines Kontos oder der Nutzung der Plattform stimmen Sie diesen Bedingungen zu.
-        </p>
+        <h1>Nutzungsbedingungen &mdash; Allgemeiner Rahmen</h1>
+        <p class="legal-meta">Version {{version}} &middot; Zuletzt aktualisiert: {{last_updated}} &middot; In Kraft seit: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>Auf einen Blick</h2>
+            <ul>
+                <li>{{brand_name}} ist ein <strong>technologischer Marktplatz</strong>, der Fahrg&auml;ste und unabh&auml;ngige NCC-Fahrer verbindet. Kein Verkehrsunternehmen.</li>
+                <li>Es gibt rollenspezifische Bedingungen f&uuml;r <a href="/legal/terms-of-service-passenger">Fahrg&auml;ste</a> und <a href="/legal/terms-of-service-driver">Fahrer</a>. Dieses Dokument ist der gemeinsame Rahmen.</li>
+                <li>Der Bef&ouml;rderungsvertrag wird direkt zwischen Fahrgast und Fahrer geschlossen. {{brand_name}} ist nicht Vertragspartei.</li>
+                <li>Manche Entscheidungen (Matching, Ranking, Eignung) sind automatisiert. Sie haben Anspruch auf menschliches Eingreifen (Art. 22 DSGVO).</li>
+                <li>Italienisches Recht gilt. Verbraucher behalten den Gerichtsstand ihres Wohnsitzes (Art. 33 ital. Verbrauchergesetz).</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
-        <h2>1. Der Dienst</h2>
-        <p>{{brand_name}} ist eine technologische Plattform, die unabh&auml;ngige Motorradtaxi-Fahrer mit Fahrg&auml;sten
-            zusammenbringt. Wir stellen die Vermittlungstechnologie, das Matching, die Fahrpreisberechnung und die
-            Zahlungsabwicklung bereit. Wir sind kein Bef&ouml;rderungsunternehmen und besch&auml;ftigen keine Fahrer; die
-            Bef&ouml;rderung erfolgt durch unabh&auml;ngige Fahrer.</p>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Wer wir sind</a></li>
+            <li><a href="#sec-2">Marktplatzrolle</a></li>
+            <li><a href="#sec-3">Rollenspezifische Bedingungen</a></li>
+            <li><a href="#sec-4">Konto, Identit&auml;t, Zugang</a></li>
+            <li><a href="#sec-5">Zahlungen, Geb&uuml;hren, Steuern</a></li>
+            <li><a href="#sec-6">Automatisierte Entscheidungen</a></li>
+            <li><a href="#sec-7">EU-Plattformarbeitsrichtlinie</a></li>
+            <li><a href="#sec-8">Sperrung und Beendigung</a></li>
+            <li><a href="#sec-9">Haftungsgrenzen</a></li>
+            <li><a href="#sec-10">&Auml;nderungen</a></li>
+            <li><a href="#sec-11">Recht, Gerichtsstand, Kontakte</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Wer wir sind</h2>
+        <p>
+            Die Plattform {{brand_name}} wird betrieben von <strong>{{legal_name}}</strong> ({{legal_form}}), Sitz
+            {{registered_street}}, {{registered_postal_code}} {{registered_city}} ({{registered_province}}),
+            {{registered_country}} &mdash; USt-IdNr. {{vat_number}}, REA {{rea_number}}. Eingetragen bei
+            {{chamber_of_commerce}}.
+        </p>
+        <p>
+            Diese Bedingungen regeln die gemeinsamen Pflichten f&uuml;r jede Nutzung der Plattform. Rollenspezifische Regeln
+            stehen in den jeweiligen Dokumenten und haben bei Konflikt Vorrang.
+        </p>
     </section>
 
-    <section>
-        <h2>2. Voraussetzungen und Konten</h2>
-        <ul>
-            <li>Sie m&uuml;ssen mindestens 18 Jahre alt und gesch&auml;ftsf&auml;hig sein.</li>
-            <li>Sie m&uuml;ssen zutreffende Angaben machen und Ihre Zugangsdaten sicher verwahren.</li>
-            <li>Sie sind f&uuml;r Aktivit&auml;ten unter Ihrem Konto verantwortlich.</li>
-            <li>Fahrer m&uuml;ssen alle nach lokalem Recht erforderlichen Lizenzen, Genehmigungen, Versicherungen und
-                Fahrzeugdokumente besitzen und unsere Eignungspr&uuml;fungen bestehen, bevor sie Fahrten annehmen.</li>
-        </ul>
+    <section id="sec-2">
+        <h2>2. Marktplatzrolle</h2>
+        <p>
+            {{brand_name}} ist ein Dienst der Informationsgesellschaft, der Angebot und Nachfrage st&auml;dtischer
+            Personenbef&ouml;rderung vermittelt. Wir besitzen keine Fahrzeuge, besch&auml;ftigen keine Fahrer und stellen
+            keine Tickets als Verkehrsunternehmen aus. Der <strong>Bef&ouml;rderungsvertrag wird direkt zwischen Fahrgast
+            und Fahrer geschlossen</strong>; {{brand_name}} stellt die digitale Infrastruktur, die Zahlungsvermittlung und
+            die Compliance-Pr&uuml;fungen auf der Angebotsseite bereit.
+        </p>
+        <aside class="legal-honest">
+            <strong>Ehrliche Grenze.</strong> Marktplatz ist das von uns gew&auml;hlte Rechtsmodell; die endg&uuml;ltige
+            Qualifikation entscheidet ein Gericht. Die europ&auml;ische Rechtsprechung (EuGH C-434/15) hat gezeigt, dass
+            Preisfestsetzung, Qualit&auml;tskontrolle und Push-Matching die Qualifikation Richtung Verkehrsdienst
+            verschieben k&ouml;nnen. {{brand_name}} hat die Plattform so gestaltet, dass sie im Vermittlungsperimeter bleibt
+            (Preisb&auml;nder pro Zone aus lokalen NCC-Tarifen, nur bereits lizenzierte Fahrer, kein
+            Besch&auml;ftigungsverh&auml;ltnis), kann aber keine k&uuml;nftigen Gerichtsurteile garantieren.
+        </aside>
     </section>
 
-    <section>
-        <h2>3. Buchungen, Fahrpreise und Zahlung</h2>
-        <ul>
-            <li>Eine Buchung begr&uuml;ndet einen Bef&ouml;rderungsvertrag zwischen Fahrgast und Fahrer. {{brand_name}} handelt als
-                Vermittler.</li>
-            <li>Die Fahrpreise berechnen sich aus Grundtarifen, Distanz, Zeit und geltenden Zonenpreisen und werden vor der
-                Best&auml;tigung angezeigt.</li>
-            <li>{{brand_name}} erhebt von Fahrern eine Plattformprovision, die beim Onboarding offengelegt und je Betriebszone
-                konfiguriert wird.</li>
-            <li>Zahlungen werden von unserem Zahlungsdienstleister abgewickelt. Auszahlungen an Fahrer erfolgen auf deren
-                verbundenes Konto.</li>
-        </ul>
+    <section id="sec-3">
+        <h2>3. Rollenspezifische Bedingungen</h2>
+        <p>
+            Fahrg&auml;ste &rarr; <a href="/legal/terms-of-service-passenger">Passenger Terms</a>. Fahrer &rarr;
+            <a href="/legal/terms-of-service-driver">Driver Terms</a> und
+            <a href="/legal/driver-settlement">Settlement Disclosure</a>. F&uuml;r NCC-T&auml;tigkeit in Italien gilt
+            zus&auml;tzlich <a href="/legal/ncc-italia">NCC Italien</a>.
+        </p>
     </section>
 
-    <section>
-        <h2>4. Stornierungen und Nichterscheinen</h2>
-        <p>Stornierungen sind vor der Zuweisung eines Fahrers und innerhalb eines kurzen Kulanzzeitraums nach der Zuweisung
-            kostenlos. Nach Ablauf dieses Zeitraums oder sobald der Fahrer eingetroffen ist bzw. die Fahrt l&auml;uft, kann eine
-            Storno- oder No-Show-Geb&uuml;hr anfallen, wie in der App zum Zeitpunkt der Buchung angezeigt.</p>
+    <section id="sec-4">
+        <h2>4. Konto, Identit&auml;t, Zugang</h2>
+        <p>
+            Identit&auml;t wird &uuml;ber unseren Identit&auml;tsanbieter (Zitadel) verwaltet. Sie m&uuml;ssen wahre Angaben
+            machen, aktuell halten und Ihre Zugangsdaten sch&uuml;tzen. {{brand_name}} haftet nicht f&uuml;r die
+            Drittnutzung Ihres Kontos, wenn Sie unautorisierten Zugriff nicht rechtzeitig melden. Mindestalter: 18 Jahre.
+        </p>
     </section>
 
-    <section>
-        <h2>5. Verhalten und Sicherheit</h2>
-        <ul>
-            <li>Nutzen Sie die Plattform rechtm&auml;&szlig;ig und behandeln Sie andere respektvoll. Bel&auml;stigung,
-                Diskriminierung, Gewalt und rechtswidrige Handlungen sind untersagt.</li>
-            <li>Fahrg&auml;ste m&uuml;ssen die bereitgestellte Schutzausr&uuml;stung tragen und angemessene Sicherheitshinweise des
-                Fahrers befolgen.</li>
-            <li>Fahrer m&uuml;ssen sicher fahren, ihre Dokumente g&uuml;ltig halten und ihr Fahrzeug warten.</li>
-            <li>Die Plattform bietet Sicherheitsfunktionen wie Fahrtverfolgung und eine SOS-Funktion f&uuml;r Notf&auml;lle.</li>
-        </ul>
+    <section id="sec-5">
+        <h2>5. Zahlungen, Geb&uuml;hren, Steuern</h2>
+        <p>
+            Zahlungen werden von unserem Zahlungsdienstleister (Stripe Connect) auf das Fahrerkonto eingezogen, abz&uuml;glich
+            der Plattformgeb&uuml;hr und etwaiger lokaler Steuern oder Beh&ouml;rdenabgaben. Das wirtschaftliche Detail wird
+            vom Preis-Arbiter aus dem Cadastre-Zonentarif berechnet. Jede Partei ist f&uuml;r ihre eigenen Steuerpflichten
+            verantwortlich; {{brand_name}} erf&uuml;llt die Plattformmeldepflichten nach DAC7 (D.Lgs. 32/2023).
+        </p>
     </section>
 
-    <section>
-        <h2>6. Status der Fahrer</h2>
-        <p>Fahrer handeln als unabh&auml;ngige Selbstst&auml;ndige und sind keine Arbeitnehmer, Vertreter oder Partner von
-            {{brand_name}}. Fahrer sind f&uuml;r ihre eigenen steuer-, sozialversicherungs- und aufsichtsrechtlichen Pflichten aus
-            ihrer T&auml;tigkeit verantwortlich.</p>
+    <section id="sec-6">
+        <h2>6. Automatisierte Entscheidungen (Art. 22 DSGVO)</h2>
+        <p>
+            Manche Plattformfunktionen treffen <strong>automatisierte Entscheidungen</strong>: Matching, Ranking,
+            Eignungsfilter, dynamischer Surge im Zonenband, Sicherheitsblocks bei abgelaufenen Dokumenten. Sie haben
+            Anspruch auf menschliches Eingreifen, k&ouml;nnen Ihren Standpunkt darlegen und die Entscheidung anfechten:
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Eine Fahrerssperre wird stets von einer Person
+            best&auml;tigt, bevor sie endg&uuml;ltig wird.
+        </p>
     </section>
 
-    <section>
-        <h2>7. Marktplatzrolle, Gew&auml;hrleistungsausschluss und Haftung</h2>
-        <p>{{brand_name}} ist ausschlie&szlig;lich eine Marktplatz- und Vermittlungsplattform. Sie ist kein
-            Bef&ouml;rderungsanbieter, kein Bef&ouml;rderer und kein Arbeitgeber der Fahrer und nicht Partei des zwischen Fahrgast
-            und Fahrer geschlossenen Bef&ouml;rderungsvertrags.</p>
-        <p>Soweit gesetzlich zul&auml;ssig, wird die Plattform &bdquo;wie besehen&ldquo; und &bdquo;wie verf&uuml;gbar&ldquo;
-            bereitgestellt. Wir &uuml;bernehmen keine Gew&auml;hr f&uuml;r die Verf&uuml;gbarkeit, P&uuml;nktlichkeit, Qualit&auml;t,
-            Sicherheit oder das Ergebnis einer Fahrt, f&uuml;r das Verhalten, Handeln oder Unterlassen eines Fahrers oder
-            Fahrgasts, f&uuml;r den Zustand oder die Verkehrst&uuml;chtigkeit eines Fahrzeugs oder daf&uuml;r, dass der Dienst
-            ununterbrochen oder fehlerfrei ist. F&uuml;r die erbrachte Bef&ouml;rderung sind allein die Fahrer verantwortlich.</p>
-        <p>Soweit gesetzlich zul&auml;ssig, haftet {{brand_name}} nur f&uuml;r die erbrachte Vermittlungsleistung und nicht
-            f&uuml;r die von unabh&auml;ngigen Fahrern durchgef&uuml;hrte Bef&ouml;rderung. Diese Bedingungen schlie&szlig;en die
-            Haftung f&uuml;r Tod oder K&ouml;rperverletzung infolge unserer Fahrl&auml;ssigkeit, f&uuml;r Vorsatz oder eine
-            gesetzlich nicht ausschlie&szlig;bare Haftung einschlie&szlig;lich zwingender Verbraucherschutzrechte nicht aus.</p>
+    <section id="sec-7">
+        <h2>7. EU-Plattformarbeitsrichtlinie</h2>
+        <p>
+            Die Richtlinie (EU) 2024/2831 ist in Kraft und bis 2. Dezember 2026 von den Mitgliedstaaten umzusetzen. Sie
+            f&uuml;hrt eine <em>gesetzliche Vermutung</em> abh&auml;ngiger Besch&auml;ftigung ein, wenn bestimmte
+            Kontrollindikatoren vorliegen. {{brand_name}} anerkennt die Richtlinie und hat den Marktplatz so gestaltet,
+            dass diese Indikatoren <em>nicht</em> ausge&uuml;bt werden (keine vorgeschriebenen Zeiten, keine Exklusivit&auml;t,
+            keine Disziplinarsanktionen jenseits Sicherheit und Compliance). Die endg&uuml;ltige Qualifikation entscheidet
+            das anwendbare Recht zum Zeitpunkt der Umsetzung.
+        </p>
     </section>
 
-    <section>
+    <section id="sec-8">
         <h2>8. Sperrung und Beendigung</h2>
-        <p>Wir k&ouml;nnen ein Konto bei Versto&szlig; gegen diese Bedingungen, Sicherheitsrisiko, Betrug oder rechtlicher
-            Verpflichtung sperren oder beenden. Sie k&ouml;nnen Ihr Konto jederzeit schlie&szlig;en. Bestimmungen, die ihrer Natur
-            nach fortgelten, bleiben anwendbar.</p>
+        <p>
+            Wir k&ouml;nnen Ihren Zugang sperren oder deaktivieren bei Sicherheitsrisiko, abgelaufenen Dokumenten,
+            Betrugsverdacht, schwerwiegender oder wiederholter Verletzung der Bedingungen oder bei gesetzlicher
+            Verpflichtung. Sperrung wird stets per E-Mail oder In-App mit Begr&uuml;ndung mitgeteilt. Sie haben Anspruch auf
+            menschliche &Uuml;berpr&uuml;fung. Sonst kann jede Partei mit angemessener Frist k&uuml;ndigen. Klauseln zu
+            Haftungsgrenzen, Vertraulichkeit und anwendbarem Recht bleiben in Kraft.
+        </p>
     </section>
 
-    <section>
-        <h2>9. Verbraucherrechte und Streitbeilegung</h2>
-        <p>Zwingende Verbraucherschutzrechte nach dem Recht Ihres Wohnsitzlandes bleiben von diesen Bedingungen unber&uuml;hrt. Die
-            Plattform zur Online-Streitbeilegung der Europ&auml;ischen Kommission ist erreichbar unter
-            <a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>. Sie k&ouml;nnen uns auch unter
-            <a href="mailto:{{email_support}}">{{email_support}}</a> kontaktieren.</p>
+    <section id="sec-9">
+        <h2>9. Haftungsgrenzen</h2>
+        <p>
+            Unsere Gesamthaftung beschr&auml;nkt sich auf den tats&auml;chlich erbrachten Vermittlungsdienst. Wir haften
+            nicht f&uuml;r die Bef&ouml;rderung selbst, mittelbare Sch&auml;den, entgangenen Gewinn oder Unterbrechungen
+            ohne Vorsatz oder grobe Fahrl&auml;ssigkeit. <strong>Nichts in diesen Bedingungen schliesst die Haftung f&uuml;r
+            Vorsatz oder grobe Fahrl&auml;ssigkeit (Art. 1229 ital. ZGB), f&uuml;r Tod oder K&ouml;rperverletzung durch
+            unsere Fahrl&auml;ssigkeit oder eine gesetzlich nicht ausschliessbare Haftung aus.</strong>
+        </p>
     </section>
 
-    <section>
-        <h2>10. Anwendbares Recht</h2>
-        <p>Diese Bedingungen unterliegen italienischem Recht, unbeschadet der zwingenden Verbraucherschutzvorschriften Ihres
-            gew&ouml;hnlichen Aufenthaltslandes. Gerichtsstand ist, soweit zul&auml;ssig, der Wohnsitz des Verbrauchers.</p>
+    <section id="sec-10">
+        <h2>10. &Auml;nderungen</h2>
+        <p>
+            Wir k&ouml;nnen diese Bedingungen anpassen, um Produkt-, Rechts- oder Unternehmens&auml;nderungen
+            widerzuspiegeln. Wesentliche &Auml;nderungen werden mindestens 30 Tage im Voraus per E-Mail oder In-App
+            mitgeteilt. F&uuml;r Verbraucher gelten Art. 33 ital. Verbrauchergesetz zu unangemessenen Klauseln.
+        </p>
     </section>
 
-    <section>
-        <h2>11. &Auml;nderungen und Kontakt</h2>
-        <p>Wir k&ouml;nnen diese Bedingungen &auml;ndern; wesentliche &Auml;nderungen werden vorab mitgeteilt, und die fortgesetzte
-            Nutzung gilt als Zustimmung. Rechtlicher Kontakt: <a href="mailto:{{email_legal}}">{{email_legal}}</a>.</p>
+    <section id="sec-11">
+        <h2>11. Recht, Gerichtsstand, Kontakte</h2>
+        <p>
+            Diese Bedingungen unterliegen italienischem Recht. F&uuml;r Streitigkeiten mit Verbrauchern ist das Gericht des
+            Wohnsitzes des Verbrauchers zust&auml;ndig (Art. 33 ital. Verbrauchergesetz). F&uuml;r Streitigkeiten mit
+            Fahrern (professionelle Akteure) ist Gerichtsstand {{registered_city}}. Die ODR-Plattform der EU-Kommission ist
+            stets verf&uuml;gbar (<a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>).
+        </p>
+        <p>
+            Allgemein: <a href="mailto:{{email_legal}}">{{email_legal}}</a> &middot; Datenschutz:
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> &middot; Support:
+            <a href="mailto:{{email_support}}">{{email_support}}</a>.
+        </p>
     </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; {{registered_street}}, {{registered_postal_code}} {{registered_city}} &middot; USt-IdNr. {{vat_number}}</p>
+        <p class="legal-translation-note">Informative &Uuml;bersetzung. Bei Abweichung gilt die italienische Fassung.</p>
+    </footer>
 </article>

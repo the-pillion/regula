@@ -1,114 +1,181 @@
 <article class="legal-document" lang="it">
+    <aside class="legal-draft-banner">
+        <strong>Bozza tecnica.</strong> Documento redatto dal team di prodotto e non ancora rivisto da un legale italiano qualificato.
+        Non utilizzare per la pubblicazione effettiva fino al via libera del legale. Rimuovere questo avviso solo dopo l&rsquo;approvazione.
+    </aside>
+
     <header>
-        <h1>Termini di Servizio</h1>
-        <p class="legal-meta">Ultimo aggiornamento: {{last_updated}} · In vigore dal: {{effective_date}}</p>
-        <p>
-            I presenti Termini disciplinano l&rsquo;uso della piattaforma {{brand_name}} gestita da {{legal_name}}
-            ({{legal_form}}), P.IVA {{vat_number}}, {{registered_city}} ({{registered_province}}), {{registered_country}}. Creando
-            un account o utilizzando la piattaforma accetti i presenti Termini.
-        </p>
+        <h1>Termini di Servizio &mdash; Quadro Generale</h1>
+        <p class="legal-meta">Versione {{version}} &middot; Ultimo aggiornamento: {{last_updated}} &middot; In vigore dal: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>In sintesi</h2>
+            <ul>
+                <li>{{brand_name}} &egrave; un <strong>marketplace tecnologico</strong>: mette in contatto passeggeri e conducenti NCC indipendenti. Non &egrave; un vettore.</li>
+                <li>Esistono termini specifici per <a href="/legal/terms-of-service-passenger">passeggeri</a> e per <a href="/legal/terms-of-service-driver">conducenti</a>. Questo documento &egrave; il quadro generale che li unisce.</li>
+                <li>Il contratto di trasporto si conclude direttamente tra passeggero e conducente. {{brand_name}} non &egrave; parte di quel contratto.</li>
+                <li>Alcune decisioni (matching, ranking, idoneit&agrave;) sono automatizzate. Hai diritto a un intervento umano (art. 22 GDPR).</li>
+                <li>La normativa italiana si applica. Il consumatore mantiene il foro della residenza abituale (art. 33 c. cons.).</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
-        <h2>1. Il servizio</h2>
-        <p>{{brand_name}} &egrave; una piattaforma tecnologica che mette in contatto conducenti indipendenti di moto-taxi con
-            passeggeri che cercano un trasporto. Forniamo la tecnologia di intermediazione, l&rsquo;abbinamento, il calcolo della
-            tariffa e la facilitazione del pagamento. Non siamo un vettore di trasporto e non impieghiamo i conducenti; il
-            trasporto &egrave; fornito da conducenti indipendenti.</p>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Chi siamo e cosa &egrave; questo documento</a></li>
+            <li><a href="#sec-2">Ruolo di marketplace</a></li>
+            <li><a href="#sec-3">Termini specifici per ruolo</a></li>
+            <li><a href="#sec-4">Account, identit&agrave;, accesso</a></li>
+            <li><a href="#sec-5">Pagamenti, commissioni e tasse</a></li>
+            <li><a href="#sec-6">Decisioni automatizzate</a></li>
+            <li><a href="#sec-7">Direttiva UE sul lavoro tramite piattaforma</a></li>
+            <li><a href="#sec-8">Sospensione e cessazione</a></li>
+            <li><a href="#sec-9">Limiti di responsabilit&agrave;</a></li>
+            <li><a href="#sec-10">Modifiche</a></li>
+            <li><a href="#sec-11">Legge, foro e contatti</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Chi siamo e cosa &egrave; questo documento</h2>
+        <p>
+            La piattaforma {{brand_name}} &egrave; gestita da <strong>{{legal_name}}</strong> ({{legal_form}}),
+            con sede in {{registered_street}}, {{registered_postal_code}} {{registered_city}} ({{registered_province}}),
+            {{registered_country}} &mdash; P.IVA {{vat_number}}, REA {{rea_number}}. Iscritta presso la
+            {{chamber_of_commerce}}.
+        </p>
+        <p>
+            Questi termini fissano le regole comuni che valgono per qualunque uso della piattaforma. Le regole specifiche per
+            i due ruoli &mdash; passeggero e conducente &mdash; sono nei rispettivi documenti dedicati e prevalgono in caso di
+            conflitto sulle disposizioni di carattere generale qui contenute.
+        </p>
     </section>
 
-    <section>
-        <h2>2. Requisiti e account</h2>
-        <ul>
-            <li>Devi avere almeno 18 anni e capacit&agrave; di stipulare un contratto vincolante.</li>
-            <li>Devi fornire informazioni accurate e custodire le credenziali del tuo account.</li>
-            <li>Sei responsabile delle attivit&agrave; svolte tramite il tuo account.</li>
-            <li>I conducenti devono possedere licenze, permessi, assicurazione e documenti del veicolo richiesti dalla legge
-                locale e superare le nostre verifiche di idoneit&agrave; prima di accettare corse.</li>
-        </ul>
+    <section id="sec-2">
+        <h2>2. Ruolo di marketplace</h2>
+        <p>
+            {{brand_name}} &egrave; un servizio della societ&agrave; dell&rsquo;informazione che mette in contatto domanda e offerta di
+            trasporto di persone in citt&agrave;. Non possediamo veicoli, non assumiamo conducenti, non emettiamo biglietti come vettore.
+            Il <strong>contratto di trasporto si conclude direttamente tra passeggero e conducente</strong>; {{brand_name}} fornisce
+            l&rsquo;infrastruttura digitale, l&rsquo;intermediazione del pagamento e le verifiche di conformit&agrave; sulla supply side.
+        </p>
+        <aside class="legal-honest">
+            <strong>Limite onesto.</strong> Anche se il marketplace &egrave; il modello giuridico scelto, l&rsquo;ultima parola
+            sulla qualificazione &egrave; del giudice. La giurisprudenza europea (CGUE C-434/15) ha mostrato che criteri come la
+            fissazione del prezzo, il controllo della qualit&agrave; e il matching push possono spostare la qualificazione
+            verso un servizio di trasporto. {{brand_name}} ha disegnato la piattaforma per restare nel perimetro
+            dell&rsquo;intermediazione (banda prezzo per zona impostata dai listini NCC, conducenti gi&agrave; autorizzati,
+            niente rapporto di lavoro), ma non promette esiti giurisprudenziali futuri.
+        </aside>
     </section>
 
-    <section>
-        <h2>3. Prenotazioni, tariffe e pagamenti</h2>
-        <ul>
-            <li>La prenotazione costituisce un contratto di trasporto tra passeggero e conducente. {{brand_name}} agisce da
-                intermediario.</li>
-            <li>Le tariffe sono calcolate in base a tariffe base, distanza, tempo e prezzi di zona applicabili, e sono mostrate
-                prima della conferma.</li>
-            <li>{{brand_name}} applica ai conducenti una commissione di piattaforma, comunicata in fase di onboarding e
-                configurabile per zona operativa.</li>
-            <li>I pagamenti sono elaborati dal nostro fornitore. Gli accrediti ai conducenti avvengono sul loro conto collegato.</li>
-        </ul>
+    <section id="sec-3">
+        <h2>3. Termini specifici per ruolo</h2>
+        <p>
+            Se sei un passeggero, si applicano i
+            <a href="/legal/terms-of-service-passenger">Termini di Servizio per Passeggeri</a>. Se sei un conducente, si
+            applicano i <a href="/legal/terms-of-service-driver">Termini di Servizio per Conducenti</a> e la
+            <a href="/legal/driver-settlement">Disclosure di Regolamento e Pagamento</a>. Se la tua attivit&agrave; in Italia
+            ricade nel quadro NCC, applica anche l&rsquo;allegato
+            <a href="/legal/ncc-italia">NCC Italia &mdash; requisiti specifici</a>.
+        </p>
     </section>
 
-    <section>
-        <h2>4. Cancellazioni e mancata presentazione</h2>
-        <p>Le cancellazioni sono gratuite prima dell&rsquo;assegnazione di un conducente ed entro una breve finestra di tolleranza
-            dopo l&rsquo;assegnazione. Trascorsa tale finestra, o una volta che il conducente &egrave; arrivato o la corsa &egrave;
-            in corso, pu&ograve; essere applicata una penale di cancellazione o di mancata presentazione, come indicato
-            nell&rsquo;app al momento della prenotazione.</p>
+    <section id="sec-4">
+        <h2>4. Account, identit&agrave;, accesso</h2>
+        <p>
+            L&rsquo;identit&agrave; &egrave; gestita tramite il nostro fornitore di identit&agrave; (Zitadel). Devi fornire
+            informazioni vere, mantenerle aggiornate e custodire le credenziali di accesso. {{brand_name}} non &egrave;
+            responsabile dell&rsquo;uso del tuo account da parte di terzi se non hai segnalato tempestivamente l&rsquo;accesso
+            non autorizzato. L&rsquo;et&agrave; minima &egrave; 18 anni.
+        </p>
     </section>
 
-    <section>
-        <h2>5. Condotta e sicurezza</h2>
-        <ul>
-            <li>Usa la piattaforma nel rispetto della legge e tratta gli altri utenti con rispetto. Molestie, discriminazioni,
-                violenza e attivit&agrave; illecite sono vietate.</li>
-            <li>I passeggeri devono indossare i dispositivi di sicurezza forniti e seguire le ragionevoli istruzioni del
-                conducente.</li>
-            <li>I conducenti devono guidare in sicurezza, mantenere validi i documenti e in efficienza il veicolo.</li>
-            <li>La piattaforma offre funzioni di sicurezza, tra cui il tracciamento della corsa e una funzione SOS per le
-                emergenze.</li>
-        </ul>
+    <section id="sec-5">
+        <h2>5. Pagamenti, commissioni e tasse</h2>
+        <p>
+            I pagamenti dei passeggeri sono incassati dal nostro fornitore di servizi di pagamento (Stripe Connect) sul conto
+            del conducente, al netto della commissione di piattaforma e di eventuali tasse e levy locali. Il dettaglio
+            economico &mdash; tariffa, commissione, tasse, eventuali levy d&rsquo;autorit&agrave; &mdash; &egrave; calcolato
+            dal servizio price-arbiter sulla base del listino della zona Cadastre. Ogni parte &egrave; responsabile dei
+            propri obblighi fiscali; {{brand_name}} ottempera agli obblighi di comunicazione delle piattaforme previsti dalla
+            direttiva DAC7 (D.Lgs. 32/2023).
+        </p>
     </section>
 
-    <section>
-        <h2>6. Stato del conducente</h2>
-        <p>I conducenti operano come lavoratori autonomi indipendenti e non sono dipendenti, agenti o partner di {{brand_name}}. I
-            conducenti sono responsabili dei propri obblighi fiscali, previdenziali e regolamentari derivanti dalla loro
-            attivit&agrave;.</p>
+    <section id="sec-6">
+        <h2>6. Decisioni automatizzate (art. 22 GDPR)</h2>
+        <p>
+            Alcune funzioni della piattaforma utilizzano <strong>decisioni automatizzate</strong>: matching del conducente,
+            ranking dei candidati, filtri di idoneit&agrave; (compliance), surge dinamico entro la banda prezzo della zona,
+            blocchi di sicurezza in caso di documenti scaduti. Hai diritto di ottenere un intervento umano, di esprimere la
+            tua opinione e di contestare la decisione scrivendo a
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. La sospensione di un conducente &egrave; sempre
+            confermata da un operatore umano prima di diventare definitiva.
+        </p>
     </section>
 
-    <section>
-        <h2>7. Ruolo di marketplace, esclusione di garanzie e responsabilit&agrave;</h2>
-        <p>{{brand_name}} &egrave; esclusivamente una piattaforma di marketplace e intermediazione. Non &egrave; un fornitore di
-            trasporto, un vettore o un datore di lavoro dei conducenti e non &egrave; parte del contratto di trasporto concluso tra
-            passeggero e conducente.</p>
-        <p>Nei limiti consentiti dalla legge, la piattaforma &egrave; fornita &laquo;cos&igrave; com&rsquo;&egrave;&raquo; e
-            &laquo;secondo disponibilit&agrave;&raquo;. Non garantiamo la disponibilit&agrave;, la puntualit&agrave;, la
-            qualit&agrave;, la sicurezza o l&rsquo;esito di alcuna corsa, la condotta, gli atti o le omissioni di alcun conducente o
-            passeggero, le condizioni o l&rsquo;idoneit&agrave; alla circolazione di alcun veicolo, n&eacute; che il servizio sia
-            ininterrotto o privo di errori. I conducenti sono gli unici responsabili del trasporto che forniscono.</p>
-        <p>Nei limiti consentiti dalla legge, {{brand_name}} risponde solo del servizio di intermediazione fornito e non del
-            trasporto eseguito da conducenti indipendenti. Nulla nei presenti Termini esclude o limita la responsabilit&agrave; per
-            morte o lesioni personali causate da nostra negligenza, per dolo, o qualsiasi responsabilit&agrave; non escludibile per
-            legge, inclusi i diritti inderogabili a tutela dei consumatori.</p>
+    <section id="sec-7">
+        <h2>7. Direttiva UE sul lavoro tramite piattaforma</h2>
+        <p>
+            La Direttiva (UE) 2024/2831 sul miglioramento delle condizioni di lavoro nel lavoro tramite piattaforma &egrave;
+            in vigore e dovr&agrave; essere recepita dagli Stati membri entro il 2 dicembre 2026. La Direttiva introduce una
+            <em>presunzione legale</em> di rapporto di lavoro subordinato quando ricorrono determinati indici di controllo
+            sull&rsquo;esecuzione della prestazione. {{brand_name}} riconosce la Direttiva e ha progettato il marketplace per
+            <em>non</em> esercitare gli indici di controllo elencati (niente orari imposti, niente esclusiva, niente sanzioni
+            disciplinari oltre la sicurezza e la conformit&agrave;). Resta inteso che la qualificazione del rapporto &egrave;
+            in ultima istanza determinata dalla legge applicabile al momento del recepimento.
+        </p>
     </section>
 
-    <section>
+    <section id="sec-8">
         <h2>8. Sospensione e cessazione</h2>
-        <p>Possiamo sospendere o chiudere un account in caso di violazione dei Termini, rischio per la sicurezza, frode o obbligo
-            di legge. Puoi chiudere il tuo account in qualsiasi momento. Le clausole destinate per natura a sopravvivere
-            continuano ad applicarsi.</p>
+        <p>
+            Possiamo sospendere o disattivare il tuo accesso in caso di rischio per la sicurezza, documenti scaduti, sospetta
+            frode, violazione grave o reiterata dei termini o per obbligo di legge. La sospensione &egrave; sempre
+            comunicata via email o avviso in-app, con motivazione. Hai diritto di chiedere riesame umano della decisione.
+            Negli altri casi, ciascuna parte pu&ograve; recedere con preavviso ragionevole. Le clausole su limiti di
+            responsabilit&agrave;, riservatezza e legge applicabile sopravvivono alla cessazione.
+        </p>
     </section>
 
-    <section>
-        <h2>9. Diritti dei consumatori e risoluzione delle controversie</h2>
-        <p>Le tutele inderogabili dei consumatori previste dalla legge del tuo Paese di residenza non sono pregiudicate dai
-            presenti Termini. La piattaforma di Risoluzione delle Controversie Online della Commissione Europea &egrave;
-            disponibile all&rsquo;indirizzo <a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>. Puoi
-            inoltre contattarci a <a href="mailto:{{email_support}}">{{email_support}}</a>.</p>
+    <section id="sec-9">
+        <h2>9. Limiti di responsabilit&agrave;</h2>
+        <p>
+            La nostra responsabilit&agrave; complessiva &egrave; limitata al servizio di intermediazione effettivamente
+            fornito. Non rispondiamo del trasporto in s&eacute;, di danni indiretti, di mancati guadagni o di interruzioni
+            non imputabili a nostro dolo o colpa grave. <strong>Nulla in questi termini esclude o limita la
+            responsabilit&agrave; per dolo o colpa grave (art. 1229 c.c.), per morte o lesioni personali causate da nostra
+            negligenza, n&eacute; qualsiasi responsabilit&agrave; non escludibile per legge.</strong>
+        </p>
     </section>
 
-    <section>
-        <h2>10. Legge applicabile</h2>
-        <p>I presenti Termini sono regolati dalla legge italiana, fatte salve le norme inderogabili a tutela del consumatore del
-            Paese di residenza abituale. Il foro competente &egrave;, ove consentito, quello di residenza del consumatore.</p>
+    <section id="sec-10">
+        <h2>10. Modifiche</h2>
+        <p>
+            Possiamo aggiornare questi termini per riflettere modifiche del prodotto, della normativa o dell&rsquo;assetto
+            aziendale. Le modifiche sostanziali sono notificate con almeno 30 giorni di preavviso via email o in-app, con il
+            riepilogo delle novit&agrave;. Per i passeggeri valgono le tutele dell&rsquo;art. 33 c. cons. sulle clausole
+            vessatorie.
+        </p>
     </section>
 
-    <section>
-        <h2>11. Modifiche e contatti</h2>
-        <p>Possiamo modificare i presenti Termini; le modifiche sostanziali sono comunicate in anticipo e l&rsquo;uso continuato ne
-            costituisce accettazione. Contatto legale: <a href="mailto:{{email_legal}}">{{email_legal}}</a>.</p>
+    <section id="sec-11">
+        <h2>11. Legge, foro e contatti</h2>
+        <p>
+            Questi termini sono regolati dalla legge italiana. Per le controversie con consumatori, il foro competente &egrave;
+            quello della residenza o del domicilio del consumatore (art. 33 c. cons.), salva la facolt&agrave; del consumatore
+            di scegliere il foro generale. Per le controversie con conducenti (operatori professionali) il foro &egrave; quello
+            di {{registered_city}}. Resta sempre disponibile la piattaforma ODR della Commissione Europea
+            (<a href="{{odr_url}}" rel="noopener noreferrer" target="_blank">{{odr_url}}</a>).
+        </p>
+        <p>
+            Contatto generale: <a href="mailto:{{email_legal}}">{{email_legal}}</a> &middot; Privacy:
+            <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> &middot; Supporto:
+            <a href="mailto:{{email_support}}">{{email_support}}</a>.
+        </p>
     </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; {{registered_street}}, {{registered_postal_code}} {{registered_city}} &middot; P.IVA {{vat_number}}</p>
+    </footer>
 </article>

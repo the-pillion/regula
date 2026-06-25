@@ -1,0 +1,115 @@
+<article class="legal-document" lang="it">
+    <aside class="legal-draft-banner">
+        <strong>Bozza tecnica.</strong> Sintesi divulgativa di una DPIA interna ancora in stato draft.
+    </aside>
+
+    <header>
+        <h1>Sintesi DPIA &mdash; Decisioni Automatizzate</h1>
+        <p class="legal-meta">Versione {{version}} &middot; Ultimo aggiornamento: {{last_updated}} &middot; In vigore dal: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>In sintesi</h2>
+            <ul>
+                <li>Quattro decisioni della piattaforma sono parzialmente automatizzate: <strong>matching</strong> conducente, <strong>ranking</strong> della pool di offerta, <strong>filtri di idoneit&agrave;</strong>, <strong>blocchi di sicurezza</strong>.</li>
+                <li>Il calcolo del <strong>prezzo</strong> usa regole deterministiche dichiarate (banda zona + surge cap + modificatore conducente), non un modello ML opaco.</li>
+                <li>La <strong>sospensione</strong> &egrave; sempre confermata da un operatore umano prima di diventare definitiva.</li>
+                <li>Hai diritto di ottenere intervento umano, esprimere la tua opinione e contestare la decisione (art. 22 GDPR).</li>
+                <li>Pubblichiamo il fascicolo tecnico della DPIA su richiesta delle autorit&agrave; di controllo.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Perch&eacute; una DPIA</a></li>
+            <li><a href="#sec-2">Cosa &egrave; automatizzato</a></li>
+            <li><a href="#sec-3">Cosa <em>non</em> &egrave; automatizzato</a></li>
+            <li><a href="#sec-4">Rischi e mitigazioni</a></li>
+            <li><a href="#sec-5">Diritto a intervento umano</a></li>
+            <li><a href="#sec-6">Trasparenza degli input</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Perch&eacute; una DPIA</h2>
+        <p>
+            Il GDPR (art. 22) limita le decisioni basate unicamente su trattamento automatizzato che producono effetti
+            giuridici o significativi. Per i conducenti, una sospensione automatica avrebbe effetti significativi
+            sull&rsquo;attivit&agrave; lavorativa; per i passeggeri, una decisione di matching pu&ograve; incidere sull&rsquo;accesso
+            al servizio. Questa DPIA documenta le scelte progettuali per prevenire un effetto sproporzionato.
+        </p>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. Cosa &egrave; automatizzato</h2>
+        <table>
+            <thead>
+                <tr><th>Decisione</th><th>Input</th><th>Logica</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Matching</td><td>posizione conducente, posizione passeggero, vehicle type, eligibility flags</td><td>radius search + ranking; offer fanout a una pool di N (default 3)</td></tr>
+                <tr><td>Ranking della pool di offerta</td><td>distanza, rating, completed_rides, presenza in zona</td><td>combinazione lineare con pesi configurabili per zona</td></tr>
+                <tr><td>Filtri di idoneit&agrave;</td><td>documenti scaduti, NCC mancante, RCA non valida, blocco zona</td><td>regola booleana deterministica (compliance rules engine)</td></tr>
+                <tr><td>Blocchi di sicurezza</td><td>segnali PrefactGuard, esiti background check, segnalazioni utenti</td><td>soglie configurabili; blocco temporaneo in attesa di review umana</td></tr>
+                <tr><td>Calcolo prezzo</td><td>distanza, durata, base zona, surge multiplier, driver modifier, fee/tax stack</td><td>formula additiva dichiarata in price-arbiter (no ML)</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Cosa <em>non</em> &egrave; automatizzato</h2>
+        <ul>
+            <li><strong>Approvazione iniziale del conducente</strong>: un operatore umano verifica documenti, NCC, rimessa, uso terzi, RCA.</li>
+            <li><strong>Sospensione definitiva</strong>: l&rsquo;automatismo pu&ograve; bloccare temporaneamente; la sospensione che dura oltre il review window &egrave; confermata da un operatore.</li>
+            <li><strong>Reintegro</strong>: sempre umano.</li>
+            <li><strong>Risoluzione delle dispute di cancellazione e no-show</strong>: umano.</li>
+            <li><strong>Decisioni sulle segnalazioni di sicurezza</strong>: il flusso PrefactGuard prevede revisione umana.</li>
+            <li><strong>Banda prezzo per zona</strong>: stabilita da un operatore sulla base dei riferimenti NCC locali; non da un algoritmo.</li>
+        </ul>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Rischi e mitigazioni</h2>
+        <table>
+            <thead>
+                <tr><th>Rischio</th><th>Mitigazione</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Discriminazione indiretta nel ranking</td><td>Pesi pubblicati al conducente in app; audit periodico delle metriche per zona</td></tr>
+                <tr><td>Sospensione errata</td><td>Conferma umana obbligatoria, finestra di contestazione 14 giorni</td></tr>
+                <tr><td>Opacit&agrave; del prezzo</td><td>Breakdown dichiarato (base, surge, modifier, fee, tax) visibile in app prima di confermare la corsa</td></tr>
+                <tr><td>Surge eccessivo</td><td>Tetto zona (di norma 2,0&times;); surge non pu&ograve; mai abbassare il prezzo sotto il modificatore conducente</td></tr>
+                <tr><td>Bias di compliance</td><td>Le regole sono deterministiche e dichiarate; la stessa configurazione vale per ogni conducente nella zona</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Diritto a intervento umano (art. 22 GDPR)</h2>
+        <p>
+            Per ogni decisione automatizzata che ti riguarda puoi:
+        </p>
+        <ol>
+            <li>Chiedere un intervento umano scrivendo a <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>.</li>
+            <li>Esprimere la tua opinione e fornire informazioni aggiuntive.</li>
+            <li>Contestare la decisione e chiedere una revisione.</li>
+        </ol>
+        <p>
+            Rispondiamo entro <strong>14 giorni</strong>. Durante la revisione, eventuali blocchi automatici sono sospesi
+            salvo rischio di sicurezza accertato.
+        </p>
+    </section>
+
+    <section id="sec-6">
+        <h2>6. Trasparenza degli input</h2>
+        <p>
+            Tramite il diritto di accesso (art. 15) puoi ottenere copia degli input che hanno generato una decisione che ti
+            riguarda: presenza online al momento, esito compliance, eventuali segnalazioni PrefactGuard pertinenti, dati di
+            offerta usati per il matching. Non condividiamo i pesi interni dei modelli pi&ugrave; granulari per ragioni di
+            sicurezza antifrode, ma forniamo una spiegazione comprensibile della logica.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; Fascicolo DPIA completo: <a href="mailto:{{email_dpo}}">{{email_dpo}}</a></p>
+    </footer>
+</article>

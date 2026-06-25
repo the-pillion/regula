@@ -1,0 +1,158 @@
+<article class="legal-document" lang="en">
+    <aside class="legal-draft-banner">
+        <strong>Technical draft.</strong> Written by the product team, not yet reviewed by qualified Italian counsel.
+    </aside>
+
+    <header>
+        <h1>Settlement &amp; Payment Disclosure &mdash; Drivers</h1>
+        <p class="legal-meta">Version {{version}} &middot; Last updated: {{last_updated}} &middot; Effective: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>At a glance</h2>
+            <ul>
+                <li>Ride price is computed by the <code>price-arbiter</code> service from the Cadastre zone rate card.</li>
+                <li>Fee stack: <strong>base &rarr; surge &rarr; driver modifier &rarr; discounts &rarr; subtotal &rarr; platform fee &rarr; taxes &rarr; total</strong>.</li>
+                <li>Stripe Connect <em>destination charge</em>: passenger pays the total; Stripe transfers the net to your account after the platform fee.</li>
+                <li>Weekly payout (typically Monday) for rides captured up to Sunday.</li>
+                <li>Cancellations: per-stage fee (after_grace / in_progress / no_show) with per-zone driver compensation.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Pricing architecture</a></li>
+            <li><a href="#sec-2">Worked example</a></li>
+            <li><a href="#sec-3">Price band and driver modifier</a></li>
+            <li><a href="#sec-4">Stripe Connect &mdash; cash flow</a></li>
+            <li><a href="#sec-5">Weekly payout</a></li>
+            <li><a href="#sec-6">Cancellations and no-show</a></li>
+            <li><a href="#sec-7">Set-off, holdback, chargeback</a></li>
+            <li><a href="#sec-8">DAC7 and invoicing</a></li>
+            <li><a href="#sec-9">Control tools</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Pricing architecture</h2>
+        <p>When a request comes in, <code>price-arbiter</code> computes the price in the following canonical order:</p>
+        <pre>base       = base_fare + (distance_m/1000)*per_km + (duration_s/60)*per_min   &larr; Cadastre zone
+&times; driver modifier            (inside zone band, additive with surge)
+&times; time modifier              (night / weekend, if configured)
+&times; surge                      (capped at zone ceiling, typically 2.0&times;)
+&minus; discounts                   (platform-funded coupons, passenger side)
+= subtotal
++ fees[]                     (platform commission, any authority levies)
++ taxes[]                    (VAT per zone tax profile)
+= total (passenger amount)</pre>
+        <p>
+            The <strong>platform commission</strong> defaults to <code>{{platform_commission_percent}}%</code> on the
+            subtotal (default {{platform_commission_default}}). Can be overridden per zone.
+        </p>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. Worked example</h2>
+        <p>Ride Bolzano centre &rarr; Bolzano Sud, distance 5 km, duration 12 min, zone base 3.00&euro;, per_km 1.80, per_min 0.30, fee 12.5%.</p>
+        <pre>base          = 3.00 + 5*1.80 + 12*0.30  = 3.00 + 9.00 + 3.60   = 15.60
+surge x1.0    (no surge)                                           = 15.60
+modifier +5% (additive)                15.60 + 0.78               = 16.38
+discounts     = 0
+subtotal      = 16.38
+fee 12.5%     = 16.38 * 0.125                                      = 2.05
+passenger total                                                    = 18.43
+
+Stripe Connect:
+- passenger charge                                                 = 18.43
+- destination amount to driver   (total - fee)                     = 16.38
+- platform retains (application_fee)                               = 2.05</pre>
+        <p>
+            If the zone has an active VAT profile (e.g. <code>it-driver-supplier</code>), a VAT line appears in
+            <code>taxes[]</code> and lowers the driver net accordingly. If the zone is <code>it-deemed-supplier</code>
+            (ViDA), VAT is <em>on top</em> and the passenger pays it separately; the platform remits it.
+        </p>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Price band and driver modifier</h2>
+        <p>
+            For each Cadastre zone we define <code>modifier_min_multiplier</code> and <code>modifier_max_multiplier</code>:
+            your modifier choice (e.g. +10% / &minus;5%) must fall inside the band. The band is tuned to local NCC tariff
+            references so the platform stays inside the marketplace intermediation perimeter (CJEU C-434/15). Surge and
+            modifier are <strong>additive on the subtotal</strong>, not multiplicative: a +20% surge combined with a +10%
+            modifier produces +30% on base, not +32%.
+        </p>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Stripe Connect &mdash; cash flow</h2>
+        <p>
+            We use Stripe Connect with <em>destination charge</em>: the passenger payment lands on the platform Stripe
+            account and Stripe automatically transfers (<em>application_fee</em>) to your connected Stripe account net of
+            the platform commission. No manual steps: settlement is atomic at capture.
+        </p>
+        <p>
+            To enable payouts, complete Stripe Connect onboarding from your profile. Stripe requires KYC info (tax code,
+            VAT, IBAN); your verification level is visible in app as <em>payouts_enabled</em>.
+        </p>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Weekly payout</h2>
+        <p>
+            The <strong>payout job</strong> runs every Monday at 03:00 UTC and processes successfully captured rides up to
+            the previous Sunday. The transfer typically arrives in 1-3 business days. Minimum threshold and cadence are
+            configurable via the operator panel. If your Stripe account is suspended or unverified, the payout goes on
+            hold (<em>held</em> state) until resolved.
+        </p>
+    </section>
+
+    <section id="sec-6">
+        <h2>6. Cancellations and no-show</h2>
+        <p>The <strong>cancellation policy</strong> is per zone and per stage:</p>
+        <ul>
+            <li><strong>after_grace</strong>: passenger cancels after the grace window but before pickup. Platform retains a fee; you receive a <em>compensation</em> (flat or percentage, per-zone).</li>
+            <li><strong>in_progress</strong>: cancellation during the ride via mutual handshake (<em>full_refund</em>, <em>full_pay</em>, <em>partial:NN</em>). Platform fee is per zone; the split between you and the passenger comes from the handshake outcome.</li>
+            <li><strong>no_show</strong>: driver reports passenger absence after the wait timer. No_show fee captured from the passenger's payment method.</li>
+        </ul>
+        <p>
+            Current percentages for your zone are visible in app before accepting the ride and in the Cadastre panel.
+        </p>
+    </section>
+
+    <section id="sec-7">
+        <h2>7. Set-off, holdback, chargeback</h2>
+        <p>
+            We may withhold or recover from credits amounts owed by you (passenger refunds, reversals, chargebacks,
+            penalties, improperly received amounts) within legal limits. We notify by email each withholding with reasons.
+            You have the right to contest within 14 days.
+        </p>
+    </section>
+
+    <section id="sec-8">
+        <h2>8. DAC7 and invoicing</h2>
+        <p>
+            We report annually to the Italian Tax Agency your data (tax code, VAT, residence), gross consideration, retained
+            commission and number of operations, under D.Lgs. 32/2023 (DAC7). You receive a copy of the data reported under
+            your name.
+        </p>
+        <p>
+            The ride invoice to the passenger is your responsibility (you are the carrier). The platform issues its own
+            invoice for the intermediation commission, settled by offset on your net.
+        </p>
+    </section>
+
+    <section id="sec-9">
+        <h2>9. Control tools</h2>
+        <ul>
+            <li>Earnings panel in app: captured rides, commissions, any holdbacks, expected payout.</li>
+            <li>Monthly CSV export via Settings &rarr; Tax documents.</li>
+            <li>Zone tariff history via Cadastre panel.</li>
+            <li>Disputes: <a href="mailto:{{email_support}}">{{email_support}}</a>.</li>
+        </ul>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; <a href="mailto:{{email_support}}">{{email_support}}</a> &middot; See also <a href="/legal/terms-of-service-driver">Driver TOS</a> and <a href="/legal/ncc-italia">NCC Italy</a></p>
+        <p class="legal-translation-note">Informational translation. In case of conflict, the Italian version prevails.</p>
+    </footer>
+</article>

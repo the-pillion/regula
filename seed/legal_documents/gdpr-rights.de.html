@@ -1,60 +1,135 @@
 <article class="legal-document" lang="de">
+    <aside class="legal-draft-banner">
+        <strong>Technischer Entwurf.</strong> Vom Produktteam verfasst, noch nicht von qualifizierten italienischen Rechtsanwalten gepr&uuml;ft.
+    </aside>
+
     <header>
-        <h1>Ihre Datenschutzrechte</h1>
-        <p class="legal-meta">Zuletzt aktualisiert: {{last_updated}} · G&uuml;ltig ab: {{effective_date}}</p>
-        <p>
-            Diese Information erl&auml;utert Ihre Rechte an Ihren personenbezogenen Daten nach der DSGVO und wie Sie sie gegen&uuml;ber
-            {{legal_name}} (&bdquo;{{brand_name}}&ldquo;) als Verantwortlichem aus&uuml;ben. Sie erg&auml;nzt unsere
-            Datenschutzerkl&auml;rung.
-        </p>
+        <h1>Ihre DSGVO-Rechte</h1>
+        <p class="legal-meta">Version {{version}} &middot; Zuletzt aktualisiert: {{last_updated}} &middot; In Kraft seit: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>Auf einen Blick</h2>
+            <ul>
+                <li>Sieben DSGVO-Rechte: Auskunft, Berichtigung, L&ouml;schung, Einschr&auml;nkung, &Uuml;bertragbarkeit, Widerspruch, keine automatisierten Entscheidungen.</li>
+                <li>F&uuml;r jedes Recht: wie aus&uuml;ben (in App oder per E-Mail), was Sie erhalten und in wie vielen Tagen.</li>
+                <li>Antwort binnen <strong>1 Monat</strong> (Art. 12), verl&auml;ngerbar um 2 Monate.</li>
+                <li>Beschwerde m&ouml;glich beim ital. Garante.</li>
+            </ul>
+        </section>
     </header>
 
-    <section>
-        <h2>Ihre Rechte</h2>
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Anfrage stellen</a></li>
+            <li><a href="#sec-2">Auskunft (Art. 15)</a></li>
+            <li><a href="#sec-3">Berichtigung (Art. 16)</a></li>
+            <li><a href="#sec-4">L&ouml;schung (Art. 17)</a></li>
+            <li><a href="#sec-5">Einschr&auml;nkung (Art. 18)</a></li>
+            <li><a href="#sec-6">&Uuml;bertragbarkeit (Art. 20)</a></li>
+            <li><a href="#sec-7">Widerspruch (Art. 21)</a></li>
+            <li><a href="#sec-8">Automatisierte Entscheidungen (Art. 22)</a></li>
+            <li><a href="#sec-9">Beschwerde beim Garante</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Anfrage stellen</h2>
         <ul>
-            <li><strong>Auskunft (Art. 15)</strong> — Best&auml;tigung und eine Kopie der zu Ihnen gespeicherten Daten erhalten.</li>
-            <li><strong>Berichtigung (Art. 16)</strong> — unrichtige oder unvollst&auml;ndige Daten korrigieren.</li>
-            <li><strong>L&ouml;schung (Art. 17)</strong> — L&ouml;schung Ihrer Daten verlangen, vorbehaltlich gesetzlicher
-                Aufbewahrungspflichten.</li>
-            <li><strong>Einschr&auml;nkung (Art. 18)</strong> — die Verarbeitung in bestimmten F&auml;llen einschr&auml;nken.</li>
-            <li><strong>Daten&uuml;bertragbarkeit (Art. 20)</strong> — Ihre Daten in einem strukturierten, maschinenlesbaren Format
-                erhalten oder, soweit technisch m&ouml;glich, an einen anderen Verantwortlichen &uuml;bermitteln lassen.</li>
-            <li><strong>Widerspruch (Art. 21)</strong> — der Verarbeitung auf Grundlage berechtigter Interessen widersprechen,
-                einschlie&szlig;lich Profiling und Direktwerbung.</li>
-            <li><strong>Widerruf der Einwilligung (Art. 7 Abs. 3)</strong> — die Einwilligung jederzeit widerrufen, ohne die
-                Rechtm&auml;&szlig;igkeit der bisherigen Verarbeitung zu ber&uuml;hren.</li>
-            <li><strong>Automatisierte Entscheidungen (Art. 22)</strong> — menschliches Eingreifen bei ausschlie&szlig;lich
-                automatisierten Entscheidungen mit rechtlicher oder &auml;hnlich erheblicher Wirkung verlangen.</li>
+            <li><strong>In App:</strong> Einstellungen &rarr; Datenschutz &rarr; Meine Daten &rarr; Recht ausw&auml;hlen.</li>
+            <li><strong>Per E-Mail:</strong> <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> mit Name, Konto-E-Mail und gew&uuml;nschtem Recht.</li>
+            <li><strong>DSB:</strong> sensible Anfragen oder interne Beschwerden &uuml;ber <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>.</li>
         </ul>
+        <p>
+            Antwort binnen <strong>30 Tagen</strong> (Art. 12), bei Komplexit&auml;t verl&auml;ngerbar um 60 Tage mit Begr&uuml;ndung.
+        </p>
     </section>
 
-    <section>
-        <h2>Wie Sie sie aus&uuml;ben</h2>
-        <p>Schreiben Sie an <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> oder an unseren Datenschutzbeauftragten unter
-            <a href="mailto:{{email_dpo}}">{{email_dpo}}</a>. Auskunfts- und &Uuml;bertragbarkeitsanfragen k&ouml;nnen auch in der
-            App &uuml;ber die Datenexport-Funktion gestellt werden. Wir m&uuml;ssen ggf. Ihre Identit&auml;t pr&uuml;fen, bevor wir
-            t&auml;tig werden.</p>
+    <section id="sec-2">
+        <h2>2. Auskunft (Art. 15)</h2>
+        <p>
+            Best&auml;tigung, ob wir Ihre Daten verarbeiten, und Kopie der Daten: Identifikation, Fahrten, Bewertungen,
+            Dokumente (f&uuml;r Fahrer), Einwilligungslogs, Support-Tickets, Zahlungsreferenzen (keine Kartendetails).
+            Export als JSON oder CSV per sicherem Link.
+        </p>
     </section>
 
-    <section>
-        <h2>Antwortzeit</h2>
-        <p>Wir antworten innerhalb eines Monats nach Eingang einer g&uuml;ltigen Anfrage. Diese Frist kann bei komplexen oder
-            zahlreichen Anfragen um zwei weitere Monate verl&auml;ngert werden; wir informieren Sie in diesem Fall. Anfragen sind
-            kostenfrei, sofern sie nicht offenkundig unbegr&uuml;ndet oder exzessiv sind.</p>
+    <section id="sec-3">
+        <h2>3. Berichtigung (Art. 16)</h2>
+        <p>
+            Profildaten in App &auml;nderbar. Sonst &uuml;ber <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>:
+            Aktualisierung binnen 7 Werktagen.
+        </p>
     </section>
 
-    <section>
-        <h2>Automatisierte Verarbeitung</h2>
-        <p>Einige Eignungs- und Sicherheitspr&uuml;fungen (z.&nbsp;B. Onboarding-Entscheidungen f&uuml;r Fahrer) umfassen eine
-            automatisierte Bewertung. Sie k&ouml;nnen menschliches Eingreifen verlangen, Ihren Standpunkt darlegen und das Ergebnis
-            anfechten, indem Sie sich an die oben genannten Adressen wenden.</p>
+    <section id="sec-4">
+        <h2>4. L&ouml;schung (Art. 17)</h2>
+        <p>Sie k&ouml;nnen Kontol&ouml;schung beantragen. Ablauf:</p>
+        <ol>
+            <li>Einstellungen &rarr; Datenschutz &rarr; Konto l&ouml;schen.</li>
+            <li>Best&auml;tigungsmail mit signiertem Link (7 Tage g&uuml;ltig).</li>
+            <li>Nach Best&auml;tigung Anonymisierung von Name, E-Mail, Telefon.</li>
+        </ol>
+        <p>
+            <strong>Ehrliche Grenze.</strong> Bestimmte Daten bleiben gesetzlich (Fahrt-Metadaten und Abrechnung 10 Jahre,
+            DAC7 nach Fristen). Sie bleiben an eine <em>anonyme ID</em> gebunden, nicht an Ihren Namen.
+        </p>
     </section>
 
-    <section>
-        <h2>Beschwerden</h2>
-        <p>Wenn Sie der Ansicht sind, dass Ihre Daten unrechtm&auml;&szlig;ig verarbeitet werden, k&ouml;nnen Sie Beschwerde bei der
-            {{supervisory_authority}} (<a href="{{supervisory_authority_url}}" rel="noopener noreferrer" target="_blank">{{supervisory_authority_url}}</a>)
-            oder bei der Aufsichtsbeh&ouml;rde Ihres gew&ouml;hnlichen Aufenthalts oder des Orts des mutma&szlig;lichen
-            Versto&szlig;es einlegen.</p>
+    <section id="sec-5">
+        <h2>5. Einschr&auml;nkung (Art. 18)</h2>
+        <p>
+            Aussetzung der Verarbeitung w&auml;hrend einer Pr&uuml;fung (z.B. Genauigkeitsstreit, laufender Widerspruch).
+            W&auml;hrend der Einschr&auml;nkung gespeichert aber nicht verarbeitet, ausser zur Rechtsverteidigung.
+        </p>
     </section>
+
+    <section id="sec-6">
+        <h2>6. &Uuml;bertragbarkeit (Art. 20)</h2>
+        <p>
+            Daten in strukturierter maschinenlesbarer Form (JSON). Auf Wunsch &Uuml;bertragung an anderen Verantwortlichen,
+            soweit technisch m&ouml;glich. In-App-Export liefert ein herunterladbares Archiv in 7 Tagen.
+        </p>
+    </section>
+
+    <section id="sec-7">
+        <h2>7. Widerspruch (Art. 21)</h2>
+        <p>
+            Widerspruch gegen Verarbeitung auf berechtigtem Interesse (Sicherheit, Anti-Betrug, nicht-personalisierte
+            Analyse). Pr&uuml;fung; ohne zwingende berechtigte Gr&uuml;nde Aussetzung. Widerspruch gegen Direktmarketing
+            <strong>immer</strong> stattgegeben.
+        </p>
+    </section>
+
+    <section id="sec-8">
+        <h2>8. Automatisierte Entscheidungen (Art. 22)</h2>
+        <p>
+            Recht, keinen ausschliesslich automatisierten Entscheidungen mit rechtlicher oder erheblicher Wirkung
+            unterworfen zu werden. Auf {{brand_name}}:
+        </p>
+        <ul>
+            <li>F&uuml;r jede Entscheidung (Matching, Preis, Sperrung) k&ouml;nnen Sie menschliches Eingreifen verlangen.</li>
+            <li>Fahrersperre <em>stets</em> von Person best&auml;tigt vor Bestandskraft.</li>
+            <li>Anfechtung: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> mit Ihrer Sicht; Antwort 14 Tage.</li>
+        </ul>
+        <p>
+            Operative Details: <a href="/legal/dpia-summary-automated-decisions">DPIA-Zusammenfassung &mdash;
+            Automatisierte Entscheidungen</a>.
+        </p>
+    </section>
+
+    <section id="sec-9">
+        <h2>9. Beschwerde beim ital. Garante</h2>
+        <p>Bei DSGVO-Verletzung Beschwerde beim <strong>{{supervisory_authority}}</strong>:</p>
+        <ul>
+            <li>Site: <a href="{{supervisory_authority_url}}" rel="noopener noreferrer" target="_blank">{{supervisory_authority_url}}</a></li>
+            <li>E-Mail/PEC: protocollo@gpdp.it &middot; protocollo@pec.gpdp.it</li>
+            <li>Telefon: +39 06 696771</li>
+            <li>Sitz: Piazza Venezia 11, 00187 Roma</li>
+        </ul>
+        <p>Alternativ Aufsichtsbeh&ouml;rde Ihres gew&ouml;hnlichen Aufenthalts oder Justiz.</p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; Datenschutz: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> &middot; DSB: <a href="mailto:{{email_dpo}}">{{email_dpo}}</a></p>
+        <p class="legal-translation-note">Informative &Uuml;bersetzung. Bei Abweichung gilt die italienische Fassung.</p>
+    </footer>
 </article>

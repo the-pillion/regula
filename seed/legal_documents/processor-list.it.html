@@ -1,0 +1,98 @@
+<article class="legal-document" lang="it">
+    <aside class="legal-draft-banner">
+        <strong>Bozza tecnica.</strong> La lista &egrave; estratta da <code>seed/foundation.json</code>; il documento &egrave; un&rsquo;istantanea editoriale. Verificare l&rsquo;allineamento con la fonte prima della pubblicazione.
+    </aside>
+
+    <header>
+        <h1>Registro dei Responsabili e Sub-Responsabili</h1>
+        <p class="legal-meta">Versione {{version}} &middot; Ultimo aggiornamento: {{last_updated}} &middot; In vigore dal: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>In sintesi</h2>
+            <ul>
+                <li>Pubblichiamo il <strong>Registro dei Responsabili del trattamento</strong> ai sensi dell&rsquo;art. 28 GDPR.</li>
+                <li>Ogni fornitore &egrave; vincolato da un accordo scritto (DPA) e accetta i nostri requisiti su sicurezza, riservatezza, sub-responsabili, audit, trasferimenti.</li>
+                <li>Lo stato del DPA &egrave; dichiarato (firmato / in corso / non richiesto).</li>
+                <li>I trasferimenti extra-SEE poggiano su decisione di adeguatezza o Clausole Contrattuali Tipo (SCC).</li>
+                <li>Notifichiamo le modifiche sostanziali con preavviso ragionevole.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Cosa &egrave; questo registro</a></li>
+            <li><a href="#sec-2">Responsabili principali</a></li>
+            <li><a href="#sec-3">Sub-responsabili</a></li>
+            <li><a href="#sec-4">Trasferimenti extra-SEE</a></li>
+            <li><a href="#sec-5">Notifica di modifiche</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Cosa &egrave; questo registro</h2>
+        <p>
+            Quando affidiamo a un fornitore esterno il trattamento di dati personali per nostro conto (ad es. invio di SMS,
+            elaborazione dei pagamenti, geocoding, monitoraggio), quel fornitore &egrave; un <strong>responsabile del
+            trattamento</strong> ai sensi dell&rsquo;art. 28 GDPR. Per ognuno indichiamo il ruolo, la sede, il meccanismo di
+            trasferimento dei dati (se extra-SEE) e lo stato del DPA.
+        </p>
+        <p>
+            Il documento &egrave; una versione editoriale del registro tecnico mantenuto in <code>regula</code>. La fonte
+            macchina &egrave; <a href="/public/subprocessors.json">/public/subprocessors.json</a>.
+        </p>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. Responsabili principali</h2>
+        <table>
+            <thead>
+                <tr><th>Fornitore</th><th>Ruolo</th><th>Paese</th><th>Trasferimento</th><th>DPA</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Stripe Payments Europe Ltd.</td><td>Elaborazione pagamenti e payout</td><td>Irlanda &middot; USA</td><td>SCC (sub-flow USA)</td><td>Firmato</td></tr>
+                <tr><td>Twilio Ireland Ltd.</td><td>Invio SMS e codici di verifica</td><td>Irlanda &middot; USA</td><td>SCC</td><td>Firmato</td></tr>
+                <tr><td>Firebase / Google Cloud EMEA Ltd.</td><td>Notifiche push, crash reporting</td><td>Irlanda &middot; USA</td><td>SCC</td><td>Firmato</td></tr>
+                <tr><td>FastGeo s.r.l. (stessa propriet&agrave;)</td><td>Routing, geocoding, mappe</td><td>Italia</td><td>Nessuno (SEE)</td><td>In corso</td></tr>
+                <tr><td>Zitadel GmbH</td><td>Identit&agrave;, OIDC, sessioni</td><td>Svizzera</td><td>Decisione di adeguatezza</td><td>Firmato</td></tr>
+                <tr><td>Provider di hosting (TBD)</td><td>Hosting infrastruttura</td><td>UE (SEE)</td><td>Nessuno (SEE)</td><td>In corso</td></tr>
+                <tr><td>Checkr Inc. (in valutazione)</td><td>Background check conducenti</td><td>USA</td><td>SCC + valutazione</td><td>In corso</td></tr>
+                <tr><td>didit / ondato (in valutazione)</td><td>Verifica identit&agrave; (KYC)</td><td>UE</td><td>Nessuno (SEE)</td><td>In valutazione</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Sub-responsabili</h2>
+        <p>
+            I responsabili principali si avvalgono a loro volta di sub-responsabili (es. hosting cloud, CDN, monitoring). I
+            sub-responsabili attivi sono indicati nei registri pubblici dei rispettivi fornitori (Stripe, Twilio, Google
+            Cloud) o, su richiesta, comunicati a <a href="mailto:{{email_privacy}}">{{email_privacy}}</a>. Ogni nuovo
+            sub-responsabile dei fornitori sensibili (pagamenti, identit&agrave;, comunicazioni) ci viene notificato e
+            riportato qui entro 30 giorni.
+        </p>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Trasferimenti extra-SEE</h2>
+        <p>
+            I trasferimenti verso Paesi terzi privi di decisione di adeguatezza si basano sulle <strong>Clausole
+            Contrattuali Tipo</strong> della Commissione UE 2021/914 (SCC), integrate da <strong>misure tecniche
+            supplementari</strong> ove necessario (cifratura at-rest, tokenizzazione, contractual transparency reporting,
+            standard sulle richieste delle autorit&agrave;). Per gli Stati Uniti consideriamo l&rsquo;EU-US Data Privacy
+            Framework, ove il fornitore vi aderisca.
+        </p>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Notifica di modifiche</h2>
+        <p>
+            Comunichiamo l&rsquo;aggiunta o il cambio di responsabili principali con preavviso ragionevole (almeno 30
+            giorni), via email ai conducenti e in app. Hai diritto di opporti alla modifica recedendo dall&rsquo;account; in
+            caso contrario il prosieguo dell&rsquo;uso costituisce accettazione del nuovo assetto.
+        </p>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; Privacy: <a href="mailto:{{email_privacy}}">{{email_privacy}}</a> &middot; DPO: <a href="mailto:{{email_dpo}}">{{email_dpo}}</a></p>
+    </footer>
+</article>

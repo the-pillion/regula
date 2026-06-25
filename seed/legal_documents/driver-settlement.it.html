@@ -1,0 +1,166 @@
+<article class="legal-document" lang="it">
+    <aside class="legal-draft-banner">
+        <strong>Bozza tecnica.</strong> Documento redatto dal team di prodotto e non ancora rivisto da un legale italiano qualificato.
+    </aside>
+
+    <header>
+        <h1>Disclosure di Regolamento e Pagamento &mdash; Conducenti</h1>
+        <p class="legal-meta">Versione {{version}} &middot; Ultimo aggiornamento: {{last_updated}} &middot; In vigore dal: {{effective_date}}</p>
+        <section class="legal-summary">
+            <h2>In sintesi</h2>
+            <ul>
+                <li>Il prezzo della corsa &egrave; calcolato dal servizio <code>price-arbiter</code> sulla base del listino zona Cadastre.</li>
+                <li>Stack della fee: <strong>tariffa base &rarr; surge &rarr; modificatore conducente &rarr; sconti &rarr; subtotale &rarr; fee piattaforma &rarr; tasse &rarr; totale</strong>.</li>
+                <li>Stripe Connect <em>destination charge</em>: il passeggero paga il totale; Stripe trasferisce al tuo conto il netto dopo la fee di piattaforma.</li>
+                <li>Payout settimanale (di norma luned&igrave;) per le corse capturate fino a domenica.</li>
+                <li>Cancellazioni: tariffa per stage (after_grace / in_progress / no_show) con compensazione conducente configurata per zona.</li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="legal-toc">
+        <ol>
+            <li><a href="#sec-1">Architettura del pricing</a></li>
+            <li><a href="#sec-2">Esempio numerico</a></li>
+            <li><a href="#sec-3">Banda prezzo e modificatore conducente</a></li>
+            <li><a href="#sec-4">Stripe Connect &mdash; flusso di cassa</a></li>
+            <li><a href="#sec-5">Payout settimanale</a></li>
+            <li><a href="#sec-6">Cancellazioni e no-show</a></li>
+            <li><a href="#sec-7">Compensazione, holdback, chargeback</a></li>
+            <li><a href="#sec-8">DAC7 e fattura</a></li>
+            <li><a href="#sec-9">Strumenti di controllo</a></li>
+        </ol>
+    </nav>
+
+    <section id="sec-1">
+        <h2>1. Architettura del pricing</h2>
+        <p>
+            Quando arriva una richiesta, il servizio <code>price-arbiter</code> calcola il prezzo seguendo questo ordine
+            canonico:
+        </p>
+        <pre>base       = base_fare + (distance_m/1000)*per_km + (duration_s/60)*per_min   &larr; zona Cadastre
+&times; modificatore conducente   (entro la banda zona, additivo con surge)
+&times; modificatore orario       (notte / weekend, se configurato)
+&times; surge                     (cappato a tetto zona, di norma 2,0&times;)
+&minus; sconti                     (coupon piattaforma, lato passeggero)
+= subtotale
++ fee[]                    (commissione piattaforma, eventuali levy autorit&agrave;)
++ tasse[]                   (IVA secondo profilo zona)
+= totale (importo passeggero)</pre>
+        <p>
+            La <strong>commissione piattaforma</strong> &egrave; di default <code>{{platform_commission_percent}}%</code>
+            sulla subtotale (default {{platform_commission_default}}). Pu&ograve; essere sovrascritta per zona.
+        </p>
+    </section>
+
+    <section id="sec-2">
+        <h2>2. Esempio numerico</h2>
+        <p>Corsa Bolzano centro &rarr; Bolzano Sud, distanza 5 km, durata 12 min, base zona 3,00&euro;, per_km 1,80, per_min 0,30, fee 12,5%.</p>
+        <pre>base          = 3,00 + 5*1,80 + 12*0,30  = 3,00 + 9,00 + 3,60   = 15,60
+surge x1.0    (nessun surge)                                       = 15,60
+modificatore +5% (additivo)                15,60 + 0,78           = 16,38
+sconti        = 0
+subtotale     = 16,38
+fee 12,5%     = 16,38 * 0,125                                      = 2,05
+totale passeggero                                                  = 18,43
+
+Stripe Connect:
+- charge passeggero                                                = 18,43
+- destination amount al conducente   (totale - fee)                = 16,38
+- piattaforma trattiene (application_fee)                          = 2,05</pre>
+        <p>
+            Se la zona ha un profilo IVA attivo (es. <code>it-driver-supplier</code>), la riga IVA appare in
+            <code>tasses[]</code> e abbassa il netto conducente di conseguenza. Se la zona &egrave; <code>it-deemed-supplier</code>
+            (ViDA), l&rsquo;IVA &egrave; <em>on top</em> e il passeggero la paga separatamente; la piattaforma la versa
+            all&rsquo;erario.
+        </p>
+    </section>
+
+    <section id="sec-3">
+        <h2>3. Banda prezzo e modificatore conducente</h2>
+        <p>
+            Per ogni zona Cadastre definiamo <code>modifier_min_multiplier</code> e <code>modifier_max_multiplier</code>: la
+            tua scelta del modificatore (es. +10% / &minus;5%) deve cadere dentro la banda. La banda &egrave; tarata sul
+            riferimento tariffa NCC locale per restare nel perimetro dell&rsquo;intermediazione marketplace (CGUE
+            C-434/15). Surge e modificatore sono <strong>additivi sulla subtotale</strong>, non moltiplicativi: un surge
+            +20% combinato con un modificatore +10% produce un +30% sulla base, non un +32%.
+        </p>
+    </section>
+
+    <section id="sec-4">
+        <h2>4. Stripe Connect &mdash; flusso di cassa</h2>
+        <p>
+            Usiamo Stripe Connect con <em>destination charge</em>: il pagamento del passeggero arriva sul conto Stripe della
+            piattaforma e Stripe esegue automaticamente un trasferimento (<em>application_fee</em>) al tuo conto Stripe
+            Connect collegato al netto della commissione di piattaforma. Niente passaggi manuali: la quadratura &egrave;
+            atomica al momento del capture.
+        </p>
+        <p>
+            Per attivare il payout devi completare l&rsquo;onboarding Stripe Connect dal tuo profilo. Stripe richiede
+            informazioni KYC (codice fiscale, P.IVA, IBAN); il tuo livello di verifica &egrave; visibile in app come
+            <em>payouts_enabled</em>.
+        </p>
+    </section>
+
+    <section id="sec-5">
+        <h2>5. Payout settimanale</h2>
+        <p>
+            Il <strong>job di payout</strong> gira ogni luned&igrave; alle 03:00 UTC ed elabora le corse capturate con esito
+            positivo fino alla domenica precedente. Il bonifico arriva di norma in 1-3 giorni lavorativi. Soglia minima e
+            cadenza configurabili tramite il pannello operatore. Se il tuo conto Stripe &egrave; sospeso o non verificato, il
+            payout va in attesa (stato <em>held</em>) finch&eacute; la sospensione non si risolve.
+        </p>
+    </section>
+
+    <section id="sec-6">
+        <h2>6. Cancellazioni e no-show</h2>
+        <p>
+            La <strong>politica di cancellazione</strong> &egrave; per zona e per stage:
+        </p>
+        <ul>
+            <li><strong>after_grace</strong>: passeggero cancella dopo la finestra di tolleranza ma prima del ritiro. Piattaforma trattiene una fee; al conducente va una <em>compensazione</em> (flat o percentuale, configurata per zona).</li>
+            <li><strong>in_progress</strong>: cancellazione durante la corsa via handshake mutuale (<em>full_refund</em>, <em>full_pay</em>, <em>partial:NN</em>). La fee piattaforma &egrave; per zona; lo split tra te e il passeggero deriva dall&rsquo;esito dell&rsquo;handshake.</li>
+            <li><strong>no_show</strong>: il conducente segnala l&rsquo;assenza dopo il timer di attesa. Tariffa no_show capturata sul metodo di pagamento del passeggero.</li>
+        </ul>
+        <p>
+            Le percentuali correnti per la tua zona sono visibili in app prima di accettare la corsa e nel pannello
+            Cadastre.
+        </p>
+    </section>
+
+    <section id="sec-7">
+        <h2>7. Compensazione, holdback, chargeback</h2>
+        <p>
+            Possiamo trattenere o recuperare dagli accrediti gli importi a debito (rimborsi a passeggero, storni,
+            chargeback, penali, importi indebitamente ricevuti) nei limiti di legge. Ti notifichiamo via email ogni
+            trattenuta con motivazione. Hai diritto di contestare entro 14 giorni.
+        </p>
+    </section>
+
+    <section id="sec-8">
+        <h2>8. DAC7 e fattura</h2>
+        <p>
+            Comunichiamo annualmente all&rsquo;Agenzia delle Entrate i tuoi dati (codice fiscale, P.IVA, residenza), il
+            corrispettivo lordo, la commissione trattenuta e il numero di operazioni, ai sensi del D.Lgs. 32/2023 (DAC7).
+            Ricevi una copia dei dati comunicati a tuo nome.
+        </p>
+        <p>
+            La fattura della corsa al passeggero &egrave; tua responsabilit&agrave; (sei il vettore). La piattaforma emette
+            una propria fattura per la commissione di intermediazione, regolata in compensazione sul tuo netto.
+        </p>
+    </section>
+
+    <section id="sec-9">
+        <h2>9. Strumenti di controllo</h2>
+        <ul>
+            <li>Pannello Earnings in app: corse capturate, commissioni, eventuali holdback, payout previsto.</li>
+            <li>Export CSV mensile via Impostazioni &rarr; Documenti fiscali.</li>
+            <li>Storico tariffe per zona via pannello Cadastre.</li>
+            <li>Contestazioni: <a href="mailto:{{email_support}}">{{email_support}}</a>.</li>
+        </ul>
+    </section>
+
+    <footer class="legal-footer">
+        <p>{{legal_name}} &middot; <a href="mailto:{{email_support}}">{{email_support}}</a> &middot; Vedi anche <a href="/legal/terms-of-service-driver">TOS Conducenti</a> e <a href="/legal/ncc-italia">NCC Italia</a></p>
+    </footer>
+</article>
